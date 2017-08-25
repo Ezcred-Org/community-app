@@ -79,10 +79,7 @@ public class BaseApiManager {
     chargeApi = createApi(ChargeService.class);
     runreportsService = createApi(RunReportsService.class);
     noteService = createApi(NoteService.class);
-<<<<<<< 5fb2d1dd821664ef76b883cd776688a5761326d3
-=======
     appUserService = createApi(AppUserService.class);
->>>>>>> AGENTAPP-36 | temp changes
 
   }
 
