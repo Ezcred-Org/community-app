@@ -6,17 +6,17 @@ package com.mifos.api.services;
 
 import com.mifos.api.model.APIEndPoint;
 import com.mifos.objects.appuser.AppUser;
-import com.mifos.objects.user.User;
 
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 import rx.Observable;
 
 /**
- * @author fomenkoo
+ * @author Nishant-Pathak
  */
 public interface AppUserService {
 
     @POST(APIEndPoint.USERS)
-    Observable<User> createUser(@Body AppUser createUserRequest);
+    Observable<Response> createUser(@Body AppUser createUserRequest);
 }

@@ -166,7 +166,7 @@ public class BaseApiManager {
     return noteService;
   }
 
-  public static AppUserService getAppUserService() {
+  public AppUserService getAppUserService() {
     return appUserService;
   }
 }

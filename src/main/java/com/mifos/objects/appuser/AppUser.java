@@ -4,16 +4,17 @@ import lombok.Data;
 
 @Data
 public class AppUser {
-  public final String username;
-  public final String firstname;
-  public final String lastname;
-  public final String email;
-  public int officeId;
-  public int[] roles;
-  public final boolean sendPasswordToEmail;
-  public final boolean isSelfServiceUser;
-  public final String password;
-  public final String repeatPassword;
-  public final String phoneNumber;
-  public final String deviceId;
+  // NOTE: username is phone number with country code
+  private final String username;
+  private final String firstname;
+  private final String lastname;
+  private final String email;
+  private int officeId;
+  private int[] roles;
+  private final boolean sendPasswordToEmail;
+  private final boolean isSelfServiceUser;
+  private final String password;
+  private final String repeatPassword;
+  private final String deviceId;
+  private final String[] imeis;
 }
