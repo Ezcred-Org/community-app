@@ -3,6 +3,7 @@ package com.mifos.api.datamanager;
 import com.mifos.api.BaseApiManager;
 import com.mifos.objects.appuser.AppUser;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import retrofit2.Response;
@@ -16,6 +17,7 @@ public class DataManagerAppUser {
     this.mBaseApiManager = mBaseApiManager;
   }
 
+  @Inject
   public Observable<Response> registerUser(AppUser appUser) {
     return mBaseApiManager.getAppUserService().createUser(appUser);
   }
