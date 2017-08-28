@@ -13,11 +13,11 @@ import rx.Observable;
 public class DataManagerAppUser {
   public final BaseApiManager mBaseApiManager;
 
+  @Inject
   public DataManagerAppUser(BaseApiManager mBaseApiManager) {
     this.mBaseApiManager = mBaseApiManager;
   }
 
-  @Inject
   public Observable<Response> registerUser(AppUser appUser) {
     return mBaseApiManager.getAppUserService().createUser(appUser);
   }
