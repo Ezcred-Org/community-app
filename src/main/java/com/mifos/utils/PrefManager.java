@@ -28,6 +28,7 @@ public class PrefManager {
     private static final String PORT = "preferences_port";
     private static final String USER_STATUS = "user_status";
     private static final String USER_DETAILS = "user_details";
+    private static final String EZCRED_SECRET_KEY = "ezcred_secret_key";
     
 
     private final Gson gson;
@@ -119,6 +120,14 @@ public class PrefManager {
 
     public String getToken() {
         return getString(TOKEN, "");
+    }
+
+    public void saveEzcredSecretKey(String ezcredSecretKey) {
+        putString(EZCRED_SECRET_KEY, ezcredSecretKey);
+    }
+
+    public String getEzcredSecretKey() {
+        return getString(EZCRED_SECRET_KEY, "");
     }
 
     public boolean isAuthenticated() {
