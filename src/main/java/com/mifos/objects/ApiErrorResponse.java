@@ -7,6 +7,6 @@ public class ApiErrorResponse {
   private final String developerMessage;
   private final String defaultUserMessage;
   private final String userMessageGlobalisationCode;
-  private final Object[] errors;
+  private final String[] errors;
   private final int httpStatusCode;
 }
