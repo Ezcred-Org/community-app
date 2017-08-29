@@ -1,6 +1,6 @@
 package com.mifos.api.datamanager;
 
-import com.mifos.api.BaseApiManager;
+import  com.mifos.api.BaseApiManager;
 import com.mifos.objects.appuser.AppUser;
 
 import javax.inject.Inject;
@@ -18,7 +18,7 @@ public class DataManagerAppUser {
     this.mBaseApiManager = mBaseApiManager;
   }
 
-  public Observable<Response> registerUser(AppUser appUser) {
+  public Observable<Response<String>> registerUser(AppUser appUser) {
     return mBaseApiManager.getAppUserService().createUser(appUser);
   }
 }
