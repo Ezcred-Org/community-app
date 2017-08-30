@@ -5,15 +5,14 @@
 package com.mifos.api.services;
 
 import com.google.gson.JsonArray;
+import com.mifos.api.GenericResponse;
 import com.mifos.api.model.APIEndPoint;
 import com.mifos.objects.noncore.DataTable;
-import com.mifos.api.GenericResponse;
 import com.mifos.objects.user.UserLocation;
 
 import java.util.List;
 import java.util.Map;
 
-import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -40,13 +39,13 @@ public interface DataTableService {
 
     //TODO Improve Body Implementation with Payload
     @POST(APIEndPoint.DATATABLES + "/{dataTableName}/{entityId}/")
-    Observable<Response<GenericResponse>> createEntryInDataTable(
+    Observable<GenericResponse> createEntryInDataTable(
             @Path("dataTableName") String dataTableName,
             @Path("entityId") int entityId,
             @Body Map<String, Object> requestPayload);
 
     @PUT(APIEndPoint.DATATABLES + "/{dataTableName}/{entityId}/")
-    Observable<Response<GenericResponse>> updateEntryInDataTable(
+    Observable<GenericResponse> updateEntryInDataTable(
       @Path("dataTableName") String dataTableName,
       @Path("entityId") int entityId,
       @Body Map<String, Object> requestPayload);
