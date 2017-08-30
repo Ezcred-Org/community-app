@@ -1,0 +1,21 @@
+package com.mifos.objects.user;
+
+
+import lombok.Data;
+
+@Data
+public class UserPayload {
+  private final String username;
+  private final String firstname;
+  private final String lastname;
+  private final String email;
+  private final int officeId;
+  private final int[] roles;
+  private final boolean sendPasswordToEmail;
+  private final boolean isSelfServiceUser;
+  private final String password;
+  private final String repeatPassword;
+  private final String deviceId;
+  private final String[] imeis;
+  private final String mobileNumber;
+}
