@@ -9,8 +9,8 @@ public class AppUser {
   private final String firstname;
   private final String lastname;
   private final String email;
-  private int officeId;
-  private int[] roles;
+  private final int officeId;
+  private final int[] roles;
   private final boolean sendPasswordToEmail;
   private final boolean isSelfServiceUser;
   private final String password;
