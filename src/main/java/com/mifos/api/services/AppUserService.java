@@ -18,5 +18,5 @@ import rx.Observable;
 public interface AppUserService {
 
     @POST(APIEndPoint.USERS)
-    Observable<Response> createUser(@Body AppUser createUserRequest);
+    Observable<Response<String>> createUser(@Body AppUser createUserRequest);
 }
