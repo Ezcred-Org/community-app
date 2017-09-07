@@ -32,7 +32,7 @@ public class LoansPayload implements Parcelable {
     String numberOfRepayments;
     String principal;
     int productId;
-    String repaymentEvery;
+    int repaymentEvery;
     int repaymentFrequencyType;
     Integer repaymentFrequencyDayOfWeekType;
     Integer repaymentFrequencyNthDayType;
@@ -230,11 +230,11 @@ public class LoansPayload implements Parcelable {
         this.productId = productId;
     }
 
-    public String getRepaymentEvery() {
+    public int getRepaymentEvery() {
         return repaymentEvery;
     }
 
-    public void setRepaymentEvery(String repaymentEvery) {
+    public void setRepaymentEvery(int repaymentEvery) {
         this.repaymentEvery = repaymentEvery;
     }
 
@@ -304,7 +304,7 @@ public class LoansPayload implements Parcelable {
         dest.writeString(this.numberOfRepayments);
         dest.writeString(this.principal);
         dest.writeInt(this.productId);
-        dest.writeString(this.repaymentEvery);
+        dest.writeInt(this.repaymentEvery);
         dest.writeInt(this.repaymentFrequencyType);
         dest.writeValue(this.repaymentFrequencyDayOfWeekType);
         dest.writeValue(this.repaymentFrequencyNthDayType);
@@ -333,7 +333,7 @@ public class LoansPayload implements Parcelable {
         this.numberOfRepayments = in.readString();
         this.principal = in.readString();
         this.productId = in.readInt();
-        this.repaymentEvery = in.readString();
+        this.repaymentEvery = in.readInt();
         this.repaymentFrequencyType = in.readInt();
         this.repaymentFrequencyDayOfWeekType = (Integer) in.readValue(
                 Integer.class.getClassLoader());
