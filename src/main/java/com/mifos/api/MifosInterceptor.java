@@ -24,8 +24,6 @@ public class MifosInterceptor implements Interceptor {
 
     public static final String HEADER_TENANT = "Fineract-Platform-TenantId";
     public static final String HEADER_AUTH = "Authorization";
-    public static final String X_EZCRED_SECRET_KEY = "x-ezcred-secret-key";
-    public static final String X_REQUEST_TIME = "x-request-time";
 
     private final PrefManager prefManager;
 
@@ -43,12 +41,6 @@ public class MifosInterceptor implements Interceptor {
         if (!TextUtils.isEmpty(prefManager.getToken())) {
             builder.header(HEADER_AUTH, prefManager.getToken());
         }
-
-        if (!TextUtils.isEmpty(prefManager.getEzcredSecretKey())) {
-            builder.header(X_EZCRED_SECRET_KEY, prefManager.getEzcredSecretKey());
-        }
-
-        builder.header(X_REQUEST_TIME, String.valueOf(System.currentTimeMillis()));
 
         Request request = builder.build();
         return chain.proceed(request);
