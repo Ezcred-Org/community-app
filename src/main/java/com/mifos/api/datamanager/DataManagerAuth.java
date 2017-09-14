@@ -7,7 +7,6 @@ import com.mifos.objects.user.User;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import retrofit2.Response;
 import rx.Observable;
 
 /**
