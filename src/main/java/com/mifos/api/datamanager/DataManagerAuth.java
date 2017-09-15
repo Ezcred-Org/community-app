@@ -37,9 +37,7 @@ public class DataManagerAuth {
     }
 
     public Observable<String> updatePassword(int userId, String password, String repeatPassword) {
-        UpdatePasswordPayload updatePasswordPayload = new UpdatePasswordPayload();
-        updatePasswordPayload.setPassword(password);
-        updatePasswordPayload.setRepeatPassword(repeatPassword);
+        UpdatePasswordPayload updatePasswordPayload = new UpdatePasswordPayload(password, repeatPassword);
         return baseApiManager.getAuthApi().updatePassword(userId, updatePasswordPayload);
   }
 }

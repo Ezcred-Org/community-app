@@ -23,8 +23,8 @@ public interface AuthService {
 
     @POST(APIEndPoint.AUTHENTICATION)
     Observable<User> authenticate(
-      @Query("username") String username,
-      @Query("password") String password
+        @Query("username") String username,
+        @Query("password") String password
     );
 
     @PUT("users/{userId}")
