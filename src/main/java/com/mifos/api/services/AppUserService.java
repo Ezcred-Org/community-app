@@ -20,6 +20,6 @@ public interface AppUserService {
     @POST(APIEndPoint.USERS)
     Observable<Response<String>> createUser(@Body AppUser createUserRequest);
 
-  @PUT("users/{userId}")
-  Observable<String> updatePassword(@Path("userId") int userId, @Body UserUpdateToken userUpdateToken);
+    @PUT("users/{userId}")
+    Observable<String> updatePassword(@Path("userId") int userId, @Body UserUpdateToken userUpdateToken);
 }

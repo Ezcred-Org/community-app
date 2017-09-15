@@ -23,9 +23,8 @@ public class DataManagerAppUser {
     return mBaseApiManager.getAppUserService().createUser(appUser);
   }
 
-  public Observable<String> updatePassword(int userId, String firstname, String password, String repeatPassword) {
+  public Observable<String> updatePassword(int userId, String password, String repeatPassword) {
     UserUpdateToken userUpdateToken = new UserUpdateToken();
-    userUpdateToken.setFirstname(firstname);
     userUpdateToken.setPassword(password);
     userUpdateToken.setRepeatPassword(repeatPassword);
 

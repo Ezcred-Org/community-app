@@ -26,5 +26,4 @@ public interface AuthService {
 
     @PUT("users/{userId}")
     Observable<String> setFcmToken(@Path("userId") int userId, @Body FcmToken fcmToken);
-
 }
