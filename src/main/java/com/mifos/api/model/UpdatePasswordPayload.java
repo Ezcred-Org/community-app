@@ -1,11 +1,10 @@
-package com.mifos.api.services;
+package com.mifos.api.model;
 
 
 import lombok.Data;
 
 @Data
-public class UserUpdateToken {
+public class UpdatePasswordPayload {
   private String password;
   private String repeatPassword;
-
 }
