@@ -31,6 +31,6 @@ public interface AuthService {
     Observable<String> setFcmToken(@Path("userId") int userId, @Body FcmToken fcmToken);
 
     @PUT("users/{userId}")
-    Observable<String> updatePassword(@Path("userId") int userId, @Body UpdatePasswordPayload updatePasswordPayload);
+    Observable<String> updatePassword(@Path("userId") long userId, @Body UpdatePasswordPayload updatePasswordPayload);
 
 }
