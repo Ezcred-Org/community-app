@@ -36,7 +36,7 @@ public class DataManagerAuth {
         return baseApiManager.getAuthApi().setFcmToken(userId, new FcmToken(token));
     }
 
-    public Observable<String> updatePassword(int userId, String password, String repeatPassword) {
+    public Observable<String> updatePassword(long userId, String password, String repeatPassword) {
         UpdatePasswordPayload updatePasswordPayload = new UpdatePasswordPayload(password, repeatPassword);
         return baseApiManager.getAuthApi().updatePassword(userId, updatePasswordPayload);
   }
