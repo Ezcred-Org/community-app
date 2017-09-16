@@ -63,8 +63,6 @@ public class LoansPayload implements Parcelable {
         this.charges = charges;
     }
 
-
-
     public ArrayList<DataTablePayload> getDataTables() {
         return datatables;
     }
