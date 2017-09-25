@@ -20,8 +20,9 @@ public interface OfficeService {
     /**
      * Fetches List of All the Offices
      *
-     * @param listOfOfficesCallback
+     * @param
      */
     @GET(APIEndPoint.OFFICES)
     Observable<List<Office>> getAllOffices();
+
 }

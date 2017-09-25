@@ -41,4 +41,5 @@ public class APIEndPoint {
     public static final String NOTES = "notes";
     public static final String IMAGES = "images";
     public static final String USERS = "users";
+    public static final String ADDRESS = "address";
 }

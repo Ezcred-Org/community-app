@@ -1,7 +1,6 @@
 package com.mifos.api;
 
 import com.mifos.api.datamanager.DataManagerClient;
-import com.mifos.api.model.APIEndPoint;
 import com.mifos.api.model.CollectionSheetPayload;
 import com.mifos.api.model.Payload;
 import com.mifos.objects.accounts.loan.LoanApproval;
@@ -16,7 +15,6 @@ import com.mifos.objects.group.CenterWithAssociations;
 import com.mifos.objects.group.Group;
 import com.mifos.objects.group.GroupWithAssociations;
 import com.mifos.objects.organisation.LoanProducts;
-import com.mifos.objects.organisation.Office;
 import com.mifos.objects.organisation.Staff;
 import com.mifos.objects.templates.clients.ChargeTemplate;
 import com.mifos.objects.templates.loans.GroupLoanTemplate;
@@ -30,8 +28,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import okhttp3.ResponseBody;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
 import rx.Observable;
 
 /**
@@ -124,14 +120,6 @@ public class DataManager {
     public Observable<List<Group>> getGroupsByOffice(int office, Map<String, Object> params) {
         return mBaseApiManager.getGroupApi().getAllGroupsInOffice(office, params);
     }
-
-    /**
-     * Offices API
-     */
-    public Observable<List<Office>> getOffices() {
-        return mBaseApiManager.getOfficeApi().getAllOffices();
-    }
-
 
     /**
      * Staff API

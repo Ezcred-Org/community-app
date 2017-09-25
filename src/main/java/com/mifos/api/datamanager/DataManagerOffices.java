@@ -12,7 +12,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import rx.Observable;
-import rx.functions.Func1;
 
 /**
  * This DataManager is for Managing Offices API, In which Request is going to Server
@@ -42,14 +41,14 @@ public class DataManagerOffices {
     public Observable<List<Office>> getOffices() {
         switch (prefManager.getUserStatus()) {
             case 0:
-                return mBaseApiManager.getOfficeApi().getAllOffices()
-                        .concatMap(new Func1<List<Office>, Observable<? extends List<Office>>>() {
-                            @Override
-                            public Observable<? extends List<Office>> call(List<Office> offices) {
-                                mDatabaseHelperOffices.saveAllOffices(offices);
-                                return Observable.just(offices);
-                            }
-                        });
+                return mBaseApiManager.getOfficeApi().getAllOffices();
+//                        .concatMap(new Func1<List<Office>, Observable<List<Office>>>() {
+//                            @Override
+//                            public Observable<List<Office>> call(List<Office> offices) {
+//                                mDatabaseHelperOffices.saveAllOffices(offices);
+//                                return Observable.just(offices);
+//                            }
+//                        });
             case 1:
                 /**
                  * return all List of Offices from DatabaseHelperOffices

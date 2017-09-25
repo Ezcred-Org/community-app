@@ -29,13 +29,12 @@ public class PrefManager {
     private static final String USER_STATUS = "user_status";
     private static final String USER_DETAILS = "user_details";
     private static final String EZCRED_SECRET_KEY = "ezcred_secret_key";
-    
 
-    private final Gson gson;
+  private final Gson gson;
     
     private final Context context;
 
-    public PrefManager(Context context, Gson gson) {
+  public PrefManager(Context context, Gson gson) {
         this.context = context;
         this.gson = gson;
     }

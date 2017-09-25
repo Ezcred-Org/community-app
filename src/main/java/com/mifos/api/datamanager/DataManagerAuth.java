@@ -40,4 +40,5 @@ public class DataManagerAuth {
         UpdatePasswordPayload updatePasswordPayload = new UpdatePasswordPayload(password, repeatPassword);
         return baseApiManager.getAuthApi().updatePassword(userId, updatePasswordPayload);
   }
+
 }

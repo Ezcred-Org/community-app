@@ -7,6 +7,7 @@ package com.mifos.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mifos.api.services.AddressService;
 import com.mifos.api.services.AuthService;
 import com.mifos.api.services.CenterService;
 import com.mifos.api.services.ChargeService;
@@ -55,6 +56,7 @@ public class BaseApiManager {
   private static SurveyService surveyApi;
   private static RunReportsService runreportsService;
   private static NoteService noteService;
+  private static AddressService addressApi;
 
   public BaseApiManager(PrefManager prefManager) {
     createService(prefManager);
@@ -77,6 +79,7 @@ public class BaseApiManager {
     chargeApi = createApi(ChargeService.class);
     runreportsService = createApi(RunReportsService.class);
     noteService = createApi(NoteService.class);
+    addressApi = createApi(AddressService.class);
   }
 
   private static <T> T createApi(Class<T> clazz) {
@@ -160,5 +163,9 @@ public class BaseApiManager {
 
   public NoteService getNoteApi() {
     return noteService;
+  }
+
+  public AddressService getAddressApi() {
+    return addressApi;
   }
 }

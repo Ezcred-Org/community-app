@@ -32,5 +32,4 @@ public interface AuthService {
 
     @PUT("users/{userId}")
     Observable<String> updatePassword(@Path("userId") long userId, @Body UpdatePasswordPayload updatePasswordPayload);
-
 }

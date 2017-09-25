@@ -196,7 +196,7 @@ public class Constants {
 
     public static Map<String, String> GLOBAL_ERROR_MAP = new HashMap<>();
 
-    static {
+  static {
         GLOBAL_ERROR_MAP.put("error.msg.not.authenticated", "User Authentication Failed - Invalid username/password");
         GLOBAL_ERROR_MAP.put("error.msg.dataintegrity", "There is an issue with your loan application request - pls contact customer support");
         GLOBAL_ERROR_MAP.put("error.msg.badrequest", "The request was invalid. Pls contact customer support if the issue persists");

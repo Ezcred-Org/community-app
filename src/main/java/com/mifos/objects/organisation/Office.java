@@ -7,9 +7,11 @@ package com.mifos.objects.organisation;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
+import com.mifos.objects.client.Address;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.ModelContainer;
@@ -24,7 +26,7 @@ import java.util.List;
  */
 @Table(database = MifosDatabase.class)
 @ModelContainer
-public class Office extends MifosBaseModel implements Parcelable {
+public class Office extends MifosBaseModel implements Parcelable, Comparable<Office> {
 
     @PrimaryKey
     Integer id;
@@ -34,6 +36,11 @@ public class Office extends MifosBaseModel implements Parcelable {
 
     @Column
     String name;
+
+    @Column
+    Long addressId;
+
+    Address address;
 
     @Column
     String nameDecorated;
@@ -92,6 +99,22 @@ public class Office extends MifosBaseModel implements Parcelable {
         this.officeOpeningDate = officeOpeningDate;
     }
 
+    public Long getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "Office{" +
@@ -143,4 +166,10 @@ public class Office extends MifosBaseModel implements Parcelable {
             return new Office[size];
         }
     };
+
+    @Override
+    public int compareTo(@NonNull Office o) {
+        if (id == o.id) return 0;
+        return id > o.id ? 1 : -1;
+    }
 }
