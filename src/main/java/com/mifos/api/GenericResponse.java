@@ -20,5 +20,6 @@ public class GenericResponse {
     private Long resourceId;
     private Long subResourceId;
     private String transactionId;
+    private String resourceIdentifier;
     private Map<String, Object> changes;
 }
