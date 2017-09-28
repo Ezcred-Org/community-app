@@ -63,4 +63,7 @@ public class DataManagerStaff {
 
     }
 
+  public Observable<Staff> getStaffDetails(long staffId) {
+    return mBaseApiManager.getStaffApi().getStaffDetails(staffId);
+  }
 }
