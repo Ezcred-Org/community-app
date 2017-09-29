@@ -10,6 +10,7 @@ import com.mifos.objects.organisation.Staff;
 import java.util.List;
 
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -29,4 +30,6 @@ public interface StaffService {
     @GET(APIEndPoint.STAFF + "?isLoanOfficer=true")
     Observable<List<Staff>> getFieldStaffForOffice();
 
+    @GET(APIEndPoint.STAFF + "/{staffId}")
+    Observable<Staff> getStaffDetails(@Path("staffId") long staffId);
 }

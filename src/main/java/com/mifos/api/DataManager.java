@@ -1,7 +1,6 @@
 package com.mifos.api;
 
 import com.mifos.api.datamanager.DataManagerClient;
-import com.mifos.api.model.APIEndPoint;
 import com.mifos.api.model.CollectionSheetPayload;
 import com.mifos.api.model.Payload;
 import com.mifos.objects.accounts.loan.LoanApproval;
@@ -30,8 +29,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import okhttp3.ResponseBody;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
 import rx.Observable;
 
 /**

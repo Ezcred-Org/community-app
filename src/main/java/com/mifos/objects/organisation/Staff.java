@@ -22,6 +22,18 @@ import com.raizlabs.android.dbflow.annotation.Table;
 @ModelContainer
 public class Staff extends MifosBaseModel implements Parcelable {
 
+    public static final Parcelable.Creator<Staff> CREATOR = new Parcelable.Creator<Staff>() {
+        @Override
+        public Staff createFromParcel(Parcel source) {
+            return new Staff(source);
+        }
+
+        @Override
+        public Staff[] newArray(int size) {
+            return new Staff[size];
+        }
+    };
+
     @PrimaryKey
     Integer id;
 
@@ -49,6 +61,24 @@ public class Staff extends MifosBaseModel implements Parcelable {
     @Column
     Boolean isActive;
 
+    @Column
+    String externalId;
+
+    public Staff() {
+    }
+
+    protected Staff(Parcel in) {
+        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.firstname = in.readString();
+        this.lastname = in.readString();
+        this.mobileNo = in.readString();
+        this.displayName = in.readString();
+        this.officeId = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.officeName = in.readString();
+        this.isLoanOfficer = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.isActive = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.externalId = in.readString();
+    }
 
     public Integer getId() {
         return id;
@@ -122,6 +152,13 @@ public class Staff extends MifosBaseModel implements Parcelable {
         this.mobileNo = mobileNo;
     }
 
+    public String getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
+    }
 
     @Override
     public int describeContents() {
@@ -139,32 +176,6 @@ public class Staff extends MifosBaseModel implements Parcelable {
         dest.writeString(this.officeName);
         dest.writeValue(this.isLoanOfficer);
         dest.writeValue(this.isActive);
+        dest.writeString(this.externalId);
     }
-
-    public Staff() {
-    }
-
-    protected Staff(Parcel in) {
-        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.firstname = in.readString();
-        this.lastname = in.readString();
-        this.mobileNo = in.readString();
-        this.displayName = in.readString();
-        this.officeId = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.officeName = in.readString();
-        this.isLoanOfficer = (Boolean) in.readValue(Boolean.class.getClassLoader());
-        this.isActive = (Boolean) in.readValue(Boolean.class.getClassLoader());
-    }
-
-    public static final Parcelable.Creator<Staff> CREATOR = new Parcelable.Creator<Staff>() {
-        @Override
-        public Staff createFromParcel(Parcel source) {
-            return new Staff(source);
-        }
-
-        @Override
-        public Staff[] newArray(int size) {
-            return new Staff[size];
-        }
-    };
 }
