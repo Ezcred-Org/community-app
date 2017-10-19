@@ -36,6 +36,9 @@ public class Office extends MifosBaseModel implements Parcelable {
     String name;
 
     @Column
+    Long addressId;
+
+    @Column
     String nameDecorated;
 
     @Column
@@ -90,6 +93,14 @@ public class Office extends MifosBaseModel implements Parcelable {
 
     public void setOfficeOpeningDate(OfficeOpeningDate officeOpeningDate) {
         this.officeOpeningDate = officeOpeningDate;
+    }
+
+    public Long getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId (Long addressId) {
+        this.addressId = addressId;
     }
 
     @Override

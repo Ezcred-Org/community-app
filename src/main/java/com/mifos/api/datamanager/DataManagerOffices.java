@@ -2,6 +2,7 @@ package com.mifos.api.datamanager;
 
 import com.mifos.api.BaseApiManager;
 import com.mifos.api.local.databasehelper.DatabaseHelperOffices;
+import com.mifos.objects.client.Address;
 import com.mifos.objects.organisation.Office;
 import com.mifos.utils.PrefManager;
 
@@ -60,5 +61,14 @@ public class DataManagerOffices {
                 List<Office> offices = new ArrayList<>();
                 return Observable.just(offices);
         }
+    }
+
+    public Observable<Address> getOfficeAddressByAddressId( long addressId) {
+        return mBaseApiManager.getOfficeApi().getOfficeAddress(addressId);
+    }
+
+    public Observable<Office> getOfficeDetailsByOfficeId( long officeId) {
+        return mBaseApiManager.getOfficeApi().getOfficeDetails(officeId);
+
     }
 }
