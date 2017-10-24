@@ -27,9 +27,9 @@ public interface OfficeService {
     @GET(APIEndPoint.OFFICES)
     Observable<List<Office>> getAllOffices();
 
-    @GET(APIEndPoint.OFFICES+ "/{officeId}")
+    @GET(APIEndPoint.OFFICES + "/{officeId}")
     Observable<Office> getOfficeDetails(@Path("officeId") long officeId);
 
-    @GET(APIEndPoint.ADDRESS+ "/{addressId}")
+    @GET(APIEndPoint.ADDRESS + "/{addressId}")
     Observable<Address> getOfficeAddress(@Path("addressId") long addressId);
 }
