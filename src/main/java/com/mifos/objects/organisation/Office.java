@@ -129,8 +129,8 @@ public class Office extends MifosBaseModel implements Parcelable {
         dest.writeValue(this.id);
         dest.writeString(this.externalId);
         dest.writeString(this.name);
-        dest.writeString(this.name);
         dest.writeLong(this.addressId);
+        dest.writeString(this.nameDecorated);
         dest.writeParcelable(this.officeOpeningDate, flags);
         dest.writeList(this.openingDate);
     }
