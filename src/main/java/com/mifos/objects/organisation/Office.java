@@ -36,6 +36,9 @@ public class Office extends MifosBaseModel implements Parcelable {
     String name;
 
     @Column
+    Long addressId;
+
+    @Column
     String nameDecorated;
 
     @Column
@@ -92,12 +95,21 @@ public class Office extends MifosBaseModel implements Parcelable {
         this.officeOpeningDate = officeOpeningDate;
     }
 
+    public Long getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId (Long addressId) {
+        this.addressId = addressId;
+    }
+
     @Override
     public String toString() {
         return "Office{" +
                 "id=" + id +
                 ", externalId='" + externalId + '\'' +
                 ", name='" + name + '\'' +
+                ", addressId='" + addressId + '\'' +
                 ", nameDecorated='" + nameDecorated + '\'' +
                 ", officeOpeningDate=" + officeOpeningDate +
                 ", openingDate=" + openingDate +
@@ -117,6 +129,7 @@ public class Office extends MifosBaseModel implements Parcelable {
         dest.writeValue(this.id);
         dest.writeString(this.externalId);
         dest.writeString(this.name);
+        dest.writeLong(this.addressId);
         dest.writeString(this.nameDecorated);
         dest.writeParcelable(this.officeOpeningDate, flags);
         dest.writeList(this.openingDate);
@@ -126,6 +139,7 @@ public class Office extends MifosBaseModel implements Parcelable {
         this.id = (Integer) in.readValue(Integer.class.getClassLoader());
         this.externalId = in.readString();
         this.name = in.readString();
+        this.addressId = in.readLong();
         this.nameDecorated = in.readString();
         this.officeOpeningDate = in.readParcelable(OfficeOpeningDate.class.getClassLoader());
         this.openingDate = new ArrayList<Integer>();
