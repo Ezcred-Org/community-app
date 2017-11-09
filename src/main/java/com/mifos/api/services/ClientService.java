@@ -246,4 +246,5 @@ public interface ClientService {
     @POST(APIEndPoint.CLIENTS + "/{clientId}?command=activate")
     Observable<GenericResponse> activateClient(@Path("clientId") int clientId,
                                                              @Body ActivatePayload clientActivate);
+    
 }
