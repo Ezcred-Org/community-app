@@ -117,7 +117,6 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         if (datatables == null) {
             datatables = new ArrayList<>();
         }
-
         datatables.add(dataTablePayload);
     }
 

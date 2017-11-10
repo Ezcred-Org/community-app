@@ -476,5 +476,4 @@ public class DataManagerClient {
                                                                     ActivatePayload clientActivate) {
         return mBaseApiManager.getClientsApi().activateClient(clientId, clientActivate);
     }
-
 }
