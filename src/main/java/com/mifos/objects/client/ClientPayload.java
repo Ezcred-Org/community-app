@@ -17,6 +17,7 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -103,20 +104,13 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
     String locale = "en";
 
     @SerializedName("datatables")
-    List<DataTablePayload> datatables = new ArrayList<>();
+    private List<DataTablePayload> datatables;
 
     public List<DataTablePayload> getDatatables() {
         return datatables;
     }
 
-    public List<DataTablePayload> getDataTables() {
-        return datatables;
-    }
-
     public void addDataTable(DataTablePayload dataTablePayload) {
-        if (datatables == null) {
-            datatables = new ArrayList<>();
-        }
         datatables.add(dataTablePayload);
     }
 
@@ -336,6 +330,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
     }
 
     public ClientPayload() {
+        this.datatables = new LinkedList<>();
     }
 
     protected ClientPayload(Parcel in) {

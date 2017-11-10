@@ -3,6 +3,6 @@ package com.mifos.objects.client;
 import lombok.Data;
 
 @Data
-public class FetchClientResponse {
+public class ClientAadhaarCheckResponse {
   private final long clientId;
 }
