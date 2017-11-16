@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class AppUser {
-  // NOTE: username is phone number with country code
+  // NOTE: username is mobile number without country code
+  private final String mobile;
   private final String username;
   private final String firstname;
   private final String lastname;
