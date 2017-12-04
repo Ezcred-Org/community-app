@@ -20,11 +20,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import lombok.ToString;
+
 /**
  * Created by ADMIN on 16-Jun-15.
  */
 @Table(database = MifosDatabase.class)
 @ModelContainer
+@ToString
 public class ClientPayload extends MifosBaseModel implements Parcelable {
 
     @PrimaryKey(autoincrement = true)
@@ -47,6 +50,10 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
     @SerializedName("middlename")
     @Column
     String middlename;
+
+    @SerializedName("fullname")
+    @Column
+    String fullname;
 
     @SerializedName("officeId")
     @Column
@@ -278,29 +285,12 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         this.locale = locale;
     }
 
-    @Override
-    public String toString() {
-        return "ClientPayload{" +
-                "id=" + id +
-                ", errorMessage='" + errorMessage + '\'' +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", middlename='" + middlename + '\'' +
-                ", officeId=" + officeId +
-                ", staffId=" + staffId +
-                ", genderId=" + genderId +
-                ", active=" + active +
-                ", activationDate='" + activationDate + '\'' +
-                ", submittedOnDate='" + submittedOnDate + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
-                ", mobileNo='" + mobileNo + '\'' +
-                ", externalId='" + externalId + '\'' +
-                ", clientTypeId=" + clientTypeId +
-                ", clientClassificationId=" + clientClassificationId +
-                ", address=" + address +
-                ", dateFormat='" + dateFormat + '\'' +
-                ", locale='" + locale + '\'' +
-                '}';
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getFullname() {
+        return fullname;
     }
 
     @Override
@@ -313,6 +303,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         dest.writeString(this.firstname);
         dest.writeString(this.lastname);
         dest.writeString(this.middlename);
+        dest.writeString(this.fullname);
         dest.writeValue(this.officeId);
         dest.writeValue(this.staffId);
         dest.writeValue(this.genderId);
@@ -337,6 +328,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         this.firstname = in.readString();
         this.lastname = in.readString();
         this.middlename = in.readString();
+        this.fullname = in.readString();
         this.officeId = (Integer) in.readValue(Integer.class.getClassLoader());
         this.staffId = (Integer) in.readValue(Integer.class.getClassLoader());
         this.genderId = (Integer) in.readValue(Integer.class.getClassLoader());
