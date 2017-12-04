@@ -29,7 +29,7 @@ public class PrefManager {
     private static final String USER_STATUS = "user_status";
     private static final String USER_DETAILS = "user_details";
     private static final String EZCRED_SECRET_KEY = "ezcred_secret_key";
-    
+    private static final String EZCRED_LAST_APP_VERSION_CODE = "ezcred_last_app_version_code";
 
     private final Gson gson;
     
@@ -202,6 +202,14 @@ public class PrefManager {
 
     public String getFirebaseToken() {
         return getString(Constants.FIREBASE_TOKEN, "");
+    }
+
+    public int getLastEzcredAppVersion() {
+        return getInt(EZCRED_LAST_APP_VERSION_CODE, 0);
+    }
+
+    public void setLastEzcredAppVersion(int versionCode) {
+        putInt(EZCRED_LAST_APP_VERSION_CODE, versionCode);
     }
 }
 
