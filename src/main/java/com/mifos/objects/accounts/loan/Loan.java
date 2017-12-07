@@ -55,6 +55,8 @@ public class Loan {
     private Boolean canDisburse;
     private Boolean inArrears;
     private Boolean isNPA;
+    private String model;
+    private String brand;
     private List<Object> overdueCharges = new ArrayList<Object>();
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -369,6 +371,22 @@ public class Loan {
 
     public void setInArrears(Boolean inArrears) {
         this.inArrears = inArrears;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public Boolean getIsNPA() {
