@@ -6,6 +6,7 @@ import com.mifos.objects.system.CodeValue;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import rx.Observable;
@@ -14,6 +15,7 @@ import rx.Observable;
 public class DataManagerCode {
   public final BaseApiManager mBaseApiManager;
 
+  @Inject
   public DataManagerCode(BaseApiManager mBaseApiManager) {
     this.mBaseApiManager = mBaseApiManager;
   }
