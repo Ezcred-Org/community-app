@@ -15,8 +15,6 @@ public interface CodeService {
   @GET(APIEndPoint.CODES)
   Observable<List<Code>> getCode();
 
-
   @GET(APIEndPoint.CODES + "/{codeId}/codevalues")
   Observable<List<CodeValue>> getCodeValue(@Path("codeId") long codeId);
-
 }
