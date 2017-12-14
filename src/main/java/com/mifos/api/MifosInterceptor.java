@@ -5,6 +5,7 @@
 
 package com.mifos.api;
 
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -24,17 +25,28 @@ public class MifosInterceptor implements Interceptor {
 
     public static final String HEADER_TENANT = "Fineract-Platform-TenantId";
     public static final String HEADER_AUTH = "Authorization";
+    public static final String CLIENT_LOAN_HEADER = "X-Client-Loan";
+
 
     private final PrefManager prefManager;
+    private final SharedPreferences sharedPreferences;
 
-    public MifosInterceptor(PrefManager prefManager) {
+    public MifosInterceptor(PrefManager prefManager, SharedPreferences sharedPreferences) {
         this.prefManager = prefManager;
+        this.sharedPreferences = sharedPreferences;
     }
 
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
         Request chianrequest = chain.request();
         Builder builder = chianrequest.newBuilder();
+        long clientId = sharedPreferences.getLong("CLIENT_ID", -1);
+        long loanId = sharedPreferences.getLong("LOAN_ID", -1);
+
+        if (clientId != -1 || loanId != -1) {
+            builder.header(CLIENT_LOAN_HEADER, clientId + "-" + loanId);
+        }
+
         if (!TextUtils.isEmpty(prefManager.getTenant())) {
             builder.header(HEADER_TENANT, prefManager.getTenant());
         }

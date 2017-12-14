@@ -5,6 +5,8 @@
 
 package com.mifos.api;
 
+import android.content.SharedPreferences;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mifos.api.services.AuthService;
@@ -58,8 +60,8 @@ public class BaseApiManager {
   private static NoteService noteService;
   private static CodeService codeService;
 
-  public BaseApiManager(PrefManager prefManager) {
-    createService(prefManager);
+  public BaseApiManager(PrefManager prefManager, SharedPreferences sharedPreferences) {
+    createService(prefManager, sharedPreferences);
   }
 
   public static void init() {
@@ -86,7 +88,7 @@ public class BaseApiManager {
     return mRetrofit.create(clazz);
   }
 
-  public static void createService(PrefManager prefManager) {
+  public static void createService(PrefManager prefManager, SharedPreferences sharedPreferences) {
 
     Gson gson = new GsonBuilder()
       .registerTypeAdapter(Date.class, new JsonDateSerializer()).create();
@@ -96,7 +98,7 @@ public class BaseApiManager {
       .addConverterFactory(ScalarsConverterFactory.create())
       .addConverterFactory(GsonConverterFactory.create(gson))
       .addCallAdapterFactory(MifosErrorHandlingCallAdapterFactory.create())
-      .client(new MifosOkHttpClient().getMifosOkHttpClient(prefManager))
+      .client(new MifosOkHttpClient().getMifosOkHttpClient(prefManager, sharedPreferences))
       .build();
     init();
   }
