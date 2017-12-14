@@ -1,5 +1,6 @@
 package com.mifos.api;
 
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
@@ -18,7 +19,7 @@ import timber.log.Timber;
 public class MifosOkHttpClient {
 
 
-    public OkHttpClient getMifosOkHttpClient(PrefManager prefManager) {
+    public OkHttpClient getMifosOkHttpClient(PrefManager prefManager, SharedPreferences sharedPreferences) {
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
@@ -28,7 +29,7 @@ public class MifosOkHttpClient {
         builder.retryOnConnectionFailure(true);
 
 
-        builder.addInterceptor(new MifosInterceptor(prefManager));
+        builder.addInterceptor(new MifosInterceptor(prefManager, sharedPreferences));
 
         //Enable Full Body Logging
         HttpLoggingInterceptor logger = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
