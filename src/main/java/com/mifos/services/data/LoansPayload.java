@@ -7,7 +7,6 @@ package com.mifos.services.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.mifos.objects.client.Charges;
 import com.mifos.objects.noncore.DataTablePayload;
 
 import java.util.ArrayList;
@@ -46,6 +45,7 @@ public class LoansPayload implements Parcelable {
     Integer linkAccountId;
     ArrayList<DataTablePayload> datatables;
     List<ChargesPayload> charges;
+    Integer officeId;
 
     public List<ChargesPayload> getCharges() {
         return charges;
@@ -57,6 +57,14 @@ public class LoansPayload implements Parcelable {
         }
 
         charges.add(chargesPayload);
+    }
+
+    public void setOfficeId(int officeId) {
+        this.officeId = officeId;
+    }
+
+    public int getOfficeId() {
+        return officeId;
     }
 
     public void setCharges(List<ChargesPayload> charges) {
