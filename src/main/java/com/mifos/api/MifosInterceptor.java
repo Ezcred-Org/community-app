@@ -43,7 +43,7 @@ public class MifosInterceptor implements Interceptor {
         Builder builder = chianrequest.newBuilder();
         long clientId = sharedPreferences.getLong("CLIENT_ID", -1);
         long loanId = sharedPreferences.getLong("LOAN_ID", -1);
-        builder.header(APP_VERSION_HEADER,  String.valueOf(prefManager.getEzcredLastAppVersionName()));
+        builder.header(APP_VERSION_HEADER,  prefManager.getEzcredLastAppVersionName());
         if (clientId != -1 || loanId != -1) {
             builder.header(CLIENT_LOAN_HEADER, clientId + "-" + loanId);
         }
