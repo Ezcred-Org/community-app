@@ -30,6 +30,7 @@ public class PrefManager {
     private static final String USER_DETAILS = "user_details";
     private static final String EZCRED_SECRET_KEY = "ezcred_secret_key";
     private static final String EZCRED_LAST_APP_VERSION_CODE = "ezcred_last_app_version_code";
+    private static final String EZCRED_LAST_APP_VERSION_NAME = "ezcred_last_app_version_name";
 
     private final Gson gson;
     
@@ -210,6 +211,14 @@ public class PrefManager {
 
     public void setLastEzcredAppVersion(int versionCode) {
         putInt(EZCRED_LAST_APP_VERSION_CODE, versionCode);
+    }
+
+    public String getEzcredLastAppVersionName() {
+        return getString(EZCRED_LAST_APP_VERSION_NAME, "");
+    }
+
+    public void setEzcredLastAppVersionName(String versionName) {
+        putString(EZCRED_LAST_APP_VERSION_NAME, versionName);
     }
 }
 
