@@ -102,7 +102,7 @@ public class Document implements Parcelable {
         return verified;
     }
 
-    public void setVerified(Map<String,Object> verified) {
+    public void setVerified(Map<String, Object> verified) {
         this.verified = verified;
     }
 
