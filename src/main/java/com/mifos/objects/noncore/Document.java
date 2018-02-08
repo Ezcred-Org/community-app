@@ -8,6 +8,8 @@ package com.mifos.objects.noncore;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Map;
+
 /**
  * Created by ishankhanna on 02/07/14.
  */
@@ -21,6 +23,8 @@ public class Document implements Parcelable {
     private long size;
     private String type;
     private String description;
+    private String comments;
+    private Map<String, Object> verified;
 
     public int getId() {
         return id;
@@ -86,6 +90,22 @@ public class Document implements Parcelable {
         this.description = description;
     }
 
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public Map<String, Object> getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Map<String,Object> verified) {
+        this.verified = verified;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -101,6 +121,8 @@ public class Document implements Parcelable {
         dest.writeLong(this.size);
         dest.writeString(this.type);
         dest.writeString(this.description);
+        dest.writeString(this.comments);
+        dest.writeMap(this.verified);
     }
 
     public Document() {
@@ -115,6 +137,8 @@ public class Document implements Parcelable {
         this.size = in.readLong();
         this.type = in.readString();
         this.description = in.readString();
+        this.comments = in.readString();
+        in.readMap(verified, Object.class.getClassLoader());
     }
 
     public static final Parcelable.Creator<Document> CREATOR = new Parcelable.Creator<Document>() {
