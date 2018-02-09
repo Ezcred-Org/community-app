@@ -8,7 +8,7 @@ package com.mifos.objects.noncore;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Map;
+import lombok.Data;
 
 /**
  * Created by ishankhanna on 02/07/14.
@@ -24,7 +24,7 @@ public class Document implements Parcelable {
     private String type;
     private String description;
     private String comments;
-    private Map<String, Object> verified;
+    private Verified verified;
 
     public int getId() {
         return id;
@@ -98,11 +98,11 @@ public class Document implements Parcelable {
         this.comments = comments;
     }
 
-    public Map<String, Object> getVerified() {
+    public Verified getVerified() {
         return verified;
     }
 
-    public void setVerified(Map<String, Object> verified) {
+    public void setVerified(Verified verified) {
         this.verified = verified;
     }
 
@@ -122,7 +122,6 @@ public class Document implements Parcelable {
         dest.writeString(this.type);
         dest.writeString(this.description);
         dest.writeString(this.comments);
-        dest.writeMap(this.verified);
     }
 
     public Document() {
@@ -138,7 +137,13 @@ public class Document implements Parcelable {
         this.type = in.readString();
         this.description = in.readString();
         this.comments = in.readString();
-        in.readMap(verified, Object.class.getClassLoader());
+    }
+
+    @Data
+    public static class Verified {
+        private final long id;
+        private final String code;
+        private final String value;
     }
 
     public static final Parcelable.Creator<Document> CREATOR = new Parcelable.Creator<Document>() {
