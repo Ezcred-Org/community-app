@@ -20,14 +20,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import lombok.Builder;
-
 /**
  * Created by ADMIN on 16-Jun-15.
  */
 @Table(database = MifosDatabase.class)
 @ModelContainer
-@Builder
 public class ClientPayload extends MifosBaseModel implements Parcelable {
 
     @PrimaryKey(autoincrement = true)
@@ -369,39 +366,163 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         }
     };
 
-//    public static final class Builder {
-//
-//        public static final String EMPTY = "";
-//
-//        private String firstName = EMPTY;
-//        private String middleName = EMPTY;
-//        private String lastName = EMPTY;
-//        private String mobileNo = EMPTY;
-//
-//        public ClientPayload build() {
-//            ClientPayload clientPayload = new ClientPayload();
-//            clientPayload.setFirstname(firstName);
-//            clientPayload.setMiddlename(middleName);
-//            clientPayload.setLastname(lastName);
-//
-//            return clientPayload;
-//        }
-//
-//        public Builder setFirstName(String firstName) {
-//            this.firstName = firstName;
-//            return this;
-//        }
-//
-//        public Builder setMiddleName(String middleName) {
-//            this.middleName = middleName;
-//            return this;
-//        }
-//
-//        public Builder setLastName(String lastName) {
-//            this.lastName = lastName;
-//            return this;
-//        }
-//
-//    }
+    public static final class Builder {
+        
+        private String firstName;
+        private String middleName;
+        private String lastName;
+        private String mobileNo;
+        private String activationDate;
+        private String submittedOnDate;
+        private String dateOfBirth;
+        private String externalId;
+        private List<Address> address;
+        private List<DataTablePayload> datatables;
+        private Integer clientTypeId;
+        private Integer officeId;
+        private Integer staffId;
+        private Integer genderId;
+        private Integer clientClassificationId;
+        private Boolean active;
+
+
+        public ClientPayload build() {
+            ClientPayload clientPayload = new ClientPayload();
+            clientPayload.setFirstname(firstName);
+            clientPayload.setMiddlename(middleName);
+            clientPayload.setLastname(lastName);
+            clientPayload.setMobileNo(mobileNo);
+
+            if(active != null) {
+                clientPayload.setActive(active);
+            }
+
+            if(activationDate != null) {
+                clientPayload.setActivationDate(activationDate);
+            }
+
+            if(submittedOnDate != null) {
+                clientPayload.setSubmittedOnDate(submittedOnDate);
+            }
+
+            if(dateOfBirth != null) {
+                clientPayload.setDateOfBirth(dateOfBirth);
+            }
+
+            if(externalId != null) {
+                clientPayload.setExternalId(externalId);
+            }
+
+            if(address != null) {
+                clientPayload.setAddress(address);
+            }
+
+            if(clientTypeId != null) {
+                clientPayload.setClientTypeId(clientTypeId);
+            }
+
+            if(officeId != null) {
+                clientPayload.setOfficeId(officeId);
+            }
+
+            if(staffId != null) {
+                clientPayload.setStaffId(staffId);
+            }
+
+            if(genderId != null) {
+                clientPayload.setGenderId(genderId);
+            }
+
+            if(clientClassificationId != null) {
+                clientPayload.setClientClassificationId(clientClassificationId);
+            }
+
+            if(datatables != null) {
+                clientPayload.setDatatables(datatables);
+            }
+
+            return clientPayload;
+        }
+
+        public Builder setFirstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public Builder setMiddleName(String middleName) {
+            this.middleName = middleName;
+            return this;
+        }
+
+        public Builder setLastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public Builder setMobileNo(String mobileNo) {
+            this.mobileNo = mobileNo;
+            return this;
+        }
+
+        public Builder setActivationDate(String activationDate) {
+            this.activationDate = activationDate;
+            return  this;
+        }
+
+        public Builder setSubmittedOnDate(String submittedOnDate) {
+            this.submittedOnDate = submittedOnDate;
+            return this;
+        }
+
+        public Builder setDateOfBirth(String dateOfBirth) {
+            this.dateOfBirth = dateOfBirth;
+            return this;
+        }
+
+        public Builder setExternalId(String externalId) {
+            this.externalId = externalId;
+            return this;
+        }
+
+        public Builder setAddress(List<Address> address) {
+            this.address = address;
+            return this;
+        }
+
+        public Builder setClientTypeId(int clientTypeId) {
+            this.clientTypeId = clientTypeId;
+            return this;
+        }
+
+        public Builder setOfficeId(int officeId) {
+            this.officeId = officeId;
+            return this;
+        }
+
+        public Builder setStaffId(int staffId) {
+            this.staffId = staffId;
+            return this;
+        }
+
+        public Builder setGenderId(int genderId) {
+            this.genderId = genderId;
+            return this;
+        }
+
+        public Builder setClientClassificationId(int clientClassificationId) {
+            this.clientClassificationId = clientClassificationId;
+            return this;
+        }
+
+        public Builder setActive(boolean active) {
+            this.active = active;
+            return this;
+        }
+
+        public Builder setDatatables(List<DataTablePayload> datatables) {
+            this.datatables = datatables;
+            return this;
+        }
+    }
 }
 
