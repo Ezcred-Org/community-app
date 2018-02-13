@@ -243,8 +243,8 @@ public class DataManagerClient {
 
     }
 
-    public Observable<GenericResponse> updateMifosClient(final Map<String, Object> clientPayload) {
-        return mBaseApiManager.getClientsApi().updateClient(clientPayload);
+    public Observable<GenericResponse> updateMifosClient(long clientId, final Map<String, Object> clientPayload) {
+        return mBaseApiManager.getClientsApi().updateClient(clientId, clientPayload);
     }
 
 

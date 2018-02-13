@@ -69,8 +69,11 @@ public interface ClientService {
     @POST(APIEndPoint.CLIENTS)
     Observable<Client> createClient(@Body ClientPayload clientPayload);
 
-    @PUT(APIEndPoint.CLIENTS + "{clientId}")
-    Observable<GenericResponse> updateClient(@Body Map<String, Object> payload);
+    @PUT(APIEndPoint.CLIENTS + "/{clientId}")
+    Observable<GenericResponse> updateClient(
+      @Path("clientId") long clientId,
+      @Body Map<String, Object> payload
+    );
 
     @POST(APIEndPoint.CLIENTS)
     Observable<GenericResponse> createMifosClient(@Body ClientPayload clientPayload);

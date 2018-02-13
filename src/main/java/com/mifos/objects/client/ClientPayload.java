@@ -392,6 +392,8 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
             clientPayload.setMiddlename(middleName);
             clientPayload.setLastname(lastName);
             clientPayload.setMobileNo(mobileNo);
+            clientPayload.setAddress(null);
+            clientPayload.setDatatables(null);
 
             if(active != null) {
                 clientPayload.setActive(active);
@@ -413,7 +415,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
                 clientPayload.setExternalId(externalId);
             }
 
-            if(address != null) {
+            if(address != null && address.size() != 0) {
                 clientPayload.setAddress(address);
             }
 
@@ -437,7 +439,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
                 clientPayload.setClientClassificationId(clientClassificationId);
             }
 
-            if(datatables != null) {
+            if(datatables != null && datatables.size() != 0) {
                 clientPayload.setDatatables(datatables);
             }
 
