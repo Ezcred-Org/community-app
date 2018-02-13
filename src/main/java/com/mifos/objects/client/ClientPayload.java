@@ -20,11 +20,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import lombok.Builder;
+
 /**
  * Created by ADMIN on 16-Jun-15.
  */
 @Table(database = MifosDatabase.class)
 @ModelContainer
+@Builder
 public class ClientPayload extends MifosBaseModel implements Parcelable {
 
     @PrimaryKey(autoincrement = true)
@@ -365,5 +368,40 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
             return new ClientPayload[size];
         }
     };
+
+//    public static final class Builder {
+//
+//        public static final String EMPTY = "";
+//
+//        private String firstName = EMPTY;
+//        private String middleName = EMPTY;
+//        private String lastName = EMPTY;
+//        private String mobileNo = EMPTY;
+//
+//        public ClientPayload build() {
+//            ClientPayload clientPayload = new ClientPayload();
+//            clientPayload.setFirstname(firstName);
+//            clientPayload.setMiddlename(middleName);
+//            clientPayload.setLastname(lastName);
+//
+//            return clientPayload;
+//        }
+//
+//        public Builder setFirstName(String firstName) {
+//            this.firstName = firstName;
+//            return this;
+//        }
+//
+//        public Builder setMiddleName(String middleName) {
+//            this.middleName = middleName;
+//            return this;
+//        }
+//
+//        public Builder setLastName(String lastName) {
+//            this.lastName = lastName;
+//            return this;
+//        }
+//
+//    }
 }
 
