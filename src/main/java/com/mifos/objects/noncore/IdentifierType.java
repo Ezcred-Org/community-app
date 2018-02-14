@@ -12,13 +12,13 @@ import com.google.gson.annotations.SerializedName;
 public class IdentifierType implements Parcelable {
 
     @SerializedName("id")
-    Integer id;
+    private Integer id;
 
     @SerializedName("name")
-    String name;
+    private String name;
 
     @SerializedName("position")
-    Integer position;
+    private Integer position;
 
     public Integer getId() {
         return id;

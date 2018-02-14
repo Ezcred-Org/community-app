@@ -15,7 +15,7 @@ import java.util.List;
 public class IdentifierTemplate implements Parcelable {
 
     @SerializedName("allowedDocumentTypes")
-    List<IdentifierType> allowedDocumentTypes = new ArrayList<>();
+    private List<IdentifierType> allowedDocumentTypes = new ArrayList<>();
 
     public List<IdentifierType> getAllowedDocumentTypes() {
         return allowedDocumentTypes;
@@ -24,7 +24,6 @@ public class IdentifierTemplate implements Parcelable {
     public void setAllowedDocumentTypes(List<IdentifierType> allowedDocumentTypes) {
         this.allowedDocumentTypes = allowedDocumentTypes;
     }
-
 
     @Override
     public int describeContents() {
