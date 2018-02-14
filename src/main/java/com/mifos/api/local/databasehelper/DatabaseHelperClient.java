@@ -496,7 +496,7 @@ public class DatabaseHelperClient {
         return Observable.defer(new Func0<Observable<List<ClientPayload>>>() {
             @Override
             public Observable<List<ClientPayload>> call() {
-                Delete.table(ClientPayload.class, ClientPayload_Table.id.eq(id));
+                Delete.table(ClientPayload.class, ClientPayload_Table.id.eq((long) id));
                 Delete.table(DataTablePayload.class, DataTablePayload_Table.clientCreationTime.eq
                         (clientCreationTIme));
                 return readAllClientPayload();

@@ -18,7 +18,6 @@ import com.mifos.objects.templates.clients.ClientsTemplate;
 import com.mifos.utils.PrefManager;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -243,7 +242,7 @@ public class DataManagerClient {
 
     }
 
-    public Observable<GenericResponse> updateMifosClient(long clientId, final Map<String, Object> clientPayload) {
+    public Observable<GenericResponse> updateMifosClient(long clientId, final ClientPayload clientPayload) {
         return mBaseApiManager.getClientsApi().updateClient(clientId, clientPayload);
     }
 

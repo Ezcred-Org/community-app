@@ -31,7 +31,7 @@ import lombok.Getter;
 public class ClientPayload extends MifosBaseModel implements Parcelable {
 
     @PrimaryKey(autoincrement = true)
-    transient Integer id;
+    transient Long id;
 
     @Column
     transient Long clientCreationTime;
@@ -100,11 +100,11 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
 
     @SerializedName("dateFormat")
     @Column
-    String dateFormat = "dd MMMM YYYY";
+    String dateFormat;
 
     @SerializedName("locale")
     @Column
-    String locale = "en";
+    String locale;
 
     @SerializedName("datatables")
     private List<DataTablePayload> datatables;
@@ -121,11 +121,11 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         this.datatables = datatables;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -368,7 +368,6 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
     };
 
     public static final class Builder {
-        
         private String firstName;
         private String middleName;
         private String lastName;
@@ -387,6 +386,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         private Boolean active;
 
         private final DateFormat dateFormat;
+        private static final String locale = "en";
 
         private Builder(DateFormat dateFormat) {
             this.dateFormat = dateFormat;
@@ -399,10 +399,24 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
 
         public ClientPayload build() {
             ClientPayload clientPayload = new ClientPayload();
-            clientPayload.setFirstname(firstName);
-            clientPayload.setMiddlename(middleName);
-            clientPayload.setLastname(lastName);
-            clientPayload.setMobileNo(mobileNo);
+            clientPayload.setLocale(locale);
+            clientPayload.setDateFormat(dateFormat.getFormat());
+
+            if (firstName != null) {
+                clientPayload.setFirstname(firstName);
+            }
+
+            if (middleName != null) {
+                clientPayload.setMiddlename(middleName);
+            }
+
+            if (lastName != null) {
+                clientPayload.setLastname(lastName);
+            }
+
+            if (mobileNo != null) {
+                clientPayload.setMobileNo(mobileNo);
+            }
 
             if(active != null) {
                 clientPayload.setActive(active);

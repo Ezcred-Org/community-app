@@ -20,7 +20,6 @@ import com.mifos.objects.noncore.IdentifierTemplate;
 import com.mifos.objects.templates.clients.ClientsTemplate;
 
 import java.util.List;
-import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
@@ -72,7 +71,7 @@ public interface ClientService {
     @PUT(APIEndPoint.CLIENTS + "/{clientId}")
     Observable<GenericResponse> updateClient(
       @Path("clientId") long clientId,
-      @Body Map<String, Object> payload
+      @Body ClientPayload clientPayload
     );
 
     @POST(APIEndPoint.CLIENTS)
