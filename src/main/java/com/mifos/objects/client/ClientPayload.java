@@ -4,6 +4,7 @@ package com.mifos.objects.client;
  * See https://github.com/openMF/android-client/blob/master/LICENSE.md
  */
 
+import android.annotation.SuppressLint;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -16,9 +17,11 @@ import com.raizlabs.android.dbflow.annotation.ModelContainer;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import lombok.Getter;
 
 /**
  * Created by ADMIN on 16-Jun-15.
@@ -93,7 +96,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
     Integer clientClassificationId;
 
     @SerializedName("address")
-    List<Address> address = new ArrayList<>();
+    List<Address> address;
 
     @SerializedName("dateFormat")
     @Column
@@ -329,9 +332,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         dest.writeString(this.locale);
     }
 
-    public ClientPayload() {
-        this.datatables = new LinkedList<>();
-    }
+    public ClientPayload() {}
 
     protected ClientPayload(Parcel in) {
         this.firstname = in.readString();
@@ -372,9 +373,9 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         private String middleName;
         private String lastName;
         private String mobileNo;
-        private String activationDate;
+        private Date activationDate;
         private String submittedOnDate;
-        private String dateOfBirth;
+        private Date dateOfBirth;
         private String externalId;
         private List<Address> address;
         private List<DataTablePayload> datatables;
@@ -385,6 +386,16 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         private Integer clientClassificationId;
         private Boolean active;
 
+        private final DateFormat dateFormat;
+
+        private Builder(DateFormat dateFormat) {
+            this.dateFormat = dateFormat;
+        }
+
+        public static Builder with(DateFormat dateFormat) {
+            return new Builder(dateFormat);
+        }
+
 
         public ClientPayload build() {
             ClientPayload clientPayload = new ClientPayload();
@@ -392,15 +403,13 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
             clientPayload.setMiddlename(middleName);
             clientPayload.setLastname(lastName);
             clientPayload.setMobileNo(mobileNo);
-            clientPayload.setAddress(null);
-            clientPayload.setDatatables(null);
 
             if(active != null) {
                 clientPayload.setActive(active);
             }
 
             if(activationDate != null) {
-                clientPayload.setActivationDate(activationDate);
+                clientPayload.setActivationDate(dateFormat.getDateFormat().format(activationDate));
             }
 
             if(submittedOnDate != null) {
@@ -408,7 +417,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
             }
 
             if(dateOfBirth != null) {
-                clientPayload.setDateOfBirth(dateOfBirth);
+                clientPayload.setDateOfBirth(dateFormat.getDateFormat().format(dateOfBirth));
             }
 
             if(externalId != null) {
@@ -466,7 +475,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
             return this;
         }
 
-        public Builder setActivationDate(String activationDate) {
+        public Builder setActivationDate(Date activationDate) {
             this.activationDate = activationDate;
             return  this;
         }
@@ -476,7 +485,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
             return this;
         }
 
-        public Builder setDateOfBirth(String dateOfBirth) {
+        public Builder setDateOfBirth(Date dateOfBirth) {
             this.dateOfBirth = dateOfBirth;
             return this;
         }
@@ -524,6 +533,23 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         public Builder setDatatables(List<DataTablePayload> datatables) {
             this.datatables = datatables;
             return this;
+        }
+    }
+
+    public enum DateFormat {
+        dd_MMMM_yyyy("dd MMMM yyyy"),
+        yyyy("yyyy");
+
+        @Getter
+        private final String format;
+
+        DateFormat(String format) {
+            this.format = format;
+        }
+
+        @SuppressLint("SimpleDateFormat")
+        public SimpleDateFormat getDateFormat() {
+            return new SimpleDateFormat(dateFormat);
         }
     }
 }
