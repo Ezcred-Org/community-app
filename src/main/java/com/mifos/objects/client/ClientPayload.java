@@ -549,7 +549,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
 
         @SuppressLint("SimpleDateFormat")
         public SimpleDateFormat getDateFormat() {
-            return new SimpleDateFormat(dateFormat);
+            return new SimpleDateFormat(format);
         }
     }
 }
