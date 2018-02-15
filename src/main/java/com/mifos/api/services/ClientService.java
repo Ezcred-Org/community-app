@@ -153,6 +153,17 @@ public interface ClientService {
     );
 
 
+    /**
+     * This Service is for the Saving the Client Address.
+     */
+    @POST(APIEndPoint.CLIENT + "/{clientId}/" + APIEndPoint.ADDRESSES)
+    Observable<GenericResponse> saveClientAddress(
+      @Path("clientId") long clientId,
+      @Query("type") long addressTypeId,
+      @Body Address address
+    );
+
+
 
     /**
      * This Service for Deleting the Client Identifier.
