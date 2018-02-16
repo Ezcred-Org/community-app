@@ -18,7 +18,6 @@ import com.mifos.objects.templates.clients.ClientsTemplate;
 import com.mifos.utils.PrefManager;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -243,8 +242,8 @@ public class DataManagerClient {
 
     }
 
-    public Observable<GenericResponse> updateMifosClient(final Map<String, Object> clientPayload) {
-        return mBaseApiManager.getClientsApi().updateClient(clientPayload);
+    public Observable<GenericResponse> updateMifosClient(long clientId, final ClientPayload clientPayload) {
+        return mBaseApiManager.getClientsApi().updateClient(clientId, clientPayload);
     }
 
 
@@ -393,6 +392,9 @@ public class DataManagerClient {
         return mBaseApiManager.getClientsApi().getClientAddresses(clientId);
     }
 
+    public Observable<GenericResponse> saveClientAddress(long clientId, long addressTypeId, Address address) {
+        return mBaseApiManager.getClientsApi().saveClientAddress(clientId, addressTypeId, address);
+    }
 
     /**
      * This Method is, for fetching the Client Address.

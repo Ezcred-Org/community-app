@@ -4,6 +4,7 @@ package com.mifos.objects.client;
  * See https://github.com/openMF/android-client/blob/master/LICENSE.md
  */
 
+import android.annotation.SuppressLint;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -16,9 +17,11 @@ import com.raizlabs.android.dbflow.annotation.ModelContainer;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import lombok.Getter;
 
 /**
  * Created by ADMIN on 16-Jun-15.
@@ -28,7 +31,7 @@ import java.util.List;
 public class ClientPayload extends MifosBaseModel implements Parcelable {
 
     @PrimaryKey(autoincrement = true)
-    transient Integer id;
+    transient Long id;
 
     @Column
     transient Long clientCreationTime;
@@ -93,15 +96,15 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
     Integer clientClassificationId;
 
     @SerializedName("address")
-    List<Address> address = new ArrayList<>();
+    List<Address> address;
 
     @SerializedName("dateFormat")
     @Column
-    String dateFormat = "dd MMMM YYYY";
+    String dateFormat;
 
     @SerializedName("locale")
     @Column
-    String locale = "en";
+    String locale;
 
     @SerializedName("datatables")
     private List<DataTablePayload> datatables;
@@ -118,11 +121,11 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         this.datatables = datatables;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -329,9 +332,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         dest.writeString(this.locale);
     }
 
-    public ClientPayload() {
-        this.datatables = new LinkedList<>();
-    }
+    public ClientPayload() {}
 
     protected ClientPayload(Parcel in) {
         this.firstname = in.readString();
@@ -365,5 +366,205 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
             return new ClientPayload[size];
         }
     };
+
+    public static final class Builder {
+        private String firstName;
+        private String middleName;
+        private String lastName;
+        private String mobileNo;
+        private Date activationDate;
+        private String submittedOnDate;
+        private Date dateOfBirth;
+        private String externalId;
+        private List<Address> address;
+        private List<DataTablePayload> datatables;
+        private Integer clientTypeId;
+        private Integer officeId;
+        private Integer staffId;
+        private Integer genderId;
+        private Integer clientClassificationId;
+        private Boolean active;
+
+        private final DateFormat dateFormat;
+        private static final String locale = "en";
+
+        private Builder(DateFormat dateFormat) {
+            this.dateFormat = dateFormat;
+        }
+
+        public static Builder with(DateFormat dateFormat) {
+            return new Builder(dateFormat);
+        }
+
+
+        public ClientPayload build() {
+            ClientPayload clientPayload = new ClientPayload();
+            clientPayload.setLocale(locale);
+            clientPayload.setDateFormat(dateFormat.getFormat());
+
+            if (firstName != null) {
+                clientPayload.setFirstname(firstName);
+            }
+
+            if (middleName != null) {
+                clientPayload.setMiddlename(middleName);
+            }
+
+            if (lastName != null) {
+                clientPayload.setLastname(lastName);
+            }
+
+            if (mobileNo != null) {
+                clientPayload.setMobileNo(mobileNo);
+            }
+
+            if(active != null) {
+                clientPayload.setActive(active);
+            }
+
+            if(activationDate != null) {
+                clientPayload.setActivationDate(dateFormat.getDateFormat().format(activationDate));
+            }
+
+            if(submittedOnDate != null) {
+                clientPayload.setSubmittedOnDate(submittedOnDate);
+            }
+
+            if(dateOfBirth != null) {
+                clientPayload.setDateOfBirth(dateFormat.getDateFormat().format(dateOfBirth));
+            }
+
+            if(externalId != null) {
+                clientPayload.setExternalId(externalId);
+            }
+
+            if(address != null && address.size() != 0) {
+                clientPayload.setAddress(address);
+            }
+
+            if(clientTypeId != null) {
+                clientPayload.setClientTypeId(clientTypeId);
+            }
+
+            if(officeId != null) {
+                clientPayload.setOfficeId(officeId);
+            }
+
+            if(staffId != null) {
+                clientPayload.setStaffId(staffId);
+            }
+
+            if(genderId != null) {
+                clientPayload.setGenderId(genderId);
+            }
+
+            if(clientClassificationId != null) {
+                clientPayload.setClientClassificationId(clientClassificationId);
+            }
+
+            if(datatables != null && datatables.size() != 0) {
+                clientPayload.setDatatables(datatables);
+            }
+
+            return clientPayload;
+        }
+
+        public Builder setFirstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public Builder setMiddleName(String middleName) {
+            this.middleName = middleName;
+            return this;
+        }
+
+        public Builder setLastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public Builder setMobileNo(String mobileNo) {
+            this.mobileNo = mobileNo;
+            return this;
+        }
+
+        public Builder setActivationDate(Date activationDate) {
+            this.activationDate = activationDate;
+            return  this;
+        }
+
+        public Builder setSubmittedOnDate(String submittedOnDate) {
+            this.submittedOnDate = submittedOnDate;
+            return this;
+        }
+
+        public Builder setDateOfBirth(Date dateOfBirth) {
+            this.dateOfBirth = dateOfBirth;
+            return this;
+        }
+
+        public Builder setExternalId(String externalId) {
+            this.externalId = externalId;
+            return this;
+        }
+
+        public Builder setAddress(List<Address> address) {
+            this.address = address;
+            return this;
+        }
+
+        public Builder setClientTypeId(int clientTypeId) {
+            this.clientTypeId = clientTypeId;
+            return this;
+        }
+
+        public Builder setOfficeId(int officeId) {
+            this.officeId = officeId;
+            return this;
+        }
+
+        public Builder setStaffId(int staffId) {
+            this.staffId = staffId;
+            return this;
+        }
+
+        public Builder setGenderId(int genderId) {
+            this.genderId = genderId;
+            return this;
+        }
+
+        public Builder setClientClassificationId(int clientClassificationId) {
+            this.clientClassificationId = clientClassificationId;
+            return this;
+        }
+
+        public Builder setActive(boolean active) {
+            this.active = active;
+            return this;
+        }
+
+        public Builder setDatatables(List<DataTablePayload> datatables) {
+            this.datatables = datatables;
+            return this;
+        }
+    }
+
+    public enum DateFormat {
+        dd_MMMM_yyyy("dd MMMM yyyy"),
+        yyyy("yyyy");
+
+        @Getter
+        private final String format;
+
+        DateFormat(String format) {
+            this.format = format;
+        }
+
+        @SuppressLint("SimpleDateFormat")
+        public SimpleDateFormat getDateFormat() {
+            return new SimpleDateFormat(format);
+        }
+    }
 }
 

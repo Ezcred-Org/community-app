@@ -52,6 +52,7 @@ public class Address implements Parcelable {
   private List<Options> countryIdOptions;
   private List<Options> stateProvinceIdOptions;
   private List<Options> addressTypeIdOptions;
+  private final String locale = "en";
 
   public Address() {
   }

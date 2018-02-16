@@ -12,16 +12,16 @@ import com.google.gson.annotations.SerializedName;
 public class IdentifierPayload implements Parcelable {
 
     @SerializedName("documentTypeId")
-    Integer documentTypeId;
+    private Integer documentTypeId;
 
     @SerializedName("documentKey")
-    String documentKey;
+    private String documentKey;
 
     @SerializedName("status")
-    String status;
+    private String status;
 
     @SerializedName("description")
-    String description;
+    private String description;
 
     public Integer getDocumentTypeId() {
         return documentTypeId;
