@@ -20,7 +20,6 @@ import com.mifos.objects.noncore.IdentifierTemplate;
 import com.mifos.objects.templates.clients.ClientsTemplate;
 
 import java.util.List;
-import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
@@ -69,8 +68,11 @@ public interface ClientService {
     @POST(APIEndPoint.CLIENTS)
     Observable<Client> createClient(@Body ClientPayload clientPayload);
 
-    @PUT(APIEndPoint.CLIENTS + "{clientId}")
-    Observable<GenericResponse> updateClient(@Body Map<String, Object> payload);
+    @PUT(APIEndPoint.CLIENTS + "/{clientId}")
+    Observable<GenericResponse> updateClient(
+      @Path("clientId") long clientId,
+      @Body ClientPayload clientPayload
+    );
 
     @POST(APIEndPoint.CLIENTS)
     Observable<GenericResponse> createMifosClient(@Body ClientPayload clientPayload);
@@ -148,6 +150,17 @@ public interface ClientService {
       @Path("clientId") long clientId,
       @Query("status") List<Boolean> status,
       @Query("type") long addressType
+    );
+
+
+    /**
+     * This Service is for the Saving the Client Address.
+     */
+    @POST(APIEndPoint.CLIENT + "/{clientId}/" + APIEndPoint.ADDRESSES)
+    Observable<GenericResponse> saveClientAddress(
+      @Path("clientId") long clientId,
+      @Query("type") long addressTypeId,
+      @Body Address address
     );
 
 
