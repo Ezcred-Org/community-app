@@ -122,5 +122,7 @@ public interface DocumentService {
                                                              @Path("documentId") int documentId,
                                                              @Part("name") String nameOfDocument,
                                                              @Part("description") String description,
+                                                             @Part("comments") String comments,
+                                                             @Part("verificationStatus") long verificationStatus,
                                                              @Part() MultipartBody.Part typedFile);
 }

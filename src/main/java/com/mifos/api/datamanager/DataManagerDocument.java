@@ -139,8 +139,8 @@ public class DataManagerDocument {
      * @return GenericResponse
      */
     public Observable<GenericResponse> updateDocument(String entityType, int entityId, int
-            documentId, String name, String desc, MultipartBody.Part file) {
+            documentId, String name, String desc, String comments, long verificationStatus, MultipartBody.Part file) {
         return mBaseApiManager.getDocumentApi()
-                .updateDocument(entityType, entityId, documentId, name, desc, file);
+                .updateDocument(entityType, entityId, documentId, name, desc, comments, verificationStatus, file);
     }
 }
