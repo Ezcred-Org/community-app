@@ -121,7 +121,6 @@ public class Document implements Parcelable {
         dest.writeLong(this.size);
         dest.writeString(this.type);
         dest.writeString(this.description);
-        dest.writeString(this.comments);
     }
 
     public Document() {
@@ -136,7 +135,6 @@ public class Document implements Parcelable {
         this.size = in.readLong();
         this.type = in.readString();
         this.description = in.readString();
-        this.comments = in.readString();
     }
 
     @Data
