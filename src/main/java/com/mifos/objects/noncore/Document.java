@@ -156,20 +156,9 @@ public class Document implements Parcelable {
         }
     };
 
-    public enum DocumentVerificationEnum {
-        DEFAULT(100),
-        NOT_VERIFIED(1),
-        VERIFIED(2),
-        REJECTED(3);
-
-        private final long value;
-
-        DocumentVerificationEnum(long value) {
-            this.value = value;
-        }
-
-        public long getValue() {
-            return value;
-        }
+    public enum DocumentVerificationStatusEnum {
+        NOT_VERIFIED,
+        VERIFIED,
+        REJECTED;
     }
 }
