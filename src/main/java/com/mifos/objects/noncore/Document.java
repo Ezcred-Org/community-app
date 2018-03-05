@@ -8,6 +8,8 @@ package com.mifos.objects.noncore;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import lombok.Data;
+
 /**
  * Created by ishankhanna on 02/07/14.
  */
@@ -21,6 +23,8 @@ public class Document implements Parcelable {
     private long size;
     private String type;
     private String description;
+    private String comments;
+    private Verified verified;
 
     public int getId() {
         return id;
@@ -86,6 +90,22 @@ public class Document implements Parcelable {
         this.description = description;
     }
 
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public Verified getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Verified verified) {
+        this.verified = verified;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -117,6 +137,13 @@ public class Document implements Parcelable {
         this.description = in.readString();
     }
 
+    @Data
+    public static class Verified {
+        private final long id;
+        private final String code;
+        private final String value;
+    }
+
     public static final Parcelable.Creator<Document> CREATOR = new Parcelable.Creator<Document>() {
         @Override
         public Document createFromParcel(Parcel source) {
@@ -128,4 +155,10 @@ public class Document implements Parcelable {
             return new Document[size];
         }
     };
+
+    public enum DocumentVerificationStatusEnum {
+        NOT_VERIFIED,
+        VERIFIED,
+        REJECTED;
+    }
 }
