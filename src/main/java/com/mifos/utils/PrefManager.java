@@ -217,6 +217,7 @@ public class PrefManager {
         return getString(EZCRED_LAST_APP_VERSION_NAME, "");
     }
 
+
     public void setEzcredLastAppVersionName(String versionName) {
         putString(EZCRED_LAST_APP_VERSION_NAME, versionName);
     }
