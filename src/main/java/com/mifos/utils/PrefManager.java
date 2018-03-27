@@ -123,13 +123,13 @@ public class PrefManager {
         return getString(TOKEN, "");
     }
 
-    public void saveEzcredSecretKey(String ezcredSecretKey) {
+    /*public void saveEzcredSecretKey(String ezcredSecretKey) {
         putString(EZCRED_SECRET_KEY, ezcredSecretKey);
     }
 
     public String getEzcredSecretKey() {
         return getString(EZCRED_SECRET_KEY, "");
-    }
+    }*/
 
     public boolean isAuthenticated() {
         return !TextUtils.isEmpty(getToken());
