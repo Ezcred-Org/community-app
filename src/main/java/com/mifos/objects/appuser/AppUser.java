@@ -15,7 +15,7 @@ public class AppUser {
   private final String deviceId;
   private final String[] imeis;
 
-  // Firebase auth token: https://firebase.google.com/docs/auth/admin/create-custom-tokens
+  // Firebaseauth token: https://firebase.google.com/docs/auth/admin/create-custom-tokens
   private String token;
   private String password;
   private String repeatPassword;
