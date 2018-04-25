@@ -22,6 +22,7 @@ public class LoansPayload implements Parcelable {
     int clientId;
     String externalId;
     String dateFormat;
+    String timeFormat;
     String expectedDisbursementDate;
     int interestCalculationPeriodType;
     Double interestRatePerPeriod;
@@ -136,6 +137,16 @@ public class LoansPayload implements Parcelable {
     public void setDateFormat(String dateFormat) {
         this.dateFormat = dateFormat;
     }
+
+
+    public String getTimeFormat() {
+        return timeFormat;
+    }
+
+    public void setTimeFormat(String timeFormat) {
+        this.timeFormat = timeFormat;
+    }
+
 
    /* public String getDisbursementData() {
         return disbursementData;
@@ -320,6 +331,7 @@ public class LoansPayload implements Parcelable {
         dest.writeInt(this.amortizationType);
         dest.writeInt(this.clientId);
         dest.writeString(this.dateFormat);
+        dest.writeString(this.timeFormat);
         dest.writeString(this.expectedDisbursementDate);
         dest.writeInt(this.interestCalculationPeriodType);
         dest.writeValue(this.interestRatePerPeriod);
@@ -349,6 +361,7 @@ public class LoansPayload implements Parcelable {
         this.amortizationType = in.readInt();
         this.clientId = in.readInt();
         this.dateFormat = in.readString();
+        this.timeFormat = in.readString();
         this.expectedDisbursementDate = in.readString();
         this.interestCalculationPeriodType = in.readInt();
         this.interestRatePerPeriod = (Double) in.readValue(Double.class.getClassLoader());
