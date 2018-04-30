@@ -31,6 +31,7 @@ public class PrefManager {
     private static final String EZCRED_SECRET_KEY = "ezcred_secret_key";
     private static final String EZCRED_LAST_APP_VERSION_CODE = "ezcred_last_app_version_code";
     private static final String EZCRED_LAST_APP_VERSION_NAME = "ezcred_last_app_version_name";
+    private static final String FCM_TOKEN_UPDATE_TIME = "firebase_token_update_time";
 
     private final Gson gson;
     
@@ -219,6 +220,14 @@ public class PrefManager {
 
     public void setEzcredLastAppVersionName(String versionName) {
         putString(EZCRED_LAST_APP_VERSION_NAME, versionName);
+    }
+
+    public long getFcmTokenUpdateTime() {
+        return getLong(FCM_TOKEN_UPDATE_TIME, 0L);
+    }
+
+    public void setFcmTokenUpdateTime(long firebaseTokenUpdateTime) {
+        putLong(FCM_TOKEN_UPDATE_TIME, firebaseTokenUpdateTime);
     }
 }
 
