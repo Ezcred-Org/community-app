@@ -32,6 +32,7 @@ public class PrefManager {
     private static final String EZCRED_LAST_APP_VERSION_CODE = "ezcred_last_app_version_code";
     private static final String EZCRED_LAST_APP_VERSION_NAME = "ezcred_last_app_version_name";
     private static final String FCM_TOKEN_UPDATE_TIME = "firebase_token_update_time";
+    private static final String NACH_SAMPLE_SHOWN = "nach_sample_shown";
 
     private final Gson gson;
     
@@ -228,6 +229,14 @@ public class PrefManager {
 
     public void setFcmTokenUpdateTime(long firebaseTokenUpdateTime) {
         putLong(FCM_TOKEN_UPDATE_TIME, firebaseTokenUpdateTime);
+    }
+
+    public boolean isNachSampleAlreadyShown() {
+        return getBoolean(NACH_SAMPLE_SHOWN, false);
+    }
+
+    public void setNachSampleShown() {
+        putBoolean(NACH_SAMPLE_SHOWN, true);
     }
 }
 
