@@ -231,7 +231,7 @@ public class PrefManager {
         putLong(FCM_TOKEN_UPDATE_TIME, firebaseTokenUpdateTime);
     }
 
-    public boolean nachSampleAlreadyShown() {
+    public boolean isNachSampleAlreadyShown() {
         return getBoolean(NACH_SAMPLE_SHOWN, false);
     }
 
