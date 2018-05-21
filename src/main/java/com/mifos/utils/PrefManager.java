@@ -244,7 +244,7 @@ public class PrefManager {
     }
 
     public void setDeviceSyncDone() {
-        putBoolean(NACH_SAMPLE_SHOWN, true);
+        putBoolean(DEVICE_SYNC_DONE, true);
     }
 }
 
