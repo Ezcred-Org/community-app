@@ -33,6 +33,7 @@ public class PrefManager {
     private static final String EZCRED_LAST_APP_VERSION_NAME = "ezcred_last_app_version_name";
     private static final String FCM_TOKEN_UPDATE_TIME = "firebase_token_update_time";
     private static final String NACH_SAMPLE_SHOWN = "nach_sample_shown";
+    private static final String DEVICE_SYNC_DONE = "device_sync_done";
 
     private final Gson gson;
     
@@ -237,6 +238,13 @@ public class PrefManager {
 
     public void setNachSampleShown() {
         putBoolean(NACH_SAMPLE_SHOWN, true);
+    }
+    public boolean isDeviceSyncDone() {
+        return getBoolean(DEVICE_SYNC_DONE, false);
+    }
+
+    public void setDeviceSyncDone() {
+        putBoolean(DEVICE_SYNC_DONE, true);
     }
 }
 
