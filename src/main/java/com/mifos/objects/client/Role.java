@@ -22,7 +22,7 @@ public class Role {
         if (this == o) return true;
         if (!(o instanceof Role)) return false;
         Role role = (Role) o;
-        return name == role.name;
+        return name == null? role.name == null: name.equals(role.name);
     }
 
     @Override
