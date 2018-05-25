@@ -21,4 +21,16 @@ public class AppUser {
   private String repeatPassword;
   private Double lat;
   private Double lng;
+
+  public AppUser(String mobile, String deviceId, String[] imeis) {
+    this.mobile = mobile;
+    this.username = mobile;
+    this.firstname = mobile;
+    this.lastname = mobile;
+    this.email = null;
+    this.sendPasswordToEmail = false;
+    this.isSelfServiceUser = true;
+    this.deviceId = deviceId;
+    this.imeis = imeis;
+  }
 }
