@@ -96,6 +96,10 @@ public class User {
         return roles;
     }
 
+    public boolean hasRole(Role role) {
+        return roles.contains(role);
+    }
+
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
