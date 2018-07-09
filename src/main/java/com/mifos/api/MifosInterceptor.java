@@ -27,7 +27,8 @@ public class MifosInterceptor implements Interceptor {
     public static final String HEADER_AUTH = "Authorization";
     public static final String CLIENT_LOAN_HEADER = "X-Client-Loan";
     public static final String APP_VERSION_HEADER = "X-App-Version";
-
+    public static final String GEO_LOCATION_HEADER = "X-Geo-Location";
+    public static final String POS_HEADER = "X-PoS";
 
     private final PrefManager prefManager;
     private final SharedPreferences sharedPreferences;
@@ -46,6 +47,19 @@ public class MifosInterceptor implements Interceptor {
         builder.header(APP_VERSION_HEADER,  prefManager.getEzcredLastAppVersionName());
         if (clientId != -1 || loanId != -1) {
             builder.header(CLIENT_LOAN_HEADER, clientId + "-" + loanId);
+        }
+
+        builder.header(GEO_LOCATION_HEADER,
+          prefManager.getLatitude() + ","
+            + prefManager.getLongitude() + ","
+            + prefManager.getLocationTimestamp() + ","
+            + prefManager.getLocationAccuracy()
+        );
+
+        if (prefManager.getUser() != null) {
+            builder.header(POS_HEADER,
+              prefManager.getUser().getUserId() + ","
+                + prefManager.getUser().getOfficeId());
         }
 
         if (!TextUtils.isEmpty(prefManager.getTenant())) {

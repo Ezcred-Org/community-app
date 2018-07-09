@@ -34,6 +34,10 @@ public class PrefManager {
     private static final String FCM_TOKEN_UPDATE_TIME = "firebase_token_update_time";
     private static final String NACH_SAMPLE_SHOWN = "nach_sample_shown";
     private static final String DEVICE_SYNC_DONE = "device_sync_done";
+    private static final String LATITUDE = "latitude";
+    private static final String LONGITUDE = "longitude";
+    private static final String LOCATION_TIMESTAMP = "location_timestamp";
+    private static final String LOCATION_ACCURACY = "location_accuracy";
 
     private final Gson gson;
     
@@ -245,6 +249,29 @@ public class PrefManager {
 
     public void setDeviceSyncDone() {
         putBoolean(DEVICE_SYNC_DONE, true);
+    }
+
+    public void setGeoLocation(String latitude, String longitude, String timestamp, String accuracy) {
+        putString(LATITUDE, latitude);
+        putString(LONGITUDE, longitude);
+        putString(LOCATION_TIMESTAMP, timestamp);
+        putString(LOCATION_ACCURACY, accuracy);
+    }
+
+    public String getLatitude() {
+        return getString(LATITUDE, "");
+    }
+
+    public String getLongitude() {
+        return getString(LONGITUDE, "");
+    }
+
+    public String getLocationTimestamp() {
+        return getString(LOCATION_TIMESTAMP, "");
+    }
+
+    public String getLocationAccuracy() {
+        return getString(LOCATION_ACCURACY, "");
     }
 }
 
