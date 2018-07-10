@@ -39,10 +39,6 @@ public class PrefManager {
     private static final String FCM_TOKEN_UPDATE_TIME = "firebase_token_update_time";
     private static final String NACH_SAMPLE_SHOWN = "nach_sample_shown";
     private static final String DEVICE_SYNC_DONE = "device_sync_done";
-    private static final String LATITUDE = "latitude";
-    private static final String LONGITUDE = "longitude";
-    private static final String LOCATION_TIMESTAMP = "location_timestamp";
-    private static final String LOCATION_ACCURACY = "location_accuracy";
     private static final String GEO_LOCATION = "geo_location";
 
     private final Gson gson;
