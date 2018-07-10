@@ -10,8 +10,13 @@ import com.mifos.api.BaseUrl;
 import com.mifos.objects.user.User;
 
 import java.util.Set;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import javax.inject.Singleton;
+
+import lombok.Data;
 
 /**
  * @author fomenkoo
@@ -34,10 +39,17 @@ public class PrefManager {
     private static final String FCM_TOKEN_UPDATE_TIME = "firebase_token_update_time";
     private static final String NACH_SAMPLE_SHOWN = "nach_sample_shown";
     private static final String DEVICE_SYNC_DONE = "device_sync_done";
+    private static final String GEO_LOCATION = "geo_location";
 
     private final Gson gson;
     
     private final Context context;
+
+    private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+
+    private final Lock readLock = readWriteLock.readLock();
+
+    private final Lock writeLock = readWriteLock.writeLock();
 
     public PrefManager(Context context, Gson gson) {
         this.context = context;
@@ -239,12 +251,39 @@ public class PrefManager {
     public void setNachSampleShown() {
         putBoolean(NACH_SAMPLE_SHOWN, true);
     }
+
     public boolean isDeviceSyncDone() {
         return getBoolean(DEVICE_SYNC_DONE, false);
     }
 
     public void setDeviceSyncDone() {
         putBoolean(DEVICE_SYNC_DONE, true);
+    }
+
+    public GeoLocation getGeoLocation() {
+        readLock.lock();
+        try {
+            return gson.fromJson(getString(GEO_LOCATION, "null"), GeoLocation.class);
+        } finally {
+            readLock.unlock();
+        }
+    }
+
+    public void setGeoLocation(GeoLocation geoLocation) {
+        writeLock.lock();
+        try {
+            putString(GEO_LOCATION, gson.toJson(geoLocation));
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    @Data
+    public static final class GeoLocation {
+        private final Double latitude;
+        private final Double longitude;
+        private final Long timestamp;
+        private final float accuracy;
     }
 }
 
