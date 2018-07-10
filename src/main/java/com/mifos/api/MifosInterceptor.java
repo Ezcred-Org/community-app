@@ -49,12 +49,15 @@ public class MifosInterceptor implements Interceptor {
             builder.header(CLIENT_LOAN_HEADER, clientId + "-" + loanId);
         }
 
-        builder.header(GEO_LOCATION_HEADER,
-          prefManager.getLatitude() + ","
-            + prefManager.getLongitude() + ","
-            + prefManager.getLocationTimestamp() + ","
-            + prefManager.getLocationAccuracy()
-        );
+        PrefManager.GeoLocation geoLocation = prefManager.getGeoLocation();
+        if (geoLocation != null) {
+            builder.header(GEO_LOCATION_HEADER,
+              geoLocation.getLatitude() + ","
+                + geoLocation.getLongitude() + ","
+                + geoLocation.getTimestamp() + ","
+                + geoLocation.getAccuracy()
+            );
+        }
 
         if (prefManager.getUser() != null) {
             builder.header(POS_HEADER,

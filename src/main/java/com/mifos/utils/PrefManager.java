@@ -16,6 +16,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import javax.inject.Singleton;
 
+import lombok.Data;
+
 /**
  * @author fomenkoo
  */
@@ -41,6 +43,7 @@ public class PrefManager {
     private static final String LONGITUDE = "longitude";
     private static final String LOCATION_TIMESTAMP = "location_timestamp";
     private static final String LOCATION_ACCURACY = "location_accuracy";
+    private static final String GEO_LOCATION = "geo_location";
 
     private final Gson gson;
     
@@ -51,7 +54,6 @@ public class PrefManager {
     private final Lock readLock = readWriteLock.readLock();
 
     private final Lock writeLock = readWriteLock.writeLock();
-
 
     public PrefManager(Context context, Gson gson) {
         this.context = context;
@@ -253,6 +255,7 @@ public class PrefManager {
     public void setNachSampleShown() {
         putBoolean(NACH_SAMPLE_SHOWN, true);
     }
+
     public boolean isDeviceSyncDone() {
         return getBoolean(DEVICE_SYNC_DONE, false);
     }
@@ -261,52 +264,30 @@ public class PrefManager {
         putBoolean(DEVICE_SYNC_DONE, true);
     }
 
-    public void setGeoLocation(String latitude, String longitude, String timestamp, String accuracy) {
+    public GeoLocation getGeoLocation() {
+        readLock.lock();
+        try {
+            return gson.fromJson(getString(GEO_LOCATION, "null"), GeoLocation.class);
+        } finally {
+            readLock.unlock();
+        }
+    }
+
+    public void setGeoLocation(GeoLocation geoLocation) {
         writeLock.lock();
         try {
-            putString(LATITUDE, latitude);
-            putString(LONGITUDE, longitude);
-            putString(LOCATION_TIMESTAMP, timestamp);
-            putString(LOCATION_ACCURACY, accuracy);
+            putString(GEO_LOCATION, gson.toJson(geoLocation));
         } finally {
             writeLock.unlock();
         }
     }
 
-    public String getLatitude() {
-        readLock.lock();
-        try {
-            return getString(LATITUDE, "");
-        } finally {
-            readLock.unlock();
-        }
-    }
-
-    public String getLongitude() {
-        readLock.lock();
-        try {
-            return getString(LONGITUDE, "");
-        } finally {
-            readLock.unlock();
-        }
-    }
-
-    public String getLocationTimestamp() {
-        readLock.lock();
-        try {
-            return getString(LOCATION_TIMESTAMP, "");
-        } finally {
-            readLock.unlock();
-        }
-    }
-
-    public String getLocationAccuracy() {
-        readLock.lock();
-        try {
-            return getString(LOCATION_ACCURACY, "");
-        } finally {
-            readLock.unlock();
-        }
+    @Data
+    public static final class GeoLocation {
+        private final Double latitude;
+        private final Double longitude;
+        private final Long timestamp;
+        private final float accuracy;
     }
 }
 
