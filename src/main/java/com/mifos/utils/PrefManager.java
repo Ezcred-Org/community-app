@@ -10,6 +10,9 @@ import com.mifos.api.BaseUrl;
 import com.mifos.objects.user.User;
 
 import java.util.Set;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import javax.inject.Singleton;
 
@@ -42,6 +45,13 @@ public class PrefManager {
     private final Gson gson;
     
     private final Context context;
+
+    private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+
+    private final Lock readLock = readWriteLock.readLock();
+
+    private final Lock writeLock = readWriteLock.writeLock();
+
 
     public PrefManager(Context context, Gson gson) {
         this.context = context;
@@ -252,26 +262,51 @@ public class PrefManager {
     }
 
     public void setGeoLocation(String latitude, String longitude, String timestamp, String accuracy) {
-        putString(LATITUDE, latitude);
-        putString(LONGITUDE, longitude);
-        putString(LOCATION_TIMESTAMP, timestamp);
-        putString(LOCATION_ACCURACY, accuracy);
+        writeLock.lock();
+        try {
+            putString(LATITUDE, latitude);
+            putString(LONGITUDE, longitude);
+            putString(LOCATION_TIMESTAMP, timestamp);
+            putString(LOCATION_ACCURACY, accuracy);
+        } finally {
+            writeLock.unlock();
+        }
     }
 
     public String getLatitude() {
-        return getString(LATITUDE, "");
+        readLock.lock();
+        try {
+            return getString(LATITUDE, "");
+        } finally {
+            readLock.unlock();
+        }
     }
 
     public String getLongitude() {
-        return getString(LONGITUDE, "");
+        readLock.lock();
+        try {
+            return getString(LONGITUDE, "");
+        } finally {
+            readLock.unlock();
+        }
     }
 
     public String getLocationTimestamp() {
-        return getString(LOCATION_TIMESTAMP, "");
+        readLock.lock();
+        try {
+            return getString(LOCATION_TIMESTAMP, "");
+        } finally {
+            readLock.unlock();
+        }
     }
 
     public String getLocationAccuracy() {
-        return getString(LOCATION_ACCURACY, "");
+        readLock.lock();
+        try {
+            return getString(LOCATION_ACCURACY, "");
+        } finally {
+            readLock.unlock();
+        }
     }
 }
 
