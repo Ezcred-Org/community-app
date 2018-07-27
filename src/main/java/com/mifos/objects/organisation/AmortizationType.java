@@ -65,7 +65,8 @@ public class AmortizationType implements Parcelable {
         dest.writeString(this.value);
     }
 
-    public AmortizationType() {
+    public AmortizationType(Integer id) {
+        this.id = id;
     }
 
     protected AmortizationType(Parcel in) {

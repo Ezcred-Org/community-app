@@ -86,7 +86,8 @@ public class RepaymentFrequencyType implements Parcelable {
         dest.writeString(this.value);
     }
 
-    public RepaymentFrequencyType() {
+    public RepaymentFrequencyType(Integer id) {
+        this.id = id;
     }
 
     protected RepaymentFrequencyType(Parcel in) {

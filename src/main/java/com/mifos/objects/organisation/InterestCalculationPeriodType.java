@@ -65,7 +65,8 @@ public class InterestCalculationPeriodType implements Parcelable {
         dest.writeString(this.value);
     }
 
-    public InterestCalculationPeriodType() {
+    public InterestCalculationPeriodType(Integer id) {
+        this.id = id;
     }
 
     protected InterestCalculationPeriodType(Parcel in) {
