@@ -65,7 +65,8 @@ public class InterestType implements Parcelable {
         dest.writeString(this.value);
     }
 
-    public InterestType() {
+    public InterestType(Integer id) {
+        this.id = id;
     }
 
     protected InterestType(Parcel in) {

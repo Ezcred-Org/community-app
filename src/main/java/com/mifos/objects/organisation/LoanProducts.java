@@ -709,7 +709,28 @@ public class LoanProducts implements Parcelable {
         dest.writeParcelable(this.allowAttributeOverrides, flags);
     }
 
-    public LoanProducts() {
+    public LoanProducts(
+      Integer id,
+      Integer numberOfRepayments,
+      RepaymentFrequencyType repaymentFrequencyType,
+      Integer repaymentEvery,
+      Double interestRatePerPeriod,
+      AmortizationType amortizationType,
+      InterestType interestType,
+      InterestCalculationPeriodType interestCalculationPeriodType,
+      Integer transactionProcessingStrategyId,
+      Boolean allowPartialPeriodInterestCalcualtion
+      ) {
+        this.id = id;
+        this.numberOfRepayments = numberOfRepayments;
+        this.repaymentFrequencyType = repaymentFrequencyType;
+        this.repaymentEvery = repaymentEvery;
+        this.interestRatePerPeriod = interestRatePerPeriod;
+        this.amortizationType = amortizationType;
+        this.interestType= interestType;
+        this.interestCalculationPeriodType = interestCalculationPeriodType;
+        this.transactionProcessingStrategyId = transactionProcessingStrategyId;
+        this.allowPartialPeriodInterestCalcualtion = allowPartialPeriodInterestCalcualtion;
     }
 
     protected LoanProducts(Parcel in) {
