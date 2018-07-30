@@ -13,7 +13,7 @@ import javax.inject.Singleton;
 public class ConfigProperties {
 
   private static final String CONFIG_PROPERTIES = "config_properties";
-  private static final String DEALER_ONBOARDING_MAIL_SENT_ON = "sent_dealer_onboarding_mail";
+  private static final String DEALER_ONBOARDING_MAIL_SENT_FROM = "sent_dealer_onboarding_mail";
 
   private final Context context;
 
@@ -78,11 +78,11 @@ public class ConfigProperties {
   }
 
   public boolean isDealerOnBoardingMailSent(String phoneNo) {
-    return getBoolean(DEALER_ONBOARDING_MAIL_SENT_ON + phoneNo, false);
+    return getBoolean(DEALER_ONBOARDING_MAIL_SENT_FROM + phoneNo, false);
   }
 
   public void setDealerOnBoardingMailSent(String phoneNo) {
-    putBoolean(DEALER_ONBOARDING_MAIL_SENT_ON + phoneNo, true);
+    putBoolean(DEALER_ONBOARDING_MAIL_SENT_FROM + phoneNo, true);
   }
 }
 
