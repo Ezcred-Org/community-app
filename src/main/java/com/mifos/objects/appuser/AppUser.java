@@ -1,5 +1,7 @@
 package com.mifos.objects.appuser;
 
+import android.text.TextUtils;
+
 import lombok.Data;
 
 @Data
@@ -28,6 +30,22 @@ public class AppUser {
     this.firstname = mobile;
     this.lastname = mobile;
     this.email = null;
+    this.sendPasswordToEmail = false;
+    this.isSelfServiceUser = true;
+    this.deviceId = deviceId;
+    this.imeis = imeis;
+  }
+
+  public AppUser(
+    String mobile, String deviceId,
+    String [] imeis, String firstname,
+    String lastname, String email
+  ) {
+    this.mobile = mobile;
+    this.username = mobile;
+    this.firstname = TextUtils.isEmpty(firstname) ?  mobile : firstname;
+    this.lastname = TextUtils.isEmpty(lastname) ?  mobile : lastname;
+    this.email = email;
     this.sendPasswordToEmail = false;
     this.isSelfServiceUser = true;
     this.deviceId = deviceId;
