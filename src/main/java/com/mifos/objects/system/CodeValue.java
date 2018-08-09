@@ -11,5 +11,6 @@ import lombok.Data;
 public class CodeValue {
     private final Integer id;
     private final String name;
+    private final String description;
     private final Integer score;
 }
