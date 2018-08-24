@@ -163,6 +163,15 @@ public interface ClientService {
       @Body Address address
     );
 
+    @PUT(APIEndPoint.CLIENT + "/{clientId}/" + APIEndPoint.ADDRESSES)
+    Observable<GenericResponse> updateClientAddress(
+      @Path("clientId") long clientId,
+      @Query("type") long addressTypeId,
+      @Body Address address
+    );
+
+
+
 
 
     /**

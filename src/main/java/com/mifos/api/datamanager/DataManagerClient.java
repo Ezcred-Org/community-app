@@ -396,6 +396,10 @@ public class DataManagerClient {
         return mBaseApiManager.getClientsApi().saveClientAddress(clientId, addressTypeId, address);
     }
 
+    public Observable<GenericResponse> updateClientAddress(long clientId, long addressTypeId, Address address) {
+        return mBaseApiManager.getClientsApi().updateClientAddress(clientId, addressTypeId, address);
+    }
+
     /**
      * This Method is, for fetching the Client Address.
      *
