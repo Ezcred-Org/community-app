@@ -198,10 +198,10 @@ public class Constants {
 
     static {
         GLOBAL_ERROR_MAP.put("error.msg.not.authenticated", "User Authentication Failed - Invalid username/password");
-        GLOBAL_ERROR_MAP.put("error.msg.dataintegrity", "There is an issue with your loan application request - pls contact customer support");
-        GLOBAL_ERROR_MAP.put("error.msg.badrequest", "The request was invalid. Pls contact customer support if the issue persists");
+        GLOBAL_ERROR_MAP.put("error.msg.dataintegrity", "There is an issue with your loan application request - Please contact customer support");
+        GLOBAL_ERROR_MAP.put("error.msg.badrequest", "The request was invalid. Please contact customer support if the issue persists");
         GLOBAL_ERROR_MAP.put("error.msg.platform.server.side.error", "There is an error in processing the request. Contact Support if the problem persists");
-        GLOBAL_ERROR_MAP.put("error.msg.platform.service.unavailable", "System is undergoing maintenance. Pls try after some time.");
+        GLOBAL_ERROR_MAP.put("error.msg.platform.service.unavailable", "System is undergoing maintenance. Please try after some time.");
         GLOBAL_ERROR_MAP = Collections.unmodifiableMap(GLOBAL_ERROR_MAP);
     }
 }
