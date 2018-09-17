@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mifos.api.services.AddressService;
 import com.mifos.api.services.AuthService;
 import com.mifos.api.services.CenterService;
 import com.mifos.api.services.ChargeService;
@@ -59,6 +60,7 @@ public class BaseApiManager {
   private static RunReportsService runreportsService;
   private static NoteService noteService;
   private static CodeService codeService;
+  private static AddressService addressService;
 
   public BaseApiManager(PrefManager prefManager, SharedPreferences sharedPreferences) {
     createService(prefManager, sharedPreferences);
@@ -82,6 +84,7 @@ public class BaseApiManager {
     runreportsService = createApi(RunReportsService.class);
     noteService = createApi(NoteService.class);
     codeService = createApi(CodeService.class);
+    addressService = createApi(AddressService.class);
   }
 
   private static <T> T createApi(Class<T> clazz) {
@@ -117,6 +120,10 @@ public class BaseApiManager {
 
   public ClientService getClientsApi() {
     return clientsApi;
+  }
+
+  public AddressService getAddressService() {
+    return addressService;
   }
 
   public DataTableService getDataTableApi() {
