@@ -157,4 +157,36 @@ public class Office extends MifosBaseModel implements Parcelable {
             return new Office[size];
         }
     };
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Office)) return false;
+
+        Office office = (Office) o;
+
+        if (id != null ? !id.equals(office.id) : office.id != null) return false;
+        if (externalId != null ? !externalId.equals(office.externalId) : office.externalId != null)
+            return false;
+        if (name != null ? !name.equals(office.name) : office.name != null) return false;
+        if (addressId != null ? !addressId.equals(office.addressId) : office.addressId != null)
+            return false;
+        if (nameDecorated != null ? !nameDecorated.equals(office.nameDecorated) : office.nameDecorated != null)
+            return false;
+        if (officeOpeningDate != null ? !officeOpeningDate.equals(office.officeOpeningDate) : office.officeOpeningDate != null)
+            return false;
+        return openingDate != null ? openingDate.equals(office.openingDate) : office.openingDate == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (externalId != null ? externalId.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (addressId != null ? addressId.hashCode() : 0);
+        result = 31 * result + (nameDecorated != null ? nameDecorated.hashCode() : 0);
+        result = 31 * result + (officeOpeningDate != null ? officeOpeningDate.hashCode() : 0);
+        result = 31 * result + (openingDate != null ? openingDate.hashCode() : 0);
+        return result;
+    }
 }
