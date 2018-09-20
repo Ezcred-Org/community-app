@@ -2,7 +2,6 @@ package com.mifos.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
@@ -25,12 +24,13 @@ import lombok.Data;
 @SuppressWarnings("unused")
 public class PrefManager {
 
+    private static final String PREF_MANAGER = "pref_manager";
+
     private static final String USER_ID = "preferences_user_id";
     private static final String TOKEN = "preferences_token";
     private static final String TENANT = "preferences_tenant";
     private static final String INSTANCE_URL = "preferences_instance";
     private static final String INSTANCE_DOMAIN = "preferences_domain";
-    private static final String PORT = "preferences_port";
     private static final String USER_STATUS = "user_status";
     private static final String USER_DETAILS = "user_details";
     private static final String EZCRED_SECRET_KEY = "ezcred_secret_key";
@@ -57,7 +57,7 @@ public class PrefManager {
     }
 
     private SharedPreferences getPreferences() {
-        return PreferenceManager.getDefaultSharedPreferences(context);
+        return context.getSharedPreferences(PREF_MANAGER, Context.MODE_PRIVATE);
     }
 
     public void clearPrefs() {
@@ -119,7 +119,19 @@ public class PrefManager {
      */
 
     public void saveUser(User user) {
+        setUserId(user.getUserId());
+        saveToken(String.format("Basic %s", user.getBase64EncodedAuthenticationKey()));
         putString(USER_DETAILS, gson.toJson(user));
+    }
+
+    public void logout() {
+        setUserId(-1);
+        clearToken();
+        clearUser();
+    }
+
+    private void clearUser() {
+        putString(USER_DETAILS, gson.toJson(null));
     }
 
     public User getUser() {
@@ -137,14 +149,6 @@ public class PrefManager {
     public String getToken() {
         return getString(TOKEN, "");
     }
-
-    /*public void saveEzcredSecretKey(String ezcredSecretKey) {
-        putString(EZCRED_SECRET_KEY, ezcredSecretKey);
-    }
-
-    public String getEzcredSecretKey() {
-        return getString(EZCRED_SECRET_KEY, "");
-    }*/
 
     public boolean isAuthenticated() {
         return !TextUtils.isEmpty(getToken());
@@ -184,15 +188,6 @@ public class PrefManager {
 
     public void setInstanceDomain(String instanceDomain) {
         putString(INSTANCE_DOMAIN, instanceDomain);
-    }
-
-    public String getPort() {
-        return getString(PORT, BaseUrl.PORT);
-    }
-
-    public void setPort(String port) {
-        if (!TextUtils.isEmpty(port))
-            putString(PORT, port);
     }
 
     /**
