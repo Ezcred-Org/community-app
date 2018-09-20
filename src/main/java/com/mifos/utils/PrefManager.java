@@ -118,7 +118,7 @@ public class PrefManager {
      * Authentication
      */
 
-    public void saveUser(User user) {
+    public void login(User user) {
         setUserId(user.getUserId());
         saveToken(String.format("Basic %s", user.getBase64EncodedAuthenticationKey()));
         putString(USER_DETAILS, gson.toJson(user));
