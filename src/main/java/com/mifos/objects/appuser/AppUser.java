@@ -19,8 +19,8 @@ public class AppUser {
   private final String target;
 
 
-  // Firebase auth token: https://firebase.google.com/docs/auth/admin/create-custom-tokens
-  private String token;
+  // OtpData for Mobile auth otp:
+  private OtpData otpData;
   private String password;
   private String repeatPassword;
   private Double lat;
@@ -41,19 +41,25 @@ public class AppUser {
 
   public AppUser(
     String mobile, String deviceId,
-    String [] imeis, String firstname,
+    String[] imeis, String firstname,
     String lastname, String email,
     String target
   ) {
     this.mobile = mobile;
     this.username = mobile;
-    this.firstname = TextUtils.isEmpty(firstname) ?  mobile : firstname;
-    this.lastname = TextUtils.isEmpty(lastname) ?  mobile : lastname;
+    this.firstname = TextUtils.isEmpty(firstname) ? mobile : firstname;
+    this.lastname = TextUtils.isEmpty(lastname) ? mobile : lastname;
     this.email = email;
     this.sendPasswordToEmail = false;
     this.isSelfServiceUser = true;
     this.deviceId = deviceId;
     this.imeis = imeis;
     this.target = target;
+  }
+
+  @Data
+  public static class OtpData {
+    private final Long otpId;
+    private final String otp;
   }
 }
