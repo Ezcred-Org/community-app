@@ -16,6 +16,8 @@ public class AppUser {
   private final boolean isSelfServiceUser;
   private final String deviceId;
   private final String[] imeis;
+  private final String target;
+
 
   // Firebase auth token: https://firebase.google.com/docs/auth/admin/create-custom-tokens
   private String token;
@@ -24,7 +26,7 @@ public class AppUser {
   private Double lat;
   private Double lng;
 
-  public AppUser(String mobile, String deviceId, String[] imeis) {
+  public AppUser(String mobile, String deviceId, String[] imeis, String target) {
     this.mobile = mobile;
     this.username = mobile;
     this.firstname = mobile;
@@ -34,12 +36,14 @@ public class AppUser {
     this.isSelfServiceUser = true;
     this.deviceId = deviceId;
     this.imeis = imeis;
+    this.target = target;
   }
 
   public AppUser(
     String mobile, String deviceId,
     String [] imeis, String firstname,
-    String lastname, String email
+    String lastname, String email,
+    String target
   ) {
     this.mobile = mobile;
     this.username = mobile;
@@ -50,5 +54,6 @@ public class AppUser {
     this.isSelfServiceUser = true;
     this.deviceId = deviceId;
     this.imeis = imeis;
+    this.target = target;
   }
 }
