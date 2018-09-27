@@ -57,9 +57,15 @@ public class AppUser {
     this.target = target;
   }
 
+  public enum Mode {
+    OTP_SMS,
+    OUTBOUND_CALL
+  }
+
   @Data
   public static class OtpData {
     private final Long otpId;
     private final String otp;
+    private final Mode mode;
   }
 }
