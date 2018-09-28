@@ -40,7 +40,7 @@ public interface LoanService {
 
   @GET(APIEndPoint.LOANS)
   Observable<Page<Loans>> getAllLoans(
-    @Query("offset")Integer offset,
+    @Query("offset") Integer offset,
     @Query("limit") Integer limit,
     @Query("accountNo") String accountNo,
     @Query("externalId") String externalId,
