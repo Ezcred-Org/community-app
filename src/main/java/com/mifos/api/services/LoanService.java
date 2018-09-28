@@ -4,6 +4,8 @@
  */
 package com.mifos.api.services;
 
+import android.support.annotation.Nullable;
+
 import com.mifos.api.GenericResponse;
 import com.mifos.api.model.APIEndPoint;
 import com.mifos.objects.accounts.loan.LoanApproval;
@@ -37,13 +39,16 @@ import rx.Observable;
 public interface LoanService {
 
   @GET(APIEndPoint.LOANS)
-  Observable<Page<Loans>>  getAllLoans(
-    @Query("offset") Integer offset,
+  Observable<Page<Loans>> getAllLoans(
+    @Query("offset")Integer offset,
     @Query("limit") Integer limit,
     @Query("accountNo") String accountNo,
     @Query("externalId") String externalId,
     @Query("orderBy") String orderBy,
-    @Query("sortOrder") String sortBy
+    @Query("sortOrder") String sortBy,
+    @Query("dataTableToJoin") String dataTable,
+    @Query("dataTableFilterCondition") String dataTableFilterCondition,
+    @Query("sqlSearch") String sqlSearch
   );
 
   @GET(APIEndPoint.LOANS + "/{loanId}")

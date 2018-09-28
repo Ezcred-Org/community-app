@@ -114,9 +114,10 @@ public class DataManagerLoan {
     }
 
     public Observable<Page<Loans>> getAllLoans(Integer offset, Integer limit, String accountNo,
-                                               String externalId, String orderBy, String sortBy) {
+                                               String externalId, String orderBy, String sortBy,
+                                               String dataTable, String dataTableFilter, String sqlQuery) {
         return mBaseApiManager.getLoanApi().getAllLoans(offset, limit, accountNo,
-          externalId, orderBy, sortBy);
+          externalId, orderBy, sortBy, dataTable, dataTableFilter, sqlQuery);
     }
 
     public Observable<LoanTemplate> getLoansAccountTemplate(int clientId, int productId) {
