@@ -113,9 +113,11 @@ public class DataManagerLoan {
       return mBaseApiManager.getLoanApi().getLoanProduct(loanProductId);
     }
 
-    public Observable<Page<Loans>> getAllLoans(Integer offset, Integer limit, String accountNo,
-                                               String externalId, String orderBy, String sortBy,
-                                               String dataTable, String dataTableFilter, String sqlQuery) {
+    public Observable<Page<Loans>> getAllLoans(
+      Integer offset, Integer limit, String accountNo,
+      String externalId, String orderBy, String sortBy,
+      String dataTable, String dataTableFilter, String sqlQuery
+    ) {
         return mBaseApiManager.getLoanApi().getAllLoans(offset, limit, accountNo,
           externalId, orderBy, sortBy, dataTable, dataTableFilter, sqlQuery);
     }
