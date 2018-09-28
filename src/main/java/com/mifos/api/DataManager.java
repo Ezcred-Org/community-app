@@ -150,7 +150,10 @@ public class DataManager {
     }
 
     public Observable<Page<Loans>> getAllLoans() {
-        return mBaseApiManager.getLoanApi().getAllLoans(null, null, null, null, null, null);
+        return mBaseApiManager.getLoanApi().getAllLoans(
+          null, null, null, null, null,
+          null, null, null, null
+        );
     }
 
     public Observable<List<LoanProducts>> getAllLoanProducts() {
