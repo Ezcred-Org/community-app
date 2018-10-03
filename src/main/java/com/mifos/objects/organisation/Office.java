@@ -41,6 +41,7 @@ public class Office extends MifosBaseModel implements Parcelable {
     @Column
     String nameDecorated;
 
+
     @Column
     @ForeignKey(saveForeignKeyModel = true)
     OfficeOpeningDate officeOpeningDate;
