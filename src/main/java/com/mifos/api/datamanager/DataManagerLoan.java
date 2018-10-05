@@ -1,5 +1,7 @@
 package com.mifos.api.datamanager;
 
+import android.text.TextUtils;
+
 import com.mifos.api.BaseApiManager;
 import com.mifos.api.GenericResponse;
 import com.mifos.api.local.databasehelper.DatabaseHelperLoan;
@@ -115,12 +117,47 @@ public class DataManagerLoan {
 
     public Observable<Page<Loans>> getAllLoans(
       Integer offset, Integer limit, String accountNo,
-      String externalId, String orderBy, String sortBy,
-      String dataTable, String dataTableFilter, String sqlQuery
+      String externalId, String orderBy, String sortBy
     ) {
-        return mBaseApiManager.getLoanApi().getAllLoans(offset, limit, accountNo,
-          externalId, orderBy, sortBy, dataTable, dataTableFilter, sqlQuery);
+        return mBaseApiManager.getLoanApi().getAllLoans(offset, limit, accountNo, externalId, orderBy, sortBy);
     }
+
+    public Observable<Page<Loans>> getAllLoans(
+      Long officeId, Integer offset, Integer limit, String accountNo,
+      String externalId, String orderBy, String sortBy
+    ) {
+        String sqlQuery = "l.office_id=" + officeId;
+        return mBaseApiManager
+          .getLoanApi()
+          .getAllLoans(offset, limit, accountNo, externalId, orderBy, sortBy, sqlQuery);
+    }
+
+
+    public Observable<Page<Loans>> getAllLoansByTask(
+      Integer offset, Integer limit, String accountNo,
+      String orderBy, String sortBy,
+      String taskStatus, String taskType, List<String> loanStatus
+    ) {
+        String sqlQuery = "l.loan_status_id in (" + TextUtils.join(",", loanStatus) + ") ";
+        sqlQuery += "and datatable.task_type='" + taskType + "' ";
+
+        return mBaseApiManager.getLoanApi().getAllLoans(offset, limit, accountNo,
+          null, orderBy, sortBy, "task_details", "task_status=" + taskStatus, sqlQuery);
+    }
+
+    public Observable<Page<Loans>> getAllLoansByTaskForOffice(
+      Integer offset, Integer limit, String accountNo,
+      String orderBy, String sortBy,
+      String taskStatus, String taskType, List<String> loanStatus, Long officeId
+    ) {
+        String sqlQuery = "l.loan_status_id in (" + TextUtils.join(",", loanStatus) + ") ";
+        sqlQuery += "and datatable.task_type='" + taskType + "' ";
+        sqlQuery += "and l.office_id=" + officeId;
+
+        return mBaseApiManager.getLoanApi().getAllLoans(offset, limit, accountNo,
+          null, orderBy, sortBy, "task_details", "task_status=" + taskStatus, sqlQuery);
+    }
+
 
     public Observable<LoanTemplate> getLoansAccountTemplate(int clientId, int productId) {
         return mBaseApiManager.getLoanApi().getLoansAccountTemplate(clientId, productId);

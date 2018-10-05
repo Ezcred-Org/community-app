@@ -4,8 +4,6 @@
  */
 package com.mifos.api.services;
 
-import android.support.annotation.Nullable;
-
 import com.mifos.api.GenericResponse;
 import com.mifos.api.model.APIEndPoint;
 import com.mifos.objects.accounts.loan.LoanApproval;
@@ -49,6 +47,27 @@ public interface LoanService {
     @Query("dataTableToJoin") String dataTable,
     @Query("dataTableFilterCondition") String dataTableFilterCondition,
     @Query("sqlSearch") String sqlSearch
+  );
+
+  @GET(APIEndPoint.LOANS)
+  Observable<Page<Loans>> getAllLoans(
+    @Query("offset") Integer offset,
+    @Query("limit") Integer limit,
+    @Query("accountNo") String accountNo,
+    @Query("externalId") String externalId,
+    @Query("orderBy") String orderBy,
+    @Query("sortOrder") String sortBy,
+    @Query("sqlSearch") String sqlSearch
+  );
+
+  @GET(APIEndPoint.LOANS)
+  Observable<Page<Loans>> getAllLoans(
+    @Query("offset") Integer offset,
+    @Query("limit") Integer limit,
+    @Query("accountNo") String accountNo,
+    @Query("externalId") String externalId,
+    @Query("orderBy") String orderBy,
+    @Query("sortOrder") String sortBy
   );
 
   @GET(APIEndPoint.LOANS + "/{loanId}")
