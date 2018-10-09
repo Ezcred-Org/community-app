@@ -64,7 +64,6 @@ public class AppUser {
     private final Mode mode;
   }
   
-  
   public enum Mode {
     OTP_SMS,
     OUTBOUND_CALL
