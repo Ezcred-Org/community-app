@@ -167,6 +167,10 @@ public class DataManagerLoan {
         return mBaseApiManager.getLoanApi().createMifosLoansAccount(loansPayload);
     }
 
+    public Observable<GenericResponse> updateMifosLoansAccount(long loanId, LoansPayload loansPayload) {
+        return mBaseApiManager.getLoanApi().updateMifosLoansAccount(loanId, loansPayload);
+    }
+
 
     @Deprecated
     public Observable<Loans> createLoansAccount(LoansPayload loansPayload) {
