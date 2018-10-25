@@ -27,6 +27,7 @@ import java.util.List;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -113,7 +114,11 @@ public interface LoanService {
   @POST(APIEndPoint.CREATELOANSACCOUNTS)
   Observable<GenericResponse> createMifosLoansAccount(@Body LoansPayload loansPayload);
 
-
+  @PUT(APIEndPoint.CREATELOANSACCOUNTS + "/{loanId}")
+  Observable<GenericResponse>updateMifosLoansAccount(
+    @Path("loanId") long loanId,
+    @Body LoansPayload loansPayload
+  );
 
   @Deprecated
   @POST(APIEndPoint.CREATELOANSACCOUNTS)
