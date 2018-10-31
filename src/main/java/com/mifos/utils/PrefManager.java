@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.mifos.api.BaseUrl;
 import com.mifos.objects.user.User;
 
+import java.io.Serializable;
 import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -147,6 +148,15 @@ public class PrefManager {
         return gson.fromJson(getString(USER_DETAILS, "null"),
                 User.class);
     }
+
+    public <T> T get(String key, Class<T> clazz) {
+        return gson.fromJson(getString(key, "null"), clazz);
+    }
+
+    public <T> void put(T object) {
+        putString(object.getClass().getSimpleName(), gson.toJson(object));
+    }
+
     public void saveToken(String token) {
         putString(TOKEN, token);
     }
