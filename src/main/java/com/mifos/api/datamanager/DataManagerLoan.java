@@ -124,9 +124,12 @@ public class DataManagerLoan {
 
     public Observable<Page<Loans>> getAllLoans(
       Long officeId, Integer offset, Integer limit, String accountNo,
-      String externalId, String orderBy, String sortBy
+      String externalId, String orderBy, String sortBy, Long staffId
     ) {
         String sqlQuery = "l.office_id=" + officeId;
+        if (staffId > 0) {
+            sqlQuery += " and l.loan_officer_id = " + staffId;
+        }
         return mBaseApiManager
           .getLoanApi()
           .getAllLoans(offset, limit, accountNo, externalId, orderBy, sortBy, sqlQuery);
