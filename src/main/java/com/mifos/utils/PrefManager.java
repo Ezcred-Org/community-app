@@ -113,6 +113,14 @@ public class PrefManager {
         return getPreferences().getStringSet(preferencesKey, null);
     }
 
+    public void setAppLabels(AppLabels appLabels) {
+        put(appLabels);
+    }
+
+    public AppLabels getAppLabels() {
+        return get(AppLabels.class.getSimpleName(), AppLabels.class);
+    }
+
     // Concrete methods
 
     /**
