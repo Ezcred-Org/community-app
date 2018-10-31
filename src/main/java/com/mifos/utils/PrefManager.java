@@ -41,7 +41,6 @@ public class PrefManager {
     private static final String NACH_SAMPLE_SHOWN = "nach_sample_shown";
     private static final String DEVICE_SYNC_DONE = "device_sync_done";
     private static final String GEO_LOCATION = "geo_location";
-    private static final String APP_LABELS = "app_labels";
 
     private final Gson gson;
     
@@ -115,11 +114,11 @@ public class PrefManager {
     }
 
     public void setAppLabels(AppLabels appLabels) {
-        getPreferences().edit().putString(APP_LABELS, gson.toJson(appLabels)).apply();
+        put(appLabels);
     }
 
     public AppLabels getAppLabels() {
-        return gson.fromJson(getPreferences().getString(APP_LABELS, "null"), AppLabels.class);
+        return get(AppLabels.class.getSimpleName(), AppLabels.class);
     }
 
     // Concrete methods
