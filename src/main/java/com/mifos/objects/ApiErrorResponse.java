@@ -8,8 +8,13 @@ import lombok.Data;
 public class ApiErrorResponse {
   @SerializedName(value = "developerMessage", alternate = {"exception"})
   private final String developerMessage;
+
+  @SerializedName(value = "defaultUserMessage", alternate = {"message"})
   private final String defaultUserMessage;
+
+  @SerializedName(value = "userMessageGlobalisationCode", alternate = {"data"})
   private final String userMessageGlobalisationCode;
+
   private final Object[] errors;
 
   @SerializedName(value = "httpStatusCode", alternate = {"status"})
