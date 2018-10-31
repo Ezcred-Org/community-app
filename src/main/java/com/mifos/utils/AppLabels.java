@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class AppLabels {
-  private String priceLabel;
+  private final String priceLabel;
   private final String partnerName;
 }
