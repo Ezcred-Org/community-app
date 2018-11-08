@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class AppLabels {
-  private final String priceLabel;
+  private final boolean loanAmountRequired;
   private final String partnerName;
 }
