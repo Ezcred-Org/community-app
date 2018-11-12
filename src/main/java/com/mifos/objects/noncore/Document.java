@@ -25,6 +25,9 @@ public class Document implements Parcelable {
     private String description;
     private String comments;
     private Verified verified;
+    private String location;
+
+    public String getLocation() { return location; }
 
     public int getId() {
         return id;
