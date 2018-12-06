@@ -7,6 +7,7 @@ import com.mifos.api.local.databasehelper.DatabaseHelperDataTable;
 import com.mifos.objects.noncore.DataTable;
 import com.mifos.objects.user.UserLocation;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,6 +62,14 @@ public class DataManagerDataTable {
 
     public Observable<JsonArray> getDataTableInfo(String table, int entityId) {
         return mBaseApiManager.getDataTableApi().getDataOfDataTable(table, entityId);
+    }
+
+    public Observable<JsonArray> getDataOfDataTableInfoWithFilter(
+      String table, Map<String,String> filterMap
+    ) {
+
+        return mBaseApiManager.getDataTableApi()
+          .getDataOfDataTableInfoWithFilter(table, filterMap);
     }
 
     public Observable<GenericResponse> addDataTableEntry(
