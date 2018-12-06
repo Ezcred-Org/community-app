@@ -19,4 +19,7 @@ public class ApiErrorResponse {
 
   @SerializedName(value = "httpStatusCode", alternate = {"status"})
   private final Integer httpStatusCode;
+
+  @SerializedName(value = "errorHash")
+  private final String errorHash;
 }
