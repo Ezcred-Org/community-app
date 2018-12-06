@@ -21,5 +21,5 @@ public class ApiErrorResponse {
   private final Integer httpStatusCode;
 
   @SerializedName(value = "errorHash")
-  private final String errorCode;
+  private final String errorHash;
 }
