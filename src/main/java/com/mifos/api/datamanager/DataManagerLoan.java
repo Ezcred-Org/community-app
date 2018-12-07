@@ -148,6 +148,20 @@ public class DataManagerLoan {
           null, orderBy, sortBy, "task_details", "task_status=" + taskStatus, sqlQuery);
     }
 
+    public Observable<Page<Loans>> getAllFundLoansByTask(
+      Integer offset, Integer limit, String accountNo,
+      String orderBy, String sortBy,
+      String taskStatus, String taskType,
+      List<String> loanStatus, long fundId
+    ) {
+        String sqlQuery = "l.loan_status_id in (" + TextUtils.join(",", loanStatus) + ") ";
+        sqlQuery += "and datatable.task_type='" + taskType + "' ";
+        sqlQuery += "and l.fund_id=" + fundId;
+
+        return mBaseApiManager.getLoanApi().getAllLoans(offset, limit, accountNo,
+          null, orderBy, sortBy, "task_details", "task_status=" + taskStatus, sqlQuery);
+    }
+
     public Observable<Page<Loans>> getAllLoansByTaskForOffice(
       Integer offset, Integer limit, String accountNo,
       String orderBy, String sortBy,
