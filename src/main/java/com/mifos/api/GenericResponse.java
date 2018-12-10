@@ -11,6 +11,7 @@ import lombok.Data;
 
 @Data
 public class GenericResponse {
+    private Long id;
     private Long commandId;
     private Long officeId;
     private Long groupId;
