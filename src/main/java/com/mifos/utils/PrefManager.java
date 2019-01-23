@@ -41,6 +41,7 @@ public class PrefManager {
     private static final String NACH_SAMPLE_SHOWN = "nach_sample_shown";
     private static final String DEVICE_SYNC_DONE = "device_sync_done";
     private static final String GEO_LOCATION = "geo_location";
+    private static final String USER_ACCESS = "user_access";
 
     private final Gson gson;
     
@@ -255,6 +256,14 @@ public class PrefManager {
 
     public void setFcmTokenUpdateTime(long firebaseTokenUpdateTime) {
         putLong(FCM_TOKEN_UPDATE_TIME, firebaseTokenUpdateTime);
+    }
+
+    public void setUserAccess(Boolean userAccess) {
+        getPreferences().edit().putBoolean(USER_ACCESS, userAccess).apply();
+    }
+
+    public Boolean getUserAccess() {
+        return getPreferences().getBoolean(USER_ACCESS, false);
     }
 
     public boolean isNachSampleAlreadyShown() {
