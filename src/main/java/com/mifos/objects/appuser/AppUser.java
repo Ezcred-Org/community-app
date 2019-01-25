@@ -2,6 +2,8 @@ package com.mifos.objects.appuser;
 
 import android.text.TextUtils;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Data;
 
 @Data
@@ -16,7 +18,7 @@ public class AppUser {
   private final boolean isSelfServiceUser;
   private final String deviceId;
   private final String[] imeis;
-  private final String target;
+  private final Target target;
 
 
   // OtpData for Mobile auth otp:
@@ -26,7 +28,7 @@ public class AppUser {
   private Double lat;
   private Double lng;
 
-  public AppUser(String mobile, String deviceId, String[] imeis, String target) {
+  public AppUser(String mobile, String deviceId, String[] imeis, Target target) {
     this.mobile = mobile;
     this.username = mobile;
     this.firstname = mobile;
@@ -43,7 +45,7 @@ public class AppUser {
     String mobile, String deviceId,
     String[] imeis, String firstname,
     String lastname, String email,
-    String target
+    Target target
   ) {
     this.mobile = mobile;
     this.username = mobile;
@@ -68,5 +70,29 @@ public class AppUser {
     OTP_SMS,
     OUTBOUND_CALL,
     GOOGLE_AUTH
+  }
+
+  public enum Target {
+
+    @SerializedName("consumer")
+    CONSUMER,
+
+    @SerializedName("agent")
+    AGENT,
+
+    @SerializedName("retailer")
+    RETAILER;
+
+    public static Target getTargetFromFlavor(String flavor) {
+      switch (flavor) {
+        case "dealer":
+          return Target.RETAILER;
+        case "agent":
+          return Target.AGENT;
+        case "consumer":
+          return Target.CONSUMER;
+      }
+      return null;
+    }
   }
 }
