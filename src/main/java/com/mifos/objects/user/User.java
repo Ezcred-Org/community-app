@@ -93,9 +93,13 @@ public class User {
         this.staffDisplayName = staffDisplayName;
     }
 
-    public boolean isSelfServiceUser() { return isSelfServiceUser; }
+    public boolean isSelfServiceUser() {
+        return isSelfServiceUser;
+    }
 
-    public void setSelfServiceUser(boolean selfServiceUser) { isSelfServiceUser = selfServiceUser; }
+    public void setSelfServiceUser(boolean isSelfServiceUser) {
+        this.isSelfServiceUser = isSelfServiceUser;
+    }
 
     public List<Role> getRoles() {
         return roles;
