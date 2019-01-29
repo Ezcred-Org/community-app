@@ -20,7 +20,7 @@ public class User {
     private boolean authenticated;
     private int officeId;
     private String officeName;
-    private boolean isSelfUser;
+    private boolean isSelfServiceUser;
 
     private List<Role> roles = new ArrayList<Role>();
     private List<String> permissions = new ArrayList<String>();
@@ -93,9 +93,9 @@ public class User {
         this.staffDisplayName = staffDisplayName;
     }
 
-    public boolean isSelfUser() { return isSelfUser; }
+    public boolean isSelfServiceUser() { return isSelfServiceUser; }
 
-    public void setSelfUser(boolean selfUser) { isSelfUser = selfUser; }
+    public void setSelfServiceUser(boolean selfServiceUser) { isSelfServiceUser = selfServiceUser; }
 
     public List<Role> getRoles() {
         return roles;
