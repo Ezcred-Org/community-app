@@ -19,6 +19,7 @@ import com.mifos.objects.organisation.Office;
 import com.mifos.objects.organisation.Staff;
 import com.mifos.objects.templates.clients.ChargeTemplate;
 import com.mifos.objects.templates.loans.GroupLoanTemplate;
+import com.mifos.objects.user.User;
 import com.mifos.services.data.ChargesPayload;
 import com.mifos.services.data.GroupLoanPayload;
 
@@ -120,6 +121,13 @@ public class DataManager {
 
     public Observable<List<Group>> getGroupsByOffice(int office, Map<String, Object> params) {
         return mBaseApiManager.getGroupApi().getAllGroupsInOffice(office, params);
+    }
+
+    /**
+     * User API
+     */
+    public Observable<User> getUser(long userId) {
+        return mBaseApiManager.getUserApi().getUser(userId);
     }
 
     /**
