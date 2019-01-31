@@ -126,7 +126,10 @@ public class DataManagerLoan {
       Long officeId, Integer offset, Integer limit, String accountNo,
       String externalId, String orderBy, String sortBy, Long staffId
     ) {
-        String sqlQuery = "l.office_id=" + officeId;
+        String sqlQuery = "";
+        if(officeId != null) {
+            sqlQuery = "l.office_id=" + officeId;
+        }
         if (staffId > 0) {
             sqlQuery += " and l.loan_officer_id = " + staffId;
         }
