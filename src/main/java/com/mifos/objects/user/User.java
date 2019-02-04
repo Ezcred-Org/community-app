@@ -5,6 +5,7 @@
 
 package com.mifos.objects.user;
 
+import com.google.gson.annotations.SerializedName;
 import com.mifos.objects.client.Role;
 
 import java.util.ArrayList;
@@ -15,15 +16,20 @@ public class User {
     public static final String AUTHENTICATION_KEY = "authenticationKey";
 
     private String username;
+
+    @SerializedName(value = "userId", alternate = {"id"})
     private int userId;
     private String base64EncodedAuthenticationKey;
+
     private boolean authenticated;
     private int officeId;
     private String officeName;
     private boolean isSelfServiceUser;
 
+    @SerializedName(value = "roles", alternate = {"selectedRoles"})
     private List<Role> roles = new ArrayList<Role>();
     private List<String> permissions = new ArrayList<String>();
+
 
     private int staffId;
     private String staffDisplayName;
