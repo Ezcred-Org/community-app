@@ -27,6 +27,7 @@ import com.mifos.api.services.SavingsAccountService;
 import com.mifos.api.services.SearchService;
 import com.mifos.api.services.StaffService;
 import com.mifos.api.services.SurveyService;
+import com.mifos.api.services.UserService;
 import com.mifos.utils.JsonDateSerializer;
 import com.mifos.utils.PrefManager;
 
@@ -61,6 +62,7 @@ public class BaseApiManager {
   private static NoteService noteService;
   private static CodeService codeService;
   private static AddressService addressService;
+  private static UserService userApi;
 
   public BaseApiManager(PrefManager prefManager, SharedPreferences sharedPreferences) {
     createService(prefManager, sharedPreferences);
@@ -85,6 +87,7 @@ public class BaseApiManager {
     noteService = createApi(NoteService.class);
     codeService = createApi(CodeService.class);
     addressService = createApi(AddressService.class);
+    userApi = createApi(UserService.class);
   }
 
   private static <T> T createApi(Class<T> clazz) {
@@ -176,5 +179,9 @@ public class BaseApiManager {
 
   public CodeService getCodeService() {
     return codeService;
+  }
+
+  public UserService getUserApi() {
+    return userApi;
   }
 }
