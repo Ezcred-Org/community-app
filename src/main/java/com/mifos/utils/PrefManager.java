@@ -3,18 +3,15 @@ package com.mifos.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
-
 import com.google.gson.Gson;
 import com.mifos.api.BaseUrl;
+import com.mifos.objects.organisation.Staff;
 import com.mifos.objects.user.User;
-
 import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-
 import javax.inject.Singleton;
-
 import lombok.Data;
 
 /**
@@ -33,6 +30,8 @@ public class PrefManager {
     private static final String INSTANCE_DOMAIN = "preferences_domain";
     private static final String USER_STATUS = "user_status";
     private static final String USER_DETAILS = "user_details";
+    private static final String STAFF_DETAILS = "staff_details";
+    private static final String STAFF_CONFIG = "staff_config";
     private static final String EZCRED_SECRET_KEY = "ezcred_secret_key";
     private static final String EZCRED_LAST_APP_VERSION_CODE = "ezcred_last_app_version_code";
     private static final String EZCRED_LAST_APP_VERSION_NAME = "ezcred_last_app_version_name";
@@ -112,6 +111,14 @@ public class PrefManager {
         return getPreferences().getStringSet(preferencesKey, null);
     }
 
+    public <T> void put(T object) {
+        putString(object.getClass().getSimpleName(), gson.toJson(object));
+    }
+
+    public <T> T get(String key, Class<T> clazz) {
+        return gson.fromJson(getString(key, "null"), clazz);
+    }
+
     public void setAppLabels(AppLabels appLabels) {
         put(appLabels);
     }
@@ -136,6 +143,8 @@ public class PrefManager {
         setUserId(-1);
         clearToken();
         clearUser();
+        clearStaffDetails();
+        clearStaffConfig();
     }
 
     private void clearUser() {
@@ -151,12 +160,28 @@ public class PrefManager {
         putString(USER_DETAILS, gson.toJson(user));
     }
 
-    public <T> T get(String key, Class<T> clazz) {
-        return gson.fromJson(getString(key, "null"), clazz);
+    private void clearStaffDetails() {
+        putString(STAFF_DETAILS, gson.toJson(null));
     }
 
-    public <T> void put(T object) {
-        putString(object.getClass().getSimpleName(), gson.toJson(object));
+    public Staff getStaffDetails() {
+        return gson.fromJson(getString(STAFF_DETAILS, null), Staff.class);
+    }
+
+    public void setStaffDetails(Staff staff) {
+        putString(STAFF_DETAILS, gson.toJson(staff));
+    }
+
+    private void clearStaffConfig() {
+        putString(STAFF_CONFIG, gson.toJson(null));
+    }
+
+    public <T> T getStaffConfig(Class<T> clazz) {
+        return gson.fromJson(getString(STAFF_CONFIG, null), clazz);
+    }
+
+    public <T> void setStaffConfig(T object) {
+        putString(STAFF_CONFIG, gson.toJson(object));
     }
 
     public void saveToken(String token) {
