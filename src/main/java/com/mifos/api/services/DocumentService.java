@@ -70,7 +70,7 @@ public interface DocumentService {
      * This Service is for downloading the Document with EntityType and EntityId and Document Id
      * Rest End Point :
      * https://demo.openmf.org/fineract-provider/api/v1/{entityType}/{entityId}/documents/
-     * {documentId}/attachment
+     * {brandId}/attachment
      *
      * @param entityType    - Type for which document is being uploaded (Client, Loan
      *                                or Savings etc)
@@ -78,16 +78,16 @@ public interface DocumentService {
      * @param documentId    - Document Id
      * @return ResponseBody
      */
-    @GET("{entityType}/{entityId}/" + APIEndPoint.DOCUMENTS + "/{documentId}/attachment")
+    @GET("{entityType}/{entityId}/" + APIEndPoint.DOCUMENTS + "/{brandId}/attachment")
     Observable<ResponseBody> downloadDocument(@Path("entityType") String entityType,
                                               @Path("entityId") int entityId,
-                                              @Path("documentId") int documentId);
+                                              @Path("brandId") int documentId);
 
     /**
      * This Service is for Deleting the Document with EntityType and EntityId and Document Id.
      * Rest End Point :
      * https://demo.openmf.org/fineract-provider/api/v1/{entityType}/{entityId}/documents/
-     * {documentId}
+     * {brandId}
      *
      * @param entityType    - Type for which document is being uploaded (Client, Loan
      *                                or Savings etc)
@@ -95,17 +95,17 @@ public interface DocumentService {
      * @param documentId    - Document Id
      * @return
      */
-    @DELETE("{entityType}/{entityId}/" + APIEndPoint.DOCUMENTS + "/{documentId}")
+    @DELETE("{entityType}/{entityId}/" + APIEndPoint.DOCUMENTS + "/{brandId}")
     Observable<GenericResponse> removeDocument(@Path("entityType") String entityType,
                                                              @Path("entityId") int entityId,
-                                                             @Path("documentId") int documentId);
+                                                             @Path("brandId") int documentId);
 
     /**
      * This Service for Updating the Document with EntityType and EntityId and Document Id.
      * Rest End Point :
      * PUT
      * https://demo.openmf.org/fineract-provider/api/v1/{entityType}/{entityId}/documents/
-     * {documentId}
+     * {brandId}
      *
      * @param entityType              - Type for which document is being uploaded (Client, Loan
      *                                or Savings etc)
@@ -115,11 +115,11 @@ public interface DocumentService {
      * @param description             - Mandatory - Document Description
      * @param typedFile               - Mandatory
      */
-    @PUT("{entityType}/{entityId}/" + APIEndPoint.DOCUMENTS + "/{documentId}")
+    @PUT("{entityType}/{entityId}/" + APIEndPoint.DOCUMENTS + "/{brandId}")
     @Multipart
     Observable<GenericResponse> updateDocument(@Path("entityType") String entityType,
                                                              @Path("entityId") int entityId,
-                                                             @Path("documentId") int documentId,
+                                                             @Path("brandId") int documentId,
                                                              @Part("name") String nameOfDocument,
                                                              @Part("description") String description,
                                                              @Part("comments") String comments,

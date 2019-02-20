@@ -94,7 +94,7 @@ public class DataManagerDocument {
      * This Method to Retrieve Binary File associated with Document.
      * REST END POINT:
      * https://demo.openmf.org/fineract-provider/api/v1/{entityType}/{entityId}/documents/
-     * {documentId}/attachment
+     * {brandId}/attachment
      *
      * @param entityType Entity Type
      * @param entityId   Entity Id
@@ -111,7 +111,7 @@ public class DataManagerDocument {
      * Document Id.
      * REST END POINT:
      * https://demo.openmf.org/fineract-provider/api/v1/{entityType}/{entityId}/documents/
-     * {documentId}
+     * {brandId}
      *
      * @param entityType Entity Type
      * @param entityId   Entity Id
@@ -128,7 +128,7 @@ public class DataManagerDocument {
      * to the new one.
      * REST END POINT:
      * https://demo.openmf.org/fineract-provider/api/v1/{entityType}/{entityId}/documents/
-     * {documentId}
+     * {brandId}
      *
      * @param entityType Entity Type
      * @param entityId   Entity Id
