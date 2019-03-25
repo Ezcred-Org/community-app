@@ -69,7 +69,8 @@ public class AppUser {
   public enum Mode {
     OTP_SMS,
     OUTBOUND_CALL,
-    GOOGLE_AUTH
+    GOOGLE_AUTH,
+    PARTNER_AUTH
   }
 
   public enum Target {
