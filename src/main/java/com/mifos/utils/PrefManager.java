@@ -41,6 +41,8 @@ public class PrefManager {
     private static final String DEVICE_SYNC_DONE = "device_sync_done";
     private static final String GEO_LOCATION = "geo_location";
     private static final String PARTNER_AUTH_DATA = "partner_auth_data";
+    private static final String LOGIN_BY_PARTNER = "login_by_partner";
+    private static final String LAST_LOGIN_TIME = "last_login_time";
 
     private final Gson gson;
     
@@ -147,6 +149,8 @@ public class PrefManager {
         clearUser();
         clearStaffDetails();
         clearStaffConfig();
+        setLastLoginTime(0);
+        setLoginByPartner(false);
     }
 
     private void clearUser() {
@@ -331,6 +335,22 @@ public class PrefManager {
 
     public void clearPartnerDetails() {
         putString(PARTNER_AUTH_DATA, gson.toJson(null));
+    }
+
+    public boolean isLoginByPartner() {
+        return getBoolean(LOGIN_BY_PARTNER, false);
+    }
+
+    public void setLoginByPartner(boolean loginByPartner) {
+        putBoolean(LOGIN_BY_PARTNER, loginByPartner);
+    }
+
+    public long getLastLoginTime() {
+        return getLong(LAST_LOGIN_TIME, 0);
+    }
+
+    public void setLastLoginTime(long time) {
+        putLong(LAST_LOGIN_TIME, time);
     }
 
     @Data
