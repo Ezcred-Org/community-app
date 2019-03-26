@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.mifos.api.BaseUrl;
+import com.mifos.objects.appuser.AppUser.EzCredAuthData;
 import com.mifos.objects.organisation.Staff;
 import com.mifos.objects.user.User;
 import java.util.Set;
@@ -39,6 +40,7 @@ public class PrefManager {
     private static final String NACH_SAMPLE_SHOWN = "nach_sample_shown";
     private static final String DEVICE_SYNC_DONE = "device_sync_done";
     private static final String GEO_LOCATION = "geo_location";
+    private static final String PARTNER_AUTH_DATA = "partner_auth_data";
 
     private final Gson gson;
     
@@ -317,6 +319,18 @@ public class PrefManager {
         } finally {
             writeLock.unlock();
         }
+    }
+
+    public String getPartnerDetails() {
+        return getString(PARTNER_AUTH_DATA, null);
+    }
+
+    public void setPartnerDetails(EzCredAuthData ezCredAuthData) {
+        putString(PARTNER_AUTH_DATA, gson.toJson(ezCredAuthData));
+    }
+
+    public void clearPartnerDetails() {
+        putString(PARTNER_AUTH_DATA, gson.toJson(null));
     }
 
     @Data
