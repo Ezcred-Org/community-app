@@ -335,7 +335,7 @@ public class PrefManager {
     }
 
     public void clearPartnerDetails() {
-        putString(PARTNER_AUTH_DATA, gson.toJson(null));
+        putString(PARTNER_AUTH_DATA, null);
     }
 
     public boolean isLoginByPartner() {
