@@ -8,6 +8,7 @@ import com.mifos.api.BaseUrl;
 import com.mifos.objects.appuser.AppUser.EzCredAuthData;
 import com.mifos.objects.organisation.Staff;
 import com.mifos.objects.user.User;
+import java.util.Date;
 import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -346,7 +347,7 @@ public class PrefManager {
     }
 
     public long getLastLoginTime() {
-        return getLong(LAST_LOGIN_TIME, 0);
+        return getLong(LAST_LOGIN_TIME, new Date().getTime());
     }
 
     public void setLastLoginTime(long time) {
