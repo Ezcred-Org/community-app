@@ -69,7 +69,14 @@ public class AppUser {
   public enum Mode {
     OTP_SMS,
     OUTBOUND_CALL,
-    GOOGLE_AUTH
+    GOOGLE_AUTH,
+    PARTNER_AUTH
+  }
+
+  @Data
+  public static class EzCredAuthData {
+    private final String partnerId;
+    private final String data;
   }
 
   public enum Target {
