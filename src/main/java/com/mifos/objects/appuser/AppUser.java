@@ -1,34 +1,56 @@
 package com.mifos.objects.appuser;
 
 import android.text.TextUtils;
-
 import com.google.gson.annotations.SerializedName;
-
+import java.util.List;
 import lombok.Data;
 
 @Data
 public class AppUser {
-  // NOTE: username is mobile number without country code
-  private final String mobile;
+
   private final String username;
+
   private final String firstname;
+
   private final String lastname;
+
   private final String email;
-  private final boolean sendPasswordToEmail;
-  private final boolean isSelfServiceUser;
-  private final String deviceId;
-  private final String[] imeis;
-  private final Target target;
 
+  private Long officeId;
 
-  // OtpData for Mobile auth otp:
-  private OtpData otpData;
+  private Long staffId;
+
+  private List<Long> roles;
+
+  private final Boolean sendPasswordToEmail;
+
+  private final Boolean isSelfServiceUser;
+
+  private Boolean enabled;
+
   private String password;
+
   private String repeatPassword;
+
+  private final String mobile;
+
+  private List<Long> clients;
+
+  /**
+   * ezcred related params. 1. List of imei's. 2. Android phone device id.
+   */
+
+  private final List<String> imeis;
+
+  private final String deviceId;
+
   private Double lat;
+
   private Double lng;
 
-  public AppUser(String mobile, String deviceId, String[] imeis, Target target) {
+  private AuthData authData;
+
+  public AppUser(String mobile, String deviceId, List<String> imeis, Target target) {
     this.mobile = mobile;
     this.username = mobile;
     this.firstname = mobile;
@@ -42,10 +64,10 @@ public class AppUser {
   }
 
   public AppUser(
-    String mobile, String deviceId,
-    String[] imeis, String firstname,
-    String lastname, String email,
-    Target target
+      String mobile, String deviceId,
+      List<String> imeis, String firstname,
+      String lastname, String email,
+      Target target
   ) {
     this.mobile = mobile;
     this.username = mobile;
@@ -60,18 +82,23 @@ public class AppUser {
   }
 
   @Data
-  public static class OtpData {
-    private final Long otpId;
-    private final String otp;
+  public static class AuthData {
+
+    private final Long dataId;
+    private final String data;
     private final Mode mode;
+
+    public enum Mode {
+      FIREBASE,
+      OTP_SMS,
+      OUTBOUND_CALL,
+      GOOGLE_AUTH,
+      PARTNER_AUTH
+    }
   }
-  
-  public enum Mode {
-    OTP_SMS,
-    OUTBOUND_CALL,
-    GOOGLE_AUTH,
-    PARTNER_AUTH
-  }
+
+  // To identify whether request came from agent, dealer, or consumer app
+  private final Target target;
 
   @Data
   public static class EzCredAuthData {
