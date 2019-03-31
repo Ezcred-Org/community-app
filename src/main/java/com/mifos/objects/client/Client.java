@@ -11,13 +11,13 @@ import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 import com.mifos.objects.Timeline;
+import com.mifos.utils.Utils;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.ModelContainer;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -318,17 +318,7 @@ public class Client extends MifosBaseModel implements Parcelable {
     }
 
     public Date getDob() {
-        if (dobDate == null || dobDate.size() != 3) {
-            return null;
-        }
-
-        int year = dobDate.get(0);
-        int month = dobDate.get(1);
-        int day = dobDate.get(2);
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month - 1, day);
-        return calendar.getTime();
+        return Utils.getDate(dobDate);
     }
 
     @Override
