@@ -327,7 +327,7 @@ public class Client extends MifosBaseModel implements Parcelable {
         int day = dobDate.get(2);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, day);
+        calendar.set(year, month - 1, day);
         return calendar.getTime();
     }
 
