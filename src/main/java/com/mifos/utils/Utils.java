@@ -5,18 +5,16 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.v4.content.ContextCompat;
-
 import com.mifos.mifosxdroid.R;
 import com.mifos.objects.PaymentTypeOption;
 import com.mifos.objects.accounts.loan.LoanAccount;
 import com.mifos.objects.accounts.savings.SavingsAccount;
-
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
-
 import rx.Observable;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -136,6 +134,16 @@ public class Utils {
 
         DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
         return df.format(calendar.getTime());
+    }
+
+    public static Date getDate(List<Integer> dateObj) {
+      if(dateObj == null || dateObj.size() != 3) {
+        return null;
+      }
+
+      Calendar calendar = Calendar.getInstance();
+      calendar.set(dateObj.get(0), dateObj.get(1) - 1, dateObj.get(2));
+      return calendar.getTime();
     }
 
     public static LayerDrawable setCircularBackground(int colorId, Context context) {

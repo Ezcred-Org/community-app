@@ -7,17 +7,18 @@ package com.mifos.objects.client;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
+import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 import com.mifos.objects.Timeline;
+import com.mifos.utils.Utils;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.ModelContainer;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
-
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,7 +55,10 @@ public class Client extends MifosBaseModel implements Parcelable {
 
     List<Integer> activationDate = new ArrayList<Integer>();
 
+    @SerializedName(value="dateOfBirth", alternate="dobDate")
     List<Integer> dobDate = new ArrayList<Integer>();
+
+    ClientGender gender;
 
     @Column
     String firstname;
@@ -201,6 +205,14 @@ public class Client extends MifosBaseModel implements Parcelable {
         this.activationDate = activationDate;
     }
 
+    public ClientGender getGender() {
+        return gender;
+    }
+
+    public void setGender(ClientGender gender) {
+        this.gender = gender;
+    }
+
     public String getFirstname() {
         return firstname;
     }
@@ -303,6 +315,10 @@ public class Client extends MifosBaseModel implements Parcelable {
 
     public void setExternalId(String externalId) {
         this.externalId = externalId;
+    }
+
+    public Date getDob() {
+        return Utils.getDate(dobDate);
     }
 
     @Override
