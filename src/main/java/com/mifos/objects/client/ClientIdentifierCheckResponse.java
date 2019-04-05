@@ -6,9 +6,9 @@ import lombok.Data;
 public class ClientIdentifierCheckResponse {
 
   private final boolean success;
-  private final long clientId;
-
+  private final Long clientId;
   private final String userMessage;
-  private final boolean updatePan;
-  private final boolean updatePhoneNumber;
+
+  private final boolean allowUpdatePan;
+  private final boolean allowUpdatePhoneNumber;
 }
