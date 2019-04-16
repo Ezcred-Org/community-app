@@ -123,6 +123,7 @@ public interface DocumentService {
                                                              @Part("name") String nameOfDocument,
                                                              @Part("description") String description,
                                                              @Part("comments") String comments,
+                                                             @Part("fileLocation") String location,
                                                              @Part("verificationStatus") Document.DocumentVerificationStatusEnum verificationStatus,
                                                              @Part() MultipartBody.Part typedFile);
 }
