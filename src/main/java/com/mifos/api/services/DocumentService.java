@@ -123,7 +123,26 @@ public interface DocumentService {
                                                              @Part("name") String nameOfDocument,
                                                              @Part("description") String description,
                                                              @Part("comments") String comments,
-                                                             @Part("fileLocation") String location,
                                                              @Part("verificationStatus") Document.DocumentVerificationStatusEnum verificationStatus,
                                                              @Part() MultipartBody.Part typedFile);
+
+    /**
+     * This Service for Updating the Document location with EntityType and EntityId and Document Id.
+     * Rest End Point : PUT https://demo.openmf.org/fineract-provider/api/v1/{entityType}/{entityId}/documents/
+     * {documentId}
+     *
+     * @param entityType - Type for which document is being uploaded (Client, Loan or Savings etc)
+     * @param entityId - Id of Entity
+     * @param documentId - Id of document
+     * @param verificationStatus verification status of the document
+     */
+    @PUT("{entityType}/{entityId}/" + APIEndPoint.DOCUMENTS + "/{documentId}")
+    @Multipart
+    Observable<GenericResponse> updateDocumentLocation(
+        @Path("entityType") String entityType,
+        @Path("entityId") int entityId,
+        @Path("documentId") int documentId,
+        @Part("fileLocation") String location,
+        @Part("verificationStatus") Document.DocumentVerificationStatusEnum verificationStatus
+    );
 }

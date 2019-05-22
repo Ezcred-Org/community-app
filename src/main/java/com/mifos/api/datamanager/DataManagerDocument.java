@@ -135,12 +135,29 @@ public class DataManagerDocument {
      * @param documentId Document Id
      * @param name       Name of Document
      * @param desc       Description of Document
-     * @param verificationStatus
+     * @param verificationStatus verification status of the document
      *@param file       Document File  @return GenericResponse
      */
     public Observable<GenericResponse> updateDocument(String entityType, int entityId, int
-            documentId, String name, String desc, String comments, String location, Document.DocumentVerificationStatusEnum verificationStatus, MultipartBody.Part file) {
+            documentId, String name, String desc, String comments, Document.DocumentVerificationStatusEnum verificationStatus, MultipartBody.Part file) {
         return mBaseApiManager.getDocumentApi()
-                .updateDocument(entityType, entityId, documentId, name, desc, comments, location, verificationStatus, file);
+                .updateDocument(entityType, entityId, documentId, name, desc, comments, verificationStatus, file);
+    }
+
+    /**
+     * This Method for Updating the document location with EntityType and EntityId and Document Id to
+     * the new one. REST END POINT: https://demo.openmf.org/fineract-provider/api/v1/{entityType}/{entityId}/documents/
+     * {documentId}
+     *
+     * @param entityType Entity Type
+     * @param entityId Entity Id
+     * @param documentId Document Id
+     * @param verificationStatus verification status of the document
+     */
+    public Observable<GenericResponse> updateDocumentLocation(String entityType, int entityId,
+        int documentId, String location,
+        Document.DocumentVerificationStatusEnum verificationStatus) {
+        return mBaseApiManager.getDocumentApi()
+            .updateDocumentLocation(entityType, entityId, documentId, location, verificationStatus);
     }
 }
