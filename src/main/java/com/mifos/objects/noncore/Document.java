@@ -162,6 +162,7 @@ public class Document implements Parcelable {
     public enum DocumentVerificationStatusEnum {
         NOT_VERIFIED,
         VERIFIED,
-        REJECTED;
+        REJECTED,
+        PASSWORD_PENDING;
     }
 }
