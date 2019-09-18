@@ -124,7 +124,7 @@ public class Constants {
     public static final String SERVICE_STATUS = "service_status";
 
     public static final String DATA_TABLE_NAME = "data_table_name";
-    
+
     public static final int DIALOG_FRAGMENT = 1;
 
     public static final String ACTIVATE_CLIENT = "activate_client";
@@ -196,12 +196,18 @@ public class Constants {
 
     public static Map<String, String> GLOBAL_ERROR_MAP = new HashMap<>();
 
+    public static String ERROR_MSG_NOT_AUTHENTICATED = "error.msg.not.authenticated";
+    public static String ERROR_MSG_DATA_INTEGRITY = "error.msg.dataintegrity";
+    public static String ERROR_MSG_BAD_REQUEST = "error.msg.badrequest";
+    public static String ERROR_MSG_PLATFORM_SERVER_SIDE_ERROR = "error.msg.platform.server.side.error";
+    public static String ERROR_MSG_PLATFORM_SERVICE_UNAVAILABLE = "error.msg.platform.service.unavailable";
+
     static {
-        GLOBAL_ERROR_MAP.put("error.msg.not.authenticated", "User Authentication Failed - Invalid username/password");
-        GLOBAL_ERROR_MAP.put("error.msg.dataintegrity", "There is an issue with your loan application request - Please contact customer support");
-        GLOBAL_ERROR_MAP.put("error.msg.badrequest", "The request was invalid. Please contact customer support if the issue persists");
-        GLOBAL_ERROR_MAP.put("error.msg.platform.server.side.error", "There is an error in processing the request. Contact Support if the problem persists");
-        GLOBAL_ERROR_MAP.put("error.msg.platform.service.unavailable", "System is undergoing maintenance. Please try after some time.");
+        GLOBAL_ERROR_MAP.put(ERROR_MSG_NOT_AUTHENTICATED, "User Authentication Failed - Invalid username/password");
+        GLOBAL_ERROR_MAP.put(ERROR_MSG_DATA_INTEGRITY, "There is an issue with your loan application request - Please contact customer support");
+        GLOBAL_ERROR_MAP.put(ERROR_MSG_BAD_REQUEST, "The request was invalid. Please contact customer support if the issue persists");
+        GLOBAL_ERROR_MAP.put(ERROR_MSG_PLATFORM_SERVER_SIDE_ERROR, "There is an error in processing the request. Contact Support if the problem persists");
+        GLOBAL_ERROR_MAP.put(ERROR_MSG_PLATFORM_SERVICE_UNAVAILABLE, "System is undergoing maintenance. Please try after some time.");
         GLOBAL_ERROR_MAP = Collections.unmodifiableMap(GLOBAL_ERROR_MAP);
     }
 }
