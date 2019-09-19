@@ -1,7 +1,6 @@
 package com.mifos.api.datamanager;
 
 import android.text.TextUtils;
-
 import com.mifos.api.BaseApiManager;
 import com.mifos.api.GenericResponse;
 import com.mifos.api.local.databasehelper.DatabaseHelperLoan;
@@ -18,12 +17,10 @@ import com.mifos.objects.templates.loans.LoanTemplate;
 import com.mifos.objects.templates.loans.LoanTransactionTemplate;
 import com.mifos.services.data.LoansPayload;
 import com.mifos.utils.PrefManager;
-
+import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 import rx.Observable;
 import rx.functions.Func1;
 
@@ -123,32 +120,39 @@ public class DataManagerLoan {
     }
 
     public Observable<Page<Loans>> getAllLoans(
-      Long officeId, Integer offset, Integer limit, String accountNo,
-      String externalId, String orderBy, String sortBy, Long staffId
+        Long officeId, Integer offset, Integer limit, String accountNo,
+        String externalId, String orderBy, String sortBy, Long staffId
     ) {
-        String sqlQuery = "";
-        if(officeId != null) {
-            sqlQuery = "l.office_id=" + officeId;
+        List<String> sqlQueries = new ArrayList<>();
+        if (officeId != null) {
+            sqlQueries.add("l.office_id=" + officeId);
         }
         if (staffId > 0) {
-            sqlQuery += " and l.loan_officer_id = " + staffId;
+            sqlQueries.add("l.loan_officer_id = " + staffId);
         }
         return mBaseApiManager
-          .getLoanApi()
-          .getAllLoans(offset, limit, accountNo, externalId, orderBy, sortBy, sqlQuery);
+            .getLoanApi()
+            .getAllLoans(offset, limit, accountNo, externalId, orderBy, sortBy,
+                joinQueries(sqlQueries));
     }
 
 
     public Observable<Page<Loans>> getAllLoansByTask(
-      Integer offset, Integer limit, String accountNo,
-      String orderBy, String sortBy,
-      String taskStatus, String taskType, List<String> loanStatus
+        Integer offset, Integer limit, String accountNo,
+        String orderBy, String sortBy,
+        String taskStatus, String taskType, List<String> loanStatus
     ) {
-        String sqlQuery = "l.loan_status_id in (" + TextUtils.join(",", loanStatus) + ") ";
-        sqlQuery += "and datatable.task_type='" + taskType + "' ";
+        List<String> sqlQueries = new ArrayList<>();
+        if (!loanStatus.isEmpty()) {
+            sqlQueries.add("l.loan_status_id in (" + TextUtils.join(",", loanStatus) + ") ");
+        }
+        if (!TextUtils.isEmpty(taskType)) {
+            sqlQueries.add("datatable.task_type='" + taskType + "' ");
+        }
 
         return mBaseApiManager.getLoanApi().getAllLoans(offset, limit, accountNo,
-          null, orderBy, sortBy, "task_details", "task_status=" + taskStatus, sqlQuery);
+            null, orderBy, sortBy, "task_details", "task_status=" + taskStatus,
+            joinQueries(sqlQueries));
     }
 
     public Observable<Page<Loans>> getAllFundLoansByTask(
@@ -157,12 +161,17 @@ public class DataManagerLoan {
       String taskStatus, String taskType,
       List<String> loanStatus, long fundId
     ) {
-        String sqlQuery = "l.loan_status_id in (" + TextUtils.join(",", loanStatus) + ") ";
-        sqlQuery += "and datatable.task_type='" + taskType + "' ";
-        sqlQuery += "and l.fund_id=" + fundId;
+        List<String> sqlQueries = new ArrayList<>();
+        if(!loanStatus.isEmpty()){
+            sqlQueries.add("l.loan_status_id in (" + TextUtils.join(",", loanStatus) + ") ");
+        }
+        if(!TextUtils.isEmpty(taskType)){
+            sqlQueries.add("datatable.task_type='" + taskType + "' ");
+        }
+        sqlQueries.add("l.fund_id=" + fundId);
 
         return mBaseApiManager.getLoanApi().getAllLoans(offset, limit, accountNo,
-          null, orderBy, sortBy, "task_details", "task_status=" + taskStatus, sqlQuery);
+          null, orderBy, sortBy, "task_details", "task_status=" + taskStatus, joinQueries(sqlQueries));
     }
 
     public Observable<Page<Loans>> getAllLoansByTaskForOffice(
@@ -170,12 +179,19 @@ public class DataManagerLoan {
       String orderBy, String sortBy,
       String taskStatus, String taskType, List<String> loanStatus, Long officeId
     ) {
-        String sqlQuery = "l.loan_status_id in (" + TextUtils.join(",", loanStatus) + ") ";
-        sqlQuery += "and datatable.task_type='" + taskType + "' ";
-        sqlQuery += "and l.office_id=" + officeId;
+        List<String> sqlQueries = new ArrayList<>();
+        if(!loanStatus.isEmpty()){
+            sqlQueries.add("l.loan_status_id in (" + TextUtils.join(",", loanStatus) + ") ");
+        }
+        if(!TextUtils.isEmpty(taskType)){
+            sqlQueries.add("datatable.task_type='" + taskType + "' ");
+        }
+        if (officeId != null) {
+            sqlQueries.add("l.office_id=" + officeId);
+        }
 
         return mBaseApiManager.getLoanApi().getAllLoans(offset, limit, accountNo,
-          null, orderBy, sortBy, "task_details", "task_status=" + taskStatus, sqlQuery);
+          null, orderBy, sortBy, "task_details", "task_status=" + taskStatus, joinQueries(sqlQueries));
     }
 
 
@@ -380,5 +396,21 @@ public class DataManagerLoan {
     public Observable<GenericResponse> dispurseLoan(int loanId,
                                                     LoanDisbursement loanDisbursement) {
         return mBaseApiManager.getLoanApi().disburseLoan(loanId, loanDisbursement);
+    }
+
+    private String joinQueries(List<String> queries) {
+        StringBuilder sb = new StringBuilder();
+        boolean firstTime = true;
+        for (String query : queries) {
+            if (!TextUtils.isEmpty(query)) {
+                if (firstTime) {
+                    firstTime = false;
+                } else {
+                    sb.append(" and ");
+                }
+                sb.append(query);
+            }
+        }
+        return sb.toString();
     }
 }
