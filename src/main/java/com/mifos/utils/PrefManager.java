@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mifos.api.BaseUrl;
 import com.mifos.objects.appuser.AppUser.EzCredAuthData;
 import com.mifos.objects.organisation.Staff;
 import com.mifos.objects.user.User;
 import java.util.Date;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -44,6 +46,7 @@ public class PrefManager {
     private static final String PARTNER_AUTH_DATA = "partner_auth_data";
     private static final String LOGIN_BY_PARTNER = "login_by_partner";
     private static final String LAST_LOGIN_TIME = "last_login_time";
+    private static final String APP_LABELS = "APP_LABELS";
 
     private final Gson gson;
     
@@ -352,6 +355,16 @@ public class PrefManager {
 
     public void setLastLoginTime(long time) {
         putLong(LAST_LOGIN_TIME, time);
+    }
+
+    public void setLabels(Map<String, String> appLabels) {
+        putString(APP_LABELS, new Gson().toJson(appLabels));
+    }
+
+    public Map<String, String> getLabels() {
+        return new Gson()
+            .fromJson(getString(APP_LABELS, null), new TypeToken<Map<String, String>>() {
+            }.getType());
     }
 
     @Data
