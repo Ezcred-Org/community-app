@@ -143,7 +143,7 @@ public class DataManagerLoan {
         String taskStatus, String taskType, List<String> loanStatus
     ) {
         List<String> sqlQueries = new ArrayList<>();
-        if (!loanStatus.isEmpty()) {
+        if (loanStatus != null && !loanStatus.isEmpty()) {
             sqlQueries.add("l.loan_status_id in (" + TextUtils.join(",", loanStatus) + ") ");
         }
         if (!TextUtils.isEmpty(taskType)) {
@@ -162,7 +162,7 @@ public class DataManagerLoan {
       List<String> loanStatus, long fundId
     ) {
         List<String> sqlQueries = new ArrayList<>();
-        if(!loanStatus.isEmpty()){
+        if(loanStatus != null && !loanStatus.isEmpty()){
             sqlQueries.add("l.loan_status_id in (" + TextUtils.join(",", loanStatus) + ") ");
         }
         if(!TextUtils.isEmpty(taskType)){
@@ -180,7 +180,7 @@ public class DataManagerLoan {
       String taskStatus, String taskType, List<String> loanStatus, Long officeId
     ) {
         List<String> sqlQueries = new ArrayList<>();
-        if(!loanStatus.isEmpty()){
+        if (loanStatus != null && !loanStatus.isEmpty()) {
             sqlQueries.add("l.loan_status_id in (" + TextUtils.join(",", loanStatus) + ") ");
         }
         if(!TextUtils.isEmpty(taskType)){
