@@ -51,6 +51,10 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
     @Column
     String middlename;
 
+    @SerializedName("fullname")
+    @Column
+    String fullname;
+
     @SerializedName("officeId")
     @Column
     Integer officeId;
@@ -171,6 +175,14 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
 
     public void setMiddlename(String middlename) {
         this.middlename = middlename;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public Integer getOfficeId() {
@@ -301,6 +313,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", middlename='" + middlename + '\'' +
+                ", fullname='" + fullname + '\'' +
                 ", officeId=" + officeId +
                 ", staffId=" + staffId +
                 ", genderId=" + genderId +
@@ -329,6 +342,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         dest.writeString(this.firstname);
         dest.writeString(this.lastname);
         dest.writeString(this.middlename);
+        dest.writeString(this.fullname);
         dest.writeValue(this.officeId);
         dest.writeValue(this.staffId);
         dest.writeValue(this.genderId);
@@ -353,6 +367,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         this.firstname = in.readString();
         this.lastname = in.readString();
         this.middlename = in.readString();
+        this.fullname = in.readString();
         this.officeId = (Integer) in.readValue(Integer.class.getClassLoader());
         this.staffId = (Integer) in.readValue(Integer.class.getClassLoader());
         this.genderId = (Integer) in.readValue(Integer.class.getClassLoader());
@@ -387,6 +402,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         private String firstName;
         private String middleName;
         private String lastName;
+        private String fullName;
         private String mobileNo;
         private Date activationDate;
         private String submittedOnDate;
@@ -429,6 +445,10 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
 
             if (lastName != null) {
                 clientPayload.setLastname(lastName);
+            }
+
+            if (fullName != null) {
+                clientPayload.setFullname(fullName);
             }
 
             if (mobileNo != null) {
@@ -502,6 +522,11 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
 
         public Builder setLastName(String lastName) {
             this.lastName = lastName;
+            return this;
+        }
+
+        public Builder setFullName(String fullName) {
+            this.fullName = fullName;
             return this;
         }
 
