@@ -347,7 +347,6 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         dest.writeValue(this.staffId);
         dest.writeValue(this.genderId);
         dest.writeValue(this.legalFormId);
-        dest.writeValue(this.legalFormId);
         dest.writeValue(this.active);
         dest.writeString(this.activationDate);
         dest.writeString(this.submittedOnDate);
@@ -495,7 +494,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
                 clientPayload.setGenderId(genderId);
             }
 
-            if(legalFormId != null) {
+            if (legalFormId != null) {
                 clientPayload.setLegalFormId(legalFormId);
             }
 
