@@ -51,6 +51,10 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
     @Column
     String middlename;
 
+    @SerializedName("fullname")
+    @Column
+    String fullname;
+
     @SerializedName("officeId")
     @Column
     Integer officeId;
@@ -62,6 +66,10 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
     @SerializedName("genderId")
     @Column
     Integer genderId;
+
+    @SerializedName("legalFormId")
+    @Column
+    Integer legalFormId;
 
     @SerializedName("active")
     @Column
@@ -169,6 +177,14 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         this.middlename = middlename;
     }
 
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
     public Integer getOfficeId() {
         return officeId;
     }
@@ -191,6 +207,14 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
 
     public void setGenderId(Integer genderId) {
         this.genderId = genderId;
+    }
+
+    public Integer getLegalFormId() {
+        return legalFormId;
+    }
+
+    public void setLegalFormId(Integer legalFormId) {
+        this.legalFormId = legalFormId;
     }
 
     public boolean isActive() {
@@ -289,9 +313,11 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", middlename='" + middlename + '\'' +
+                ", fullname='" + fullname + '\'' +
                 ", officeId=" + officeId +
                 ", staffId=" + staffId +
                 ", genderId=" + genderId +
+                ", legalFormId=" + legalFormId +
                 ", active=" + active +
                 ", activationDate='" + activationDate + '\'' +
                 ", submittedOnDate='" + submittedOnDate + '\'' +
@@ -316,9 +342,12 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         dest.writeString(this.firstname);
         dest.writeString(this.lastname);
         dest.writeString(this.middlename);
+        dest.writeString(this.fullname);
         dest.writeValue(this.officeId);
         dest.writeValue(this.staffId);
         dest.writeValue(this.genderId);
+        dest.writeValue(this.legalFormId);
+        dest.writeValue(this.legalFormId);
         dest.writeValue(this.active);
         dest.writeString(this.activationDate);
         dest.writeString(this.submittedOnDate);
@@ -338,9 +367,11 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         this.firstname = in.readString();
         this.lastname = in.readString();
         this.middlename = in.readString();
+        this.fullname = in.readString();
         this.officeId = (Integer) in.readValue(Integer.class.getClassLoader());
         this.staffId = (Integer) in.readValue(Integer.class.getClassLoader());
         this.genderId = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.legalFormId = (Integer) in.readValue(Integer.class.getClassLoader());
         this.active = (Boolean) in.readValue(Boolean.class.getClassLoader());
         this.activationDate = in.readString();
         this.submittedOnDate = in.readString();
@@ -371,6 +402,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         private String firstName;
         private String middleName;
         private String lastName;
+        private String fullName;
         private String mobileNo;
         private Date activationDate;
         private String submittedOnDate;
@@ -382,6 +414,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
         private Integer officeId;
         private Integer staffId;
         private Integer genderId;
+        private Integer legalFormId;
         private Integer clientClassificationId;
         private Boolean active;
 
@@ -412,6 +445,10 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
 
             if (lastName != null) {
                 clientPayload.setLastname(lastName);
+            }
+
+            if (fullName != null) {
+                clientPayload.setFullname(fullName);
             }
 
             if (mobileNo != null) {
@@ -458,6 +495,10 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
                 clientPayload.setGenderId(genderId);
             }
 
+            if(legalFormId != null) {
+                clientPayload.setLegalFormId(legalFormId);
+            }
+
             if(clientClassificationId != null) {
                 clientPayload.setClientClassificationId(clientClassificationId);
             }
@@ -481,6 +522,11 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
 
         public Builder setLastName(String lastName) {
             this.lastName = lastName;
+            return this;
+        }
+
+        public Builder setFullName(String fullName) {
+            this.fullName = fullName;
             return this;
         }
 
@@ -531,6 +577,11 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
 
         public Builder setGenderId(int genderId) {
             this.genderId = genderId;
+            return this;
+        }
+
+        public Builder setLegalFormId(int legalFormId) {
+            this.legalFormId = legalFormId;
             return this;
         }
 
