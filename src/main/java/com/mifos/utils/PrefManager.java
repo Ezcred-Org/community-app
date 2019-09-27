@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.mifos.api.BaseUrl;
 import com.mifos.objects.appuser.AppUser.EzCredAuthData;
+import com.mifos.objects.client.Role;
 import com.mifos.objects.organisation.Staff;
 import com.mifos.objects.user.User;
 import java.util.Date;
@@ -46,7 +47,7 @@ public class PrefManager {
     private static final String LAST_LOGIN_TIME = "last_login_time";
 
     private final Gson gson;
-    
+
     private final Context context;
 
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
@@ -161,6 +162,15 @@ public class PrefManager {
     public User getUser() {
         return gson.fromJson(getString(USER_DETAILS, "null"),
                 User.class);
+    }
+
+    public boolean doesUserHasRole(Role role) {
+        User user = getUser();
+        return user != null && user.hasRole(role);
+    }
+
+    public boolean doesUserHasRole(String role) {
+        return doesUserHasRole(new Role(role));
     }
 
     public void setUser(User user) {
