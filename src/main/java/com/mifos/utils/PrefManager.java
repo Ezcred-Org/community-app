@@ -32,6 +32,7 @@ public class PrefManager {
     private static final String INSTANCE_DOMAIN = "preferences_domain";
     private static final String USER_STATUS = "user_status";
     private static final String USER_DETAILS = "user_details";
+    private static final String APP_LABELS = "app_labels";
     private static final String STAFF_DETAILS = "staff_details";
     private static final String STAFF_CONFIG = "staff_config";
     private static final String EZCRED_SECRET_KEY = "ezcred_secret_key";
@@ -46,7 +47,7 @@ public class PrefManager {
     private static final String LAST_LOGIN_TIME = "last_login_time";
 
     private final Gson gson;
-    
+
     private final Context context;
 
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
@@ -124,12 +125,16 @@ public class PrefManager {
         return gson.fromJson(getString(key, "null"), clazz);
     }
 
-    public void setAppLabels(AppLabels appLabels) {
-        put(appLabels);
+    private void clearAppLabels() {
+        putString(APP_LABELS, gson.toJson(null));
     }
 
     public AppLabels getAppLabels() {
-        return get(AppLabels.class.getSimpleName(), AppLabels.class);
+        return gson.fromJson(getString(APP_LABELS, "null"), AppLabels.class);
+    }
+
+    public void setAppLabels(AppLabels appLabels) {
+        putString(APP_LABELS, gson.toJson(appLabels));
     }
 
     // Concrete methods
@@ -152,6 +157,7 @@ public class PrefManager {
         clearStaffConfig();
         setLastLoginTime(0);
         setLoginByPartner(false);
+        clearAppLabels();
     }
 
     private void clearUser() {
