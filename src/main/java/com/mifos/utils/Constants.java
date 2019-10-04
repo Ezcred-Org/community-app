@@ -196,11 +196,15 @@ public class Constants {
 
     public static Map<String, String> GLOBAL_ERROR_MAP = new HashMap<>();
 
+    public static Map<String, String> NO_TICKET_MAP = new HashMap<>();
+
     public static String ERROR_MSG_NOT_AUTHENTICATED = "error.msg.not.authenticated";
     public static String ERROR_MSG_DATA_INTEGRITY = "error.msg.dataintegrity";
     public static String ERROR_MSG_BAD_REQUEST = "error.msg.badrequest";
     public static String ERROR_MSG_PLATFORM_SERVER_SIDE_ERROR = "error.msg.platform.server.side.error";
     public static String ERROR_MSG_PLATFORM_SERVICE_UNAVAILABLE = "error.msg.platform.service.unavailable";
+    public static String ERROR_OTP_NOT_VERIFIED = "creditengine.otp.not.verified";
+
 
     static {
         GLOBAL_ERROR_MAP.put(ERROR_MSG_NOT_AUTHENTICATED, "User Authentication Failed - Invalid username/password");
@@ -208,6 +212,10 @@ public class Constants {
         GLOBAL_ERROR_MAP.put(ERROR_MSG_BAD_REQUEST, "The request was invalid. Please contact customer support if the issue persists");
         GLOBAL_ERROR_MAP.put(ERROR_MSG_PLATFORM_SERVER_SIDE_ERROR, "There is an error in processing the request. Contact Support if the problem persists");
         GLOBAL_ERROR_MAP.put(ERROR_MSG_PLATFORM_SERVICE_UNAVAILABLE, "System is undergoing maintenance. Please try after some time.");
+        GLOBAL_ERROR_MAP.put(ERROR_OTP_NOT_VERIFIED, "Otp is not verified.");
         GLOBAL_ERROR_MAP = Collections.unmodifiableMap(GLOBAL_ERROR_MAP);
+        NO_TICKET_MAP.put(ERROR_MSG_NOT_AUTHENTICATED, "User Authentication Failed - Invalid username/password");
+        NO_TICKET_MAP.put(ERROR_OTP_NOT_VERIFIED, "Otp is not verified.");
+        NO_TICKET_MAP = Collections.unmodifiableMap(NO_TICKET_MAP);
     }
 }
