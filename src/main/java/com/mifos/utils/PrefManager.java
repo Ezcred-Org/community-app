@@ -32,9 +32,9 @@ public class PrefManager {
     private static final String INSTANCE_DOMAIN = "preferences_domain";
     private static final String USER_STATUS = "user_status";
     private static final String USER_DETAILS = "user_details";
-    private static final String APP_LABELS = "app_labels";
     private static final String STAFF_DETAILS = "staff_details";
     private static final String STAFF_CONFIG = "staff_config";
+    private static final String RETAILER_CONFIG = "retailer_config";
     private static final String EZCRED_SECRET_KEY = "ezcred_secret_key";
     private static final String EZCRED_LAST_APP_VERSION_CODE = "ezcred_last_app_version_code";
     private static final String EZCRED_LAST_APP_VERSION_NAME = "ezcred_last_app_version_name";
@@ -125,18 +125,6 @@ public class PrefManager {
         return gson.fromJson(getString(key, "null"), clazz);
     }
 
-    private void clearAppLabels() {
-        putString(APP_LABELS, gson.toJson(null));
-    }
-
-    public AppLabels getAppLabels() {
-        return gson.fromJson(getString(APP_LABELS, "null"), AppLabels.class);
-    }
-
-    public void setAppLabels(AppLabels appLabels) {
-        putString(APP_LABELS, gson.toJson(appLabels));
-    }
-
     // Concrete methods
 
     /**
@@ -157,7 +145,7 @@ public class PrefManager {
         clearStaffConfig();
         setLastLoginTime(0);
         setLoginByPartner(false);
-        clearAppLabels();
+        clearRetailerConfig();
     }
 
     private void clearUser() {
@@ -195,6 +183,18 @@ public class PrefManager {
 
     public <T> void setStaffConfig(T object) {
         putString(STAFF_CONFIG, gson.toJson(object));
+    }
+
+    private void clearRetailerConfig() {
+        putString(RETAILER_CONFIG, gson.toJson(null));
+    }
+
+    public <T> T getRetailerConfig(Class<T> clazz) {
+        return gson.fromJson(getString(RETAILER_CONFIG, null), clazz);
+    }
+
+    public <T> void setRetailerConfig(T object) {
+        putString(RETAILER_CONFIG, gson.toJson(object));
     }
 
     public void saveToken(String token) {
