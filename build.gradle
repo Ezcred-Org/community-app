@@ -83,7 +83,7 @@ dependencies {
     // exclude Retrofit’s OkHttp peer-dependency module and define your own module import
     exclude module: 'okhttp'
   }
-  compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersionLatest"
+  api "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersionLatest"
   compile "com.squareup.retrofit2:converter-scalars:$rootProject.retrofitVersionLatest"
   compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofitVersionLatest"
   compile "com.squareup.okhttp3:okhttp:$rootProject.okHttp3Version"
@@ -125,5 +125,5 @@ dependencies {
 
   compile "com.jakewharton.timber:timber:$rootProject.timberVersion"
 
-  compile group: 'org.projectlombok', name: 'lombok', version: '1.16.18'
+  api group: 'org.projectlombok', name: 'lombok', version: '1.18.8'
 }
