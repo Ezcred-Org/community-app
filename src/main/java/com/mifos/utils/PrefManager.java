@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.mifos.api.BaseUrl;
 import com.mifos.objects.appuser.AppUser.EzCredAuthData;
+import com.mifos.objects.client.Role;
 import com.mifos.objects.organisation.Staff;
 import com.mifos.objects.user.User;
 import java.util.Date;
@@ -358,6 +359,15 @@ public class PrefManager {
 
     public void setLastLoginTime(long time) {
         putLong(LAST_LOGIN_TIME, time);
+    }
+
+    public boolean doesUserHasRole(String roleToCheck) {
+        User user = getUser();
+        if (user == null || roleToCheck == null) {
+            return false;
+        }
+
+        return user.hasRole(new Role(roleToCheck));
     }
 
     @Data
