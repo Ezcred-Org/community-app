@@ -8,6 +8,7 @@ package com.mifos.utils;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.Gravity;
@@ -42,7 +43,9 @@ public class DataTableUIBuilder {
                                            LinearLayout parentLayout,
                                            final Context context,
                                            final int entityId,
-                                           DataTableActionListener mListener) {
+                                           Boolean isAttribute,
+                                           DataTableActionListener mListener
+    ) {
         dataTableActionListener = mListener;
 
         /**
@@ -57,98 +60,121 @@ public class DataTableUIBuilder {
         tableIndex = 0;
         while (jsonElementIterator.hasNext()) {
 
-            /*
-             * Creating CardView
-             */
-            CardView cardView = new CardView(context);
-            LinearLayout.LayoutParams params = new LayoutParams(
-                    LayoutParams.MATCH_PARENT,
-                    LayoutParams.MATCH_PARENT
-            );
-            params.setMargins(8, 8, 8, 8);
-            cardView.setLayoutParams(params);
-            cardView.setRadius(8);
-            cardView.setPadding(16, 16, 16, 16);
-            cardView.setCardElevation(2);
-
-
-            /*
-             * Creating TableLayout
-             */
-            TableLayout tableLayout = new TableLayout(context);
-            tableLayout.setPadding(10, 10, 10, 10);
-
             final JsonElement jsonElement = jsonElementIterator.next();
-            /*
-            * Each Entry in a Data Table is Displayed in the
-            * form of a table where each row contains one Key-Value Pair
-            * i.e a Column Name - Column Value from the DataTable
-            */
-            int rowIndex = 0;
-            while (rowIndex < dataTable.getColumnHeaderData().size()) {
-                TableRow tableRow = new TableRow(context);
-                tableRow.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams
-                        .MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-                tableRow.setPadding(10, 10, 10, 10);
-                if (rowIndex % 2 == 0) {
-                    tableRow.setBackgroundColor(Color.LTGRAY);
-                } else {
-                    tableRow.setBackgroundColor(Color.WHITE);
-                }
 
-                TextView key = new TextView(context);
-                key.setText(dataTable.getColumnHeaderData().get(rowIndex).getColumnName());
-                key.setGravity(Gravity.LEFT);
-                TextView value = new TextView(context);
-                value.setGravity(Gravity.RIGHT);
-                if (jsonElement.getAsJsonObject().get(dataTable.getColumnHeaderData().get
-                        (rowIndex).getColumnName()).toString().contains("\"")) {
-                    value.setText(jsonElement.getAsJsonObject().get(dataTable.getColumnHeaderData
-                            ().get(rowIndex).getColumnName()).toString().replace("\"", ""));
-                } else {
-                    value.setText(jsonElement.getAsJsonObject().get(dataTable.getColumnHeaderData
-                            ().get(rowIndex).getColumnName()).toString());
-                }
+            parentLayout = createCardView(dataTable, parentLayout, context, entityId, isAttribute, jsonElement);
 
-                tableRow.addView(key, new TableRow.LayoutParams(ViewGroup.LayoutParams
-                        .WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
-                tableRow.addView(value, new TableRow.LayoutParams(ViewGroup.LayoutParams
-                        .WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
-                TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(ViewGroup
-                        .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                layoutParams.setMargins(12, 16, 12, 16);
-                tableLayout.addView(tableRow, layoutParams);
-                rowIndex++;
-            }
-
-            cardView.addView(tableLayout);
-
-            tableLayout.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-
-                    //show DataTableOptions
-                    dataTableActionListener.showDataTableOptions(
-                            dataTable.getRegisteredTableName(), entityId,
-                            Integer.parseInt(jsonElement.getAsJsonObject()
-                                    .get(dataTable.getColumnHeaderData()
-                                            .get(0).getColumnName()).toString()));
-
-                    return true;
-                }
-            });
-
-            View v = new View(context);
-            parentLayout.addView(cardView);
-            parentLayout.addView(v, new LinearLayout.LayoutParams(LinearLayout.LayoutParams
-                    .MATCH_PARENT, 5));
             Log.i("TABLE INDEX", "" + tableIndex);
             tableIndex++;
         }
         return parentLayout;
     }
 
+    private LinearLayout createCardView(final DataTable dataTable, LinearLayout parentLayout, Context context, final int entityId, Boolean isAttribute, final JsonElement jsonElement) {
+        /*
+         * Creating CardView
+         */
+        CardView cardView = new CardView(context);
+        LayoutParams params = new LayoutParams(
+                LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT
+        );
+        params.setMargins(8, 8, 8, 8);
+        cardView.setLayoutParams(params);
+        cardView.setRadius(8);
+        cardView.setPadding(16, 16, 16, 16);
+        cardView.setCardElevation(2);
+
+
+        /*
+         * Creating TableLayout
+         */
+        TableLayout tableLayout = new TableLayout(context);
+        tableLayout.setPadding(20, 20, 20, 20);
+
+        /*
+        * Each Entry in a Data Table is Displayed in the
+        * form of a table where each row contains one Key-Value Pair
+        * i.e a Column Name - Column Value from the DataTable
+        */
+        int rowIndex = 0;
+        while (rowIndex < dataTable.getColumnHeaderData().size()) {
+            TableRow tableRow = new TableRow(context);
+            tableRow.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams
+                    .MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            tableRow.setPadding(10, 10, 10, 10);
+            if (rowIndex % 2 == 0) {
+                tableRow.setBackgroundColor(Color.parseColor("#ADD8E6"));
+            } else {
+                tableRow.setBackgroundColor(Color.WHITE);
+            }
+
+            String columnName = dataTable.getColumnHeaderData().get(rowIndex).getColumnName();
+            if("id".equalsIgnoreCase(columnName) ||
+              "client_id".equalsIgnoreCase(columnName) ||
+              "loan_id".equalsIgnoreCase(columnName)
+            ) {
+                rowIndex++;
+                continue;
+            }
+            if(!isAttribute) {
+                TextView key = new TextView(context);
+                key.setText(columnName);
+                key.setGravity(Gravity.LEFT);
+                tableRow.addView(key, new TableRow.LayoutParams(ViewGroup.LayoutParams
+                  .WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+            }
+            TextView value = new TextView(context);
+            value.setGravity(Gravity.CENTER);
+            if (jsonElement.getAsJsonObject().get(columnName).toString().contains("\"")) {
+                value.setText(jsonElement.getAsJsonObject().get(columnName).toString().replace("\"", ""));
+            } else {
+                value.setText(jsonElement.getAsJsonObject().get(columnName).toString());
+            }
+
+            tableRow.addView(value, new TableRow.LayoutParams(ViewGroup.LayoutParams
+                    .WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+            TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(ViewGroup
+                    .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            layoutParams.setMargins(12, 16, 12, 16);
+            tableLayout.addView(tableRow, layoutParams);
+            rowIndex++;
+        }
+
+        cardView.addView(tableLayout);
+
+        if(dataTableActionListener != null) {
+            tableLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    //show DataTableOptions
+                    dataTableActionListener.showDataTableOptions(
+                      dataTable.getRegisteredTableName(), entityId,
+//                            Integer.parseInt(jsonElement.getAsJsonObject().get(dataTable.getColumnHeaderData().get(0).getColumnName()).toString())
+                      jsonElement
+                    );
+                }
+            });
+        }
+
+        View v = new View(context);
+        parentLayout.addView(cardView);
+        parentLayout.addView(v, new LayoutParams(LayoutParams
+                .MATCH_PARENT, 5));
+        return parentLayout;
+    }
+
+    public LinearLayout getDataTableLayout(DataTable dataTable, JsonArray jsonElements, LinearLayout linearLayout, FragmentActivity activity, int entityId, DataTableActionListener mListener) {
+        return getDataTableLayout(dataTable,
+          jsonElements, linearLayout, activity, entityId, false, mListener);
+    }
+
+    public LinearLayout getDataTableLayout(DataTable dataTable, JsonElement jsonElement, LinearLayout linearLayout, FragmentActivity activity, int entityId, DataTableActionListener mListener) {
+        return createCardView(dataTable, linearLayout, activity, entityId, false, jsonElement);
+    }
+
     public interface DataTableActionListener {
-        void showDataTableOptions(String table, int entity, int rowId);
+        void showDataTableOptions(String table, int entity, JsonElement jsonElement);
     }
 }
