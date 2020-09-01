@@ -25,6 +25,8 @@ import com.google.gson.JsonElement;
 import com.mifos.objects.noncore.DataTable;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ishankhanna on 17/06/14.
@@ -44,6 +46,8 @@ public class DataTableUIBuilder {
                                            final Context context,
                                            final int entityId,
                                            Boolean isAttribute,
+                                           List<String> headerFieldList,
+                                           Map<String, List<String>> filterFieldList,
                                            DataTableActionListener mListener
     ) {
         dataTableActionListener = mListener;
@@ -62,7 +66,8 @@ public class DataTableUIBuilder {
 
             final JsonElement jsonElement = jsonElementIterator.next();
 
-            parentLayout = createCardView(dataTable, parentLayout, context, entityId, isAttribute, jsonElement);
+            parentLayout = createCardView(dataTable, parentLayout, context, entityId, isAttribute,
+              headerFieldList, filterFieldList, jsonElement);
 
             Log.i("TABLE INDEX", "" + tableIndex);
             tableIndex++;
@@ -70,7 +75,7 @@ public class DataTableUIBuilder {
         return parentLayout;
     }
 
-    private LinearLayout createCardView(final DataTable dataTable, LinearLayout parentLayout, Context context, final int entityId, Boolean isAttribute, final JsonElement jsonElement) {
+    private LinearLayout createCardView(final DataTable dataTable, LinearLayout parentLayout, Context context, final int entityId, Boolean isAttribute, List<String> headerFieldList, Map<String, List<String>> filterFieldList, final JsonElement jsonElement) {
         /*
          * Creating CardView
          */
@@ -98,12 +103,14 @@ public class DataTableUIBuilder {
         * i.e a Column Name - Column Value from the DataTable
         */
         int rowIndex = 0;
+        int colorIndex = 0;
+        boolean showTable = true;
         while (rowIndex < dataTable.getColumnHeaderData().size()) {
             TableRow tableRow = new TableRow(context);
             tableRow.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams
                     .MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             tableRow.setPadding(10, 10, 10, 10);
-            if (rowIndex % 2 == 0) {
+            if (colorIndex % 2 == 0) {
                 tableRow.setBackgroundColor(Color.parseColor("#ADD8E6"));
             } else {
                 tableRow.setBackgroundColor(Color.WHITE);
@@ -112,7 +119,8 @@ public class DataTableUIBuilder {
             String columnName = dataTable.getColumnHeaderData().get(rowIndex).getColumnName();
             if("id".equalsIgnoreCase(columnName) ||
               "client_id".equalsIgnoreCase(columnName) ||
-              "loan_id".equalsIgnoreCase(columnName)
+              "loan_id".equalsIgnoreCase(columnName) ||
+              (!headerFieldList.isEmpty() && !headerFieldList.contains(columnName))
             ) {
                 rowIndex++;
                 continue;
@@ -124,13 +132,23 @@ public class DataTableUIBuilder {
                 tableRow.addView(key, new TableRow.LayoutParams(ViewGroup.LayoutParams
                   .WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
             }
+            String valueString = "";
+            if (jsonElement.getAsJsonObject().get(columnName).toString().contains("\"")) {
+                valueString = jsonElement.getAsJsonObject().get(columnName).toString().replace("\"", "");
+            } else {
+                valueString = jsonElement.getAsJsonObject().get(columnName).toString();
+            }
+
+            for (String filterField : filterFieldList.keySet()) {
+                if(columnName.equalsIgnoreCase(filterField) && !filterFieldList.get(filterField).contains(valueString)) {
+                    showTable = false;
+                }
+            }
+
             TextView value = new TextView(context);
             value.setGravity(Gravity.CENTER);
-            if (jsonElement.getAsJsonObject().get(columnName).toString().contains("\"")) {
-                value.setText(jsonElement.getAsJsonObject().get(columnName).toString().replace("\"", ""));
-            } else {
-                value.setText(jsonElement.getAsJsonObject().get(columnName).toString());
-            }
+            value.setText(valueString);
+
 
             tableRow.addView(value, new TableRow.LayoutParams(ViewGroup.LayoutParams
                     .WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
@@ -139,8 +157,10 @@ public class DataTableUIBuilder {
             layoutParams.setMargins(12, 16, 12, 16);
             tableLayout.addView(tableRow, layoutParams);
             rowIndex++;
+            colorIndex++;
         }
 
+        tableLayout.setVisibility(showTable ? View.VISIBLE : View.GONE);
         cardView.addView(tableLayout);
 
         if(dataTableActionListener != null) {
@@ -167,11 +187,11 @@ public class DataTableUIBuilder {
 
     public LinearLayout getDataTableLayout(DataTable dataTable, JsonArray jsonElements, LinearLayout linearLayout, FragmentActivity activity, int entityId, DataTableActionListener mListener) {
         return getDataTableLayout(dataTable,
-          jsonElements, linearLayout, activity, entityId, false, mListener);
+          jsonElements, linearLayout, activity, entityId, false, null, null, mListener);
     }
 
     public LinearLayout getDataTableLayout(DataTable dataTable, JsonElement jsonElement, LinearLayout linearLayout, FragmentActivity activity, int entityId, DataTableActionListener mListener) {
-        return createCardView(dataTable, linearLayout, activity, entityId, false, jsonElement);
+        return createCardView(dataTable, linearLayout, activity, entityId, false, null, null, jsonElement);
     }
 
     public interface DataTableActionListener {
