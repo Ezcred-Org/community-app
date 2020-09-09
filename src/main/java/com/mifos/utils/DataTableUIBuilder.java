@@ -117,6 +117,20 @@ public class DataTableUIBuilder {
             }
 
             String columnName = dataTable.getColumnHeaderData().get(rowIndex).getColumnName();
+
+            String valueString = "";
+            if (jsonElement.getAsJsonObject().get(columnName).toString().contains("\"")) {
+                valueString = jsonElement.getAsJsonObject().get(columnName).toString().replace("\"", "");
+            } else {
+                valueString = jsonElement.getAsJsonObject().get(columnName).toString();
+            }
+
+            for (String filterField : filterFieldList.keySet()) {
+                if(columnName.equalsIgnoreCase(filterField) && !filterFieldList.get(filterField).contains(valueString)) {
+                    showTable = false;
+                }
+            }
+
             if("id".equalsIgnoreCase(columnName) ||
               "client_id".equalsIgnoreCase(columnName) ||
               "loan_id".equalsIgnoreCase(columnName) ||
@@ -131,18 +145,6 @@ public class DataTableUIBuilder {
                 key.setGravity(Gravity.LEFT);
                 tableRow.addView(key, new TableRow.LayoutParams(ViewGroup.LayoutParams
                   .WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
-            }
-            String valueString = "";
-            if (jsonElement.getAsJsonObject().get(columnName).toString().contains("\"")) {
-                valueString = jsonElement.getAsJsonObject().get(columnName).toString().replace("\"", "");
-            } else {
-                valueString = jsonElement.getAsJsonObject().get(columnName).toString();
-            }
-
-            for (String filterField : filterFieldList.keySet()) {
-                if(columnName.equalsIgnoreCase(filterField) && !filterFieldList.get(filterField).contains(valueString)) {
-                    showTable = false;
-                }
             }
 
             TextView value = new TextView(context);
