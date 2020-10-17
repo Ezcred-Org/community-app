@@ -84,7 +84,7 @@ public class AppUser {
   @Data
   public static class AuthData {
 
-    private final Long dataId;
+    private final String dataId;
     private final String data;
     private final Mode mode;
 
@@ -102,6 +102,7 @@ public class AppUser {
 
   @Data
   public static class EzCredAuthData {
+
     private final String partnerId;
     private final String data;
   }
