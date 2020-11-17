@@ -4,6 +4,8 @@
  */
 package com.mifos.api.services;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.mifos.api.GenericResponse;
 import com.mifos.api.model.APIEndPoint;
 import com.mifos.objects.accounts.ClientAccounts;
@@ -94,6 +96,9 @@ public interface ClientService {
      */
     @GET(APIEndPoint.CLIENTS + "/{clientId}/" + APIEndPoint.IDENTIFIERS)
     Observable<List<Identifier>> getClientIdentifiers(@Path("clientId") long clientId);
+
+    @GET(APIEndPoint.CLIENTS + "/{clientId}/" + APIEndPoint.IDENTIFIERS)
+    Observable<JsonArray> getClientIdentifiersJsonArray(@Path("clientId") long clientId);
 
     /**
      * This Service is for Creating the Client Identifier.
