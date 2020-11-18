@@ -433,6 +433,17 @@ public class DataManagerClient {
     }
 
     /**
+     * This Method is for updating the Client Identifier.
+     *
+     * @param clientId     Client Id
+     * @param identifierId Identifier Id
+     * @return GenericResponse
+     */
+    public Observable<GenericResponse> updateClientIdentifier(int clientId, int identifierId) {
+        return mBaseApiManager.getClientsApi().updateClientIdentifier(clientId, identifierId);
+    }
+
+    /**
      * This Method is fetching the Client Pinpoint location from the DataTable
      * "client_pinpoint_location"
      *
