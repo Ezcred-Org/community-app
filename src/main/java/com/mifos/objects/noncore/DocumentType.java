@@ -15,6 +15,8 @@ import com.google.gson.annotations.SerializedName;
  */
 public class DocumentType implements Parcelable {
 
+    public static final String NAME = "name";
+
     @SerializedName("id")
     Integer id;
 

@@ -15,6 +15,13 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Identifier implements Parcelable {
 
+    public static final String ID ="id";
+    public static final String CLIENT_ID ="clientId";
+    public static final String DOCUMENT_KEY ="documentKey";
+    public static final String DOCUMENT_TYPE ="documentType";
+    public static final String DESCRIPTION ="description";
+    public static final String STATUS ="status";
+
     @SerializedName("id")
     Integer id;
 
