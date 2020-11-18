@@ -41,6 +41,20 @@ public class DataManagerDocument {
     }
 
     /**
+     * This Method for Fetching the Document with EntityType, EntityId and DocumentId from the REST API.
+     * REST END POINT:
+     * https://demo.openmf.org/fineract-provider/api/v1/{entityType}/{entityId}/documents/{documentId}
+     *
+     * @param entityType Entity Type
+     * @param entityId   Entity Id
+     * @param documentId   Document Id
+     * @return Document
+     */
+    public Observable<Document> getDocument(String entityType, int entityId, int documentId) {
+        return mBaseApiManager.getDocumentApi().getDocument(entityType, entityId, documentId);
+    }
+
+    /**
      * This Method for Creating the Document with EntityType and EntityId to server.
      * REST END POINT:
      * https://demo.openmf.org/fineract-provider/api/v1/{entityType}/{entityId}/documents

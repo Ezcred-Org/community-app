@@ -31,6 +31,13 @@ public interface DocumentService {
     Observable<List<Document>> getDocuments(@Path("entityType") String entityType,
                                             @Path("entityId") int entityId);
 
+    @GET("{entityType}/{entityId}/" + APIEndPoint.DOCUMENTS + "/{documentId}")
+    Observable<Document> getDocument(
+        @Path("entityType") String entityType,
+        @Path("entityId") int entityId,
+        @Path("documentId") int documentId
+    );
+
     /**
      * @param entityType              - Type for which document is being uploaded (Client, Loan
      *                                or Savings etc)
