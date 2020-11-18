@@ -437,10 +437,12 @@ public class DataManagerClient {
      *
      * @param clientId     Client Id
      * @param identifierId Identifier Id
+     * @param identifierPayload
      * @return GenericResponse
      */
-    public Observable<GenericResponse> updateClientIdentifier(int clientId, int identifierId) {
-        return mBaseApiManager.getClientsApi().updateClientIdentifier(clientId, identifierId);
+    public Observable<GenericResponse> updateClientIdentifier(int clientId, int identifierId,
+        IdentifierPayload identifierPayload) {
+        return mBaseApiManager.getClientsApi().updateClientIdentifier(clientId, identifierId, identifierPayload);
     }
 
     /**

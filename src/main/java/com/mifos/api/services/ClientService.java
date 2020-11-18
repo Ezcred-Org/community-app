@@ -190,7 +190,7 @@ public interface ClientService {
      * @return GenericResponse
      */
     @DELETE(APIEndPoint.CLIENTS + "/{clientId}/" + APIEndPoint.IDENTIFIERS + "/{identifierId}")
-    Observable<GenericResponse> updateClientIdentifier(@Path("clientId") int clientId,
+    Observable<GenericResponse> deleteClientIdentifier(@Path("clientId") int clientId,
                                                                      @Path("identifierId") int identifierId);
 
 
@@ -205,8 +205,11 @@ public interface ClientService {
      * @return GenericResponse
      */
     @PUT(APIEndPoint.CLIENTS + "/{clientId}/" + APIEndPoint.IDENTIFIERS + "/{identifierId}")
-    Observable<GenericResponse> deleteClientIdentifier(@Path("clientId") int clientId,
-                                                                     @Path("identifierId") int identifierId);
+    Observable<GenericResponse> updateClientIdentifier(
+        @Path("clientId") int clientId,
+        @Path("identifierId") int identifierId,
+        @Body IdentifierPayload identifierPayload
+    );
 
 
     /**
