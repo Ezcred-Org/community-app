@@ -1,5 +1,6 @@
 package com.mifos.api.datamanager;
 
+import com.google.gson.JsonArray;
 import com.mifos.api.BaseApiManager;
 import com.mifos.api.GenericResponse;
 import com.mifos.api.local.databasehelper.DatabaseHelperClient;
@@ -321,6 +322,16 @@ public class DataManagerClient {
      * This Method is for fetching the Client identifier from the REST API.
      *
      * @param clientId Client Id
+     * @return JsonArray
+     */
+    public Observable<JsonArray> getClientIdentifiersJsonArray(int clientId) {
+        return mBaseApiManager.getClientsApi().getClientIdentifiersJsonArray(clientId);
+    }
+
+    /**
+     * This Method is for fetching the Client identifier from the REST API.
+     *
+     * @param clientId Client Id
      * @return List<Identifier>
      */
     public Observable<List<Identifier>> getClientIdentifiers(int clientId) {
@@ -419,6 +430,19 @@ public class DataManagerClient {
      */
     public Observable<GenericResponse> deleteClientIdentifier(int clientId, int identifierId) {
         return mBaseApiManager.getClientsApi().deleteClientIdentifier(clientId, identifierId);
+    }
+
+    /**
+     * This Method is for updating the Client Identifier.
+     *
+     * @param clientId     Client Id
+     * @param identifierId Identifier Id
+     * @param identifierPayload
+     * @return GenericResponse
+     */
+    public Observable<GenericResponse> updateClientIdentifier(int clientId, int identifierId,
+        IdentifierPayload identifierPayload) {
+        return mBaseApiManager.getClientsApi().updateClientIdentifier(clientId, identifierId, identifierPayload);
     }
 
     /**

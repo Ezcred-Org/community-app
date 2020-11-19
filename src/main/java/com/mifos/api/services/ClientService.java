@@ -4,6 +4,8 @@
  */
 package com.mifos.api.services;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.mifos.api.GenericResponse;
 import com.mifos.api.model.APIEndPoint;
 import com.mifos.objects.accounts.ClientAccounts;
@@ -94,6 +96,9 @@ public interface ClientService {
      */
     @GET(APIEndPoint.CLIENTS + "/{clientId}/" + APIEndPoint.IDENTIFIERS)
     Observable<List<Identifier>> getClientIdentifiers(@Path("clientId") long clientId);
+
+    @GET(APIEndPoint.CLIENTS + "/{clientId}/" + APIEndPoint.IDENTIFIERS)
+    Observable<JsonArray> getClientIdentifiersJsonArray(@Path("clientId") long clientId);
 
     /**
      * This Service is for Creating the Client Identifier.
@@ -187,6 +192,24 @@ public interface ClientService {
     @DELETE(APIEndPoint.CLIENTS + "/{clientId}/" + APIEndPoint.IDENTIFIERS + "/{identifierId}")
     Observable<GenericResponse> deleteClientIdentifier(@Path("clientId") int clientId,
                                                                      @Path("identifierId") int identifierId);
+
+
+    /**
+     * This Service for Updating the Client Identifier.
+     * REST END POINT:
+     * https://demo.openmf.org/fineract-provider/api/v1/clients/{clientId}/identifiers/
+     * {identifierId}
+     *
+     * @param clientId     Client Id
+     * @param identifierId Identifier Id
+     * @return GenericResponse
+     */
+    @PUT(APIEndPoint.CLIENTS + "/{clientId}/" + APIEndPoint.IDENTIFIERS + "/{identifierId}")
+    Observable<GenericResponse> updateClientIdentifier(
+        @Path("clientId") int clientId,
+        @Path("identifierId") int identifierId,
+        @Body IdentifierPayload identifierPayload
+    );
 
 
     /**
