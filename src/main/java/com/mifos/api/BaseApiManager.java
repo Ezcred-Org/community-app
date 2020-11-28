@@ -64,8 +64,8 @@ public class BaseApiManager {
   private static AddressService addressService;
   private static UserService userApi;
 
-  public BaseApiManager(PrefManager prefManager, SharedPreferences sharedPreferences) {
-    createService(prefManager, sharedPreferences);
+  public BaseApiManager(PrefManager prefManager, SharedPreferences sharedPreferences, RawCertificatePinner certificatePinner) {
+    createService(prefManager, sharedPreferences, certificatePinner);
   }
 
   public static void init() {
@@ -94,7 +94,7 @@ public class BaseApiManager {
     return mRetrofit.create(clazz);
   }
 
-  public static void createService(PrefManager prefManager, SharedPreferences sharedPreferences) {
+  public static void createService(PrefManager prefManager, SharedPreferences sharedPreferences, RawCertificatePinner certificatePinner) {
 
     Gson gson = new GsonBuilder()
       .registerTypeAdapter(Date.class, new JsonDateSerializer()).create();
@@ -104,7 +104,7 @@ public class BaseApiManager {
       .addConverterFactory(ScalarsConverterFactory.create())
       .addConverterFactory(GsonConverterFactory.create(gson))
       .addCallAdapterFactory(MifosErrorHandlingCallAdapterFactory.create())
-      .client(new MifosOkHttpClient().getMifosOkHttpClient(prefManager, sharedPreferences))
+      .client(certificatePinner.pinCertificate(new MifosOkHttpClient().getMifosOkHttpClient(prefManager, sharedPreferences)).build())
       .build();
     init();
   }

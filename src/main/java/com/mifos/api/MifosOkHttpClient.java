@@ -19,7 +19,7 @@ import timber.log.Timber;
 public class MifosOkHttpClient {
 
 
-    public OkHttpClient getMifosOkHttpClient(PrefManager prefManager, SharedPreferences sharedPreferences) {
+    public OkHttpClient.Builder getMifosOkHttpClient(PrefManager prefManager, SharedPreferences sharedPreferences) {
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
@@ -44,7 +44,7 @@ public class MifosOkHttpClient {
         builder.addInterceptor(logger);
         builder.addNetworkInterceptor(new StethoInterceptor());
 
-        return builder.build();
+        return builder;
 
     }
 }
