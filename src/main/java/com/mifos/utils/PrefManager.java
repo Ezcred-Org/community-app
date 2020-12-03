@@ -45,6 +45,7 @@ public class PrefManager {
     private static final String PARTNER_AUTH_DATA = "partner_auth_data";
     private static final String LOGIN_BY_PARTNER = "login_by_partner";
     private static final String LAST_LOGIN_TIME = "last_login_time";
+    private static final String LAST_INTERACTION_PAUSE_TIME= "last_interaction_pause_time";
 
     private final Gson gson;
 
@@ -358,6 +359,14 @@ public class PrefManager {
 
     public void setLastLoginTime(long time) {
         putLong(LAST_LOGIN_TIME, time);
+    }
+
+    public long getLastInteractionPauseTime() {
+        return getLong(LAST_INTERACTION_PAUSE_TIME, new Date().getTime());
+    }
+
+    public void setLastInteractionPauseTime(long time) {
+        putLong(LAST_INTERACTION_PAUSE_TIME, time);
     }
 
     @Data
