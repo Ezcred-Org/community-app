@@ -33,6 +33,7 @@ import com.mifos.utils.PrefManager;
 
 import java.util.Date;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
@@ -64,8 +65,8 @@ public class BaseApiManager {
   private static AddressService addressService;
   private static UserService userApi;
 
-  public BaseApiManager(PrefManager prefManager, SharedPreferences sharedPreferences) {
-    createService(prefManager, sharedPreferences);
+  public BaseApiManager(PrefManager prefManager, SharedPreferences sharedPreferences, RawCertificatePinner certificatePinner, boolean sslPinningEnabled) {
+    createService(prefManager, sharedPreferences, certificatePinner, sslPinningEnabled);
   }
 
   public static void init() {
@@ -94,17 +95,21 @@ public class BaseApiManager {
     return mRetrofit.create(clazz);
   }
 
-  public static void createService(PrefManager prefManager, SharedPreferences sharedPreferences) {
+  public static void createService(PrefManager prefManager, SharedPreferences sharedPreferences, RawCertificatePinner certificatePinner, boolean sslPinningEnabled) {
 
     Gson gson = new GsonBuilder()
       .registerTypeAdapter(Date.class, new JsonDateSerializer()).create();
 
+    OkHttpClient okHttpClient = new MifosOkHttpClient().getMifosOkHttpClient(prefManager, sharedPreferences).build();
+    if(sslPinningEnabled) {
+      okHttpClient = certificatePinner.pinCertificate(new MifosOkHttpClient().getMifosOkHttpClient(prefManager, sharedPreferences)).build();
+    }
     mRetrofit = new Retrofit.Builder()
       .baseUrl(prefManager.getInstanceUrl())
       .addConverterFactory(ScalarsConverterFactory.create())
       .addConverterFactory(GsonConverterFactory.create(gson))
       .addCallAdapterFactory(MifosErrorHandlingCallAdapterFactory.create())
-      .client(new MifosOkHttpClient().getMifosOkHttpClient(prefManager, sharedPreferences))
+      .client(okHttpClient)
       .build();
     init();
   }
