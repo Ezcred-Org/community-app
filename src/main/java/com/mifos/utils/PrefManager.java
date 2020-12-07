@@ -136,7 +136,6 @@ public class PrefManager {
     public void login(User user, String token) {
         setUserId(user.getUserId());
         setToken(token);
-//        saveToken(String.format("%s %s", tokenType, user.getBase64EncodedAuthenticationKey()));
         setUser(user);
     }
 
