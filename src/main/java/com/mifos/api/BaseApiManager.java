@@ -69,8 +69,19 @@ public class BaseApiManager {
   private static UserService userApi;
   private static OAuthService oAuthService;
 
-  public BaseApiManager(PrefManager prefManager, SharedPreferences sharedPreferences, RawCertificatePinner certificatePinner, boolean sslPinningEnabled) {
-    createService(prefManager, sharedPreferences, certificatePinner, sslPinningEnabled);
+  public BaseApiManager(
+      PrefManager prefManager,
+      SharedPreferences loanScopeSharedPreferences,
+      RawCertificatePinner certificatePinner,
+      boolean sslPinningEnabled
+  ) {
+    createService(
+        prefManager,
+        loanScopeSharedPreferences,
+        certificatePinner,
+        sslPinningEnabled,
+        oAuthService
+    );
   }
 
   public static void init() {
@@ -108,15 +119,26 @@ public class BaseApiManager {
     return null;
   }
 
-  public static void createService(PrefManager prefManager, SharedPreferences sharedPreferences, RawCertificatePinner certificatePinner, boolean sslPinningEnabled) {
+  public static void createService(
+      PrefManager prefManager,
+      SharedPreferences loanScopeSharedPreferences,
+      RawCertificatePinner certificatePinner,
+      boolean sslPinningEnabled,
+      OAuthService oAuthService
+  ) {
 
     Gson gson = new GsonBuilder()
       .registerTypeAdapter(Date.class, new JsonDateSerializer()).create();
 
-    OkHttpClient okHttpClient = new MifosOkHttpClient().getMifosOkHttpClient(prefManager, sharedPreferences).build();
-    if(sslPinningEnabled) {
-      okHttpClient = certificatePinner.pinCertificate(new MifosOkHttpClient().getMifosOkHttpClient(prefManager, sharedPreferences)).build();
+    OkHttpClient.Builder okHttpClientBuilder = new MifosOkHttpClient().getMifosOkHttpClientBuilder(
+        prefManager,
+        loanScopeSharedPreferences,
+        new MifosTokenAuthenticator(prefManager, oAuthService)
+    );
+    if (sslPinningEnabled) {
+      okHttpClientBuilder = certificatePinner.pinCertificate(okHttpClientBuilder);
     }
+    OkHttpClient okHttpClient = okHttpClientBuilder.build();
     mRetrofit = new Retrofit.Builder()
       .baseUrl(prefManager.getInstanceUrl())
       .addConverterFactory(ScalarsConverterFactory.create())
