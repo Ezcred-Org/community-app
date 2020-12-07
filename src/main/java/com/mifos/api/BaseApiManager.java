@@ -21,6 +21,7 @@ import com.mifos.api.services.DocumentService;
 import com.mifos.api.services.GroupService;
 import com.mifos.api.services.LoanService;
 import com.mifos.api.services.NoteService;
+import com.mifos.api.services.OAuthService;
 import com.mifos.api.services.OfficeService;
 import com.mifos.api.services.RunReportsService;
 import com.mifos.api.services.SavingsAccountService;
@@ -45,6 +46,7 @@ public class BaseApiManager {
 
 
   private static Retrofit mRetrofit;
+  private static Retrofit mRetrofitOAuth;
   private static AuthService authApi;
   private static CenterService centerApi;
   private static ClientAccountsService accountsApi;
@@ -64,6 +66,7 @@ public class BaseApiManager {
   private static CodeService codeService;
   private static AddressService addressService;
   private static UserService userApi;
+  private static OAuthService oAuthService;
 
   public BaseApiManager(PrefManager prefManager, SharedPreferences sharedPreferences, RawCertificatePinner certificatePinner, boolean sslPinningEnabled) {
     createService(prefManager, sharedPreferences, certificatePinner, sslPinningEnabled);
@@ -89,10 +92,15 @@ public class BaseApiManager {
     codeService = createApi(CodeService.class);
     addressService = createApi(AddressService.class);
     userApi = createApi(UserService.class);
+    oAuthService = createOAuthApi(OAuthService.class);
   }
 
   private static <T> T createApi(Class<T> clazz) {
     return mRetrofit.create(clazz);
+  }
+
+  private static <T> T createOAuthApi(Class<T> clazz) {
+    return mRetrofitOAuth.create(clazz);
   }
 
   public static void createService(PrefManager prefManager, SharedPreferences sharedPreferences, RawCertificatePinner certificatePinner, boolean sslPinningEnabled) {
@@ -111,11 +119,23 @@ public class BaseApiManager {
       .addCallAdapterFactory(MifosErrorHandlingCallAdapterFactory.create())
       .client(okHttpClient)
       .build();
+
+    mRetrofitOAuth = new Retrofit.Builder()
+      .baseUrl(prefManager.getOauthUrl())
+      .addConverterFactory(ScalarsConverterFactory.create())
+      .addConverterFactory(GsonConverterFactory.create(gson))
+      .addCallAdapterFactory(MifosErrorHandlingCallAdapterFactory.create())
+      .client(okHttpClient)
+      .build();
     init();
   }
 
   public AuthService getAuthApi() {
     return authApi;
+  }
+
+  public OAuthService getoAuthService() {
+    return oAuthService;
   }
 
   public CenterService getCenterApi() {

@@ -20,4 +20,8 @@ public class DataManagerUser {
   public Observable<User> getUser(long userId) {
     return mBaseApiManager.getUserApi().getUser(userId);
   }
+
+  public Observable<User> getUser(String accessToken) {
+    return mBaseApiManager.getUserApi().getUser(accessToken);
+  }
 }

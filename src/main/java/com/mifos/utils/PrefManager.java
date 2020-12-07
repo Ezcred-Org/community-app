@@ -133,10 +133,11 @@ public class PrefManager {
      * Authentication
      */
 
-    public void login(User user) {
+    public void login(User user, String token) {
         setUserId(user.getUserId());
-        saveToken(String.format("Basic %s", user.getBase64EncodedAuthenticationKey()));
-        putString(USER_DETAILS, gson.toJson(user));
+        setToken(token);
+//        saveToken(String.format("%s %s", tokenType, user.getBase64EncodedAuthenticationKey()));
+        setUser(user);
     }
 
     public void logout() {
@@ -199,7 +200,7 @@ public class PrefManager {
         putString(RETAILER_CONFIG, gson.toJson(object));
     }
 
-    public void saveToken(String token) {
+    public void setToken(String token) {
         putString(TOKEN, token);
     }
 
@@ -243,12 +244,12 @@ public class PrefManager {
         putString(INSTANCE_URL, instanceUrl);
     }
 
-    public void setOauthUrl(String oauthUrl) {
-        putString(OAUTH_URL, oauthUrl);
-    }
-
     public String getOauthUrl() {
         return getString(OAUTH_URL, "");
+    }
+
+    public void setOauthUrl(String oauthUrl) {
+        putString(OAUTH_URL, oauthUrl);
     }
 
     public String getInstanceDomain() {

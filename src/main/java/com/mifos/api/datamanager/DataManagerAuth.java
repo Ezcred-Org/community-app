@@ -3,6 +3,7 @@ package com.mifos.api.datamanager;
 import com.mifos.api.BaseApiManager;
 import com.mifos.api.model.FcmToken;
 import com.mifos.api.model.UpdatePasswordPayload;
+import com.mifos.objects.oauth.OAuthTokenResponse;
 import com.mifos.objects.user.User;
 
 import javax.inject.Inject;
@@ -30,6 +31,29 @@ public class DataManagerAuth {
      */
     public Observable<User> login(String username, String password) {
         return baseApiManager.getAuthApi().authenticate(username, password);
+    }
+
+    public Observable<OAuthTokenResponse> fetchOAuthToken(
+        String userName,
+        String password,
+        String clientId,
+        String clientSecret,
+        String grantType
+    ) {
+        return baseApiManager.getoAuthService().fetchOAuthToken(
+            userName, password, clientId, clientSecret, grantType
+        );
+    }
+
+    public Observable<OAuthTokenResponse> refreshOAuthToken(
+        String refreshToken,
+        String clientId,
+        String clientSecret,
+        String grantType
+    ) {
+        return baseApiManager.getoAuthService().refreshOAuthToken(
+            refreshToken, clientId, clientSecret, grantType
+        );
     }
 
     public Observable<String> saveFcmToken(int userId, String token) {
