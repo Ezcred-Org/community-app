@@ -7,6 +7,7 @@ package com.mifos.api;
 
 import android.content.SharedPreferences;
 
+import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mifos.api.services.AddressService;
@@ -100,7 +101,11 @@ public class BaseApiManager {
   }
 
   private static <T> T createOAuthApi(Class<T> clazz) {
-    return mRetrofitOAuth.create(clazz);
+    if (mRetrofitOAuth != null) {
+      return mRetrofitOAuth.create(clazz);
+    }
+
+    return null;
   }
 
   public static void createService(PrefManager prefManager, SharedPreferences sharedPreferences, RawCertificatePinner certificatePinner, boolean sslPinningEnabled) {
@@ -120,13 +125,16 @@ public class BaseApiManager {
       .client(okHttpClient)
       .build();
 
-    mRetrofitOAuth = new Retrofit.Builder()
-      .baseUrl(prefManager.getOauthUrl())
-      .addConverterFactory(ScalarsConverterFactory.create())
-      .addConverterFactory(GsonConverterFactory.create(gson))
-      .addCallAdapterFactory(MifosErrorHandlingCallAdapterFactory.create())
-      .client(okHttpClient)
-      .build();
+    if (!TextUtils.isEmpty(prefManager.getOauthUrl())) {
+      mRetrofitOAuth = new Retrofit.Builder()
+          .baseUrl(prefManager.getOauthUrl())
+          .addConverterFactory(ScalarsConverterFactory.create())
+          .addConverterFactory(GsonConverterFactory.create(gson))
+          .addCallAdapterFactory(MifosErrorHandlingCallAdapterFactory.create())
+          .client(okHttpClient)
+          .build();
+    }
+
     init();
   }
 
