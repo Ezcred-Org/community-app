@@ -28,7 +28,8 @@ public class PrefManager {
     private static final String USER_ID = "preferences_user_id";
     private static final String TOKEN = "preferences_token";
     private static final String TENANT = "preferences_tenant";
-    private static final String INSTANCE_URL = "preferences_instance";
+    private static final String INSTANCE_URL = "instance_url";
+    private static final String OAUTH_URL = "oauth_url";
     private static final String INSTANCE_DOMAIN = "preferences_domain";
     private static final String USER_STATUS = "user_status";
     private static final String USER_DETAILS = "user_details";
@@ -231,15 +232,23 @@ public class PrefManager {
             putString(TENANT, tenant);
     }
 
+    /**
+     * Connection
+     */
     public String getInstanceUrl() {
         return getString(INSTANCE_URL, "");
     }
 
-    /**
-     * Connection
-     */
     public void setInstanceUrl(String instanceUrl) {
         putString(INSTANCE_URL, instanceUrl);
+    }
+
+    public void setOauthUrl(String oauthUrl) {
+        putString(OAUTH_URL, oauthUrl);
+    }
+
+    public String getOauthUrl() {
+        return getString(OAUTH_URL, "");
     }
 
     public String getInstanceDomain() {
