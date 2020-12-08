@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.mifos.api.BaseUrl;
 import com.mifos.objects.appuser.AppUser.EzCredAuthData;
+import com.mifos.objects.oauth.OAuthTokenResponse;
 import com.mifos.objects.organisation.Staff;
 import com.mifos.objects.user.User;
 import java.util.Date;
@@ -30,6 +31,7 @@ public class PrefManager {
     private static final String TENANT = "preferences_tenant";
     private static final String INSTANCE_URL = "instance_url";
     private static final String OAUTH_URL = "oauth_url";
+    private static final String OAUTH_DATA = "oauth_data";
     private static final String INSTANCE_DOMAIN = "preferences_domain";
     private static final String USER_STATUS = "user_status";
     private static final String USER_DETAILS = "user_details";
@@ -119,11 +121,11 @@ public class PrefManager {
         return getPreferences().getStringSet(preferencesKey, null);
     }
 
-    public <T> void put(T object) {
-        putString(object.getClass().getSimpleName(), gson.toJson(object));
+    public <T> void putClassObject(String key, T object) {
+        putString(key, gson.toJson(object));
     }
 
-    public <T> T get(String key, Class<T> clazz) {
+    public <T> T getClassObject(String key, Class<T> clazz) {
         return gson.fromJson(getString(key, "null"), clazz);
     }
 
@@ -150,53 +152,64 @@ public class PrefManager {
         clearRetailerConfig();
     }
 
+    private void clearOauthData() {
+        putClassObject(OAUTH_DATA, null);
+    }
+
+    private OAuthTokenResponse getOauthData() {
+        return getClassObject(OAUTH_DATA, OAuthTokenResponse.class);
+    }
+
+    private void setOauthData(OAuthTokenResponse oauthData) {
+        putClassObject(OAUTH_DATA, oauthData);
+    }
+
     private void clearUser() {
-        putString(USER_DETAILS, gson.toJson(null));
+        putClassObject(USER_DETAILS, null);
     }
 
     public User getUser() {
-        return gson.fromJson(getString(USER_DETAILS, "null"),
-                User.class);
+        return getClassObject(USER_DETAILS, User.class);
     }
 
     public void setUser(User user) {
-        putString(USER_DETAILS, gson.toJson(user));
+        putClassObject(USER_DETAILS, user);
     }
 
     private void clearStaffDetails() {
-        putString(STAFF_DETAILS, gson.toJson(null));
+        putClassObject(STAFF_DETAILS, null);
     }
 
     public Staff getStaffDetails() {
-        return gson.fromJson(getString(STAFF_DETAILS, null), Staff.class);
+        return getClassObject(STAFF_DETAILS, Staff.class);
     }
 
     public void setStaffDetails(Staff staff) {
-        putString(STAFF_DETAILS, gson.toJson(staff));
+        putClassObject(STAFF_DETAILS, staff);
     }
 
     private void clearStaffConfig() {
-        putString(STAFF_CONFIG, gson.toJson(null));
+        putClassObject(STAFF_CONFIG, null);
     }
 
     public <T> T getStaffConfig(Class<T> clazz) {
-        return gson.fromJson(getString(STAFF_CONFIG, null), clazz);
+        return getClassObject(STAFF_CONFIG, clazz);
     }
 
     public <T> void setStaffConfig(T object) {
-        putString(STAFF_CONFIG, gson.toJson(object));
+        putClassObject(STAFF_CONFIG, object);
     }
 
     private void clearRetailerConfig() {
-        putString(RETAILER_CONFIG, gson.toJson(null));
+        putClassObject(RETAILER_CONFIG, null);
     }
 
     public <T> T getRetailerConfig(Class<T> clazz) {
-        return gson.fromJson(getString(RETAILER_CONFIG, null), clazz);
+        return getClassObject(RETAILER_CONFIG, clazz);
     }
 
     public <T> void setRetailerConfig(T object) {
-        putString(RETAILER_CONFIG, gson.toJson(object));
+        putClassObject(RETAILER_CONFIG, object);
     }
 
     public void setToken(String token) {
@@ -327,7 +340,7 @@ public class PrefManager {
     public GeoLocation getGeoLocation() {
         readLock.lock();
         try {
-            return gson.fromJson(getString(GEO_LOCATION, "null"), GeoLocation.class);
+            return getClassObject(GEO_LOCATION, GeoLocation.class);
         } finally {
             readLock.unlock();
         }
@@ -336,7 +349,7 @@ public class PrefManager {
     public void setGeoLocation(GeoLocation geoLocation) {
         writeLock.lock();
         try {
-            putString(GEO_LOCATION, gson.toJson(geoLocation));
+            putClassObject(GEO_LOCATION, geoLocation);
         } finally {
             writeLock.unlock();
         }
@@ -347,7 +360,7 @@ public class PrefManager {
     }
 
     public void setPartnerDetails(EzCredAuthData ezCredAuthData) {
-        putString(PARTNER_AUTH_DATA, gson.toJson(ezCredAuthData));
+        putClassObject(PARTNER_AUTH_DATA, ezCredAuthData);
     }
 
     public void clearPartnerDetails() {

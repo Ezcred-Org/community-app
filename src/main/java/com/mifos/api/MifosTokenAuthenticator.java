@@ -25,12 +25,17 @@ public class MifosTokenAuthenticator implements Authenticator {
   @Nullable
   @Override
   public Request authenticate(Route route, Response response) throws IOException {
+    Request request = null;
     if (prefManager != null && oAuthService != null) {
       synchronized (this) {
+        prefManager.setToken("");
+
+        return null;
 
       }
+    } else {
+      return null;
     }
-    return null;
   }
 
 }
