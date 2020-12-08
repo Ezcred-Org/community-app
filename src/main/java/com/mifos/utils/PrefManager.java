@@ -150,17 +150,18 @@ public class PrefManager {
         setLastLoginTime(0);
         setLoginByPartner(false);
         clearRetailerConfig();
+        clearOauthData();
     }
 
     private void clearOauthData() {
         putClassObject(OAUTH_DATA, null);
     }
 
-    private OAuthTokenResponse getOauthData() {
+    public OAuthTokenResponse getOauthData() {
         return getClassObject(OAUTH_DATA, OAuthTokenResponse.class);
     }
 
-    private void setOauthData(OAuthTokenResponse oauthData) {
+    public void setOauthData(OAuthTokenResponse oauthData) {
         putClassObject(OAUTH_DATA, oauthData);
     }
 
