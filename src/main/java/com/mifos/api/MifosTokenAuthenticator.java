@@ -1,6 +1,7 @@
 package com.mifos.api;
 
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import com.mifos.api.services.OAuthService;
 import com.mifos.objects.oauth.OAuthTokenResponse;
 import com.mifos.utils.PrefManager;
@@ -26,7 +27,7 @@ public class MifosTokenAuthenticator implements Authenticator {
 
   @Nullable
   @Override
-  public Request authenticate(Route route, Response response) throws IOException {
+  public Request authenticate(Route route, Response response) {
     Request request = null;
     if (prefManager != null && oAuthService != null && prefManager.getOauthData() != null) {
       synchronized (this) {
@@ -45,9 +46,7 @@ public class MifosTokenAuthenticator implements Authenticator {
 
               @Override
               public void onError(Throwable e) {
-                if (prefManager != null) {
 
-                }
               }
 
               @Override
@@ -62,13 +61,14 @@ public class MifosTokenAuthenticator implements Authenticator {
               }
             });
 
-        return response.request().newBuilder()
-            .header("authorization", prefManager.getToken())
-            .build();
-
+        if (!TextUtils.isEmpty(prefManager.getToken())) {
+          request = response.request().newBuilder()
+              .header(MifosInterceptor.HEADER_AUTH, prefManager.getToken())
+              .build();
+        }
       }
-    } else {
-      return null;
     }
+
+    return request;
   }
 }
