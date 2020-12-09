@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import com.mifos.api.services.OAuthService;
 import com.mifos.objects.oauth.OAuthTokenResponse;
 import com.mifos.utils.PrefManager;
-import java.io.IOException;
 import okhttp3.Authenticator;
 import okhttp3.Request;
 import okhttp3.Response;
