@@ -3,6 +3,7 @@ package com.mifos.api;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import com.mifos.api.services.OAuthService;
+import com.mifos.objects.oauth.GrantType;
 import com.mifos.objects.oauth.OAuthTokenResponse;
 import com.mifos.utils.PrefManager;
 import okhttp3.Authenticator;
@@ -35,7 +36,7 @@ public class MifosTokenAuthenticator implements Authenticator {
             prefManager.getOauthData().getRefreshToken(),
             "community-app",
             "123",
-            "refresh_token"
+            GrantType.refresh_token
         )
             .subscribe(new Subscriber<OAuthTokenResponse>() {
               @Override

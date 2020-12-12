@@ -1,6 +1,7 @@
 package com.mifos.api.services;
 
 import com.mifos.api.model.APIEndPoint;
+import com.mifos.objects.oauth.GrantType;
 import com.mifos.objects.oauth.OAuthTokenResponse;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -16,7 +17,7 @@ public interface OAuthService {
       @Field("password") String password,
       @Field("client_id") String clientId,
       @Field("client_secret") String clientSecret,
-      @Field("grant_type") String grantType
+      @Field("grant_type") GrantType grantType
   );
 
   @FormUrlEncoded
@@ -25,6 +26,6 @@ public interface OAuthService {
       @Field("refresh_token") String refreshToken,
       @Field("client_id") String clientId,
       @Field("client_secret") String clientSecret,
-      @Field("grant_type") String grantType
+      @Field("grant_type") GrantType grantType
   );
 }

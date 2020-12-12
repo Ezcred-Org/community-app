@@ -3,6 +3,7 @@ package com.mifos.api.datamanager;
 import com.mifos.api.BaseApiManager;
 import com.mifos.api.model.FcmToken;
 import com.mifos.api.model.UpdatePasswordPayload;
+import com.mifos.objects.oauth.GrantType;
 import com.mifos.objects.oauth.OAuthTokenResponse;
 import com.mifos.objects.user.User;
 
@@ -33,26 +34,15 @@ public class DataManagerAuth {
         return baseApiManager.getAuthApi().authenticate(username, password);
     }
 
-    public Observable<OAuthTokenResponse> fetchOAuthToken(
-        String userName,
-        String password,
-        String clientId,
-        String clientSecret,
-        String grantType
-    ) {
+    public Observable<OAuthTokenResponse> fetchOAuthToken(String userName, String password) {
         return baseApiManager.getoAuthService().fetchOAuthToken(
-            userName, password, clientId, clientSecret, grantType
+            userName, password, "community-app", "123", GrantType.password
         );
     }
 
-    public Observable<OAuthTokenResponse> refreshOAuthToken(
-        String refreshToken,
-        String clientId,
-        String clientSecret,
-        String grantType
-    ) {
+    public Observable<OAuthTokenResponse> refreshOAuthToken(String refreshToken) {
         return baseApiManager.getoAuthService().refreshOAuthToken(
-            refreshToken, clientId, clientSecret, grantType
+            refreshToken, "community-app", "123", GrantType.refresh_token
         );
     }
 
