@@ -7,6 +7,7 @@ package com.mifos.api;
 
 import android.content.SharedPreferences;
 
+import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mifos.api.services.AddressService;
@@ -21,6 +22,7 @@ import com.mifos.api.services.DocumentService;
 import com.mifos.api.services.GroupService;
 import com.mifos.api.services.LoanService;
 import com.mifos.api.services.NoteService;
+import com.mifos.api.services.OAuthService;
 import com.mifos.api.services.OfficeService;
 import com.mifos.api.services.RunReportsService;
 import com.mifos.api.services.SavingsAccountService;
@@ -45,6 +47,7 @@ public class BaseApiManager {
 
 
   private static Retrofit mRetrofit;
+  private static Retrofit mRetrofitOAuth;
   private static AuthService authApi;
   private static CenterService centerApi;
   private static ClientAccountsService accountsApi;
@@ -64,9 +67,21 @@ public class BaseApiManager {
   private static CodeService codeService;
   private static AddressService addressService;
   private static UserService userApi;
+  private static OAuthService oAuthService;
 
-  public BaseApiManager(PrefManager prefManager, SharedPreferences sharedPreferences, RawCertificatePinner certificatePinner, boolean sslPinningEnabled) {
-    createService(prefManager, sharedPreferences, certificatePinner, sslPinningEnabled);
+  public BaseApiManager(
+      PrefManager prefManager,
+      SharedPreferences loanScopeSharedPreferences,
+      RawCertificatePinner certificatePinner,
+      boolean sslPinningEnabled
+  ) {
+    createService(
+        prefManager,
+        loanScopeSharedPreferences,
+        certificatePinner,
+        sslPinningEnabled,
+        oAuthService
+    );
   }
 
   public static void init() {
@@ -89,21 +104,41 @@ public class BaseApiManager {
     codeService = createApi(CodeService.class);
     addressService = createApi(AddressService.class);
     userApi = createApi(UserService.class);
+    oAuthService = createOAuthApi(OAuthService.class);
   }
 
   private static <T> T createApi(Class<T> clazz) {
     return mRetrofit.create(clazz);
   }
 
-  public static void createService(PrefManager prefManager, SharedPreferences sharedPreferences, RawCertificatePinner certificatePinner, boolean sslPinningEnabled) {
+  private static <T> T createOAuthApi(Class<T> clazz) {
+    if (mRetrofitOAuth != null) {
+      return mRetrofitOAuth.create(clazz);
+    }
+
+    return null;
+  }
+
+  public static void createService(
+      PrefManager prefManager,
+      SharedPreferences loanScopeSharedPreferences,
+      RawCertificatePinner certificatePinner,
+      boolean sslPinningEnabled,
+      OAuthService oAuthService
+  ) {
 
     Gson gson = new GsonBuilder()
       .registerTypeAdapter(Date.class, new JsonDateSerializer()).create();
 
-    OkHttpClient okHttpClient = new MifosOkHttpClient().getMifosOkHttpClient(prefManager, sharedPreferences).build();
-    if(sslPinningEnabled) {
-      okHttpClient = certificatePinner.pinCertificate(new MifosOkHttpClient().getMifosOkHttpClient(prefManager, sharedPreferences)).build();
+    OkHttpClient.Builder okHttpClientBuilder = new MifosOkHttpClient().getMifosOkHttpClientBuilder(
+        prefManager,
+        loanScopeSharedPreferences,
+        new MifosTokenAuthenticator(prefManager, oAuthService)
+    );
+    if (sslPinningEnabled) {
+      okHttpClientBuilder = certificatePinner.pinCertificate(okHttpClientBuilder);
     }
+    OkHttpClient okHttpClient = okHttpClientBuilder.build();
     mRetrofit = new Retrofit.Builder()
       .baseUrl(prefManager.getInstanceUrl())
       .addConverterFactory(ScalarsConverterFactory.create())
@@ -111,11 +146,26 @@ public class BaseApiManager {
       .addCallAdapterFactory(MifosErrorHandlingCallAdapterFactory.create())
       .client(okHttpClient)
       .build();
+
+    if (!TextUtils.isEmpty(prefManager.getOauthUrl())) {
+      mRetrofitOAuth = new Retrofit.Builder()
+          .baseUrl(prefManager.getOauthUrl())
+          .addConverterFactory(ScalarsConverterFactory.create())
+          .addConverterFactory(GsonConverterFactory.create(gson))
+          .addCallAdapterFactory(MifosErrorHandlingCallAdapterFactory.create())
+          .client(okHttpClient)
+          .build();
+    }
+
     init();
   }
 
   public AuthService getAuthApi() {
     return authApi;
+  }
+
+  public OAuthService getoAuthService() {
+    return oAuthService;
   }
 
   public CenterService getCenterApi() {
