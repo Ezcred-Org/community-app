@@ -52,6 +52,7 @@ public class Address implements Parcelable {
   private List<Options> countryIdOptions;
   private List<Options> stateProvinceIdOptions;
   private List<Options> addressTypeIdOptions;
+  private List<Options> addressOwnershipTypeIdOptions;
   private final String locale = "en";
 
   public Address() {
@@ -83,6 +84,7 @@ public class Address implements Parcelable {
     this.countryIdOptions = in.createTypedArrayList(Options.CREATOR);
     this.stateProvinceIdOptions = in.createTypedArrayList(Options.CREATOR);
     this.addressTypeIdOptions = in.createTypedArrayList(Options.CREATOR);
+    this.addressOwnershipTypeIdOptions = in.createTypedArrayList(Options.CREATOR);
   }
 
   public Long getClient_id() {
@@ -293,6 +295,14 @@ public class Address implements Parcelable {
     this.addressTypeIdOptions = addressTypeIdOptions;
   }
 
+  public List<Options> getAddressOwnershipTypeIdOptions() {
+    return addressOwnershipTypeIdOptions;
+  }
+
+  public void setAddressOwnershipTypeIdOptions(List<Options> addressOwnershipTypeIdOptions) {
+    this.addressOwnershipTypeIdOptions = addressOwnershipTypeIdOptions;
+  }
+
   @Override
   public String toString() {
     return "Address{" +
@@ -322,6 +332,7 @@ public class Address implements Parcelable {
       ", countryIdOptions=" + countryIdOptions +
       ", stateProvinceIdOptions=" + stateProvinceIdOptions +
       ", addressTypeIdOptions=" + addressTypeIdOptions +
+      ", addressOwnershipTypeIdOptions=" + addressOwnershipTypeIdOptions +
       '}';
   }
 
@@ -363,5 +374,6 @@ public class Address implements Parcelable {
     dest.writeTypedList(this.countryIdOptions);
     dest.writeTypedList(this.stateProvinceIdOptions);
     dest.writeTypedList(this.addressTypeIdOptions);
+    dest.writeTypedList(this.addressOwnershipTypeIdOptions);
   }
 }
