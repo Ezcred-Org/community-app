@@ -9,14 +9,16 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import android.util.Base64;
 import com.mifos.utils.PrefManager;
-
 import java.io.IOException;
-
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.Request.Builder;
+import okhttp3.RequestBody;
 import okhttp3.Response;
+import okio.Buffer;
 
 /**
  * @author fomenkoo
@@ -25,6 +27,7 @@ public class MifosInterceptor implements Interceptor {
 
     public static final String HEADER_TENANT = "Fineract-Platform-TenantId";
     public static final String HEADER_AUTH = "Authorization";
+    public static final String DATA_SECURITY_HEADER = "X-Data-Security";
     public static final String CLIENT_LOAN_HEADER = "X-Client-Loan";
     public static final String APP_VERSION_HEADER = "X-App-Version";
     public static final String GEO_LOCATION_HEADER = "X-Geo-Location";
@@ -72,7 +75,31 @@ public class MifosInterceptor implements Interceptor {
             builder.header(HEADER_AUTH, prefManager.getToken());
         }
 
+        String encryptedBodyString = encryptRequestBody(chianrequest.body());
+        if (!TextUtils.isEmpty(encryptedBodyString)) {
+            MediaType mediaType = MediaType.parse("text/plain; charset=utf-8");
+            RequestBody requestBody = RequestBody.create(mediaType, encryptedBodyString);
+            builder.method(chianrequest.method(), requestBody);
+            builder.header(DATA_SECURITY_HEADER, "true");
+            if (requestBody.contentType() != null) {
+                builder.header("Content-Type", requestBody.contentType().toString());
+            }
+        }
+
         Request request = builder.build();
         return chain.proceed(request);
+    }
+
+    private String encryptRequestBody(RequestBody requestBody) throws IOException {
+        String encryptedBodyString = null;
+        if (requestBody != null) {
+            final Buffer buffer = new Buffer();
+            requestBody.writeTo(buffer);
+            String oldBodyString = buffer.readUtf8();
+
+            encryptedBodyString = Base64.encodeToString(oldBodyString.getBytes(), Base64.DEFAULT);
+        }
+
+        return encryptedBodyString;
     }
 }
