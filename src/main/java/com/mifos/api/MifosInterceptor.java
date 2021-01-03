@@ -87,12 +87,21 @@ public class MifosInterceptor implements Interceptor {
         }
 
         Request request = builder.build();
-        return chain.proceed(request);
+        Response response = chain.proceed(request);
+
+        //TODO decrypt response @anish
+        return response;
     }
 
     private String encryptRequestBody(RequestBody requestBody) throws IOException {
         String encryptedBodyString = null;
         if (requestBody != null) {
+            MediaType mediaType = requestBody.contentType();
+            if (mediaType != null
+                && mediaType.toString().toLowerCase().contains("multipart/form-data")
+            ) {
+                return null;
+            }
             final Buffer buffer = new Buffer();
             requestBody.writeTo(buffer);
             String oldBodyString = buffer.readUtf8();
