@@ -77,7 +77,7 @@ public class MifosInterceptor implements Interceptor {
 
         String encryptedBodyString = encryptRequestBody(chianrequest.body());
         if (!TextUtils.isEmpty(encryptedBodyString)) {
-            MediaType mediaType = MediaType.parse("text/plain; charset=utf-8");
+            MediaType mediaType = MediaType.parse("application/json");
             RequestBody requestBody = RequestBody.create(mediaType, encryptedBodyString);
             builder.method(chianrequest.method(), requestBody);
             builder.header(DATA_SECURITY_HEADER, "true");
@@ -97,7 +97,7 @@ public class MifosInterceptor implements Interceptor {
             requestBody.writeTo(buffer);
             String oldBodyString = buffer.readUtf8();
 
-            encryptedBodyString = Base64.encodeToString(oldBodyString.getBytes(), Base64.DEFAULT);
+            encryptedBodyString = Base64.encodeToString(oldBodyString.getBytes(), Base64.NO_WRAP);
         }
 
         return encryptedBodyString;
