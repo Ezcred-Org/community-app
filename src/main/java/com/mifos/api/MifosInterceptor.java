@@ -18,6 +18,7 @@ import okhttp3.Request;
 import okhttp3.Request.Builder;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 import okio.Buffer;
 
 /**
@@ -31,6 +32,7 @@ public class MifosInterceptor implements Interceptor {
     public static final String CLIENT_LOAN_HEADER = "X-Client-Loan";
     public static final String APP_VERSION_HEADER = "X-App-Version";
     public static final String GEO_LOCATION_HEADER = "X-Geo-Location";
+    public static final String CONTENT_TYPE_HEADER = "Content-Type";
     public static final String POS_HEADER = "X-PoS";
 
     private final PrefManager prefManager;
@@ -82,7 +84,7 @@ public class MifosInterceptor implements Interceptor {
             builder.method(chianrequest.method(), requestBody);
             builder.header(DATA_SECURITY_HEADER, "true");
             if (requestBody.contentType() != null) {
-                builder.header("Content-Type", requestBody.contentType().toString());
+                builder.header(CONTENT_TYPE_HEADER, requestBody.contentType().toString());
             }
         }
 
@@ -110,5 +112,31 @@ public class MifosInterceptor implements Interceptor {
         }
 
         return encryptedBodyString;
+    }
+
+    private Response decryptResponse(Response response) {
+        Response newResponse = response;
+        if (response != null && response.isSuccessful()) {
+            Response.Builder newResponseBuilder = response.newBuilder();
+            String contentType = response.header(CONTENT_TYPE_HEADER);
+            if (TextUtils.isEmpty(contentType)) {
+                contentType = "application/json";
+            }
+            String responseString = null;
+            if (response.body() != null) {
+                responseString = response.body().toString();
+            }
+
+            if (!TextUtils.isEmpty(responseString)) {
+                byte[] decryptedBytes = Base64.decode(responseString, Base64.NO_WRAP);
+                String decryptedString = new String(decryptedBytes);
+                newResponseBuilder.body(ResponseBody.create(
+                    MediaType.parse(contentType), decryptedString)
+                );
+
+                newResponse = newResponseBuilder.build();
+            }
+        }
+        return newResponse;
     }
 }
