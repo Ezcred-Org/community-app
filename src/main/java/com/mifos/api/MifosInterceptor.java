@@ -131,7 +131,7 @@ public class MifosInterceptor implements Interceptor {
         return encryptedBodyString;
     }
 
-    private Response decryptResponse(Response response) {
+    private Response decryptResponse(Response response) throws IOException {
         Response newResponse = response;
         if (response != null && response.isSuccessful()) {
             Response.Builder newResponseBuilder = response.newBuilder();
@@ -141,7 +141,7 @@ public class MifosInterceptor implements Interceptor {
             }
             String responseString = null;
             if (response.body() != null) {
-                responseString = response.body().toString();
+                responseString = response.body().string();
             }
 
             if (!TextUtils.isEmpty(responseString)) {
