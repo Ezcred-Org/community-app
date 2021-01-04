@@ -21,7 +21,9 @@ public class MifosOkHttpClient {
   public OkHttpClient.Builder getMifosOkHttpClientBuilder(
       PrefManager prefManager,
       SharedPreferences loanScopeSharedPref,
-      MifosTokenAuthenticator mifosTokenAuthenticator
+      MifosTokenAuthenticator mifosTokenAuthenticator,
+      boolean encryptRequestBody,
+      boolean decryptResponseBody
   ) {
 
     OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -35,7 +37,9 @@ public class MifosOkHttpClient {
       builder.authenticator(mifosTokenAuthenticator);
     }
 
-    builder.addInterceptor(new MifosInterceptor(prefManager, loanScopeSharedPref));
+    builder.addInterceptor(new MifosInterceptor(
+        prefManager, loanScopeSharedPref, encryptRequestBody, decryptResponseBody
+    ));
 
     //Enable Full Body Logging
     HttpLoggingInterceptor logger = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {

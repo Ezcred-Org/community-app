@@ -34,13 +34,26 @@ public class MifosInterceptor implements Interceptor {
     public static final String GEO_LOCATION_HEADER = "X-Geo-Location";
     public static final String CONTENT_TYPE_HEADER = "Content-Type";
     public static final String POS_HEADER = "X-PoS";
+    public static final String HEADER_APPLICATION_JSON = "application/json";
+    public static final String HEADER_TEXT_PLAIN = "text/plain";
+
+
 
     private final PrefManager prefManager;
     private final SharedPreferences sharedPreferences;
+    private final boolean encryptRequestBody;
+    private final boolean decryptResponseBody;
 
-    public MifosInterceptor(PrefManager prefManager, SharedPreferences sharedPreferences) {
+    public MifosInterceptor(
+        PrefManager prefManager,
+        SharedPreferences sharedPreferences,
+        boolean encryptRequestBody,
+        boolean decryptResponseBody
+    ) {
         this.prefManager = prefManager;
         this.sharedPreferences = sharedPreferences;
+        this.encryptRequestBody = encryptRequestBody;
+        this.decryptResponseBody = decryptResponseBody;
     }
 
     @Override
@@ -77,21 +90,25 @@ public class MifosInterceptor implements Interceptor {
             builder.header(HEADER_AUTH, prefManager.getToken());
         }
 
-        String encryptedBodyString = encryptRequestBody(chianrequest.body());
-        if (!TextUtils.isEmpty(encryptedBodyString)) {
-            MediaType mediaType = MediaType.parse("application/json");
-            RequestBody requestBody = RequestBody.create(mediaType, encryptedBodyString);
-            builder.method(chianrequest.method(), requestBody);
-            builder.header(DATA_SECURITY_HEADER, "true");
-            if (requestBody.contentType() != null) {
-                builder.header(CONTENT_TYPE_HEADER, requestBody.contentType().toString());
+        if (encryptRequestBody) {
+            String encryptedBodyString = encryptRequestBody(chianrequest.body());
+            if (!TextUtils.isEmpty(encryptedBodyString)) {
+                MediaType mediaType = MediaType.parse(HEADER_TEXT_PLAIN);
+                RequestBody requestBody = RequestBody.create(mediaType, encryptedBodyString);
+                builder.method(chianrequest.method(), requestBody);
+                builder.header(DATA_SECURITY_HEADER, "true");
+                if (requestBody.contentType() != null) {
+                    builder.header(CONTENT_TYPE_HEADER, requestBody.contentType().toString());
+                }
             }
         }
 
         Request request = builder.build();
         Response response = chain.proceed(request);
 
-        //TODO decrypt response @anish
+        if (decryptResponseBody) {
+            response = decryptResponse(response);
+        }
         return response;
     }
 
@@ -120,7 +137,7 @@ public class MifosInterceptor implements Interceptor {
             Response.Builder newResponseBuilder = response.newBuilder();
             String contentType = response.header(CONTENT_TYPE_HEADER);
             if (TextUtils.isEmpty(contentType)) {
-                contentType = "application/json";
+                contentType = HEADER_APPLICATION_JSON;
             }
             String responseString = null;
             if (response.body() != null) {
