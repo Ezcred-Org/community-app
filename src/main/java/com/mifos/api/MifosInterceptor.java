@@ -42,18 +42,15 @@ public class MifosInterceptor implements Interceptor {
     private final PrefManager prefManager;
     private final SharedPreferences sharedPreferences;
     private final boolean encryptRequestBody;
-    private final boolean decryptResponseBody;
 
     public MifosInterceptor(
         PrefManager prefManager,
         SharedPreferences sharedPreferences,
-        boolean encryptRequestBody,
-        boolean decryptResponseBody
+        boolean encryptRequestBody
     ) {
         this.prefManager = prefManager;
         this.sharedPreferences = sharedPreferences;
         this.encryptRequestBody = encryptRequestBody;
-        this.decryptResponseBody = decryptResponseBody;
     }
 
     @Override
@@ -105,11 +102,7 @@ public class MifosInterceptor implements Interceptor {
 
         Request request = builder.build();
         Response response = chain.proceed(request);
-
-        if (decryptResponseBody) {
-            response = decryptResponse(response);
-        }
-        return response;
+        return decryptResponseIfNeeded(response);
     }
 
     private String encryptRequestBody(RequestBody requestBody) throws IOException {
@@ -131,27 +124,31 @@ public class MifosInterceptor implements Interceptor {
         return encryptedBodyString;
     }
 
-    private Response decryptResponse(Response response) throws IOException {
+    private Response decryptResponseIfNeeded(Response response) throws IOException {
         Response newResponse = response;
         if (response != null && response.isSuccessful()) {
-            Response.Builder newResponseBuilder = response.newBuilder();
             String contentType = response.header(CONTENT_TYPE_HEADER);
-            if (TextUtils.isEmpty(contentType)) {
-                contentType = HEADER_APPLICATION_JSON;
-            }
-            String responseString = null;
-            if (response.body() != null) {
-                responseString = response.body().string();
-            }
+            boolean decrypt = Boolean.parseBoolean(response.header(DATA_SECURITY_HEADER));
+            if (decrypt) {
+                Response.Builder newResponseBuilder = response.newBuilder();
+                if (TextUtils.isEmpty(contentType)) {
+                    contentType = HEADER_APPLICATION_JSON;
+                }
 
-            if (!TextUtils.isEmpty(responseString)) {
-                byte[] decryptedBytes = Base64.decode(responseString, Base64.NO_WRAP);
-                String decryptedString = new String(decryptedBytes);
-                newResponseBuilder.body(ResponseBody.create(
-                    MediaType.parse(contentType), decryptedString)
-                );
+                String responseString = null;
+                if (response.body() != null) {
+                    responseString = response.body().string();
+                }
 
-                newResponse = newResponseBuilder.build();
+                if (!TextUtils.isEmpty(responseString)) {
+                    byte[] decryptedBytes = Base64.decode(responseString, Base64.NO_WRAP);
+                    String decryptedString = new String(decryptedBytes);
+                    newResponseBuilder.body(ResponseBody.create(
+                        MediaType.parse(contentType), decryptedString)
+                    );
+
+                    newResponse = newResponseBuilder.build();
+                }
             }
         }
         return newResponse;
