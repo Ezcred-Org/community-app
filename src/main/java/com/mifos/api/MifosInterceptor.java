@@ -38,7 +38,6 @@ public class MifosInterceptor implements Interceptor {
     public static final String HEADER_TEXT_PLAIN = "text/plain";
 
 
-
     private final PrefManager prefManager;
     private final SharedPreferences sharedPreferences;
     private final boolean encryptRequestBody;
@@ -87,41 +86,43 @@ public class MifosInterceptor implements Interceptor {
             builder.header(HEADER_AUTH, prefManager.getToken());
         }
 
-        if (encryptRequestBody) {
-            String encryptedBodyString = encryptRequestBody(chianrequest.body());
-            if (!TextUtils.isEmpty(encryptedBodyString)) {
-                MediaType mediaType = MediaType.parse(HEADER_TEXT_PLAIN);
-                RequestBody requestBody = RequestBody.create(mediaType, encryptedBodyString);
-                builder.method(chianrequest.method(), requestBody);
-                builder.header(DATA_SECURITY_HEADER, "true");
-                if (requestBody.contentType() != null) {
-                    builder.header(CONTENT_TYPE_HEADER, requestBody.contentType().toString());
-                }
-            }
-        }
+        encryptRequestBodyIfNeeded(chianrequest.body(), builder, chianrequest.method());
 
         Request request = builder.build();
         Response response = chain.proceed(request);
         return decryptResponseIfNeeded(response);
     }
 
-    private String encryptRequestBody(RequestBody requestBody) throws IOException {
-        String encryptedBodyString = null;
-        if (requestBody != null) {
-            MediaType mediaType = requestBody.contentType();
-            if (mediaType != null
-                && mediaType.toString().toLowerCase().contains("multipart/form-data")
-            ) {
-                return null;
+    private void encryptRequestBodyIfNeeded(RequestBody requestBody, Builder builder, String method)
+        throws IOException {
+        if (encryptRequestBody) {
+            if (requestBody != null) {
+                MediaType mediaType = requestBody.contentType();
+                if (mediaType != null
+                    && mediaType.toString().toLowerCase().contains("multipart/form-data")
+                ) {
+                    return;
+                }
+                builder.header(DATA_SECURITY_HEADER, "true");
+                final Buffer buffer = new Buffer();
+                requestBody.writeTo(buffer);
+                String oldBodyString = buffer.readUtf8();
+
+                String encryptedBodyString =
+                    Base64.encodeToString(oldBodyString.getBytes(), Base64.NO_WRAP);
+
+                if (!TextUtils.isEmpty(encryptedBodyString)) {
+                    RequestBody encryptedRequestBody = RequestBody.create(
+                        MediaType.parse(HEADER_TEXT_PLAIN),
+                        encryptedBodyString
+                    );
+                    builder.method(method, encryptedRequestBody);
+                    builder.header(CONTENT_TYPE_HEADER, HEADER_TEXT_PLAIN);
+                }
+            } else {
+                builder.header(DATA_SECURITY_HEADER, "true");
             }
-            final Buffer buffer = new Buffer();
-            requestBody.writeTo(buffer);
-            String oldBodyString = buffer.readUtf8();
-
-            encryptedBodyString = Base64.encodeToString(oldBodyString.getBytes(), Base64.NO_WRAP);
         }
-
-        return encryptedBodyString;
     }
 
     private Response decryptResponseIfNeeded(Response response) throws IOException {
