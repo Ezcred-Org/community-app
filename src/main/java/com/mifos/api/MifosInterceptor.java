@@ -104,6 +104,7 @@ public class MifosInterceptor implements Interceptor {
                     return;
                 }
                 builder.header(DATA_SECURITY_HEADER, "true");
+                builder.header(CONTENT_TYPE_HEADER, HEADER_TEXT_PLAIN);
                 final Buffer buffer = new Buffer();
                 requestBody.writeTo(buffer);
                 String oldBodyString = buffer.readUtf8();
@@ -121,6 +122,7 @@ public class MifosInterceptor implements Interceptor {
                 }
             } else {
                 builder.header(DATA_SECURITY_HEADER, "true");
+                builder.header(CONTENT_TYPE_HEADER, HEADER_TEXT_PLAIN);
             }
         }
     }
