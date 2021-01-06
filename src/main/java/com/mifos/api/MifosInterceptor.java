@@ -10,8 +10,10 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import android.util.Base64;
+import com.mifos.utils.AESUtil;
 import com.mifos.utils.PrefManager;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Request;
@@ -109,8 +111,15 @@ public class MifosInterceptor implements Interceptor {
                 requestBody.writeTo(buffer);
                 String oldBodyString = buffer.readUtf8();
 
-                String encryptedBodyString =
-                    Base64.encodeToString(oldBodyString.getBytes(), Base64.NO_WRAP);
+                String encryptedBodyString = null;
+                try {
+                    encryptedBodyString = AESUtil.encrypt(
+                        oldBodyString, "AES/CBC/PKCS5Padding", "M2tma2lkbTloZG4wcWk4ZA=="
+                    );
+                } catch (GeneralSecurityException e) {
+                    throw new IOException(e);
+                }
+//                    Base64.encodeToString(oldBodyString.getBytes(), Base64.NO_WRAP);
 
                 if (!TextUtils.isEmpty(encryptedBodyString)) {
                     RequestBody encryptedRequestBody = RequestBody.create(
@@ -144,8 +153,16 @@ public class MifosInterceptor implements Interceptor {
                 }
 
                 if (!TextUtils.isEmpty(responseString)) {
-                    byte[] decryptedBytes = Base64.decode(responseString, Base64.NO_WRAP);
-                    String decryptedString = new String(decryptedBytes);
+//                    byte[] decryptedBytes = Base64.decode(responseString, Base64.NO_WRAP);
+                    String decryptedString = null;
+                    try {
+                        decryptedString = AESUtil.decrypt(
+                            responseString, "AES/CBC/PKCS5Padding", "M2tma2lkbTloZG4wcWk4ZA=="
+                        );
+                    } catch (GeneralSecurityException e) {
+                        e.printStackTrace();
+                    }
+//                    String decryptedString = new String(decryptedBytes);
                     newResponseBuilder.body(ResponseBody.create(
                         MediaType.parse(contentType), decryptedString)
                     );
