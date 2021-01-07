@@ -73,14 +73,20 @@ public class BaseApiManager {
       PrefManager prefManager,
       SharedPreferences loanScopeSharedPreferences,
       RawCertificatePinner certificatePinner,
-      boolean sslPinningEnabled
+      boolean sslPinningEnabled,
+      boolean encryptRequestBody,
+      String dataEncryptionAlgorithm,
+      String dataEncryptionSecretKey
   ) {
     createService(
         prefManager,
         loanScopeSharedPreferences,
         certificatePinner,
         sslPinningEnabled,
-        oAuthService
+        oAuthService,
+        encryptRequestBody,
+        dataEncryptionAlgorithm,
+        dataEncryptionSecretKey
     );
   }
 
@@ -124,7 +130,10 @@ public class BaseApiManager {
       SharedPreferences loanScopeSharedPreferences,
       RawCertificatePinner certificatePinner,
       boolean sslPinningEnabled,
-      OAuthService oAuthService
+      OAuthService oAuthService,
+      boolean encryptRequestBody,
+      String dataEncryptionAlgorithm,
+      String dataEncryptionSecretKey
   ) {
 
     Gson gson = new GsonBuilder()
@@ -133,7 +142,10 @@ public class BaseApiManager {
     OkHttpClient.Builder okHttpClientBuilder = new MifosOkHttpClient().getMifosOkHttpClientBuilder(
         prefManager,
         loanScopeSharedPreferences,
-        new MifosTokenAuthenticator(prefManager, oAuthService)
+        new MifosTokenAuthenticator(prefManager, oAuthService),
+        encryptRequestBody,
+        dataEncryptionAlgorithm,
+        dataEncryptionSecretKey
     );
     if (sslPinningEnabled) {
       okHttpClientBuilder = certificatePinner.pinCertificate(okHttpClientBuilder);
