@@ -37,6 +37,8 @@ public class MifosInterceptor implements Interceptor {
     public static final String POS_HEADER = "X-PoS";
     public static final String HEADER_APPLICATION_JSON = "application/json";
     public static final String HEADER_TEXT_PLAIN = "text/plain";
+    public static final String HEADER_MULTIPART_FORM_DATA= "multipart/form-data";
+    public static final String HEADER_FORM_URLENCODED = "application/x-www-form-urlencoded";
 
 
     private final PrefManager prefManager;
@@ -106,7 +108,8 @@ public class MifosInterceptor implements Interceptor {
             if (requestBody != null) {
                 MediaType mediaType = requestBody.contentType();
                 if (mediaType != null
-                    && mediaType.toString().toLowerCase().contains("multipart/form-data")
+                    && (mediaType.toString().toLowerCase().contains(HEADER_MULTIPART_FORM_DATA)
+                    || mediaType.toString().toLowerCase().contains(HEADER_FORM_URLENCODED))
                 ) {
                     return;
                 }
