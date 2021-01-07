@@ -275,7 +275,6 @@ public class Address implements Parcelable {
     this.yearsAtCity = yearsAtCity;
   }
 
-  
   public String getMonthsAtCity() {
     return monthsAtCity;
   }
