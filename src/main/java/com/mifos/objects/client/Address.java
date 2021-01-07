@@ -39,10 +39,16 @@ public class Address implements Parcelable {
   private String city;
   private String countyDistrict;
   private Long stateProvinceId;
+  private Long addressOwnershipTypeId;
   private String countryName;
   private String stateName;
   private Long countryId;
   private String postalCode;
+  private String monthlyRent;
+  private String yearsAtAddress;
+  private String monthsAtAddress;
+  private String yearsAtCity;
+  private String monthsAtCity;
   private BigDecimal latitude;
   private BigDecimal longitude;
   private String createdBy;
@@ -52,6 +58,7 @@ public class Address implements Parcelable {
   private List<Options> countryIdOptions;
   private List<Options> stateProvinceIdOptions;
   private List<Options> addressTypeIdOptions;
+  private List<Options> addressOwnershipTypeIdOptions;
   private final String locale = "en";
 
   public Address() {
@@ -70,10 +77,16 @@ public class Address implements Parcelable {
     this.city = (String) in.readValue(String.class.getClassLoader());
     this.countyDistrict = (String) in.readValue(String.class.getClassLoader());
     this.stateProvinceId = (Long) in.readValue(Long.class.getClassLoader());
+    this.addressOwnershipTypeId = (Long) in.readValue(Long.class.getClassLoader());
     this.countryName = (String) in.readValue(String.class.getClassLoader());
     this.stateName = (String) in.readValue(String.class.getClassLoader());
     this.countryId = (Long) in.readValue(Long.class.getClassLoader());
     this.postalCode = (String) in.readValue(String.class.getClassLoader());
+    this.monthlyRent = (String) in.readValue(String.class.getClassLoader());
+    this.yearsAtAddress = (String) in.readValue(String.class.getClassLoader());
+    this.monthsAtAddress = (String) in.readValue(String.class.getClassLoader());
+    this.yearsAtCity = (String) in.readValue(String.class.getClassLoader());
+    this.monthsAtCity = (String) in.readValue(String.class.getClassLoader());
     this.latitude = (BigDecimal) in.readValue(BigDecimal.class.getClassLoader());
     this.longitude = (BigDecimal) in.readValue(BigDecimal.class.getClassLoader());
     this.createdBy = (String) in.readValue(String.class.getClassLoader());
@@ -83,6 +96,7 @@ public class Address implements Parcelable {
     this.countryIdOptions = in.createTypedArrayList(Options.CREATOR);
     this.stateProvinceIdOptions = in.createTypedArrayList(Options.CREATOR);
     this.addressTypeIdOptions = in.createTypedArrayList(Options.CREATOR);
+    this.addressOwnershipTypeIdOptions = in.createTypedArrayList(Options.CREATOR);
   }
 
   public Long getClient_id() {
@@ -189,6 +203,14 @@ public class Address implements Parcelable {
     this.stateProvinceId = stateProvinceId;
   }
 
+  public Long getAddressOwnershipTypeId() {
+    return addressOwnershipTypeId;
+  }
+
+  public void setAddressOwnershipTypeId(Long addressOwnershipTypeId) {
+    this.addressOwnershipTypeId = addressOwnershipTypeId;
+  }
+
   public String getCountryName() {
     return countryName;
   }
@@ -219,6 +241,46 @@ public class Address implements Parcelable {
 
   public void setPostalCode(String postalCode) {
     this.postalCode = postalCode;
+  }
+
+  public String getMonthlyRent() {
+    return monthlyRent;
+  }
+
+  public void setMonthlyRent(String monthlyRent) {
+    this.monthlyRent = monthlyRent;
+  }
+
+  public String getYearsAtAddress() {
+    return yearsAtAddress;
+  }
+
+  public void setYearsAtAddress(String yearsAtAddress) {
+    this.yearsAtAddress = yearsAtAddress;
+  }
+
+  public String getMonthsAtAddress() {
+    return monthsAtAddress;
+  }
+
+  public void setMonthsAtAddress(String monthsAtAddress) {
+    this.monthsAtAddress = monthsAtAddress;
+  }
+
+  public String getYearsAtCity() {
+    return yearsAtCity;
+  }
+
+  public void setYearsAtCity(String yearsAtCity) {
+    this.yearsAtCity = yearsAtCity;
+  }
+
+  public String getMonthsAtCity() {
+    return monthsAtCity;
+  }
+
+  public void setMonthsAtCity(String monthsAtCity) {
+    this.monthsAtCity = monthsAtCity;
   }
 
   public BigDecimal getLatitude() {
@@ -293,6 +355,14 @@ public class Address implements Parcelable {
     this.addressTypeIdOptions = addressTypeIdOptions;
   }
 
+  public List<Options> getAddressOwnershipTypeIdOptions() {
+    return addressOwnershipTypeIdOptions;
+  }
+
+  public void setAddressOwnershipTypeIdOptions(List<Options> addressOwnershipTypeIdOptions) {
+    this.addressOwnershipTypeIdOptions = addressOwnershipTypeIdOptions;
+  }
+
   @Override
   public String toString() {
     return "Address{" +
@@ -309,10 +379,16 @@ public class Address implements Parcelable {
       ", city='" + city + '\'' +
       ", countyDistrict='" + countyDistrict + '\'' +
       ", stateProvinceId=" + stateProvinceId +
+      ", addressOwnershipTypeId=" + addressOwnershipTypeId +
       ", countryName='" + countryName + '\'' +
       ", stateName='" + stateName + '\'' +
       ", countryId=" + countryId +
       ", postalCode='" + postalCode + '\'' +
+      ", monthlyRent='" + monthlyRent + '\'' +
+      ", yearsAtAddress='" + yearsAtAddress + '\'' +
+      ", monthsAtAddress='" + monthsAtAddress + '\'' +
+      ", yearsAtCity='" + yearsAtCity + '\'' +
+      ", monthsAtCity='" + monthsAtCity + '\'' +
       ", latitude=" + latitude +
       ", longitude=" + longitude +
       ", createdBy='" + createdBy + '\'' +
@@ -322,6 +398,7 @@ public class Address implements Parcelable {
       ", countryIdOptions=" + countryIdOptions +
       ", stateProvinceIdOptions=" + stateProvinceIdOptions +
       ", addressTypeIdOptions=" + addressTypeIdOptions +
+      ", addressOwnershipTypeIdOptions=" + addressOwnershipTypeIdOptions +
       '}';
   }
 
@@ -345,10 +422,16 @@ public class Address implements Parcelable {
     dest.writeString(this.city);
     dest.writeString(this.countyDistrict);
     dest.writeValue(this.stateProvinceId);
+    dest.writeValue(this.addressOwnershipTypeId);
     dest.writeString(this.countryName);
     dest.writeString(this.stateName);
     dest.writeValue(this.countryId);
     dest.writeString(this.postalCode);
+    dest.writeString(this.monthlyRent);
+    dest.writeString(this.yearsAtAddress);
+    dest.writeString(this.monthsAtAddress);
+    dest.writeString(this.yearsAtCity);
+    dest.writeString(this.monthsAtCity);
     dest.writeValue(this.latitude);
     dest.writeValue(this.longitude);
     dest.writeString(this.createdBy);
@@ -363,5 +446,6 @@ public class Address implements Parcelable {
     dest.writeTypedList(this.countryIdOptions);
     dest.writeTypedList(this.stateProvinceIdOptions);
     dest.writeTypedList(this.addressTypeIdOptions);
+    dest.writeTypedList(this.addressOwnershipTypeIdOptions);
   }
 }
