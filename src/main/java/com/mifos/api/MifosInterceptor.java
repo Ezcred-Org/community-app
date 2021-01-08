@@ -108,8 +108,7 @@ public class MifosInterceptor implements Interceptor {
             if (requestBody != null) {
                 MediaType mediaType = requestBody.contentType();
                 if (mediaType != null
-                    && (mediaType.toString().toLowerCase().contains(HEADER_MULTIPART_FORM_DATA)
-                    || mediaType.toString().toLowerCase().contains(HEADER_FORM_URLENCODED))
+                    && mediaType.toString().toLowerCase().contains(HEADER_MULTIPART_FORM_DATA)
                 ) {
                     return;
                 }
