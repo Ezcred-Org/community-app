@@ -33,7 +33,7 @@ public class User {
 
     private int staffId;
     private String staffDisplayName;
-    private String encryptedCredentials;
+    private String encodedCredentials;
     private String mobile;
     //{"username":"User1","userId":1,"base64EncodedAuthenticationKey":"VXNlcjE6dGVjaDRtZg\u003d
     // \u003d",
@@ -96,12 +96,12 @@ public class User {
         this.staffDisplayName = staffDisplayName;
     }
 
-    public String getEncryptedCredentials() {
-        return encryptedCredentials;
+    public String getEncodedCredentials() {
+        return encodedCredentials;
     }
 
-    public void setEncryptedCredentials(String encryptedCredentials) {
-        this.encryptedCredentials = encryptedCredentials;
+    public void setEncodedCredentials(String encodedCredentials) {
+        this.encodedCredentials = encodedCredentials;
     }
 
     public String getMobile() { return mobile; }
