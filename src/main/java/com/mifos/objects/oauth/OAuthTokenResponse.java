@@ -20,6 +20,7 @@ public class OAuthTokenResponse {
   public static final String TOKEN_TYPE = "token_type";
   public static final String EXPIRES_IN = "expires_in";
   public static final String SCOPE = "scope";
+  public static final String ENCRYPTED_CREDENTIALS = "encodedCredentials";
 
   @SerializedName(ACCESS_TOKEN)
   private final String accessToken;
@@ -35,4 +36,7 @@ public class OAuthTokenResponse {
 
   @SerializedName(SCOPE)
   private final String scope;
+  
+  @SerializedName(ENCRYPTED_CREDENTIALS)
+  private final String encryptedCredentials;
 }

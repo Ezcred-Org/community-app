@@ -33,6 +33,7 @@ public class User {
 
     private int staffId;
     private String staffDisplayName;
+    private String encryptedCredentials;
     private String mobile;
     //{"username":"User1","userId":1,"base64EncodedAuthenticationKey":"VXNlcjE6dGVjaDRtZg\u003d
     // \u003d",
@@ -91,13 +92,21 @@ public class User {
         return staffDisplayName;
     }
 
-    public String getMobile() { return mobile; }
-
-    public void setMobile(String mobile) { this.mobile = mobile; }
-
     public void setStaffDisplayName(String staffDisplayName) {
         this.staffDisplayName = staffDisplayName;
     }
+
+    public String getEncryptedCredentials() {
+        return encryptedCredentials;
+    }
+
+    public void setEncryptedCredentials(String encryptedCredentials) {
+        this.encryptedCredentials = encryptedCredentials;
+    }
+
+    public String getMobile() { return mobile; }
+
+    public void setMobile(String mobile) { this.mobile = mobile; }
 
     public boolean isSelfServiceUser() {
         return isSelfServiceUser;
