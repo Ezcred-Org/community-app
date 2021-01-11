@@ -36,7 +36,7 @@ public class OAuthTokenResponse {
 
   @SerializedName(SCOPE)
   private final String scope;
-
+  
   @SerializedName(ENCODED_CREDENTIALS)
   private final String encodedCredentials;
 }
