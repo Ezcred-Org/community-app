@@ -5,6 +5,7 @@ import com.mifos.api.model.FcmToken;
 import com.mifos.api.model.UpdatePasswordPayload;
 import com.mifos.objects.oauth.GrantType;
 import com.mifos.objects.oauth.OAuthTokenResponse;
+import com.mifos.objects.user.LoginData;
 import com.mifos.objects.user.User;
 
 import javax.inject.Inject;
@@ -31,7 +32,7 @@ public class DataManagerAuth {
      * @return Basic OAuth
      */
     public Observable<User> login(String username, String password) {
-        return baseApiManager.getAuthApi().authenticate(username, password);
+        return baseApiManager.getAuthApi().authenticate(new LoginData(username, password));
     }
 
     public Observable<OAuthTokenResponse> fetchOAuthToken(String userName, String password) {
