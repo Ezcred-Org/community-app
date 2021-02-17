@@ -1,13 +1,10 @@
 package com.mifos.api;
 
 import android.text.TextUtils;
-import com.google.gson.annotations.SerializedName;
-import com.mifos.utils.Constants;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
-
-import lombok.Builder;
-import lombok.Data;
 import okhttp3.Request;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
@@ -17,26 +14,6 @@ import retrofit2.Retrofit;
 public class RetrofitException extends RuntimeException {
   static RetrofitException httpError(String url, Request request, Response response, Retrofit retrofit) {
     String message = response.code() + " " + response.message();
-
-    if (TextUtils.isEmpty(response.message())) {
-      try {
-        ErrorWithDescription errorWithDescription =
-            getErrorBodyAs(response, retrofit, ErrorWithDescription.class);
-
-        if (errorWithDescription != null) {
-          String errorCodeWithError = response.code() + "." + errorWithDescription.getError();
-
-          if (Constants.GLOBAL_ERROR_MAP.get(errorCodeWithError) != null) {
-            message = Constants.GLOBAL_ERROR_MAP.get(errorCodeWithError);
-          } else {
-            message = response.code() + " " + errorWithDescription.getErrorDescription();
-          }
-        }
-
-      } catch (IOException ignore) {
-
-      }
-    }
 
     return new RetrofitException(message, url, request, response, Kind.HTTP, null, retrofit);
   }
@@ -106,6 +83,8 @@ public class RetrofitException extends RuntimeException {
    * response.
    *
    * @throws IOException if unable to convert the body to the specified {@code type}.
+   *
+   * This method should be called only once. Calling it multiple times, EOF exception will be thrown.
    */
   public <T> T getErrorBodyAs(Class<T> type) throws IOException {
     if (response == null || response.errorBody() == null) {
@@ -115,27 +94,26 @@ public class RetrofitException extends RuntimeException {
     return converter.convert(response.errorBody());
   }
 
-  /**
-   * HTTP response body converted to specified {@code type}. {@code null} if there is no response.
-   *
-   * @throws IOException if unable to convert the body to the specified {@code type}.
-   */
-  public static <T> T getErrorBodyAs(Response response, Retrofit retrofit, Class<T> type) throws IOException {
-    if (response == null || response.errorBody() == null || retrofit == null) {
-      return null;
-    }
-    Converter<ResponseBody, T> converter = retrofit.responseBodyConverter(type, new Annotation[0]);
-    return converter.convert(response.errorBody());
+  public int getStatusCode() {
+    return response != null ? response.code() : -1;
   }
 
-  @Data
-  @Builder(toBuilder = true)
-  public static class ErrorWithDescription {
+  public String getErrorMessage() {
+    return response != null ? response.message() : "";
+  }
 
-    @SerializedName("error")
-    private final String error;
+  /**
+   * HTTP response body converted to specified {@code type}. {@code null} if there is no response.
+   */
+  public static <T> T getErrorBodyAs(String error, Class<T> type) {
+    if (TextUtils.isEmpty(error)) {
+      return null;
+    }
 
-    @SerializedName("error_description")
-    private final String errorDescription;
+    try {
+      return new Gson().fromJson(error, type);
+    } catch (JsonSyntaxException ignore) {
+      return null;
+    }
   }
 }
