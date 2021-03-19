@@ -144,12 +144,10 @@ public class MifosInterceptor implements Interceptor {
 
     private Response decryptResponseIfNeeded(Response response) throws IOException {
         Response newResponse = response;
-        if (response != null && response.isSuccessful()) {
-            String contentType = response.header(CONTENT_TYPE_HEADER);
-            boolean decrypt = Boolean.parseBoolean(response.header(DATA_SECURITY_HEADER));
-            if (decrypt) {
-                Response.Builder newResponseBuilder = response.newBuilder();
-                if (TextUtils.isEmpty(contentType)) {
+        if (response != null) {
+            if (Boolean.parseBoolean(response.header(DATA_SECURITY_HEADER))) {
+                String contentType = response.header(CONTENT_TYPE_HEADER);
+                if (contentType == null || TextUtils.isEmpty(contentType)) {
                     contentType = HEADER_APPLICATION_JSON;
                 }
 
@@ -163,6 +161,7 @@ public class MifosInterceptor implements Interceptor {
                         String decryptedString = AESUtil.decrypt(
                             responseString, dataEncryptionAlgorithm, dataEncryptionSecretKey
                         );
+                        Response.Builder newResponseBuilder = response.newBuilder();
                         newResponseBuilder.body(ResponseBody.create(
                             MediaType.parse(contentType), decryptedString
                         ));
