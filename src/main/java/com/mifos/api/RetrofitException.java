@@ -1,8 +1,10 @@
 package com.mifos.api;
 
+import android.text.TextUtils;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
-
 import okhttp3.Request;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
@@ -12,6 +14,7 @@ import retrofit2.Retrofit;
 public class RetrofitException extends RuntimeException {
   static RetrofitException httpError(String url, Request request, Response response, Retrofit retrofit) {
     String message = response.code() + " " + response.message();
+
     return new RetrofitException(message, url, request, response, Kind.HTTP, null, retrofit);
   }
 
@@ -80,6 +83,8 @@ public class RetrofitException extends RuntimeException {
    * response.
    *
    * @throws IOException if unable to convert the body to the specified {@code type}.
+   *
+   * This method should be called only once. Calling it multiple times, EOF exception will be thrown.
    */
   public <T> T getErrorBodyAs(Class<T> type) throws IOException {
     if (response == null || response.errorBody() == null) {
@@ -87,5 +92,28 @@ public class RetrofitException extends RuntimeException {
     }
     Converter<ResponseBody, T> converter = retrofit.responseBodyConverter(type, new Annotation[0]);
     return converter.convert(response.errorBody());
+  }
+
+  public int getStatusCode() {
+    return response != null ? response.code() : -1;
+  }
+
+  public String getErrorMessage() {
+    return response != null ? response.message() : "";
+  }
+
+  /**
+   * HTTP response body converted to specified {@code type}. {@code null} if there is no response.
+   */
+  public static <T> T getErrorBodyAs(String error, Class<T> type) {
+    if (TextUtils.isEmpty(error)) {
+      return null;
+    }
+
+    try {
+      return new Gson().fromJson(error, type);
+    } catch (JsonSyntaxException ignore) {
+      return null;
+    }
   }
 }

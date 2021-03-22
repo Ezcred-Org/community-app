@@ -204,18 +204,24 @@ public class Constants {
     public static String ERROR_MSG_PLATFORM_SERVER_SIDE_ERROR = "error.msg.platform.server.side.error";
     public static String ERROR_MSG_PLATFORM_SERVICE_UNAVAILABLE = "error.msg.platform.service.unavailable";
     public static String ERROR_OTP_NOT_VERIFIED = "creditengine.otp.not.verified";
+    public static String ERROR_MSG_400_INVALID_GRANT = "400.invalid_grant";
+    public static String ERROR_MSG_401_UNAUTHORIZED = "401.unauthorized";
 
 
     static {
         GLOBAL_ERROR_MAP.put(ERROR_MSG_NOT_AUTHENTICATED, "User Authentication Failed - Invalid username/password");
+        GLOBAL_ERROR_MAP.put(ERROR_MSG_400_INVALID_GRANT, "User Authentication Failed - Invalid username/password");
+        GLOBAL_ERROR_MAP.put(ERROR_MSG_401_UNAUTHORIZED, "Looks like you are logged out, please login again.");
         GLOBAL_ERROR_MAP.put(ERROR_MSG_DATA_INTEGRITY, "There is an issue with your loan application request - Please contact customer support");
         GLOBAL_ERROR_MAP.put(ERROR_MSG_BAD_REQUEST, "The request was invalid. Please contact customer support if the issue persists");
         GLOBAL_ERROR_MAP.put(ERROR_MSG_PLATFORM_SERVER_SIDE_ERROR, "There is an error in processing the request. Contact Support if the problem persists");
         GLOBAL_ERROR_MAP.put(ERROR_MSG_PLATFORM_SERVICE_UNAVAILABLE, "System is undergoing maintenance. Please try after some time.");
-        GLOBAL_ERROR_MAP.put(ERROR_OTP_NOT_VERIFIED, "Otp is not verified.");
+        GLOBAL_ERROR_MAP.put(ERROR_OTP_NOT_VERIFIED, "OTP is not verified.");
         GLOBAL_ERROR_MAP = Collections.unmodifiableMap(GLOBAL_ERROR_MAP);
         NO_TICKET_MAP.put(ERROR_MSG_NOT_AUTHENTICATED, "User Authentication Failed - Invalid username/password");
-        NO_TICKET_MAP.put(ERROR_OTP_NOT_VERIFIED, "Otp is not verified.");
+        NO_TICKET_MAP.put(ERROR_OTP_NOT_VERIFIED, "OTP is not verified.");
+        NO_TICKET_MAP.put(ERROR_MSG_400_INVALID_GRANT, "User Authentication Failed - Invalid username/password");
+        NO_TICKET_MAP.put(ERROR_MSG_401_UNAUTHORIZED, "Looks like you are logged out, please login again.");
         NO_TICKET_MAP = Collections.unmodifiableMap(NO_TICKET_MAP);
     }
 }
