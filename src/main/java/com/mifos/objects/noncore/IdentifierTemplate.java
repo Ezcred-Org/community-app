@@ -54,4 +54,18 @@ public class IdentifierTemplate implements Parcelable {
             return new IdentifierTemplate[size];
         }
     };
+
+    public String getIdentifierValue(Integer optionId) {
+        if (allowedDocumentTypes == null || allowedDocumentTypes.size() == 0 || optionId == null) {
+            return null;
+        }
+
+        for (IdentifierType identifierType : allowedDocumentTypes) {
+            if (optionId.equals(identifierType.getId())) {
+                return identifierType.getName();
+            }
+        }
+
+        return null;
+    }
 }
