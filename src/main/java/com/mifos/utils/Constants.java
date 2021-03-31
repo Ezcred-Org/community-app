@@ -222,8 +222,8 @@ public class Constants {
         GLOBAL_ERROR_MAP.put(ERROR_MSG_PLATFORM_SERVICE_UNAVAILABLE, "System is undergoing maintenance. Please try after some time.");
         GLOBAL_ERROR_MAP.put(ERROR_OTP_NOT_VERIFIED, "OTP is not verified.");
         GLOBAL_ERROR_MAP.put(ERROR_MSG_PASSWORD_OUTDATED, "Your password is expired, please reset your password.");
-        GLOBAL_ERROR_MAP = Collections.unmodifiableMap(GLOBAL_ERROR_MAP);
         GLOBAL_ERROR_MAP.put(INVALID_REFRESH_TOKEN, "Session expired. Please login again to continue.");
+        GLOBAL_ERROR_MAP = Collections.unmodifiableMap(GLOBAL_ERROR_MAP);
 
         NO_TICKET_MAP.put(ERROR_MSG_NOT_AUTHENTICATED, "User Authentication Failed - Invalid username/password");
         NO_TICKET_MAP.put(ERROR_OTP_NOT_VERIFIED, "OTP is not verified.");
