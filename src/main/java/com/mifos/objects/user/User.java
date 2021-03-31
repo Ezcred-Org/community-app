@@ -22,6 +22,7 @@ public class User {
     private String base64EncodedAuthenticationKey;
 
     private boolean authenticated;
+    private boolean shouldRenewPassword;
     private int officeId;
     private String officeName;
     private boolean isSelfServiceUser;
@@ -54,6 +55,14 @@ public class User {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public boolean isShouldRenewPassword() {
+        return shouldRenewPassword;
+    }
+
+    public void setShouldRenewPassword(boolean shouldRenewPassword) {
+        this.shouldRenewPassword = shouldRenewPassword;
     }
 
     public boolean isAuthenticated() {
@@ -151,6 +160,7 @@ public class User {
                 ", userId=" + userId +
                 ", base64EncodedAuthenticationKey='" + base64EncodedAuthenticationKey + '\'' +
                 ", authenticated=" + authenticated +
+                ", shouldRenewPassword=" + shouldRenewPassword +
                 ", officeId=" + officeId +
                 ", officeName='" + officeName + '\'' +
                 ", roles=" + roles +

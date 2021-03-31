@@ -3,6 +3,7 @@ package com.mifos.api.datamanager;
 import com.mifos.api.BaseApiManager;
 import com.mifos.api.model.FcmToken;
 import com.mifos.api.model.UpdatePasswordPayload;
+import com.mifos.api.model.UpdatePasswordResponse;
 import com.mifos.objects.oauth.GrantType;
 import com.mifos.objects.oauth.OAuthTokenResponse;
 import com.mifos.objects.user.LoginData;
@@ -51,7 +52,7 @@ public class DataManagerAuth {
         return baseApiManager.getAuthApi().setFcmToken(userId, new FcmToken(token));
     }
 
-    public Observable<String> updatePassword(long userId, String password, String repeatPassword) {
+    public Observable<UpdatePasswordResponse> updatePassword(long userId, String password, String repeatPassword) {
         UpdatePasswordPayload updatePasswordPayload = new UpdatePasswordPayload(password, repeatPassword);
         return baseApiManager.getAuthApi().updatePassword(userId, updatePasswordPayload);
   }

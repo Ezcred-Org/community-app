@@ -7,6 +7,7 @@ package com.mifos.api.services;
 import com.mifos.api.model.APIEndPoint;
 import com.mifos.api.model.FcmToken;
 import com.mifos.api.model.UpdatePasswordPayload;
+import com.mifos.api.model.UpdatePasswordResponse;
 import com.mifos.objects.user.LoginData;
 import com.mifos.objects.user.User;
 
@@ -28,6 +29,6 @@ public interface AuthService {
     Observable<String> setFcmToken(@Path("userId") int userId, @Body FcmToken fcmToken);
 
     @PUT("users/{userId}")
-    Observable<String> updatePassword(@Path("userId") long userId, @Body UpdatePasswordPayload updatePasswordPayload);
+    Observable<UpdatePasswordResponse> updatePassword(@Path("userId") long userId, @Body UpdatePasswordPayload updatePasswordPayload);
 
 }

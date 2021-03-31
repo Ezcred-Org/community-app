@@ -2,6 +2,8 @@ package com.mifos.objects;
 
 import com.google.gson.annotations.SerializedName;
 
+import com.mifos.objects.mifoserror.Errors;
+import java.util.List;
 import lombok.Data;
 
 @Data
@@ -15,7 +17,7 @@ public class ApiErrorResponse {
   @SerializedName(value = "userMessageGlobalisationCode", alternate = {"data"})
   private final String userMessageGlobalisationCode;
 
-  private final Object[] errors;
+  private final List<Errors> errors;
 
   @SerializedName(value = "httpStatusCode", alternate = {"status"})
   private final Integer httpStatusCode;

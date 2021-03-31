@@ -194,9 +194,12 @@ public class Constants {
 
     public static final int PERMISSION_FILE_ATTACH = 919;
 
-    public static Map<String, String> GLOBAL_ERROR_MAP = new HashMap<>();
+    public static String INVALID_REFRESH_TOKEN_MESSAGE = "invalid refresh token";
 
+    public static Map<String, String> GLOBAL_ERROR_MAP = new HashMap<>();
     public static Map<String, String> NO_TICKET_MAP = new HashMap<>();
+    public static Map<String, String> LOGOUT_ERROR_MAP = new HashMap<>();
+    public static Map<String, String> CUSTOM_ERROR_MAP_KEYS = new HashMap<>();
 
     public static String ERROR_MSG_NOT_AUTHENTICATED = "error.msg.not.authenticated";
     public static String ERROR_MSG_DATA_INTEGRITY = "error.msg.dataintegrity";
@@ -206,7 +209,8 @@ public class Constants {
     public static String ERROR_OTP_NOT_VERIFIED = "creditengine.otp.not.verified";
     public static String ERROR_MSG_400_INVALID_GRANT = "400.invalid_grant";
     public static String ERROR_MSG_401_UNAUTHORIZED = "401.unauthorized";
-
+    public static String ERROR_MSG_PASSWORD_OUTDATED = "error.msg.password.outdated";
+    public static String INVALID_REFRESH_TOKEN = "invalid.refresh.token";
 
     static {
         GLOBAL_ERROR_MAP.put(ERROR_MSG_NOT_AUTHENTICATED, "User Authentication Failed - Invalid username/password");
@@ -217,11 +221,23 @@ public class Constants {
         GLOBAL_ERROR_MAP.put(ERROR_MSG_PLATFORM_SERVER_SIDE_ERROR, "There is an error in processing the request. Contact Support if the problem persists");
         GLOBAL_ERROR_MAP.put(ERROR_MSG_PLATFORM_SERVICE_UNAVAILABLE, "System is undergoing maintenance. Please try after some time.");
         GLOBAL_ERROR_MAP.put(ERROR_OTP_NOT_VERIFIED, "OTP is not verified.");
+        GLOBAL_ERROR_MAP.put(ERROR_MSG_PASSWORD_OUTDATED, "Your password has expired, please reset your password.");
+        GLOBAL_ERROR_MAP.put(INVALID_REFRESH_TOKEN, "Session expired. Please login again to continue.");
         GLOBAL_ERROR_MAP = Collections.unmodifiableMap(GLOBAL_ERROR_MAP);
+
         NO_TICKET_MAP.put(ERROR_MSG_NOT_AUTHENTICATED, "User Authentication Failed - Invalid username/password");
         NO_TICKET_MAP.put(ERROR_OTP_NOT_VERIFIED, "OTP is not verified.");
         NO_TICKET_MAP.put(ERROR_MSG_400_INVALID_GRANT, "User Authentication Failed - Invalid username/password");
         NO_TICKET_MAP.put(ERROR_MSG_401_UNAUTHORIZED, "Looks like you are logged out, please login again.");
+        NO_TICKET_MAP.put(ERROR_MSG_PASSWORD_OUTDATED, "Your password has expired, please reset your password.");
+        NO_TICKET_MAP.put(INVALID_REFRESH_TOKEN, "Session expired. Please login again to continue.");
         NO_TICKET_MAP = Collections.unmodifiableMap(NO_TICKET_MAP);
+
+        LOGOUT_ERROR_MAP.put(ERROR_MSG_PASSWORD_OUTDATED, "Password expired. Please login again to continue.");
+        LOGOUT_ERROR_MAP.put(INVALID_REFRESH_TOKEN, "Session expired. Please login again to continue.");
+        LOGOUT_ERROR_MAP = Collections.unmodifiableMap(LOGOUT_ERROR_MAP);
+
+        CUSTOM_ERROR_MAP_KEYS.put(INVALID_REFRESH_TOKEN_MESSAGE, INVALID_REFRESH_TOKEN);
+        CUSTOM_ERROR_MAP_KEYS = Collections.unmodifiableMap(CUSTOM_ERROR_MAP_KEYS);
     }
 }
