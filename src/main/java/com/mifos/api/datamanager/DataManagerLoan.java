@@ -116,62 +116,84 @@ public class DataManagerLoan {
       Integer offset, Integer limit, String accountNo,
       String externalId, String orderBy, String sortBy
     ) {
-        return mBaseApiManager.getLoanApi().getAllLoans(offset, limit, accountNo, externalId, orderBy, sortBy);
+        return getAllLoans(
+            null,
+            null,
+            null,
+            accountNo,
+            offset,
+            limit,
+            orderBy,
+            sortBy,
+            null,
+            null,
+            null,
+            externalId
+        );
     }
 
     public Observable<Page<Loans>> getAllLoans(
         Long officeId, Integer offset, Integer limit, String accountNo,
         String externalId, String orderBy, String sortBy, Long staffId
     ) {
-        List<String> sqlQueries = new ArrayList<>();
-        if (officeId != null) {
-            sqlQueries.add("l.office_id=" + officeId);
-        }
-        if (staffId > 0) {
-            sqlQueries.add("l.loan_officer_id = " + staffId);
-        }
-        return mBaseApiManager
-            .getLoanApi()
-            .getAllLoans(offset, limit, accountNo, externalId, orderBy, sortBy,
-                joinQueries(sqlQueries));
+        return getAllLoans(
+            officeId,
+            staffId,
+            null,
+            accountNo,
+            offset,
+            limit,
+            orderBy,
+            sortBy,
+            null,
+            null,
+            null,
+            externalId
+        );
     }
-
 
     public Observable<Page<Loans>> getAllLoansByTask(
         Integer offset, Integer limit, String accountNo,
         String orderBy, String sortBy,
         String taskStatus, String taskType, List<String> loanStatus
     ) {
-        List<String> sqlQueries = new ArrayList<>();
-        if (loanStatus != null && !loanStatus.isEmpty()) {
-            sqlQueries.add("l.loan_status_id in (" + TextUtils.join(",", loanStatus) + ") ");
-        }
-        if (!TextUtils.isEmpty(taskType)) {
-            sqlQueries.add("datatable.task_type='" + taskType + "' ");
-        }
 
-        return mBaseApiManager.getLoanApi().getAllLoans(offset, limit, accountNo,
-            null, orderBy, sortBy, "task_details", "task_status=" + taskStatus,
-            joinQueries(sqlQueries));
+        return getAllLoans(
+            null,
+            null,
+            null,
+            accountNo,
+            offset,
+            limit,
+            orderBy,
+            sortBy,
+            taskType,
+            taskStatus,
+            loanStatus,
+            null
+        );
     }
 
     public Observable<Page<Loans>> getAllFundLoansByTask(
-      Integer offset, Integer limit, String accountNo,
-      String orderBy, String sortBy,
-      String taskStatus, String taskType,
-      List<String> loanStatus, long fundId
+        Integer offset, Integer limit, String accountNo,
+        String orderBy, String sortBy,
+        String taskStatus, String taskType,
+        List<String> loanStatus, long fundId
     ) {
-        List<String> sqlQueries = new ArrayList<>();
-        if(loanStatus != null && !loanStatus.isEmpty()){
-            sqlQueries.add("l.loan_status_id in (" + TextUtils.join(",", loanStatus) + ") ");
-        }
-        if(!TextUtils.isEmpty(taskType)){
-            sqlQueries.add("datatable.task_type='" + taskType + "' ");
-        }
-        sqlQueries.add("l.fund_id=" + fundId);
-
-        return mBaseApiManager.getLoanApi().getAllLoans(offset, limit, accountNo,
-          null, orderBy, sortBy, "task_details", "task_status=" + taskStatus, joinQueries(sqlQueries));
+        return getAllLoans(
+            null,
+            null,
+            fundId,
+            accountNo,
+            offset,
+            limit,
+            orderBy,
+            sortBy,
+            taskType,
+            taskStatus,
+            loanStatus,
+            null
+        );
     }
 
     public Observable<Page<Loans>> getAllLoansByTaskForOffice(
@@ -181,6 +203,7 @@ public class DataManagerLoan {
     ) {
         return getAllLoans(
             officeId,
+            null,
             null,
             accountNo,
             offset,
@@ -197,6 +220,7 @@ public class DataManagerLoan {
     public Observable<Page<Loans>> getAllLoans(
         Long officeId,
         Long staffId,
+        Long fundId,
         String accountNo,
         Integer offset,
         Integer limit,
@@ -215,13 +239,23 @@ public class DataManagerLoan {
         if (!TextUtils.isEmpty(taskType)) {
             sqlQueries.add("datatable.task_type='" + taskType + "' ");
         }
-        if (officeId != null) {
+        if (officeId != null && officeId > 0) {
             sqlQueries.add("l.office_id=" + officeId);
         }
-        if (staffId > 0) {
+        if (staffId != null && staffId > 0) {
             sqlQueries.add("l.loan_officer_id = " + staffId);
         }
 
+        if (fundId != null && fundId > 0) {
+            sqlQueries.add("l.fund_id=" + fundId);
+        }
+
+        String dataTableToJoin = null;
+        String dataTableFilterCondition = null;
+        if (!TextUtils.isEmpty(taskStatus)) {
+            dataTableToJoin = "task_details";
+            dataTableFilterCondition = "task_status=" + taskStatus;
+        }
         return mBaseApiManager.getLoanApi().getAllLoans(
             offset,
             limit,
@@ -229,8 +263,8 @@ public class DataManagerLoan {
             externalId,
             orderBy,
             sortBy,
-            "task_details",
-            "task_status=" + taskStatus,
+            dataTableToJoin,
+            dataTableFilterCondition,
             joinQueries(sqlQueries)
         );
     }
