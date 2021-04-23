@@ -175,23 +175,64 @@ public class DataManagerLoan {
     }
 
     public Observable<Page<Loans>> getAllLoansByTaskForOffice(
-      Integer offset, Integer limit, String accountNo,
-      String orderBy, String sortBy,
-      String taskStatus, String taskType, List<String> loanStatus, Long officeId
+        Integer offset, Integer limit, String accountNo,
+        String orderBy, String sortBy,
+        String taskStatus, String taskType, List<String> loanStatus, Long officeId
+    ) {
+        return getAllLoans(
+            officeId,
+            null,
+            accountNo,
+            offset,
+            limit,
+            orderBy,
+            sortBy,
+            taskType,
+            taskStatus,
+            loanStatus,
+            null
+        );
+    }
+
+    public Observable<Page<Loans>> getAllLoans(
+        Long officeId,
+        Long staffId,
+        String accountNo,
+        Integer offset,
+        Integer limit,
+        String orderBy,
+        String sortBy,
+        String taskType,
+        String taskStatus,
+        List<String> loanStatus,
+        String externalId
     ) {
         List<String> sqlQueries = new ArrayList<>();
+
         if (loanStatus != null && !loanStatus.isEmpty()) {
             sqlQueries.add("l.loan_status_id in (" + TextUtils.join(",", loanStatus) + ") ");
         }
-        if(!TextUtils.isEmpty(taskType)){
+        if (!TextUtils.isEmpty(taskType)) {
             sqlQueries.add("datatable.task_type='" + taskType + "' ");
         }
         if (officeId != null) {
             sqlQueries.add("l.office_id=" + officeId);
         }
+        if (staffId > 0) {
+            sqlQueries.add("l.loan_officer_id = " + staffId);
+        }
 
-        return mBaseApiManager.getLoanApi().getAllLoans(offset, limit, accountNo,
-          null, orderBy, sortBy, "task_details", "task_status=" + taskStatus, joinQueries(sqlQueries));
+        return mBaseApiManager.getLoanApi().getAllLoans(
+            offset,
+            limit,
+            accountNo,
+            externalId,
+            orderBy,
+            sortBy,
+            "task_details",
+            "task_status=" + taskStatus,
+            joinQueries(sqlQueries)
+        );
     }
 
 
