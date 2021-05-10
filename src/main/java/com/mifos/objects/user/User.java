@@ -129,6 +129,10 @@ public class User {
         return roles;
     }
 
+    public boolean hasRole(String role) {
+        return hasRole(new Role(role));
+    }
+
     public boolean hasRole(Role role) {
         return roles.contains(role);
     }
