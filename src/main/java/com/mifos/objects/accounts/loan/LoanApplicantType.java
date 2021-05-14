@@ -8,7 +8,7 @@ public enum LoanApplicantType {
   CO_APPLICANT,
   VERIFICATION_LOAN;
 
-  public LoanApplicantType getLoanApplicantType(String loanApplicantType) {
+  public static LoanApplicantType getLoanApplicantType(String loanApplicantType) {
     try {
       if (loanApplicantType != null) {
         return valueOf(loanApplicantType);
