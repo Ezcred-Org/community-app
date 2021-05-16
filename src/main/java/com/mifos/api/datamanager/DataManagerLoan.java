@@ -112,86 +112,6 @@ public class DataManagerLoan {
       return mBaseApiManager.getLoanApi().getLoanProduct(loanProductId);
     }
 
-    public Observable<Page<Loans>> getAllLoans(
-        Integer offset,
-        Integer limit,
-        String accountNo,
-        String externalId,
-        String orderBy,
-        String sortBy
-    ) {
-
-        return getAllLoans(
-            null,
-            null,
-            null,
-            accountNo,
-            externalId,
-            null,
-            offset,
-            limit,
-            orderBy,
-            sortBy,
-            null,
-            null,
-            null
-        );
-    }
-
-    public Observable<Page<Loans>> getAllLoans(
-        Long officeId,
-        Integer offset,
-        Integer limit,
-        String accountNo,
-        String externalId,
-        String orderBy,
-        String sortBy,
-        Long staffId
-    ) {
-        return getAllLoans(
-            officeId,
-            staffId,
-            null,
-            accountNo,
-            externalId,
-            null,
-            offset,
-            limit,
-            orderBy,
-            sortBy,
-            null,
-            null,
-            null
-        );
-    }
-
-    public Observable<Page<Loans>> getAllLoansByTask(
-        Integer offset,
-        Integer limit,
-        String accountNo,
-        String orderBy,
-        String sortBy,
-        String taskStatus,
-        String taskType,
-        List<String> loanStatus
-    ) {
-        return getAllLoans(
-            null,
-            null,
-            null,
-            accountNo,
-            null,
-            null,
-            offset,
-            limit,
-            orderBy,
-            sortBy,
-            taskType,
-            taskStatus,
-            loanStatus
-        );
-    }
-
     public Observable<Page<Loans>> getAllFundLoansByTask(
         Integer offset,
         Integer limit,
@@ -207,34 +127,6 @@ public class DataManagerLoan {
             null,
             null,
             fundId,
-            accountNo,
-            null,
-            null,
-            offset,
-            limit,
-            orderBy,
-            sortBy,
-            taskType,
-            taskStatus,
-            loanStatus
-        );
-    }
-
-    public Observable<Page<Loans>> getAllLoansByTaskForOffice(
-        Integer offset,
-        Integer limit,
-        String accountNo,
-        String orderBy,
-        String sortBy,
-        String taskStatus,
-        String taskType,
-        List<String> loanStatus,
-        Long officeId
-    ) {
-        return getAllLoans(
-            officeId,
-            null,
-            null,
             accountNo,
             null,
             null,
