@@ -277,7 +277,7 @@ public class DataManagerLoan {
         }
 
         if (staffId != null && staffId > 0) {
-            sqlQueries.add("l.loan_officer_id = " + staffId);
+            sqlQueries.add("l.loan_officer_id=" + staffId);
         }
 
         if (fundId != null && fundId > 0) {
@@ -285,7 +285,7 @@ public class DataManagerLoan {
         }
 
         if (!TextUtils.isEmpty(loanApplicantType)) {
-            sqlQueries.add("l.loanApplicantType=" + loanApplicantType);
+            sqlQueries.add("l.loan_applicant_type='" + loanApplicantType + "'");
         }
 
         if (!TextUtils.isEmpty(taskType)) {
