@@ -28,6 +28,10 @@ public class Constants {
 
     public static final String API_PATH = "/mifosng-provider/api/v1";
 
+    public static final String ORDER_BY_ID = "id";
+
+    public static final String SORT_BY_DESC = "DESC";
+
 
     /**
      * Entity Type, Like Clients, Groups, Staff, Loans, Savings and Client Identifiers
