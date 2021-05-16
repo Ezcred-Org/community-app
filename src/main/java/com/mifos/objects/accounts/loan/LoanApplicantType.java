@@ -1,6 +1,5 @@
 package com.mifos.objects.accounts.loan;
 
-import timber.log.Timber;
 
 public enum LoanApplicantType {
   MAIN("Main"),
@@ -23,8 +22,12 @@ public enum LoanApplicantType {
       if (loanApplicantType != null) {
         return valueOf(loanApplicantType);
       }
-    } catch (IllegalArgumentException iae) {
-      Timber.d("Failed to parse " + loanApplicantType);
+    } catch (IllegalArgumentException ignore) {
+      for (LoanApplicantType loanApplicantTypeEnum : values()) {
+        if (loanApplicantTypeEnum.getValue().equals(loanApplicantType)) {
+          return loanApplicantTypeEnum;
+        }
+      }
     }
 
     return null;
