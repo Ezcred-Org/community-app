@@ -17,14 +17,14 @@ public enum LoanApplicantionType {
     return value;
   }
 
-  public static LoanApplicantionType getLoanApplicationType(String loanApplicantType) {
+  public static LoanApplicantionType getLoanApplicationType(String loanApplicationType) {
     try {
-      if (loanApplicantType != null) {
-        return valueOf(loanApplicantType);
+      if (loanApplicationType != null) {
+        return valueOf(loanApplicationType);
       }
     } catch (IllegalArgumentException ignore) {
       for (LoanApplicantionType loanApplicantTypeEnum : values()) {
-        if (loanApplicantTypeEnum.getValue().equals(loanApplicantType)) {
+        if (loanApplicantTypeEnum.getValue().equals(loanApplicationType)) {
           return loanApplicantTypeEnum;
         }
       }

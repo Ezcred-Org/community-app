@@ -44,8 +44,8 @@ public class Loans implements Parcelable {
     @SerializedName("loanProductId")
     Integer loanProductId;
 
-    @SerializedName("loanApplicantType")
-    String loanApplicantType;
+    @SerializedName("loanApplicationType")
+    String loanApplicationType;
 
     @SerializedName("loanProductName")
     String loanProductName;
@@ -220,12 +220,12 @@ public class Loans implements Parcelable {
         this.loanProductId = loanProductId;
     }
 
-    public String getLoanApplicantType() {
-        return loanApplicantType;
+    public String getLoanApplicationType() {
+        return loanApplicationType;
     }
 
-    public void setLoanApplicantType(String loanApplicantType) {
-        this.loanApplicantType = loanApplicantType;
+    public void setLoanApplicationType(String loanApplicationType) {
+        this.loanApplicationType = loanApplicationType;
     }
 
     public String getLoanProductName() {
@@ -523,7 +523,7 @@ public class Loans implements Parcelable {
         dest.writeString(this.clientName);
         dest.writeValue(this.clientOfficeId);
         dest.writeValue(this.loanProductId);
-        dest.writeString(this.loanApplicantType);
+        dest.writeString(this.loanApplicationType);
         dest.writeString(this.loanProductName);
         dest.writeString(this.loanProductDescription);
         dest.writeValue(this.fundId);
@@ -570,7 +570,7 @@ public class Loans implements Parcelable {
         this.clientName = in.readString();
         this.clientOfficeId = (Integer) in.readValue(Integer.class.getClassLoader());
         this.loanProductId = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.loanApplicantType = in.readString();
+        this.loanApplicationType = in.readString();
         this.loanProductName = in.readString();
         this.loanProductDescription = in.readString();
         this.fundId = (Integer) in.readValue(Integer.class.getClassLoader());
@@ -643,7 +643,7 @@ public class Loans implements Parcelable {
             return false;
         if (loanProductId != null ? !loanProductId.equals(loans.loanProductId) : loans.loanProductId != null)
             return false;
-        if (loanApplicantType != null ? !loanApplicantType.equals(loans.loanApplicantType) : loans.loanApplicantType != null)
+        if (loanApplicationType != null ? !loanApplicationType.equals(loans.loanApplicationType) : loans.loanApplicationType != null)
             return false;
         if (loanProductName != null ? !loanProductName.equals(loans.loanProductName) : loans.loanProductName != null)
             return false;
@@ -721,7 +721,7 @@ public class Loans implements Parcelable {
         result = 31 * result + (clientName != null ? clientName.hashCode() : 0);
         result = 31 * result + (clientOfficeId != null ? clientOfficeId.hashCode() : 0);
         result = 31 * result + (loanProductId != null ? loanProductId.hashCode() : 0);
-        result = 31 * result + (loanApplicantType != null ? loanApplicantType.hashCode() : 0);
+        result = 31 * result + (loanApplicationType != null ? loanApplicationType.hashCode() : 0);
         result = 31 * result + (loanProductName != null ? loanProductName.hashCode() : 0);
         result = 31 * result + (loanProductDescription != null ? loanProductDescription.hashCode() : 0);
         result = 31 * result + (fundId != null ? fundId.hashCode() : 0);
