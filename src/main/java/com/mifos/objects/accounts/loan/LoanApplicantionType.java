@@ -1,7 +1,7 @@
 package com.mifos.objects.accounts.loan;
 
 
-public enum LoanApplicantType {
+public enum LoanApplicantionType {
   MAIN("Main"),
   GUARANTOR("Guarantor"),
   CO_APPLICANT("Co-Applicant"),
@@ -9,7 +9,7 @@ public enum LoanApplicantType {
 
   private final String value;
 
-  LoanApplicantType(String value) {
+  LoanApplicantionType(String value) {
     this.value = value;
   }
 
@@ -17,13 +17,13 @@ public enum LoanApplicantType {
     return value;
   }
 
-  public static LoanApplicantType getLoanApplicantType(String loanApplicantType) {
+  public static LoanApplicantionType getLoanApplicationType(String loanApplicantType) {
     try {
       if (loanApplicantType != null) {
         return valueOf(loanApplicantType);
       }
     } catch (IllegalArgumentException ignore) {
-      for (LoanApplicantType loanApplicantTypeEnum : values()) {
+      for (LoanApplicantionType loanApplicantTypeEnum : values()) {
         if (loanApplicantTypeEnum.getValue().equals(loanApplicantType)) {
           return loanApplicantTypeEnum;
         }

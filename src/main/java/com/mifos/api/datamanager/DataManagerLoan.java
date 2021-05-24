@@ -146,7 +146,7 @@ public class DataManagerLoan {
         Long fundId,
         String accountNo,
         String externalId,
-        String loanApplicantType,
+        String loanApplicationType,
         Integer offset,
         Integer limit,
         String orderBy,
@@ -176,8 +176,8 @@ public class DataManagerLoan {
             sqlQueries.add("l.fund_id=" + fundId);
         }
 
-        if (!TextUtils.isEmpty(loanApplicantType)) {
-            sqlQueries.add("l.loan_applicant_type='" + loanApplicantType + "'");
+        if (!TextUtils.isEmpty(loanApplicationType)) {
+            sqlQueries.add("l.loan_application_type='" + loanApplicationType + "'");
         }
 
         if (!TextUtils.isEmpty(taskType)) {
