@@ -20,6 +20,7 @@ import com.mifos.utils.PrefManager;
 
 import java.util.List;
 
+import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -442,6 +443,23 @@ public class DataManagerClient {
      */
     public Observable<GenericResponse> updateClientIdentifier(int clientId, int identifierId,
         IdentifierPayload identifierPayload) {
+        return mBaseApiManager.getClientsApi().updateClientIdentifier(clientId, identifierId, identifierPayload);
+    }
+
+
+    /**
+     * This Method is for updating the Client Identifier.
+     *
+     * @param clientId     Client Id
+     * @param identifierId Identifier Id
+     * @param identifierPayload
+     * @return GenericResponse
+     */
+    public Observable<GenericResponse> updateClientIdentifier(
+        long clientId,
+        long identifierId,
+        Map<String, Object> identifierPayload
+    ) {
         return mBaseApiManager.getClientsApi().updateClientIdentifier(clientId, identifierId, identifierPayload);
     }
 

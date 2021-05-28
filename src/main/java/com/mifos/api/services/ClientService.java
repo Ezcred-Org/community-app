@@ -23,6 +23,7 @@ import com.mifos.objects.templates.clients.ClientsTemplate;
 
 import java.util.List;
 
+import java.util.Map;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
@@ -209,6 +210,23 @@ public interface ClientService {
         @Path("clientId") int clientId,
         @Path("identifierId") int identifierId,
         @Body IdentifierPayload identifierPayload
+    );
+
+    /**
+     * This Service for Updating the Client Identifier.
+     * REST END POINT:
+     * https://demo.openmf.org/fineract-provider/api/v1/clients/{clientId}/identifiers/
+     * {identifierId}
+     *
+     * @param clientId     Client Id
+     * @param identifierId Identifier Id
+     * @return GenericResponse
+     */
+    @PUT(APIEndPoint.CLIENTS + "/{clientId}/" + APIEndPoint.IDENTIFIERS + "/{identifierId}")
+    Observable<GenericResponse> updateClientIdentifier(
+        @Path("clientId") long clientId,
+        @Path("identifierId") long identifierId,
+        @Body Map<String, Object> identifierPayload
     );
 
 
