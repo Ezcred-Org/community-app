@@ -20,6 +20,7 @@ public class Identifier implements Parcelable {
     public static final String DOCUMENT_KEY ="documentKey";
     public static final String DOCUMENT_TYPE ="documentType";
     public static final String DESCRIPTION ="description";
+    public static final String DOCUMENT_TYPE_ID = "documentTypeId";
     public static final String STATUS ="status";
 
     @SerializedName("id")

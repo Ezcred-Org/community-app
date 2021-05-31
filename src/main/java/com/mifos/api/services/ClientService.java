@@ -114,6 +114,19 @@ public interface ClientService {
     Observable<GenericResponse> createClientIdentifier(@Path("clientId") int clientId,
                                                        @Body IdentifierPayload identifierPayload);
 
+    /**
+     * This Service is for Creating the Client Identifier.
+     * REST END POINT:
+     * https://demo.openmf.org/fineract-provider/api/v1/clients/{clientId}/identifiers
+     *
+     * @param clientId          Client Id
+     * @param identifierPayload IdentifierPayload
+     * @return SaveResponse
+     */
+    @POST(APIEndPoint.CLIENTS + "/{clientId}/identifiers")
+    Observable<GenericResponse> createClientIdentifier(@Path("clientId") long clientId,
+                                                       @Body Map<String, Object> identifierPayload);
+
 
     /**
      * This Service is for the Fetching the Client Identifier Template.

@@ -377,6 +377,20 @@ public class DataManagerClient {
     }
 
     /**
+     * This Method is, for creating the Client Identifier.
+     *
+     * @param clientId          Client Id
+     * @param identifierPayload IdentifierPayload
+     * @return SaveResponse
+     */
+    public Observable<GenericResponse> createClientIdentifier(
+        long clientId,
+        Map<String, Object> identifierPayload
+    ) {
+        return mBaseApiManager.getClientsApi().createClientIdentifier(clientId, identifierPayload);
+    }
+
+    /**
      * This Method is, for fetching the Client Identifier Template.
      *
      * @param clientId Client Id
