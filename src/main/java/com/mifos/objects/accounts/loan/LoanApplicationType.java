@@ -2,11 +2,11 @@ package com.mifos.objects.accounts.loan;
 
 
 public enum LoanApplicationType {
+
   MAIN("Main"),
   GUARANTOR("Guarantor"),
   CO_APPLICANT("Co-Applicant"),
-  VERIFICATION("Verification")
-  ;
+  VERIFICATION("Verification");
 
   private final String value;
 
