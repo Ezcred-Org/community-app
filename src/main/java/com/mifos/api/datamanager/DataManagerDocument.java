@@ -65,19 +65,21 @@ public class DataManagerDocument {
      * @param desc         Description of Document
      * @param subDirectory SubDirectory of Document
      * @param file         Document File
+     * @param metadata     Document Metadata
      * @return SaveResponse
      */
     public Observable<GenericResponse> createDocument(
-      String entityType,
-      int entityId,
-      String name,
-      String desc,
-      String subDirectory,
-      MultipartBody.Part file
+        String entityType,
+        int entityId,
+        String name,
+        String desc,
+        String subDirectory,
+        String metadata,
+        MultipartBody.Part file
     ) {
-        return mBaseApiManager
-                .getDocumentApi()
-                .createDocument(entityType, entityId, name, desc, subDirectory, file);
+        return mBaseApiManager.getDocumentApi()
+            .createDocument(entityType, entityId, name, desc, subDirectory, metadata, file
+            );
     }
 
     /**

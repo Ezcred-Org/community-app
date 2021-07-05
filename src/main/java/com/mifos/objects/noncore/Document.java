@@ -8,6 +8,8 @@ package com.mifos.objects.noncore;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -26,8 +28,11 @@ public class Document implements Parcelable {
     private String comments;
     private Verified verified;
     private String location;
+    private String metadata;
 
-    public String getLocation() { return location; }
+    public String getLocation() {
+        return location;
+    }
 
     public int getId() {
         return id;
@@ -101,6 +106,14 @@ public class Document implements Parcelable {
         this.comments = comments;
     }
 
+    public String getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(String metadata) {
+        this.metadata = metadata;
+    }
+
     public Verified getVerified() {
         return verified;
     }
@@ -164,5 +177,22 @@ public class Document implements Parcelable {
         VERIFIED,
         REJECTED,
         PASSWORD_PENDING;
+    }
+
+    @Data
+    @Builder
+    public static class DocumentMetadata {
+
+        private static final String LAT = "lat";
+        private static final String LONG = "long";
+
+        @SerializedName(LAT)
+        private final String latitude;
+
+        @SerializedName(LONG)
+        private final String longitude;
+
+        private final String timestamp;
+        private final String timeFormat;
     }
 }
