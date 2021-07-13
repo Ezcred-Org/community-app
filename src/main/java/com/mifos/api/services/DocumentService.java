@@ -45,15 +45,19 @@ public interface DocumentService {
      * @param nameOfDocument          - Document Name
      * @param description             - Mandatory - Document Description
      * @param typedFile               - Mandatory
+     * @param metadata               - metadata
      */
     @POST("{entityType}/{entityId}/" + APIEndPoint.DOCUMENTS)
     @Multipart
-    Observable<GenericResponse> createDocument(@Path("entityType") String entityType,
-                                               @Path("entityId") int entityId,
-                                               @Part("name") String nameOfDocument,
-                                               @Part("description") String description,
-                                               @Part("subDirectory") String subDirectory,
-                                               @Part() MultipartBody.Part typedFile);
+    Observable<GenericResponse> createDocument(
+        @Path("entityType") String entityType,
+        @Path("entityId") int entityId,
+        @Part("name") String nameOfDocument,
+        @Part("description") String description,
+        @Part("subDirectory") String subDirectory,
+        @Part("metadata") String metadata,
+        @Part() MultipartBody.Part typedFile
+    );
 
 
     /**
