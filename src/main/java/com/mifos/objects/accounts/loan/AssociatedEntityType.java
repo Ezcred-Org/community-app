@@ -4,6 +4,7 @@ package com.mifos.objects.accounts.loan;
 public enum AssociatedEntityType {
 
   PARENT_LOAN("Parent"),
+  MAIN("Main"),
   GUARANTOR("Guarantor"),
   CO_APPLICANT("Co-Applicant"),
   VERIFICATION("Verification");
