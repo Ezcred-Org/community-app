@@ -60,6 +60,8 @@ public class Client extends MifosBaseModel implements Parcelable {
 
     ClientGender gender;
 
+    ClientLegalForm legalForm;
+
     @Column
     String firstname;
 
@@ -211,6 +213,14 @@ public class Client extends MifosBaseModel implements Parcelable {
 
     public void setGender(ClientGender gender) {
         this.gender = gender;
+    }
+
+    public ClientLegalForm getLegalForm() {
+        return legalForm;
+    }
+
+    public void setLegalForm(ClientLegalForm legalForm) {
+        this.legalForm = legalForm;
     }
 
     public String getFirstname() {
