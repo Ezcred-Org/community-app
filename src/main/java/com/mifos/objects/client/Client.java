@@ -11,6 +11,7 @@ import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 import com.mifos.objects.Timeline;
+import com.mifos.objects.templates.clients.LegalForm;
 import com.mifos.utils.Utils;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
@@ -59,6 +60,8 @@ public class Client extends MifosBaseModel implements Parcelable {
     List<Integer> dobDate = new ArrayList<Integer>();
 
     ClientGender gender;
+
+    LegalForm legalForm;
 
     @Column
     String firstname;
@@ -211,6 +214,14 @@ public class Client extends MifosBaseModel implements Parcelable {
 
     public void setGender(ClientGender gender) {
         this.gender = gender;
+    }
+
+    public LegalForm getLegalForm() {
+        return legalForm;
+    }
+
+    public void setLegalForm(LegalForm legalForm) {
+        this.legalForm = legalForm;
     }
 
     public String getFirstname() {
