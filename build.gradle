@@ -125,5 +125,11 @@ dependencies {
 
   compile "com.jakewharton.timber:timber:$rootProject.timberVersion"
 
-  compile group: 'org.projectlombok', name: 'lombok', version: '1.16.18'
+  compile group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
+
+  compileOnly 'org.projectlombok:lombok:1.18.20'
+  annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+  testCompileOnly 'org.projectlombok:lombok:1.18.20'
+  testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
 }
