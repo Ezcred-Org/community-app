@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import java.util.Locale;
 import lombok.Getter;
 
 /**
@@ -563,7 +564,7 @@ public class ClientPayload extends MifosBaseModel implements Parcelable {
 
         @SuppressLint("SimpleDateFormat")
         public SimpleDateFormat getDateFormat() {
-            return new SimpleDateFormat(format);
+            return new SimpleDateFormat(format, Locale.ENGLISH);
         }
     }
 }
