@@ -153,12 +153,12 @@ public class DatabaseHelperGroups {
 
                 List<LoanAccount> loanAccounts = SQLite.select()
                         .from(LoanAccount.class)
-                        .where(LoanAccount_Table.groupId.eq(groupId))
+//                        .where(LoanAccount_Table.groupId.eq(groupId))
                         .queryList();
 
                 List<SavingsAccount> savingsAccounts = SQLite.select()
                         .from(SavingsAccount.class)
-                        .where(SavingsAccount_Table.groupId.eq(groupId))
+//                        .where(SavingsAccount_Table.groupId.eq(groupId))
                         .queryList();
 
                 GroupAccounts groupAccounts = new GroupAccounts();

@@ -214,12 +214,12 @@ public class DatabaseHelperClient {
 
                 List<LoanAccount> loanAccounts = select()
                         .from(LoanAccount.class)
-                        .where(LoanAccount_Table.clientId.eq(clientId))
+//                        .where(LoanAccount_Table.clientId.eq(clientId))
                         .queryList();
 
                 List<SavingsAccount> savingsAccounts = select()
                         .from(SavingsAccount.class)
-                        .where(SavingsAccount_Table.clientId.eq(clientId))
+//                        .where(SavingsAccount_Table.clientId.eq(clientId))
                         .queryList();
 
                 ClientAccounts clientAccounts = new ClientAccounts();

@@ -12,12 +12,12 @@ import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ModelContainer;
+
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 
 @Table(database = MifosDatabase.class, name = "SavingsAccountSummary")
-@ModelContainer
+
 public class Summary extends MifosBaseModel implements Parcelable {
 
     @PrimaryKey

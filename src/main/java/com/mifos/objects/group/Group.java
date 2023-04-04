@@ -14,7 +14,6 @@ import com.mifos.objects.Timeline;
 import com.mifos.objects.client.Status;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
-import com.raizlabs.android.dbflow.annotation.ModelContainer;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 
@@ -26,7 +25,6 @@ import java.util.List;
  * Created by ishankhanna on 28/06/14.
  */
 @Table(database = MifosDatabase.class)
-@ModelContainer
 public class Group extends MifosBaseModel implements Parcelable {
 
     @PrimaryKey

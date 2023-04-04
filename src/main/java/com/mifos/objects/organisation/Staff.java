@@ -11,7 +11,7 @@ import android.os.Parcelable;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ModelContainer;
+
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 
@@ -19,7 +19,7 @@ import com.raizlabs.android.dbflow.annotation.Table;
  * Created by ishankhanna on 14/07/14.
  */
 @Table(database = MifosDatabase.class)
-@ModelContainer
+
 public class Staff extends MifosBaseModel implements Parcelable {
 
     public static final Parcelable.Creator<Staff> CREATOR = new Parcelable.Creator<Staff>() {

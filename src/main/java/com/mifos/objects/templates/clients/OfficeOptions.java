@@ -12,7 +12,7 @@ import android.os.Parcelable;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ModelContainer;
+
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 
@@ -20,7 +20,7 @@ import com.raizlabs.android.dbflow.annotation.Table;
  * Created by rajan on 13/3/16.
  */
 @Table(database = MifosDatabase.class, name = "ClientTemplateOfficeOptions")
-@ModelContainer
+
 public class OfficeOptions extends MifosBaseModel implements Parcelable {
 
     @PrimaryKey
