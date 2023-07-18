@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 import com.mifos.objects.noncore.DataTable;
-import com.raizlabs.android.dbflow.annotation.ModelContainer;
+
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 
@@ -23,7 +23,7 @@ import java.util.List;
  * Created by rajan on 13/3/16.
  */
 @Table(database = MifosDatabase.class)
-@ModelContainer
+
 public class ClientsTemplate extends MifosBaseModel implements Parcelable {
 
     private int[] activationDate;

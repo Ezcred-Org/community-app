@@ -13,7 +13,6 @@ import com.mifos.api.local.MifosDatabase;
 import com.mifos.objects.accounts.savings.Currency;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
-import com.raizlabs.android.dbflow.annotation.ModelContainer;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 
@@ -21,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Table(database = MifosDatabase.class)
-@ModelContainer
 public class LoanWithAssociations extends MifosBaseModel implements Parcelable {
     //TODO Fix OBJECT Typed Lists
 

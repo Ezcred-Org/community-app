@@ -13,7 +13,7 @@ import com.mifos.api.local.MifosDatabase;
 import com.mifos.objects.PaymentTypeOption;
 import com.mifos.objects.accounts.savings.Currency;
 import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ModelContainer;
+
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Table(database = MifosDatabase.class)
-@ModelContainer
+
 public class LoanRepaymentTemplate extends MifosBaseModel implements Parcelable {
 
     // Loan id is not present in Response, It's only for primary key use case to save

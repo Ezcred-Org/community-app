@@ -13,7 +13,6 @@ import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 import com.mifos.objects.noncore.DataTablePayload;
 import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ModelContainer;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 
@@ -28,7 +27,6 @@ import lombok.Getter;
  * Created by ADMIN on 16-Jun-15.
  */
 @Table(database = MifosDatabase.class)
-@ModelContainer
 public class ClientPayload extends MifosBaseModel implements Parcelable {
 
     @PrimaryKey(autoincrement = true)

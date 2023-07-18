@@ -7,7 +7,7 @@ import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 import com.mifos.api.model.APIEndPoint;
 import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ModelContainer;
+
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 
@@ -16,7 +16,7 @@ import com.raizlabs.android.dbflow.annotation.Table;
  * See https://github.com/openMF/android-client/blob/master/LICENSE.md
  */
 @Table(database = MifosDatabase.class, name = "SavingAccountDepositType")
-@ModelContainer
+
 public class DepositType extends MifosBaseModel implements Parcelable {
 
 

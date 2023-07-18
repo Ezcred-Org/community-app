@@ -29,9 +29,9 @@ public class MifosOkHttpClient {
 
     OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
-    //Setting Timeout 50 Seconds
-    builder.connectTimeout(50, TimeUnit.SECONDS);
-    builder.readTimeout(50, TimeUnit.SECONDS);
+    //Setting Timeout 90 Seconds
+    builder.connectTimeout(90, TimeUnit.SECONDS);
+    builder.readTimeout(90, TimeUnit.SECONDS);
     builder.retryOnConnectionFailure(true);
 
     if (mifosTokenAuthenticator != null) {

@@ -13,7 +13,7 @@ import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 import com.mifos.objects.PaymentTypeOption;
 import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ModelContainer;
+
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 
@@ -24,7 +24,7 @@ import java.util.List;
  * Created by ishankhanna on 12/06/14.
  */
 @Table(database = MifosDatabase.class)
-@ModelContainer
+
 public class SavingsAccountTransactionTemplate extends MifosBaseModel implements Parcelable {
 
     @SerializedName("accountId")

@@ -12,12 +12,12 @@ import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ModelContainer;
+
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 
 @Table(database = MifosDatabase.class)
-@ModelContainer
+
 public class TransactionType extends MifosBaseModel implements Parcelable {
 
     @SerializedName("id")
