@@ -6,6 +6,7 @@
 package com.mifos.api;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -32,6 +33,7 @@ public class MifosInterceptor implements Interceptor {
     public static final String DATA_SECURITY_HEADER = "X-Data-Security";
     public static final String CLIENT_LOAN_HEADER = "X-Client-Loan";
     public static final String APP_VERSION_HEADER = "X-App-Version";
+    public static final String X_MOBILE_SDK_VERSION = "x-mobile-sdk-version";
     public static final String GEO_LOCATION_HEADER = "X-Geo-Location";
     public static final String CONTENT_TYPE_HEADER = "Content-Type";
     public static final String POS_HEADER = "X-PoS";
@@ -68,6 +70,7 @@ public class MifosInterceptor implements Interceptor {
         long clientId = sharedPreferences.getLong("CLIENT_ID", -1);
         long loanId = sharedPreferences.getLong("LOAN_ID", -1);
         builder.header(APP_VERSION_HEADER,  prefManager.getEzcredLastAppVersionName());
+        builder.header(X_MOBILE_SDK_VERSION, String.valueOf(Build.VERSION.SDK_INT));
         if (clientId != -1 || loanId != -1) {
             builder.header(CLIENT_LOAN_HEADER, clientId + "-" + loanId);
         }
