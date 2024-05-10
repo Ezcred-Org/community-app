@@ -100,9 +100,7 @@ dependencies {
 
 
   compile 'com.joanzapata.iconify:android-iconify-material:2.1.1' // (v2.0.0)
-  compile('com.crashlytics.sdk.android:crashlytics:2.6.6@aar') {
-    transitive = true;
-  }
+
   compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
   compile 'com.github.bumptech.glide:glide:3.7.0'
 
