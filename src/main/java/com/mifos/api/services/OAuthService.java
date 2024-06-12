@@ -28,4 +28,8 @@ public interface OAuthService {
       @Field("client_secret") String clientSecret,
       @Field("grant_type") GrantType grantType
   );
+
+  @FormUrlEncoded
+  @POST(APIEndPoint.TOKEN)
+  Observable<Void> logout(@Field("access_token") String accessToken);
 }

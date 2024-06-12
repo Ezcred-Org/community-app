@@ -36,6 +36,14 @@ public class DataManagerAuth {
         return baseApiManager.getAuthApi().authenticate(new LoginData(username, password));
     }
 
+    /**
+     * @param accessToken Access token
+     * @return Void
+     */
+    public Observable<Void> logout(String accessToken) {
+        return baseApiManager.getoAuthService().logout(accessToken);
+    }
+
     public Observable<OAuthTokenResponse> fetchOAuthToken(String userName, String password) {
         return baseApiManager.getoAuthService().fetchOAuthToken(
             userName, password, "community-app", "123", GrantType.password
