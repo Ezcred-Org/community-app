@@ -8,14 +8,15 @@ package com.mifos.objects.accounts.savings;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.ForeignKey;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ForeignKey;
-
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -154,6 +155,7 @@ public class Transaction extends MifosBaseModel implements Parcelable {
         this.savingsTransactionDate = savingsTransactionDate;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Transaction{" +

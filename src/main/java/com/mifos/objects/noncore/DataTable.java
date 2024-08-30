@@ -8,11 +8,13 @@ package com.mifos.objects.noncore;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
+import androidx.annotation.NonNull;
+
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.mifos.api.local.MifosBaseModel;
+import com.mifos.api.local.MifosDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +57,7 @@ public class DataTable extends MifosBaseModel implements Parcelable {
         this.registeredTableName = registeredTableName;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "DataTable{" +

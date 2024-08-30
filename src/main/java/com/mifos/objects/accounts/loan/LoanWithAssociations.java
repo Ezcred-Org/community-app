@@ -8,13 +8,13 @@ package com.mifos.objects.accounts.loan;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
-import com.mifos.objects.accounts.savings.Currency;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.mifos.api.local.MifosBaseModel;
+import com.mifos.api.local.MifosDatabase;
+import com.mifos.objects.accounts.savings.Currency;
 
 import java.util.ArrayList;
 import java.util.List;

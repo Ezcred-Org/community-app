@@ -2,9 +2,7 @@ package com.mifos.api.local.databasehelper;
 
 import com.mifos.objects.accounts.GroupAccounts;
 import com.mifos.objects.accounts.loan.LoanAccount;
-import com.mifos.objects.accounts.loan.LoanAccount_Table;
 import com.mifos.objects.accounts.savings.SavingsAccount;
-import com.mifos.objects.accounts.savings.SavingsAccount_Table;
 import com.mifos.objects.client.Page;
 import com.mifos.objects.group.Group;
 import com.mifos.objects.group.GroupDate;

@@ -8,14 +8,14 @@ package com.mifos.objects.group;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
-import com.mifos.objects.Timeline;
-import com.mifos.objects.client.Status;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.mifos.api.local.MifosBaseModel;
+import com.mifos.api.local.MifosDatabase;
+import com.mifos.objects.Timeline;
+import com.mifos.objects.client.Status;
 
 import java.util.ArrayList;
 import java.util.List;

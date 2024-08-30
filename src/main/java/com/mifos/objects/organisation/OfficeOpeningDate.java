@@ -3,12 +3,14 @@ package com.mifos.objects.organisation;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
+import androidx.annotation.NonNull;
 
+import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.mifos.api.local.MifosBaseModel;
+import com.mifos.api.local.MifosDatabase;
+
 
 /**
  * Created by Rajan Maurya on 7/7/16.
@@ -61,6 +63,7 @@ public class OfficeOpeningDate extends MifosBaseModel implements Parcelable {
         this.day = day;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "OfficeOpeningDate{" +

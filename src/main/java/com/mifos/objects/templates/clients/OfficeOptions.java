@@ -9,12 +9,14 @@ package com.mifos.objects.templates.clients;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
+import androidx.annotation.NonNull;
 
+import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.mifos.api.local.MifosBaseModel;
+import com.mifos.api.local.MifosDatabase;
+
 
 /**
  * Created by rajan on 13/3/16.
@@ -56,6 +58,7 @@ public class OfficeOptions extends MifosBaseModel implements Parcelable {
         this.nameDecorated = nameDecorated;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "OfficeOptions{" +

@@ -1,129 +1,121 @@
 apply plugin: 'com.android.library'
 
 android {
-  compileSdkVersion 28
-  buildToolsVersion "28.0.3"
+    compileSdk 34
+    namespace 'com.mifos.mifosxdroid'
 
-  defaultConfig {
-    minSdkVersion 17
-    targetSdkVersion 28
-    versionCode 1
-    versionName "1.0"
+    defaultConfig {
+        minSdkVersion 17
+        targetSdk 34
 
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-    lintOptions {
-      tasks.lint.enabled = false
-      checkReleaseBuilds false
-      // Or, if you prefer, you can continue to check for errors in release builds,
-      // but continue the build even when errors are found:
-      abortOnError false
-      javaCompileOptions {
-        annotationProcessorOptions {
-          includeCompileClasspath true
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
         }
-      }
+
+     /*   lintOptions {
+            tasks.lint.enabled = false
+            checkReleaseBuilds false
+            abortOnError false
+        }
+*/
+
+            /*javaCompileOptions {
+                annotationProcessorOptions {
+                    arguments = ["dbflow.incremental": "true"]
+                }
+            }*/
+       /* packagingOptions {
+            exclude 'META-INF/services/javax.annotation.processing.Processor'
+        }*/
     }
-  }
-  buildTypes {
-    release {
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+    buildTypes {
+        release {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
-  }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.fork = true
+        options.forkOptions.jvmArgs += [
+                '--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED',
+                '--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED',
+                '--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED'
+        ]
+
+    }
+
+
 }
 
-
 repositories {
-  mavenCentral()
-  jcenter()
-  maven { url 'http://dl.bintray.com/amulyakhare/maven' }
+    mavenCentral()
+    google()
+    maven {
+        url 'http://dl.bintray.com/amulyakhare/maven'
+        allowInsecureProtocol = true
+    }
+    maven { url "https://www.jitpack.io" }
+    maven { url 'https://maven.google.com' }
 }
 
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
-  androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-    exclude group: 'com.android.support', module: 'support-annotations'
-  })
-  compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
-  testCompile 'junit:junit:4.12'
-  // You must install or update the Support Repository through the SDK manager to use this dependency.
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-  compile fileTree(dir: 'src/main/libs', include: ['*.jar'])
+    // DBFlow dependencies
+ /*   annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:4.2.4"
+    implementation "com.github.Raizlabs.DBFlow:dbflow-core:4.2.4"
+    implementation "com.github.Raizlabs.DBFlow:dbflow:4.2.4"*/
+    annotationProcessor project (':dbflow-processor')
+    implementation project (':dbflow-core')
+    implementation project (':dbflow')
 
-  //DBFlow dependencies
-  annotationProcessor "com.github.raizlabs.dbflow:dbflow-processor:$rootProject.raizLabsDBFlow"
-  //apt "com.github.raizlabs.dbflow:dbflow-processor:$rootProject.raizLabsDBFlow"
-  compile "com.github.raizlabs.dbflow:dbflow-core:$rootProject.raizLabsDBFlow"
-  compile "com.github.raizlabs.dbflow:dbflow:$rootProject.raizLabsDBFlow"
+   /* annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:4.2.4"
+    implementation "com.github.Raizlabs.DBFlow:dbflow-core:4.2.4"
+    implementation "com.github.Raizlabs.DBFlow:dbflow:4.2.4"
+    implementation "com.github.Raizlabs.DBFlow:dbflow-kotlinextensions:4.2.4"*/
+    implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
+    testImplementation 'junit:junit:4.13.2'
 
-  // App's Support dependencies, including test
-  compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
-  compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
-  compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
-  compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
-  compile "com.android.support:design:$rootProject.supportLibraryVersion"
-//  compile "com.google.android.gms:play-services-places:$rootProject.playServicesVersion"
-//  compile "com.google.android.gms:play-services-location:$rootProject.playServicesVersion"
-//  compile "com.google.android.gms:play-services-maps:$rootProject.playServicesVersion"
-//  compile "com.google.maps.android:android-maps-utils:$rootProject.mapUtilsServices"
-  compile "com.android.support.test.espresso:espresso-idling-resource:$rootProject.espressoVersion"
+    // Dagger dependencies
+    annotationProcessor "com.google.dagger:dagger-compiler:2.40.5"
+    implementation "com.google.dagger:dagger:2.40.5"
 
-  //Dagger dependencies
-  annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
-  compile "com.google.dagger:dagger:$rootProject.daggerVersion"
-  provided 'javax.annotation:jsr250-api:1.0'                //Required by Dagger2
-
-  //Butter Knife
-  compile "com.jakewharton:butterknife:$rootProject.butterKnifeVersion"
-  annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"
+    // Other dependencies...
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation "androidx.core:core-ktx:1.13.1"
+    implementation "androidx.recyclerview:recyclerview:1.3.2"
+    implementation "androidx.cardview:cardview:1.0.0"
+   // implementation "com.google.android.material:material:1.12.0"
+    implementation 'com.google.android.material:material:1.12.0'
 
 
-  //Square dependencies
-  compile ('com.squareup.retrofit2:retrofit:$rootProject.retrofitVersionLatest') {
-    // exclude Retrofit’s OkHttp peer-dependency module and define your own module import
-    exclude module: 'okhttp'
-  }
-  compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersionLatest"
-  compile "com.squareup.retrofit2:converter-scalars:$rootProject.retrofitVersionLatest"
-  compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofitVersionLatest"
-  compile "com.squareup.okhttp3:okhttp:$rootProject.okHttp3Version"
-  compile "com.squareup.okhttp3:logging-interceptor:$rootProject.okHttp3Version"
-  compile "com.jakewharton.fliptables:fliptables:$rootProject.flipTableVersion"
+    implementation "com.jakewharton:butterknife:10.2.3"
+    annotationProcessor "com.jakewharton:butterknife-compiler:10.2.3"
 
-  compile 'javax.annotation:jsr250-api:1.0@jar'
 
-  compile 'io.reactivex:rxandroid:1.1.0'
-  compile 'io.reactivex:rxjava:1.1.4'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0' // Scalars Converter
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.okhttp3:okhttp:4.12.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
 
-  compile 'com.joanzapata.iconify:android-iconify-material:2.1.1' // (v2.0.0)
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0' // RxJava3 adapter for Retrofit
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.5' // RxJava3 library
 
-  compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
-  compile 'com.github.bumptech.glide:glide:3.7.0'
 
-  // Android Testing Support Library's runner and rules
-  androidTestCompile "com.android.support.test:runner:$rootProject.runnerVersion"
-  androidTestCompile "com.android.support.test:rules:$rootProject.rulesVersion"
+    implementation "io.reactivex:rxandroid:1.2.1"
+    implementation "io.reactivex:rxjava:1.3.8"
 
-  // Espresso UI Testing dependencies.
-  androidTestCompile "com.android.support.test.espresso:espresso-core:2.2.2"
-  androidTestCompile("com.android.support.test.espresso:espresso-contrib:$rootProject.espressoVersion") {
-    exclude group: 'com.android.support', module: 'appcompat'
-    exclude group: 'com.android.support', module: 'support-v4'
-    exclude group: 'com.android.support', module: 'recyclerview-v7'
-    exclude group: 'com.android.support', module: 'design'
-  }
-  androidTestCompile "com.android.support.test.espresso:espresso-intents:$rootProject.espressoVersion"
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+    implementation 'org.projectlombok:lombok:1.18.34'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
+    testImplementation 'org.projectlombok:lombok:1.18.34'
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
 
-  testCompile 'junit:junit:4.12'
-  testCompile 'org.mockito:mockito-core:1.10.19'
+    implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
+    implementation "androidx.test.espresso:espresso-idling-resource:3.6.1"
 
-  compile "com.jakewharton.timber:timber:$rootProject.timberVersion"
 
-  compile group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
-
-  compileOnly 'org.projectlombok:lombok:1.18.20'
-  annotationProcessor 'org.projectlombok:lombok:1.18.20'
-
-  testCompileOnly 'org.projectlombok:lombok:1.18.20'
-  testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
 }

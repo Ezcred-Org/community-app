@@ -1,7 +1,8 @@
 package com.mifos.api.local.databasehelper;
 
 import android.os.AsyncTask;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import com.mifos.objects.client.Page;
 import com.mifos.objects.group.Center;

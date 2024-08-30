@@ -8,12 +8,13 @@ package com.mifos.objects.accounts.savings;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
-
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 
@@ -21,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Table(database = MifosDatabase.class)
-
 public class SavingsAccountWithAssociations extends MifosBaseModel implements Parcelable {
 
     @SerializedName("id")
@@ -341,6 +341,7 @@ public class SavingsAccountWithAssociations extends MifosBaseModel implements Pa
         isDormancyTrackingActive = dormancyTrackingActive;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "SavingsAccountWithAssociations{" +

@@ -3,13 +3,14 @@ package com.mifos.objects.accounts.savings;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 import com.mifos.api.model.APIEndPoint;
-import com.raizlabs.android.dbflow.annotation.Column;
-
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 
 /*
  * This project is licensed under the open source MPL V2.
@@ -85,6 +86,7 @@ public class DepositType extends MifosBaseModel implements Parcelable {
         return ServerTypes.fromId(getId());
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "DepositType{" +

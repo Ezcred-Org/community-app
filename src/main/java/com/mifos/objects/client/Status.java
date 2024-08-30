@@ -8,11 +8,14 @@ package com.mifos.objects.client;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
+import androidx.annotation.NonNull;
+
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.mifos.api.local.MifosBaseModel;
+import com.mifos.api.local.MifosDatabase;
+
 
 /**
  * This Model is the common for Client and Group. So we can use it in both client and group
@@ -72,6 +75,7 @@ public class Status extends MifosBaseModel implements Parcelable {
         this.value = value;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Status{" +
