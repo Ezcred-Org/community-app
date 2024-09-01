@@ -11,9 +11,9 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,38 +22,37 @@ import java.util.List;
  * This Model is saving the Summary of the Loans according to their Id's
  *
  */
-@Table(database = MifosDatabase.class, name = "LoansAccountSummary")
 public class Summary extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+
     transient Integer loanId;
 
     @SerializedName("Currency")
     Currency currency;
 
-    @Column
+
     @SerializedName("principalDisbursed")
     Double principalDisbursed;
 
-    @Column
+
     @SerializedName("principalPaid")
     Double principalPaid;
 
     @SerializedName("principalWrittenOff")
     Double principalWrittenOff;
 
-    @Column
+
     @SerializedName("principalOutstanding")
     Double principalOutstanding;
 
     @SerializedName("principalOverdue")
     Double principalOverdue;
 
-    @Column
+
     @SerializedName("interestCharged")
     Double interestCharged;
 
-    @Column
+
     @SerializedName("interestPaid")
     Double interestPaid;
 
@@ -63,21 +62,21 @@ public class Summary extends MifosBaseModel implements Parcelable {
     @SerializedName("interestWrittenOff")
     Double interestWrittenOff;
 
-    @Column
+
     @SerializedName("interestOutstanding")
     Double interestOutstanding;
 
     @SerializedName("interestOverdue")
     Double interestOverdue;
 
-    @Column
+
     @SerializedName("feeChargesCharged")
     Double feeChargesCharged;
 
     @SerializedName("feeChargesDueAtDisbursementCharged")
     Double feeChargesDueAtDisbursementCharged;
 
-    @Column
+
     @SerializedName("feeChargesPaid")
     Double feeChargesPaid;
 
@@ -87,18 +86,18 @@ public class Summary extends MifosBaseModel implements Parcelable {
     @SerializedName("feeChargesWrittenOff")
     Double feeChargesWrittenOff;
 
-    @Column
+
     @SerializedName("feeChargesOutstanding")
     Double feeChargesOutstanding;
 
     @SerializedName("feeChargesOverdue")
     Double feeChargesOverdue;
 
-    @Column
+
     @SerializedName("penaltyChargesCharged")
     Double penaltyChargesCharged;
 
-    @Column
+
     @SerializedName("penaltyChargesPaid")
     Double penaltyChargesPaid;
 
@@ -108,18 +107,18 @@ public class Summary extends MifosBaseModel implements Parcelable {
     @SerializedName("penaltyChargesWrittenOff")
     Double penaltyChargesWrittenOff;
 
-    @Column
+
     @SerializedName("penaltyChargesOutstanding")
     Double penaltyChargesOutstanding;
 
     @SerializedName("penaltyChargesOverdue")
     Double penaltyChargesOverdue;
 
-    @Column
+
     @SerializedName("totalExpectedRepayment")
     Double totalExpectedRepayment;
 
-    @Column
+
     @SerializedName("totalRepayment")
     Double totalRepayment;
 
@@ -135,11 +134,11 @@ public class Summary extends MifosBaseModel implements Parcelable {
     @SerializedName("totalWrittenOff")
     Double totalWrittenOff;
 
-    @Column
+
     @SerializedName("totalOutstanding")
     Double totalOutstanding;
 
-    @Column
+
     @SerializedName("totalOverdue")
     Double totalOverdue;
 

@@ -1,11 +1,9 @@
 package com.mifos.api.local;
 
-import com.raizlabs.android.dbflow.annotation.Database;
 
 /**
  * Created by Rajan Maurya on 23/06/16.
  */
-@Database(name = MifosDatabase.NAME, version = MifosDatabase.VERSION)
 public class MifosDatabase {
 
     // database name will be Mifos.db

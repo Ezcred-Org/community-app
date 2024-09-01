@@ -10,28 +10,28 @@ import android.os.Parcelable;
 
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
 
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
+
+
 
 /**
  * Created by ishankhanna on 16/06/14.
  */
-@Table(database = MifosDatabase.class)
+
 
 public class ColumnValue extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+    
     Integer id;
 
-    @Column
+    
     String value;
 
-    @Column
+    
     Integer score;
 
-    @Column
+    
     String registeredTableName;
 
     public String getRegisteredTableName() {

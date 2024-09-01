@@ -10,28 +10,28 @@ import android.os.Parcelable;
 
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
+
+
 
 /**
  * This Model is the common for Client and Group. So we can use it in both client and group
  * database.
  * Created by ishankhanna on 09/02/14.
  */
-@Table(database = MifosDatabase.class)
+
 public class Status extends MifosBaseModel implements Parcelable {
 
 
     private static final String STATUS_ACTIVE = "Active";
 
-    @PrimaryKey
+    
     int id;
 
-    @Column
+    
     String code;
 
-    @Column
+    
     String value;
 
     public Status() {

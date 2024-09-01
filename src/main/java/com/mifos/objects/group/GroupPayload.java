@@ -10,44 +10,44 @@ import android.os.Parcelable;
 
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
+
+
 
 /**
  * Created by nellyk on 1/22/2016.
  */
-@Table(database = MifosDatabase.class)
+
 public class GroupPayload extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey(autoincrement = true)
+    
     transient int id;
 
-    @Column
+    
     transient String errorMessage;
 
-    @Column
+    
     int officeId;
 
-    @Column
+    
     boolean active;
 
-    @Column
+    
     String activationDate;
 
-    @Column
+    
     String submittedOnDate;
 
-    @Column
+    
     String externalId;
 
-    @Column
+    
     String name;
 
-    @Column
+    
     String locale;
 
-    @Column
+    
     String dateFormat;
 
     public int getId() {
