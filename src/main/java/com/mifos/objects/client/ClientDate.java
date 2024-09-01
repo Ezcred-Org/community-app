@@ -6,33 +6,33 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
+
+
 
 /**
  * Created by Rajan Maurya on 04/07/16.
  */
-@Table(database = MifosDatabase.class)
+
 public class ClientDate extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+    
     @SerializedName("clientId")
     long clientId;
 
-    @PrimaryKey
+    
     @SerializedName("chargeId")
     long chargeId;
 
-    @Column
+    
     @SerializedName("day")
     int day;
 
-    @Column
+    
     @SerializedName("month")
     int month;
 
-    @Column
+    
     @SerializedName("year")
     int year;
 

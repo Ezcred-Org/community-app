@@ -11,43 +11,42 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
 
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
+
+
 
 
 /**
  * Created by rajan on 13/3/16.
  */
-@Table(database = MifosDatabase.class, name = "ClientTemplateStaffOptions")
 
 public class StaffOptions extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+
     int id;
 
-    @Column
+
     String firstname;
 
-    @Column
+
     String lastname;
 
-    @Column
+
     String displayName;
 
-    @Column
+
     int officeId;
 
-    @Column
+
     String officeName;
 
     @SerializedName("isLoanOfficer")
-    @Column
+
     boolean isLoan_officer;
 
     @SerializedName("isActive")
-    @Column
+
     boolean is_Active;
 
     public int getId() {

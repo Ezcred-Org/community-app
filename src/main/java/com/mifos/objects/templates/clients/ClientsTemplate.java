@@ -7,8 +7,8 @@ import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 import com.mifos.objects.noncore.DataTable;
 
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,13 +22,13 @@ import java.util.List;
 /**
  * Created by rajan on 13/3/16.
  */
-@Table(database = MifosDatabase.class)
+
 
 public class ClientsTemplate extends MifosBaseModel implements Parcelable {
 
     private int[] activationDate;
 
-    @PrimaryKey
+    
     int officeId;
 
     private List<OfficeOptions> officeOptions;

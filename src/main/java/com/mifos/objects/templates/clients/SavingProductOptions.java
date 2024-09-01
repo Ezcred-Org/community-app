@@ -10,28 +10,27 @@ import android.os.Parcelable;
 
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
 
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
+
+
 
 /**
  * Created by rajan on 13/3/16.
  */
-@Table(database = MifosDatabase.class, name = "ClientTemplateSavingProductsOptions")
 
 public class SavingProductOptions extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+
     int id;
 
-    @Column
+
     String name;
 
-    @Column
+
     boolean withdrawalFeeForTransfers;
 
-    @Column
+
     boolean allowOverdraft;
 
     public int getId() {

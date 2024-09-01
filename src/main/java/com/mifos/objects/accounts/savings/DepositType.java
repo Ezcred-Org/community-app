@@ -6,27 +6,26 @@ import android.os.Parcelable;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 import com.mifos.api.model.APIEndPoint;
-import com.raizlabs.android.dbflow.annotation.Column;
 
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
+
+
 
 /*
  * This project is licensed under the open source MPL V2.
  * See https://github.com/openMF/android-client/blob/master/LICENSE.md
  */
-@Table(database = MifosDatabase.class, name = "SavingAccountDepositType")
 
 public class DepositType extends MifosBaseModel implements Parcelable {
 
 
-    @PrimaryKey
+
     Integer id;
 
-    @Column
+
     String code;
 
-    @Column
+
     String value;
 
     public DepositType() {

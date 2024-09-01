@@ -10,57 +10,57 @@ import android.os.Parcelable;
 
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
+
+
 
 /**
  * Created by ishankhanna on 22/05/14.
  */
-@Table(database = MifosDatabase.class)
+
 public class LoanRepaymentRequest extends MifosBaseModel implements Parcelable {
 
 
-    @PrimaryKey
+    
     transient long timeStamp;
 
-    @Column
+    
     transient Integer loanId;
 
-    @Column
+    
     transient String errorMessage;
 
-    @Column
+    
     String dateFormat;
 
-    @Column
+    
     String locale;
 
-    @Column
+    
     String transactionDate;
 
-    @Column
+    
     String transactionAmount;
 
-    @Column
+    
     String paymentTypeId;
 
-    @Column
+    
     String note;
 
-    @Column
+    
     String accountNumber;
 
-    @Column
+    
     String checkNumber;
 
-    @Column
+    
     String routingCode;
 
-    @Column
+    
     String receiptNumber;
 
-    @Column
+    
     String bankNumber;
 
     public String getErrorMessage() {

@@ -11,10 +11,10 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ForeignKey;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
+
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +24,10 @@ import java.util.List;
  *
  * Here
  */
-@Table(database = MifosDatabase.class)
+
 public class Timeline extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+    
     transient Integer loanId;
 
     @SerializedName("submittedOnDate")
@@ -58,8 +58,8 @@ public class Timeline extends MifosBaseModel implements Parcelable {
     List<Integer> expectedDisbursementDate;
 
     //This Object for saving the actualDisbursementDate, Not belong to any POST and GET Request
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     transient ActualDisbursementDate actualDisburseDate;
 
     @SerializedName("actualDisbursementDate")
