@@ -16,11 +16,12 @@
 
 package com.mifos.utils;
 
-import android.support.test.espresso.IdlingResource;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static dagger.internal.Preconditions.checkNotNull;
+
+import androidx.test.espresso.IdlingResource;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**

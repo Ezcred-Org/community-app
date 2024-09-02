@@ -8,14 +8,15 @@ package com.mifos.objects.templates.savings;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 import com.mifos.objects.PaymentTypeOption;
-import com.raizlabs.android.dbflow.annotation.Column;
-
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,6 +86,7 @@ public class SavingsAccountTransactionTemplate extends MifosBaseModel implements
         this.paymentTypeOptions = paymentTypeOptions;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "SavingsAccountTransactionTemplate{" +

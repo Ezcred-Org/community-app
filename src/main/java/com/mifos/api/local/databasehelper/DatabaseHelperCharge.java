@@ -15,7 +15,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import rx.Observable;
-import rx.Subscriber;
 
 /**
  * Created by Rajan Maurya on 4/7/16.
@@ -67,29 +66,26 @@ public class DatabaseHelperCharge {
      * @return Page of Charges
      */
     public Observable<Page<Charges>> readClientCharges(final int clientId) {
-        return Observable.create(new Observable.OnSubscribe<Page<Charges>>() {
-            @Override
-            public void call(Subscriber<? super Page<Charges>> subscriber) {
+        return Observable.create(subscriber -> {
 
-                //Loading All charges from Charges_Table as reference to client id
-                List<Charges> chargesList = SQLite.select()
-                        .from(Charges.class)
-                        .where(Charges_Table.clientId.eq(clientId))
-                        .queryList();
+            //Loading All charges from Charges_Table as reference to client id
+            List<Charges> chargesList = SQLite.select()
+                    .from(Charges.class)
+                    .where(Charges_Table.clientId.eq(clientId))
+                    .queryList();
 
-                //Setting the Charge Due Date
-                for (int i = 0; i < chargesList.size(); i++) {
-                    chargesList.get(i).setDueDate(Arrays.asList(
-                            chargesList.get(i).getChargeDueDate().getYear(),
-                            chargesList.get(i).getChargeDueDate().getMonth(),
-                            chargesList.get(i).getChargeDueDate().getDay()));
-                }
-
-                Page<Charges> chargePage = new Page<Charges>();
-                chargePage.setPageItems(chargesList);
-                subscriber.onNext(chargePage);
-
+            //Setting the Charge Due Date
+            for (int i = 0; i < chargesList.size(); i++) {
+                chargesList.get(i).setDueDate(Arrays.asList(
+                        chargesList.get(i).getChargeDueDate().getYear(),
+                        chargesList.get(i).getChargeDueDate().getMonth(),
+                        chargesList.get(i).getChargeDueDate().getDay()));
             }
+
+            Page<Charges> chargePage = new Page<Charges>();
+            chargePage.setPageItems(chargesList);
+            subscriber.onNext(chargePage);
+
         });
 
     }

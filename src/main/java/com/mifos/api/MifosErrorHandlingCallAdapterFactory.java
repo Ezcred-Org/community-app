@@ -1,30 +1,30 @@
 package com.mifos.api;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
+
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
-
 
 import retrofit2.Call;
 import retrofit2.CallAdapter;
 import retrofit2.HttpException;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import rx.Observable;
 import rx.functions.Func1;
 
 // refer http://bytes.babbel.com/en/articles/2016-03-16-retrofit2-rxjava-error-handling.html
 public class MifosErrorHandlingCallAdapterFactory extends CallAdapter.Factory {
-  private final RxJavaCallAdapterFactory original;
+  private final RxJava3CallAdapterFactory original;
 
   public static CallAdapter.Factory create() {
     return new MifosErrorHandlingCallAdapterFactory();
   }
 
   public MifosErrorHandlingCallAdapterFactory() {
-    this.original = RxJavaCallAdapterFactory.create();
+    this.original = RxJava3CallAdapterFactory.create();
   }
 
   @Nullable

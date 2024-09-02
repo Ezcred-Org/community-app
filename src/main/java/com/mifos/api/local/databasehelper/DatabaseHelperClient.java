@@ -1,14 +1,14 @@
 package com.mifos.api.local.databasehelper;
 
+import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.mifos.objects.accounts.ClientAccounts;
 import com.mifos.objects.accounts.loan.LoanAccount;
-import com.mifos.objects.accounts.loan.LoanAccount_Table;
 import com.mifos.objects.accounts.savings.SavingsAccount;
-import com.mifos.objects.accounts.savings.SavingsAccount_Table;
 import com.mifos.objects.client.Client;
 import com.mifos.objects.client.ClientDate;
 import com.mifos.objects.client.ClientPayload;
@@ -48,7 +48,6 @@ import rx.Subscriber;
 import rx.functions.Action1;
 import rx.functions.Func0;
 
-import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
 /**
  * This DatabaseHelper Managing all Database logic and staff (Saving, Update, Delete).

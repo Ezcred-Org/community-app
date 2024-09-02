@@ -9,12 +9,15 @@ package com.mifos.objects.accounts.loan;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
+import androidx.annotation.NonNull;
+
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.mifos.api.local.MifosBaseModel;
+import com.mifos.api.local.MifosDatabase;
+
 
 @Table(database = MifosDatabase.class)
 public class LoanAccount extends MifosBaseModel implements Parcelable {
@@ -194,6 +197,7 @@ public class LoanAccount extends MifosBaseModel implements Parcelable {
         this.inArrears = inArrears;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "LoanAccount{" +

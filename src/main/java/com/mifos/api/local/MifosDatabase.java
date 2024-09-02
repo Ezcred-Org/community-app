@@ -1,5 +1,6 @@
 package com.mifos.api.local;
 
+
 import com.raizlabs.android.dbflow.annotation.Database;
 
 /**

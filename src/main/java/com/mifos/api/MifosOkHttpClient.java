@@ -1,12 +1,12 @@
 package com.mifos.api;
 
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
 
 import com.mifos.utils.PrefManager;
 
 import java.util.concurrent.TimeUnit;
 
+import lombok.NonNull;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;

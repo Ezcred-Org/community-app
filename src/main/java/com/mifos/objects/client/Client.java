@@ -7,15 +7,19 @@ package com.mifos.objects.client;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.ForeignKey;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 import com.mifos.objects.Timeline;
 import com.mifos.utils.Utils;
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ForeignKey;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -329,6 +333,7 @@ public class Client extends MifosBaseModel implements Parcelable {
         return Utils.getDate(dobDate);
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Client{" +
