@@ -10,27 +10,21 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
 
-
-@Table(database = MifosDatabase.class, name = "LoanAccountLoanType")
 
 public class LoanType extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+
     @SerializedName("id")
     Integer id;
 
-    @Column
+
     @SerializedName("code")
     String code;
 
-    @Column
+
     @SerializedName("value")
     String value;
 

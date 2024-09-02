@@ -10,14 +10,9 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
 import com.mifos.objects.Timeline;
 import com.mifos.objects.client.Status;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,39 +20,39 @@ import java.util.List;
  * This is Center Model Table
  * Created by ishankhanna on 11/03/14.
  */
-@Table(database = MifosDatabase.class)
+
 public class Center extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+    
     Integer id;
 
-    @Column
+    
     transient Boolean sync;
 
-    @Column
+    
     String accountNo;
 
-    @Column
+    
     String name;
 
-    @Column
+    
     Integer officeId;
 
-    @Column
+    
     String officeName;
 
-    @Column
+    
     Integer staffId;
 
-    @Column
+    
     String staffName;
 
-    @Column
+    
     String hierarchy;
 
     Status status;
 
-    @Column
+    
     Boolean active;
 
     List<Integer> activationDate = new ArrayList<Integer>();

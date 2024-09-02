@@ -10,20 +10,14 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
 
-
-@Table(database = MifosDatabase.class)
 
 public class TransactionType extends MifosBaseModel implements Parcelable {
 
     @SerializedName("id")
-    @PrimaryKey
+    
     Integer id;
 
     @SerializedName("code")
@@ -33,11 +27,11 @@ public class TransactionType extends MifosBaseModel implements Parcelable {
     String value;
 
     @SerializedName("deposit")
-    @Column
+    
     Boolean deposit;
 
     @SerializedName("withdrawal")
-    @Column
+    
     Boolean withdrawal;
 
     @SerializedName("interestPosting")

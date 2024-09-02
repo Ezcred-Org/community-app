@@ -10,32 +10,32 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ForeignKey;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
+
+
+
+
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Table(database = MifosDatabase.class)
+
 
 public class Transaction extends MifosBaseModel implements Parcelable {
 
     @SerializedName("id")
-    @PrimaryKey
+    
     Integer id;
 
     @SerializedName("savingsAccountId")
-    @Column
+    
     transient Integer savingsAccountId;
 
     @SerializedName("transactionType")
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     TransactionType transactionType;
 
     @SerializedName("accountId")
@@ -44,24 +44,24 @@ public class Transaction extends MifosBaseModel implements Parcelable {
     @SerializedName("accountNo")
     String accountNo;
 
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     transient SavingsTransactionDate savingsTransactionDate;
 
     @SerializedName("date")
     List<Integer> date = new ArrayList<>();
 
     @SerializedName("currency")
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     Currency currency;
 
     @SerializedName("amount")
-    @Column
+    
     Double amount;
 
     @SerializedName("runningBalance")
-    @Column
+    
     Double runningBalance;
 
     @SerializedName("reversed")

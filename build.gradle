@@ -63,18 +63,10 @@ repositories {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    // DBFlow dependencies
- /*   annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:4.2.4"
-    implementation "com.github.Raizlabs.DBFlow:dbflow-core:4.2.4"
-    implementation "com.github.Raizlabs.DBFlow:dbflow:4.2.4"*/
-    annotationProcessor project (':dbflow-processor')
+   /* annotationProcessor project (':dbflow-processor')
     implementation project (':dbflow-core')
-    implementation project (':dbflow')
+    implementation project (':dbflow')*/
 
-   /* annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:4.2.4"
-    implementation "com.github.Raizlabs.DBFlow:dbflow-core:4.2.4"
-    implementation "com.github.Raizlabs.DBFlow:dbflow:4.2.4"
-    implementation "com.github.Raizlabs.DBFlow:dbflow-kotlinextensions:4.2.4"*/
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
     testImplementation 'junit:junit:4.13.2'
 

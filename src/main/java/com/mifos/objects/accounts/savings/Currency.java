@@ -9,38 +9,39 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import com.mifos.api.local.MifosBaseModel;
+import com.mifos.api.local.MifosDatabase;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 
 
-@Table(database = MifosDatabase.class, name = "SavingAccountCurrency")
+
+
+
 
 public class Currency extends MifosBaseModel implements Parcelable {
 
 
-    @PrimaryKey
+
     public String code;
 
-    @Column
+
     String name;
 
-    @Column
+
     Integer decimalPlaces;
 
-    @Column
+
     Integer inMultiplesOf;
 
-    @Column
+
     String displaySymbol;
 
-    @Column
+
     String nameCode;
 
-    @Column
+
     String displayLabel;
 
 

@@ -10,11 +10,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
 
 
 /**
@@ -22,19 +18,19 @@ import com.mifos.api.local.MifosDatabase;
  * database.
  * Created by ishankhanna on 09/02/14.
  */
-@Table(database = MifosDatabase.class)
+
 public class Status extends MifosBaseModel implements Parcelable {
 
 
     private static final String STATUS_ACTIVE = "Active";
 
-    @PrimaryKey
+    
     int id;
 
-    @Column
+    
     String code;
 
-    @Column
+    
     String value;
 
     public Status() {

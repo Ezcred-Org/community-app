@@ -3,29 +3,26 @@ package com.mifos.objects.accounts.savings;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
+
 
 /**
  *
  * Created by Rajan Maurya on 17/08/16.
  */
-@Table(database = MifosDatabase.class)
+
 public class SavingsTransactionDate extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+    
     Integer transactionId;
 
-    @Column
+    
     Integer year;
 
-    @Column
+    
     Integer month;
 
-    @Column
+    
     Integer day;
 
     public Integer getTransactionId() {

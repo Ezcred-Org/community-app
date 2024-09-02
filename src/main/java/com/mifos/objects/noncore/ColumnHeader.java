@@ -12,10 +12,11 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
+
+
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +24,11 @@ import java.util.List;
 /**
  * Created by ishankhanna on 16/06/14.
  */
-@Table(database = MifosDatabase.class)
+
 
 public class ColumnHeader extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey(autoincrement = true)
+    
     Integer id;
 
     /**
@@ -37,30 +38,30 @@ public class ColumnHeader extends MifosBaseModel implements Parcelable {
     String columnCode;
 
     @SerializedName("columnDisplayType")
-    @Column
+    
     String columnDisplayType;
 
     @SerializedName("columnLength")
-    @Column
+    
     Integer columnLength;
 
     @SerializedName("columnName")
-    @Column
+    
     String dataTableColumnName;
 
     @SerializedName("columnType")
-    @Column
+    
     String columnType;
 
     @SerializedName("isColumnNullable")
-    @Column
+    
     Boolean isColumnNullable;
 
     @SerializedName("isColumnPrimaryKey")
-    @Column
+    
     Boolean isColumnPrimaryKey;
 
-    @Column
+    
     String registeredTableName;
 
     /**

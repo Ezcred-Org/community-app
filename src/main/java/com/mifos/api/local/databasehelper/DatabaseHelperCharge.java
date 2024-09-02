@@ -3,10 +3,8 @@ package com.mifos.api.local.databasehelper;
 import android.os.AsyncTask;
 
 import com.mifos.objects.client.Charges;
-import com.mifos.objects.client.Charges_Table;
 import com.mifos.objects.client.ClientDate;
 import com.mifos.objects.client.Page;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,7 +48,6 @@ public class DatabaseHelperCharge {
                             charges.getDueDate().get(1),
                             charges.getDueDate().get(0));
                     charges.setChargeDueDate(clientDate);
-                    charges.save();
                 }
             }
         });
@@ -66,27 +63,8 @@ public class DatabaseHelperCharge {
      * @return Page of Charges
      */
     public Observable<Page<Charges>> readClientCharges(final int clientId) {
-        return Observable.create(subscriber -> {
 
-            //Loading All charges from Charges_Table as reference to client id
-            List<Charges> chargesList = SQLite.select()
-                    .from(Charges.class)
-                    .where(Charges_Table.clientId.eq(clientId))
-                    .queryList();
-
-            //Setting the Charge Due Date
-            for (int i = 0; i < chargesList.size(); i++) {
-                chargesList.get(i).setDueDate(Arrays.asList(
-                        chargesList.get(i).getChargeDueDate().getYear(),
-                        chargesList.get(i).getChargeDueDate().getMonth(),
-                        chargesList.get(i).getChargeDueDate().getDay()));
-            }
-
-            Page<Charges> chargePage = new Page<Charges>();
-            chargePage.setPageItems(chargesList);
-            subscriber.onNext(chargePage);
-
-        });
+        return Observable.just(null);
 
     }
 

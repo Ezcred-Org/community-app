@@ -10,42 +10,41 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
 
 
-@Table(database = MifosDatabase.class, name = "SavingsAccountStatus")
+
+
+
+
 
 public class Status extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+
     Integer id;
 
-    @Column
+
     String code;
 
-    @Column
+
     String value;
 
-    @Column
+
     Boolean submittedAndPendingApproval;
 
-    @Column
+
     Boolean approved;
 
-    @Column
+
     Boolean rejected;
 
-    @Column
+
     Boolean withdrawnByApplicant;
 
-    @Column
+
     Boolean active;
 
-    @Column
+
     Boolean closed;
 
 

@@ -10,14 +10,9 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
 import com.mifos.objects.noncore.DataTablePayload;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -28,83 +23,83 @@ import lombok.Getter;
 /**
  * Created by ADMIN on 16-Jun-15.
  */
-@Table(database = MifosDatabase.class)
+
 public class ClientPayload extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey(autoincrement = true)
+    
     transient Long id;
 
-    @Column
+
     transient Long clientCreationTime;
 
-    @Column
+
     transient String errorMessage;
 
     @SerializedName("firstname")
-    @Column
+
     String firstname;
 
     @SerializedName("lastname")
-    @Column
+
     String lastname;
 
     @SerializedName("middlename")
-    @Column
+
     String middlename;
 
     @SerializedName("officeId")
-    @Column
+
     Integer officeId;
 
     @SerializedName("staffId")
-    @Column
+
     Integer staffId;
 
     @SerializedName("genderId")
-    @Column
+
     Integer genderId;
 
     @SerializedName("active")
-    @Column
+
     Boolean active;
 
     @SerializedName("activationDate")
-    @Column
+
     String activationDate;
 
     @SerializedName("submittedOnDate")
-    @Column
+
     String submittedOnDate;
 
     @SerializedName("dateOfBirth")
-    @Column
+
     String dateOfBirth;
 
     @SerializedName("mobileNo")
-    @Column
+
     String mobileNo;
 
     @SerializedName("externalId")
-    @Column
+
     String externalId;
 
     @SerializedName("clientTypeId")
-    @Column
+
     Integer clientTypeId;
 
     @SerializedName("clientClassificationId")
-    @Column
+
     Integer clientClassificationId;
 
     @SerializedName("address")
     List<Address> address;
 
     @SerializedName("dateFormat")
-    @Column
+
     String dateFormat;
 
     @SerializedName("locale")
-    @Column
+
     String locale;
 
     @SerializedName("datatables")

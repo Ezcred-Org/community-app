@@ -3,32 +3,32 @@ package com.mifos.objects.group;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
+
+
+
+
 
 
 /**
  * Created by Rajan Maurya on 18/09/16.
  */
-@Table(database = MifosDatabase.class)
+
 public class GroupDate extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+    
     long groupId;
 
-    @PrimaryKey
+    
     long chargeId;
 
-    @Column
+    
     int day;
 
-    @Column
+    
     int month;
 
-    @Column
+    
     int year;
 
     public GroupDate(long groupId, long chargeId, int day, int month, int year) {
