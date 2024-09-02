@@ -8,39 +8,35 @@ package com.mifos.objects;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
 
 
-@Table(database = MifosDatabase.class)
+
+
+
 public class PaymentTypeOption extends MifosBaseModel implements Comparable<PaymentTypeOption>,
         Parcelable {
 
 
     @SerializedName("id")
-    @PrimaryKey
+    
     Integer id;
 
     @SerializedName("name")
-    @Column
+    
     String name;
 
     @SerializedName("description")
-    @Column
+    
     String description;
 
     @SerializedName("isCashPayment")
-    @Column
+    
     Boolean isCashPayment;
 
     @SerializedName("position")
-    @Column
+    
     Integer position;
 
     public Integer getId() {
@@ -103,7 +99,6 @@ public class PaymentTypeOption extends MifosBaseModel implements Comparable<Paym
         }
     }
 
-    @NonNull
     @Override
     public String toString() {
         return "PaymentTypeOption{" +

@@ -3,48 +3,43 @@ package com.mifos.objects.client;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
+
+
 
 
 /**
  * Created by Rajan Maurya on 05/07/16.
  */
-@Table(database = MifosDatabase.class, name = "ClientChargeCurrency")
 public class Currency extends MifosBaseModel implements Parcelable {
 
 
-    @PrimaryKey
+
     @SerializedName("code")
     public String code;
 
-    @Column
+
     @SerializedName("name")
     String name;
 
-    @Column
+
     @SerializedName("decimalPlaces")
     Integer decimalPlaces;
 
-    @Column
+
     @SerializedName("inMultiplesOf")
     Integer inMultiplesOf;
 
-    @Column
+
     @SerializedName("displaySymbol")
     String displaySymbol;
 
-    @Column
+
     @SerializedName("nameCode")
     String nameCode;
 
-    @Column
+
     @SerializedName("displayLabel")
     String displayLabel;
 
@@ -105,7 +100,6 @@ public class Currency extends MifosBaseModel implements Parcelable {
         this.displayLabel = displayLabel;
     }
 
-    @NonNull
     @Override
     public String toString() {
         return "Currency{" +

@@ -8,17 +8,14 @@ package com.mifos.objects.client;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ForeignKey;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
 import com.mifos.objects.Timeline;
 import com.mifos.utils.Utils;
+
+
+
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,32 +24,32 @@ import java.util.List;
 /**
  * Created by ishankhanna on 08/02/14.
  */
-@Table(database = MifosDatabase.class)
+
 public class Client extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+    
     int id;
 
-    @Column
+    
     transient int groupId;
 
-    @Column
+    
     String accountNo;
 
     Integer clientId;
 
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     Status status;
 
-    @Column
+    
     transient boolean sync;
 
-    @Column
+    
     boolean active;
 
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     ClientDate clientDate;
 
     List<Integer> activationDate = new ArrayList<Integer>();
@@ -64,42 +61,42 @@ public class Client extends MifosBaseModel implements Parcelable {
 
     ClientLegalForm legalForm;
 
-    @Column
+    
     String firstname;
 
-    @Column
+    
     String middlename;
 
-    @Column
+    
     String lastname;
 
-    @Column
+    
     String displayName;
 
-    @Column
+    
     int officeId;
 
-    @Column
+    
     String officeName;
 
-    @Column
+    
     int staffId;
 
-    @Column
+    
     String staffName;
 
     Timeline timeline;
 
-    @Column
+    
     String fullname;
 
-    @Column
+    
     int imageId;
 
-    @Column
+    
     boolean imagePresent;
 
-    @Column
+    
     private String externalId;
 
     public Integer getClientId() {
@@ -333,7 +330,6 @@ public class Client extends MifosBaseModel implements Parcelable {
         return Utils.getDate(dobDate);
     }
 
-    @NonNull
     @Override
     public String toString() {
         return "Client{" +

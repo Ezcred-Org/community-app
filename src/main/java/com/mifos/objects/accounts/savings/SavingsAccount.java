@@ -8,52 +8,43 @@ package com.mifos.objects.accounts.savings;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ForeignKey;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
 
-
-@Table(database = MifosDatabase.class)
 
 public class SavingsAccount extends MifosBaseModel implements Parcelable {
 
 
-    @Column
+    
     transient long clientId;
 
-    @Column
+    
     transient long groupId;
 
-    @PrimaryKey
+    
     Integer id;
 
-    @Column
+    
     String accountNo;
 
-    @Column
+    
     Integer productId;
 
-    @Column
+    
     String productName;
 
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     Status status;
 
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     Currency currency;
 
-    @Column
+    
     Double accountBalance;
 
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     DepositType depositType;
 
     public SavingsAccount() {
@@ -189,7 +180,6 @@ public class SavingsAccount extends MifosBaseModel implements Parcelable {
         return this.getDepositType() == null ? false : this.getDepositType().isRecurring();
     }
 
-    @NonNull
     @Override
     public String toString() {
         return "SavingsAccount{" +

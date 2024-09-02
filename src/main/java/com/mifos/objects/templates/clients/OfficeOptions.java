@@ -9,29 +9,21 @@ package com.mifos.objects.templates.clients;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
-
 
 /**
  * Created by rajan on 13/3/16.
  */
-@Table(database = MifosDatabase.class, name = "ClientTemplateOfficeOptions")
 
 public class OfficeOptions extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+
     int id;
 
-    @Column
+
     String name;
 
-    @Column
+
     String nameDecorated;
 
     public int getId() {
@@ -58,7 +50,6 @@ public class OfficeOptions extends MifosBaseModel implements Parcelable {
         this.nameDecorated = nameDecorated;
     }
 
-    @NonNull
     @Override
     public String toString() {
         return "OfficeOptions{" +

@@ -7,11 +7,7 @@ import com.mifos.objects.client.Page;
 import com.mifos.objects.group.Group;
 import com.mifos.objects.group.GroupDate;
 import com.mifos.objects.group.GroupPayload;
-import com.mifos.objects.group.GroupPayload_Table;
-import com.mifos.objects.group.Group_Table;
 import com.mifos.api.GenericResponse;
-import com.raizlabs.android.dbflow.sql.language.Delete;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.Arrays;
 import java.util.List;
@@ -54,7 +50,6 @@ public class DatabaseHelperGroups {
                             group.getActivationDate().get(2));
                     group.setGroupDate(groupDate);
                 }
-                group.save();
                 return Observable.just(group);
             }
         });
@@ -66,16 +61,7 @@ public class DatabaseHelperGroups {
      * @return List Of Groups
      */
     public Observable<Page<Group>> readAllGroups() {
-        return Observable.defer(new Func0<Observable<Page<Group>>>() {
-            @Override
-            public Observable<Page<Group>> call() {
-                Page<Group> groupPage = new Page<>();
-                groupPage.setPageItems(SQLite.select()
-                        .from(Group.class)
-                        .queryList());
-                return Observable.just(groupPage);
-            }
-        });
+        return Observable.just(null);
     }
 
     /**
@@ -85,23 +71,7 @@ public class DatabaseHelperGroups {
      * @return Group
      */
     public Observable<Group> getGroup(final int groupId) {
-        return Observable.defer(new Func0<Observable<Group>>() {
-            @Override
-            public Observable<Group> call() {
-
-                Group group = SQLite.select()
-                        .from(Group.class)
-                        .where(Group_Table.id.eq(groupId))
-                        .querySingle();
-
-                if (group != null) {
-                    group.setActivationDate(Arrays.asList(group.getGroupDate().getDay(),
-                            group.getGroupDate().getMonth(), group.getGroupDate().getYear()));
-                }
-
-                return Observable.just(group);
-            }
-        });
+        return Observable.just(null);
     }
 
     /**
@@ -113,27 +83,8 @@ public class DatabaseHelperGroups {
      */
     public Observable<GroupAccounts> saveGroupAccounts(final GroupAccounts groupAccounts,
                                                         final int groupId) {
+        return Observable.just(null);
 
-        return Observable.defer(new Func0<Observable<GroupAccounts>>() {
-            @Override
-            public Observable<GroupAccounts> call() {
-
-                List<LoanAccount> loanAccounts = groupAccounts.getLoanAccounts();
-                List<SavingsAccount> savingsAccounts = groupAccounts.getSavingsAccounts();
-
-                for (LoanAccount loanAccount : loanAccounts) {
-                    loanAccount.setGroupId(groupId);
-                    loanAccount.save();
-                }
-
-                for (SavingsAccount savingsAccount : savingsAccounts) {
-                    savingsAccount.setGroupId(groupId);
-                    savingsAccount.save();
-                }
-
-                return Observable.just(groupAccounts);
-            }
-        });
     }
 
 
@@ -145,52 +96,16 @@ public class DatabaseHelperGroups {
      * @return the GroupAccounts according to Group Id
      */
     public Observable<GroupAccounts> readGroupAccounts(final int groupId) {
-        return Observable.defer(new Func0<Observable<GroupAccounts>>() {
-            @Override
-            public Observable<GroupAccounts> call() {
-
-                List<LoanAccount> loanAccounts = SQLite.select()
-                        .from(LoanAccount.class)
-//                        .where(LoanAccount_Table.groupId.eq(groupId))
-                        .queryList();
-
-                List<SavingsAccount> savingsAccounts = SQLite.select()
-                        .from(SavingsAccount.class)
-//                        .where(SavingsAccount_Table.groupId.eq(groupId))
-                        .queryList();
-
-                GroupAccounts groupAccounts = new GroupAccounts();
-                groupAccounts.setLoanAccounts(loanAccounts);
-                groupAccounts.setSavingsAccounts(savingsAccounts);
-
-                return Observable.just(groupAccounts);
-            }
-        });
+        return Observable.just(null);
     }
 
     public Observable<GenericResponse> saveGroupPayload(final GroupPayload groupPayload) {
-        return Observable.defer(new Func0<Observable<GenericResponse>>() {
-            @Override
-            public Observable<GenericResponse> call() {
-                groupPayload.save();
-                return Observable.just(new GenericResponse());
-            }
-        });
+        return Observable.just(null);
     }
 
 
     public Observable<List<GroupPayload>> realAllGroupPayload() {
-        return Observable.defer(new Func0<Observable<List<GroupPayload>>>() {
-            @Override
-            public Observable<List<GroupPayload>> call() {
-
-                List<GroupPayload> groupPayloads = SQLite.select()
-                        .from(GroupPayload.class)
-                        .queryList();
-
-                return Observable.just(groupPayloads);
-            }
-        });
+        return Observable.just(null);
     }
 
     /**
@@ -200,30 +115,12 @@ public class DatabaseHelperGroups {
      * @return List<ClientPayload></>
      */
     public Observable<List<GroupPayload>> deleteAndUpdateGroupPayloads(final int id) {
-        return Observable.defer(new Func0<Observable<List<GroupPayload>>>() {
-            @Override
-            public Observable<List<GroupPayload>> call() {
-
-                Delete.table(GroupPayload.class, GroupPayload_Table.id.eq(id));
-
-                List<GroupPayload> groupPayloads = SQLite.select()
-                        .from(GroupPayload.class)
-                        .queryList();
-
-                return Observable.just(groupPayloads);
-            }
-        });
+        return Observable.just(null);
     }
 
 
     public Observable<GroupPayload> updateDatabaseGroupPayload(final GroupPayload groupPayload) {
-        return Observable.defer(new Func0<Observable<GroupPayload>>() {
-            @Override
-            public Observable<GroupPayload> call() {
-                groupPayload.update();
-                return Observable.just(groupPayload);
-            }
-        });
+        return Observable.just(null);
     }
 
 }

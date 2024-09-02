@@ -8,50 +8,53 @@ package com.mifos.objects.accounts.savings;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ForeignKey;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
+
+
+
+
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Table(database = MifosDatabase.class)
+
+
+
 public class SavingsAccountWithAssociations extends MifosBaseModel implements Parcelable {
 
     @SerializedName("id")
-    @PrimaryKey
+    
     Integer id;
 
     @SerializedName("accountNo")
-    @Column
+    
     String accountNo;
 
     @SerializedName("clientId")
     Integer clientId;
 
     @SerializedName("clientName")
-    @Column
+    
     String clientName;
 
     @SerializedName("savingsProductId")
     Integer savingsProductId;
 
     @SerializedName("savingsProductName")
-    @Column
+    
     String savingsProductName;
 
     @SerializedName("fieldOfficerId")
     Integer fieldOfficerId;
 
     @SerializedName("status")
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     Status status;
 
     @SerializedName("timeline")
@@ -105,8 +108,8 @@ public class SavingsAccountWithAssociations extends MifosBaseModel implements Pa
     Integer overdraftLimit;
 
     @SerializedName("summary")
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     Summary summary;
 
     @SerializedName("transactions")
@@ -341,7 +344,6 @@ public class SavingsAccountWithAssociations extends MifosBaseModel implements Pa
         isDormancyTrackingActive = dormancyTrackingActive;
     }
 
-    @NonNull
     @Override
     public String toString() {
         return "SavingsAccountWithAssociations{" +

@@ -16,30 +16,32 @@ import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 
 
-@Table(database = MifosDatabase.class, name = "SavingsAccountSummary")
+
+
+
 
 public class Summary extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+
     transient Integer savingsId;
 
     @SerializedName("currency")
     Currency currency;
 
     @SerializedName("totalDeposits")
-    @Column
+
     Double totalDeposits;
 
     @SerializedName("accountBalance")
-    @Column
+
     Double accountBalance;
 
     @SerializedName("totalWithdrawals")
-    @Column
+
     Double totalWithdrawals;
 
     @SerializedName("totalInterestEarned")
-    @Column
+
     Double totalInterestEarned;
 
     public Integer getSavingsId() {

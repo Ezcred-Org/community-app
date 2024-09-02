@@ -18,19 +18,21 @@ import com.mifos.api.local.MifosBaseModel;
 import com.mifos.api.local.MifosDatabase;
 
 
-@Table(database = MifosDatabase.class, name = "LoanAccountLoanType")
+
+
+
 
 public class LoanType extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+
     @SerializedName("id")
     Integer id;
 
-    @Column
+
     @SerializedName("code")
     String code;
 
-    @Column
+
     @SerializedName("value")
     String value;
 

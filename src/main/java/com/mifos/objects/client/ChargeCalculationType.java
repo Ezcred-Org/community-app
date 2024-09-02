@@ -3,31 +3,27 @@ package com.mifos.objects.client;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
+
+
 
 
 /**
  * Created by Rajan Maurya on 05/07/16.
  */
-@Table(database = MifosDatabase.class)
+
 public class ChargeCalculationType extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+    
     @SerializedName("id")
     Integer id;
 
-    @Column
+    
     @SerializedName("code")
     String code;
 
-    @Column
+    
     @SerializedName("value")
     String value;
 
@@ -56,7 +52,6 @@ public class ChargeCalculationType extends MifosBaseModel implements Parcelable 
         this.value = value;
     }
 
-    @NonNull
     @Override
     public String toString() {
         return "ChargeCalculationType{" +

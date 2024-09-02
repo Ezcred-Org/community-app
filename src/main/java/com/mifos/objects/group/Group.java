@@ -8,14 +8,14 @@ package com.mifos.objects.group;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ForeignKey;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
 import com.mifos.objects.Timeline;
 import com.mifos.objects.client.Status;
+
+
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,54 +24,54 @@ import java.util.List;
  * This is the Groups Model Table
  * Created by ishankhanna on 28/06/14.
  */
-@Table(database = MifosDatabase.class)
+
 public class Group extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+    
     Integer id;
 
-    @Column
+    
     String accountNo;
 
-    @Column
+    
     transient boolean sync;
 
-    @Column
+    
     String name;
 
     Status status;
 
-    @Column
+    
     Boolean active;
 
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     transient GroupDate groupDate;
 
     List<Integer> activationDate = new ArrayList<>();
 
-    @Column
+    
     Integer officeId;
 
-    @Column
+    
     String officeName;
 
-    @Column
+    
     int centerId;
 
-    @Column
+    
     String centerName;
 
-    @Column
+    
     Integer staffId;
 
-    @Column
+    
     String staffName;
 
-    @Column
+    
     String hierarchy;
 
-    @Column
+    
     int groupLevel;
 
     Timeline timeline;

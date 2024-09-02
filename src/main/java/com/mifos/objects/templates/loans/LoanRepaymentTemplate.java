@@ -8,26 +8,22 @@ package com.mifos.objects.templates.loans;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
 import com.mifos.objects.PaymentTypeOption;
 import com.mifos.objects.accounts.savings.Currency;
+
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Table(database = MifosDatabase.class)
+
 
 public class LoanRepaymentTemplate extends MifosBaseModel implements Parcelable {
 
     // Loan id is not present in Response, It's only for primary key use case to save
     // LoanRepaymentTemplate in Database
-    @PrimaryKey
+    
     Integer loanId;
 
     Type type;
@@ -36,19 +32,19 @@ public class LoanRepaymentTemplate extends MifosBaseModel implements Parcelable 
 
     Currency currency;
 
-    @Column
+    
     Double amount;
 
-    @Column
+    
     Double principalPortion;
 
-    @Column
+    
     Double interestPortion;
 
-    @Column
+    
     Double feeChargesPortion;
 
-    @Column
+    
     Double penaltyChargesPortion;
 
     List<PaymentTypeOption> paymentTypeOptions = new ArrayList<PaymentTypeOption>();
@@ -133,7 +129,6 @@ public class LoanRepaymentTemplate extends MifosBaseModel implements Parcelable 
         this.paymentTypeOptions = paymentTypeOptions;
     }
 
-    @NonNull
     @Override
     public String toString() {
         return "LoanRepaymentTemplate{" +
