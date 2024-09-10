@@ -9,7 +9,7 @@ package com.mifos.utils;
 import com.google.gson.Gson;
 import com.mifos.objects.mifoserror.MifosError;
 
-import retrofit2.adapter.rxjava3.HttpException;
+import retrofit2.adapter.rxjava.HttpException;
 import rx.plugins.RxJavaPlugins;
 
 public class MFErrorParser {

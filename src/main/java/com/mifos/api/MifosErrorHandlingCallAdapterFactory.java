@@ -11,20 +11,20 @@ import retrofit2.CallAdapter;
 import retrofit2.HttpException;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import rx.Observable;
 import rx.functions.Func1;
 
 // refer http://bytes.babbel.com/en/articles/2016-03-16-retrofit2-rxjava-error-handling.html
 public class MifosErrorHandlingCallAdapterFactory extends CallAdapter.Factory {
-  private final RxJava3CallAdapterFactory original;
+  private final RxJavaCallAdapterFactory original;
 
   public static CallAdapter.Factory create() {
     return new MifosErrorHandlingCallAdapterFactory();
   }
 
   public MifosErrorHandlingCallAdapterFactory() {
-    this.original = RxJava3CallAdapterFactory.create();
+    this.original = RxJavaCallAdapterFactory.create();
   }
 
   @Nullable
