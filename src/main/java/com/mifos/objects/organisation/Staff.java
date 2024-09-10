@@ -9,16 +9,15 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
 
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
+
+
 
 /**
  * Created by ishankhanna on 14/07/14.
  */
-@Table(database = MifosDatabase.class)
+
 
 public class Staff extends MifosBaseModel implements Parcelable {
 
@@ -34,34 +33,34 @@ public class Staff extends MifosBaseModel implements Parcelable {
         }
     };
 
-    @PrimaryKey
+    
     Integer id;
 
-    @Column
+    
     String firstname;
 
-    @Column
+    
     String lastname;
 
-    @Column
+    
     String mobileNo;
 
-    @Column
+    
     String displayName;
 
-    @Column
+    
     Integer officeId;
 
-    @Column
+    
     String officeName;
 
-    @Column
+    
     Boolean isLoanOfficer;
 
-    @Column
+    
     Boolean isActive;
 
-    @Column
+    
     String externalId;
 
     public Staff() {

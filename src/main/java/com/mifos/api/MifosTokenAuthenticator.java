@@ -1,11 +1,14 @@
 package com.mifos.api;
 
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
+
+import androidx.annotation.Nullable;
+
 import com.mifos.api.services.OAuthService;
 import com.mifos.objects.oauth.GrantType;
 import com.mifos.objects.oauth.OAuthTokenResponse;
 import com.mifos.utils.PrefManager;
+
 import okhttp3.Authenticator;
 import okhttp3.Request;
 import okhttp3.Response;

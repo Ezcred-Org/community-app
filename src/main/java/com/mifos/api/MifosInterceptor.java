@@ -7,13 +7,16 @@ package com.mifos.api;
 
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
 
 import com.mifos.utils.AESUtil;
 import com.mifos.utils.PrefManager;
+
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Request;

@@ -31,6 +31,7 @@ public class User {
     @SerializedName(value = "roles", alternate = {"selectedRoles"})
     private List<Role> roles = new ArrayList<Role>();
     private List<String> permissions = new ArrayList<String>();
+    private List<Integer> lastLoggedInTime = new ArrayList<>();
 
 
     private int staffId;
@@ -162,8 +163,16 @@ public class User {
         return permissions;
     }
 
+    public List<Integer> getLastLoggedInTime() {
+        return lastLoggedInTime;
+    }
+
     public void setPermissions(List<String> permissions) {
         this.permissions = permissions;
+    }
+
+    public void setLastLoggedInTime(List<Integer> lastLoggedInTime) {
+        this.lastLoggedInTime = lastLoggedInTime;
     }
 
     @Override
@@ -179,6 +188,7 @@ public class User {
                 ", officeName='" + officeName + '\'' +
                 ", roles=" + roles +
                 ", permissions=" + permissions +
+                ", lastLoggedInTime=" + lastLoggedInTime +
                 '}';
     }
 }

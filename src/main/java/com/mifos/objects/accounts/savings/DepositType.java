@@ -3,30 +3,27 @@ package com.mifos.objects.accounts.savings;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
-import com.mifos.api.model.APIEndPoint;
-import com.raizlabs.android.dbflow.annotation.Column;
+import androidx.annotation.NonNull;
 
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+import com.mifos.api.local.MifosBaseModel;
+import com.mifos.api.model.APIEndPoint;
+
 
 /*
  * This project is licensed under the open source MPL V2.
  * See https://github.com/openMF/android-client/blob/master/LICENSE.md
  */
-@Table(database = MifosDatabase.class, name = "SavingAccountDepositType")
 
 public class DepositType extends MifosBaseModel implements Parcelable {
 
 
-    @PrimaryKey
+
     Integer id;
 
-    @Column
+
     String code;
 
-    @Column
+
     String value;
 
     public DepositType() {
@@ -85,6 +82,7 @@ public class DepositType extends MifosBaseModel implements Parcelable {
         return ServerTypes.fromId(getId());
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "DepositType{" +

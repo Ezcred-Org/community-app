@@ -10,77 +10,73 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
 
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 
 /**
  * Created by ishankhanna on 12/06/14.
  */
-@Table(database = MifosDatabase.class)
+
 
 public class SavingsAccountTransactionRequest extends MifosBaseModel implements Parcelable {
 
     @SerializedName("savingAccountId")
-    @PrimaryKey
+    
     transient Integer savingAccountId;
 
     @SerializedName("savingsAccountType")
-    @Column
+    
     transient String savingsAccountType;
 
     @SerializedName("transactionType")
-    @Column
+    
     transient String transactionType;
 
     @SerializedName("dateFormat")
-    @Column
+    
     String dateFormat;
 
     @SerializedName("locale")
-    @Column
+    
     String locale;
 
     @SerializedName("transactionDate")
-    @Column
+    
     String transactionDate;
 
     @SerializedName("transactionAmount")
-    @Column
+    
     String transactionAmount;
 
     @SerializedName("paymentTypeId")
-    @Column
+    
     String paymentTypeId;
 
     @SerializedName("note")
-    @Column
+    
     String note;
 
     @SerializedName("accountNumber")
-    @Column
+    
     String accountNumber;
 
     @SerializedName("checkNumber")
-    @Column
+    
     String checkNumber;
 
     @SerializedName("routingCode")
-    @Column
+    
     String routingCode;
 
     @SerializedName("receiptNumber")
-    @Column
+    
     String receiptNumber;
 
     @SerializedName("bankNumber")
-    @Column
+    
     String bankNumber;
 
     @SerializedName("errorMessage")
-    @Column
+    
     transient String errorMessage;
 
     public String getErrorMessage() {

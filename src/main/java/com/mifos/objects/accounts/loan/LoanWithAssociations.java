@@ -9,40 +9,36 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
 import com.mifos.objects.accounts.savings.Currency;
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ForeignKey;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Table(database = MifosDatabase.class)
+
 public class LoanWithAssociations extends MifosBaseModel implements Parcelable {
     //TODO Fix OBJECT Typed Lists
 
-    @PrimaryKey
+    
     Integer id;
 
-    @Column
+    
     String accountNo;
 
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     Status status;
 
     Integer clientId;
 
-    @Column
+    
     String clientName;
 
     Integer clientOfficeId;
 
     Integer loanProductId;
 
-    @Column
+    
     String loanProductName;
 
     String loanProductDescription;
@@ -57,7 +53,7 @@ public class LoanWithAssociations extends MifosBaseModel implements Parcelable {
 
     Integer loanOfficerId;
 
-    @Column
+    
     String loanOfficerName;
 
     LoanType loanType;
@@ -96,12 +92,12 @@ public class LoanWithAssociations extends MifosBaseModel implements Parcelable {
 
     Boolean syncDisbursementWithMeeting;
 
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     Timeline timeline;
 
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     Summary summary;
 
     RepaymentSchedule repaymentSchedule;

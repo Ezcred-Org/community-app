@@ -1,13 +1,12 @@
 package com.mifos.api;
 
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
 
-import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.mifos.utils.PrefManager;
 
 import java.util.concurrent.TimeUnit;
 
+import lombok.NonNull;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
@@ -57,7 +56,6 @@ public class MifosOkHttpClient {
     logger.setLevel(Level.BODY);
     //Interceptor :> Full Body Logger and ApiRequest Header
     builder.addInterceptor(logger);
-    builder.addNetworkInterceptor(new StethoInterceptor());
 
     return builder;
 

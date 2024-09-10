@@ -3,8 +3,6 @@ package com.mifos.api.local.databasehelper;
 import android.os.AsyncTask;
 
 import com.mifos.objects.organisation.Staff;
-import com.mifos.objects.organisation.Staff_Table;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.List;
 
@@ -33,7 +31,7 @@ public class DatabaseHelperStaff {
             public void run() {
 
                 for (Staff staff : staffs) {
-                    staff.save();
+//                    staff.save();
                 }
 
             }
@@ -44,18 +42,6 @@ public class DatabaseHelperStaff {
 
 
     public Observable<List<Staff>> readAllStaffOffices(final int officeId) {
-        return Observable.create(new Observable.OnSubscribe<List<Staff>>() {
-            @Override
-            public void call(Subscriber<? super List<Staff>> subscriber) {
-
-                List<Staff> staffs = SQLite.select()
-                        .from(Staff.class)
-                        .where(Staff_Table.officeId.eq(officeId))
-                        .queryList();
-
-                subscriber.onNext(staffs);
-
-            }
-        });
+       return null;
     }
 }

@@ -8,167 +8,114 @@ package com.mifos.objects.accounts.loan;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
+import lombok.Getter;
+
+
+
+
 
 /**
  * Created by ishankhanna on 22/05/14.
  */
-@Table(database = MifosDatabase.class)
+@Getter
 public class LoanRepaymentRequest extends MifosBaseModel implements Parcelable {
 
 
-    @PrimaryKey
+    
     transient long timeStamp;
 
-    @Column
+    
     transient Integer loanId;
 
-    @Column
+    
     transient String errorMessage;
 
-    @Column
+    
     String dateFormat;
 
-    @Column
+    
     String locale;
 
-    @Column
+    
     String transactionDate;
 
-    @Column
+    
     String transactionAmount;
 
-    @Column
+    
     String paymentTypeId;
 
-    @Column
+    
     String note;
 
-    @Column
+    
     String accountNumber;
 
-    @Column
+    
     String checkNumber;
 
-    @Column
+    
     String routingCode;
 
-    @Column
+    
     String receiptNumber;
 
-    @Column
+    
     String bankNumber;
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
-    }
-
-    public Integer getLoanId() {
-        return loanId;
     }
 
     public void setLoanId(Integer loanId) {
         this.loanId = loanId;
     }
 
-    public long getTimeStamp() {
-        return timeStamp;
-    }
-
     public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
-    }
-
-    public String getDateFormat() {
-        return dateFormat;
     }
 
     public void setDateFormat(String dateFormat) {
         this.dateFormat = dateFormat;
     }
 
-    public String getLocale() {
-        return locale;
-    }
-
     public void setLocale(String locale) {
         this.locale = locale;
-    }
-
-    public String getTransactionDate() {
-        return transactionDate;
     }
 
     public void setTransactionDate(String transactionDate) {
         this.transactionDate = transactionDate;
     }
 
-    public String getTransactionAmount() {
-        return transactionAmount;
-    }
-
     public void setTransactionAmount(String transactionAmount) {
         this.transactionAmount = transactionAmount;
-    }
-
-    public String getPaymentTypeId() {
-        return paymentTypeId;
     }
 
     public void setPaymentTypeId(String paymentTypeId) {
         this.paymentTypeId = paymentTypeId;
     }
 
-    public String getNote() {
-        return note;
-    }
-
     public void setNote(String note) {
         this.note = note;
-    }
-
-    public String getAccountNumber() {
-        return accountNumber;
     }
 
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 
-    public String getCheckNumber() {
-        return checkNumber;
-    }
-
     public void setCheckNumber(String checkNumber) {
         this.checkNumber = checkNumber;
-    }
-
-    public String getRoutingCode() {
-        return routingCode;
     }
 
     public void setRoutingCode(String routingCode) {
         this.routingCode = routingCode;
     }
 
-    public String getReceiptNumber() {
-        return receiptNumber;
-    }
-
     public void setReceiptNumber(String receiptNumber) {
         this.receiptNumber = receiptNumber;
-    }
-
-    public String getBankNumber() {
-        return bankNumber;
     }
 
     public void setBankNumber(String bankNumber) {

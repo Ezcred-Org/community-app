@@ -16,7 +16,8 @@
 
 package com.mifos.utils;
 
-import android.support.test.espresso.IdlingResource;
+
+import androidx.test.espresso.IdlingResource;
 
 /**
  * @author Rajan Maurya
@@ -37,7 +38,7 @@ public class EspressoIdlingResource {
         mCountingIdlingResource.decrement();
     }
 
-    public static IdlingResource getIdlingResource() {
+    public static SimpleCountingIdlingResource getIdlingResource() {
         return mCountingIdlingResource;
     }
 }
