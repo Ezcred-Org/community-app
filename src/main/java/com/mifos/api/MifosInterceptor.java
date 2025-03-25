@@ -32,6 +32,7 @@ import okio.Buffer;
 public class MifosInterceptor implements Interceptor {
 
     public static final String HEADER_TENANT = "Fineract-Platform-TenantId";
+    public static final String HEADER_TFA_TOKEN = "Fineract-Platform-TFA-Token";
     public static final String HEADER_AUTH = "Authorization";
     public static final String DATA_SECURITY_HEADER = "X-Data-Security";
     public static final String CLIENT_LOAN_HEADER = "X-Client-Loan";
@@ -99,6 +100,10 @@ public class MifosInterceptor implements Interceptor {
         }
         if (!TextUtils.isEmpty(prefManager.getToken())) {
             builder.header(HEADER_AUTH, prefManager.getToken());
+        }
+
+        if (!TextUtils.isEmpty(prefManager.getTfaToken())) {
+            builder.header(HEADER_TFA_TOKEN, prefManager.getTfaToken());
         }
 
         encryptRequestBodyIfNeeded(chianrequest.body(), builder, chianrequest.method());

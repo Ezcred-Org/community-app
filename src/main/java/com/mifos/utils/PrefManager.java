@@ -28,6 +28,7 @@ public class PrefManager {
 
     private static final String USER_ID = "preferences_user_id";
     private static final String TOKEN = "preferences_token";
+    private static final String TFA_TOKEN = "preferences_tfa_token";
     private static final String TENANT = "preferences_tenant";
     private static final String INSTANCE_URL = "instance_url";
     private static final String OAUTH_URL = "oauth_url";
@@ -135,15 +136,17 @@ public class PrefManager {
      * Authentication
      */
 
-    public void login(User user, String token) {
+    public void login(User user, String token, String tfaToken) {
         setUserId(user.getUserId());
         setToken(token);
         setUser(user);
+        setTfaToken(tfaToken);
     }
 
     public void logout() {
         setUserId(-1);
         clearToken();
+        clearTfaToken();
         clearUser();
         clearStaffDetails();
         clearStaffConfig();
@@ -223,6 +226,18 @@ public class PrefManager {
 
     public String getToken() {
         return getString(TOKEN, "");
+    }
+
+    public void setTfaToken(String tfaToken) {
+        putString(TFA_TOKEN, tfaToken);
+    }
+
+    public void clearTfaToken() {
+        putString(TFA_TOKEN, "");
+    }
+
+    public String getTfaToken() {
+        return getString(TFA_TOKEN, "");
     }
 
     public boolean isAuthenticated() {
