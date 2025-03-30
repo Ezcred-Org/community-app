@@ -14,8 +14,8 @@ import com.mifos.objects.group.Center;
 import com.mifos.objects.group.CenterWithAssociations;
 import com.mifos.objects.group.Group;
 import com.mifos.objects.group.GroupWithAssociations;
+import com.mifos.objects.mfa.SendMfaOtpResponse;
 import com.mifos.objects.mfa.ValidateMfaOtpResponse;
-import com.mifos.objects.oauth.OAuthTokenResponse;
 import com.mifos.objects.organisation.LoanProducts;
 import com.mifos.objects.organisation.Office;
 import com.mifos.objects.organisation.Staff;
@@ -199,7 +199,7 @@ public class DataManager {
         return mBaseApiManager.getLoanApi().getListOfCharges(clientId);
     }
 
-    public Observable<OAuthTokenResponse> sendMfaOtp(String accessToken) {
+    public Observable<SendMfaOtpResponse> sendMfaOtp(String accessToken) {
         return mBaseApiManager.getMfaService().sendMfaOtp(accessToken);
     }
 

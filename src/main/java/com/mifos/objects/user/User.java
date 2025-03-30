@@ -24,6 +24,7 @@ public class User {
     private boolean authenticated;
     private boolean shouldRenewPassword;
     private boolean passwordExpired;
+    private boolean isTwoFactorAuthenticationRequired;
     private int officeId;
     private String officeName;
     private boolean isSelfServiceUser;
@@ -73,6 +74,14 @@ public class User {
 
     public void setPasswordExpired(boolean passwordExpired) {
         this.passwordExpired = passwordExpired;
+    }
+
+    public boolean isTwoFactorAuthenticationRequired() {
+        return isTwoFactorAuthenticationRequired;
+    }
+
+    public void setIsTwoFactorAuthenticationRequired(boolean isTwoFactorAuthenticationRequired) {
+        this.isTwoFactorAuthenticationRequired = isTwoFactorAuthenticationRequired;
     }
 
     public boolean isAuthenticated() {

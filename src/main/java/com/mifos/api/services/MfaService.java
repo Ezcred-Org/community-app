@@ -1,7 +1,7 @@
 package com.mifos.api.services;
 
+import com.mifos.objects.mfa.SendMfaOtpResponse;
 import com.mifos.objects.mfa.ValidateMfaOtpResponse;
-import com.mifos.objects.oauth.OAuthTokenResponse;
 
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -12,7 +12,7 @@ public interface MfaService {
 
 
   @POST("twofactor?deliveryMethod=sms")
-  Observable<OAuthTokenResponse> sendMfaOtp(
+  Observable<SendMfaOtpResponse> sendMfaOtp(
           @Header("Authorization") String accessToken
   );
 
