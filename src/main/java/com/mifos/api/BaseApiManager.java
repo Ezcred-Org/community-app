@@ -21,6 +21,7 @@ import com.mifos.api.services.DataTableService;
 import com.mifos.api.services.DocumentService;
 import com.mifos.api.services.GroupService;
 import com.mifos.api.services.LoanService;
+import com.mifos.api.services.MfaService;
 import com.mifos.api.services.NoteService;
 import com.mifos.api.services.OAuthService;
 import com.mifos.api.services.OfficeService;
@@ -67,6 +68,7 @@ public class BaseApiManager {
   private static CodeService codeService;
   private static AddressService addressService;
   private static UserService userApi;
+  private static MfaService mfaService;
   private static OAuthService oAuthService;
 
   public BaseApiManager(
@@ -111,6 +113,7 @@ public class BaseApiManager {
     addressService = createApi(AddressService.class);
     userApi = createApi(UserService.class);
     oAuthService = createOAuthApi(OAuthService.class);
+    mfaService = createApi(MfaService.class);
   }
 
   private static <T> T createApi(Class<T> clazz) {
@@ -250,5 +253,9 @@ public class BaseApiManager {
 
   public UserService getUserApi() {
     return userApi;
+  }
+
+  public MfaService getMfaService() {
+    return mfaService;
   }
 }
