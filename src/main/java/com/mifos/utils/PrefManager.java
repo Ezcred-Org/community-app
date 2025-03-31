@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.mifos.api.BaseUrl;
 import com.mifos.objects.appuser.AppUser.EzCredAuthData;
+import com.mifos.objects.mfa.ValidateMfaOtpResponse;
 import com.mifos.objects.oauth.OAuthTokenResponse;
 import com.mifos.objects.organisation.Staff;
 import com.mifos.objects.user.User;
@@ -33,6 +34,7 @@ public class PrefManager {
     private static final String INSTANCE_URL = "instance_url";
     private static final String OAUTH_URL = "oauth_url";
     private static final String OAUTH_DATA = "oauth_data";
+    private static final String TFA_DATA = "oauth_data";
     private static final String INSTANCE_DOMAIN = "preferences_domain";
     private static final String USER_STATUS = "user_status";
     private static final String USER_DETAILS = "user_details";
@@ -154,6 +156,7 @@ public class PrefManager {
         setLoginByPartner(false);
         clearRetailerConfig();
         clearOauthData();
+        setTfaData(null);
     }
 
     private void clearOauthData() {
@@ -166,6 +169,14 @@ public class PrefManager {
 
     public void setOauthData(OAuthTokenResponse oauthData) {
         putClassObject(OAUTH_DATA, oauthData);
+    }
+
+    public ValidateMfaOtpResponse getTfaData() {
+        return getClassObject(TFA_DATA, ValidateMfaOtpResponse.class);
+    }
+
+    public void setTfaData(ValidateMfaOtpResponse mfaOtpResponse) {
+        putClassObject(TFA_DATA, mfaOtpResponse);
     }
 
     private void clearUser() {

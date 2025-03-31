@@ -18,7 +18,9 @@ import lombok.Data;
 @Data
 public class ValidateMfaOtpResponse {
 
+  private final String status;
   private final String token;
   private final long validFrom;
   private final long validTo;
+  private final String errorMessage;
 }

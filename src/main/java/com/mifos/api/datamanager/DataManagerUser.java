@@ -22,7 +22,8 @@ public class DataManagerUser {
     return mBaseApiManager.getUserApi().getUser(userId);
   }
 
-  public Observable<User> getUser(String accessToken) {
-    return mBaseApiManager.getUserApi().getUser(Collections.singletonMap("access_token", accessToken));
+  public Observable<User> getUser(String accessToken, String accessTokenWithType) {
+    return mBaseApiManager.getUserApi()
+            .getUser(Collections.singletonMap("access_token", accessToken), accessTokenWithType);
   }
 }
