@@ -235,8 +235,6 @@ public class Constants {
 
         LOGOUT_ERROR_MAP.put(ERROR_MSG_PASSWORD_OUTDATED, "Current Session has expired. Please re-login to continue.");
         LOGOUT_ERROR_MAP.put(INVALID_REFRESH_TOKEN, "Current Session has expired. Please re-login to continue.");
-        LOGOUT_ERROR_MAP.put("401", "Current Session has expired. Please re-login to continue.");
-        LOGOUT_ERROR_MAP.put("401 ", "Current Session has expired. Please re-login to continue.");
         LOGOUT_ERROR_MAP.put("401.Unauthorized", "Current Session has expired. Please re-login to continue.");
         LOGOUT_ERROR_MAP = Collections.unmodifiableMap(LOGOUT_ERROR_MAP);
 
