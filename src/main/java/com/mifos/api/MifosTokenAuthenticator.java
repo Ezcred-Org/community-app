@@ -9,6 +9,7 @@ import com.mifos.objects.oauth.GrantType;
 import com.mifos.objects.oauth.OAuthTokenResponse;
 import com.mifos.utils.PrefManager;
 
+import java.util.HashMap;
 import okhttp3.Authenticator;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -35,12 +36,17 @@ public class MifosTokenAuthenticator implements Authenticator {
     if (prefManager != null && oAuthService != null && prefManager.getOauthData() != null) {
       synchronized (this) {
         prefManager.setToken("");
-        oAuthService.refreshOAuthToken(
-            prefManager.getOauthData().getRefreshToken(),
-            "community-app",
-            "123",
-            GrantType.refresh_token
-        )
+//        oAuthService.refreshOAuthToken(
+//            prefManager.getOauthData().getRefreshToken(),
+//            "community-app",
+//            "123",
+//            GrantType.refresh_token
+//        )
+        oAuthService.refreshOAuthTokenV1(
+                new HashMap<String, String>() {{
+                  put("refresh_token", prefManager.getOauthData().getRefreshToken());
+                }}
+            )
             .subscribe(new Subscriber<OAuthTokenResponse>() {
               @Override
               public void onCompleted() {
