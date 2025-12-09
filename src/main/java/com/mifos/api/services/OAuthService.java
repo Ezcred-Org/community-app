@@ -36,7 +36,7 @@ public interface OAuthService {
       @Body Map<String, String> requestPayload
   );
 
-  @POST("refresh")
+  @POST(APIEndPoint.TOKEN)
   Observable<OAuthTokenResponse> refreshOAuthTokenV1(
       @Body Map<String, String> requestPayload
   );
