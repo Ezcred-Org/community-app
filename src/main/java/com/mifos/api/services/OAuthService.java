@@ -3,6 +3,8 @@ package com.mifos.api.services;
 import com.mifos.api.model.APIEndPoint;
 import com.mifos.objects.oauth.GrantType;
 import com.mifos.objects.oauth.OAuthTokenResponse;
+import java.util.Map;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
@@ -27,5 +29,15 @@ public interface OAuthService {
       @Field("client_id") String clientId,
       @Field("client_secret") String clientSecret,
       @Field("grant_type") GrantType grantType
+  );
+
+  @POST(APIEndPoint.TOKEN)
+  Observable<OAuthTokenResponse> fetchOAuthTokenV1(
+      @Body Map<String, String> requestPayload
+  );
+
+  @POST(APIEndPoint.TOKEN)
+  Observable<OAuthTokenResponse> refreshOAuthTokenV1(
+      @Body Map<String, String> requestPayload
   );
 }
