@@ -98,9 +98,16 @@ public class MifosInterceptor implements Interceptor {
         if (!TextUtils.isEmpty(prefManager.getTenant())) {
             builder.header(HEADER_TENANT, prefManager.getTenant());
         }
-        if (!TextUtils.isEmpty(prefManager.getToken())) {
-            builder.header(HEADER_AUTH, prefManager.getToken());
+
+        String authNotRequired = chianrequest.header("authorization_not_required");
+        if (authNotRequired == null || !authNotRequired.equalsIgnoreCase("true")) {
+            if (!TextUtils.isEmpty(prefManager.getToken())) {
+                builder.header(HEADER_AUTH, prefManager.getToken());
+            }
         }
+
+        // Remove the "authorization_not_required" header to ensure it is not passed to the server
+        builder.removeHeader("authorization_not_required");
 
         if (!TextUtils.isEmpty(prefManager.getTfaToken())) {
             builder.header(HEADER_TFA_TOKEN, prefManager.getTfaToken());
@@ -161,7 +168,6 @@ public class MifosInterceptor implements Interceptor {
                 if (contentType == null || TextUtils.isEmpty(contentType)) {
                     contentType = HEADER_APPLICATION_JSON;
                 }
-
                 String responseString = null;
                 if (response.body() != null) {
                     responseString = response.body().string();

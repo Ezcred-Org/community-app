@@ -240,6 +240,7 @@ public class Constants {
         LOGOUT_ERROR_MAP.put("error.msg.user.account.disabled", "");
         LOGOUT_ERROR_MAP.put("error.msg.user.account.expired", "");
         LOGOUT_ERROR_MAP.put("error.msg.user.credentials.expired", "");
+        LOGOUT_ERROR_MAP.put("error.user.session.expired", "");
         LOGOUT_ERROR_MAP = Collections.unmodifiableMap(LOGOUT_ERROR_MAP);
 
         CUSTOM_ERROR_MAP_KEYS.put(INVALID_REFRESH_TOKEN_MESSAGE, INVALID_REFRESH_TOKEN);

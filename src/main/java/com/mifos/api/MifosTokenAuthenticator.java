@@ -35,7 +35,17 @@ public class MifosTokenAuthenticator implements Authenticator {
     Request request = null;
     if (prefManager != null && oAuthService != null && prefManager.getOauthData() != null) {
       synchronized (this) {
-        prefManager.setToken("");
+
+        if (!TextUtils.isEmpty(prefManager.getToken())
+            && System.currentTimeMillis() - prefManager.getLastAccessTokenRefreshTime() < 10000) {
+          // Token is valid within the last 10 seconds
+          return response.request().newBuilder()
+              .header(MifosInterceptor.HEADER_AUTH, prefManager.getToken())
+              .build();
+        }
+
+
+//        prefManager.setToken("");
 //        oAuthService.refreshOAuthToken(
 //            prefManager.getOauthData().getRefreshToken(),
 //            "community-app",
@@ -55,7 +65,7 @@ public class MifosTokenAuthenticator implements Authenticator {
 
               @Override
               public void onError(Throwable e) {
-
+                prefManager.setToken("");
               }
 
               @Override

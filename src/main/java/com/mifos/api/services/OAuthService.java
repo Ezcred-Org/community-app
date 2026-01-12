@@ -7,6 +7,7 @@ import java.util.Map;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import rx.Observable;
 
@@ -37,6 +38,7 @@ public interface OAuthService {
   );
 
   @POST(APIEndPoint.TOKEN)
+  @Headers("authorization_not_required:true")
   Observable<OAuthTokenResponse> refreshOAuthTokenV1(
       @Body Map<String, String> requestPayload
   );

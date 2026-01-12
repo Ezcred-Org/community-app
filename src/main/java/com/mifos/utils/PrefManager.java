@@ -51,6 +51,7 @@ public class PrefManager {
     private static final String PARTNER_AUTH_DATA = "partner_auth_data";
     private static final String LOGIN_BY_PARTNER = "login_by_partner";
     private static final String LAST_LOGIN_TIME = "last_login_time";
+    private static final String LAST_ACCESS_TOKEN_REFRESH_TIME = "last_access_token_refresh_time";
     private static final String LAST_INTERACTION_PAUSE_TIME= "last_interaction_pause_time";
 
     private final Gson gson;
@@ -169,6 +170,15 @@ public class PrefManager {
 
     public void setOauthData(OAuthTokenResponse oauthData) {
         putClassObject(OAUTH_DATA, oauthData);
+        putLastAccessTokenRefreshTime();
+    }
+
+    public void putLastAccessTokenRefreshTime() {
+        putLong(LAST_ACCESS_TOKEN_REFRESH_TIME, System.currentTimeMillis());
+    }
+
+    public long getLastAccessTokenRefreshTime() {
+        return getLong(LAST_ACCESS_TOKEN_REFRESH_TIME, 0l);
     }
 
     public ValidateMfaOtpResponse getTfaData() {
