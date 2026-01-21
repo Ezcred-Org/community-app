@@ -33,9 +33,13 @@ public class MifosTokenAuthenticator implements Authenticator {
     Request request = null;
     if (prefManager != null && oAuthService != null && prefManager.getOauthData() != null) {
       synchronized (this) {
+        if (prefManager.getOauthData() == null) {
+          return request;
+        }
 
         if (!TextUtils.isEmpty(prefManager.getToken())
-            && System.currentTimeMillis() - prefManager.getLastAccessTokenRefreshTime() < 10000) {
+            && System.currentTimeMillis() - prefManager.getLastAccessTokenRefreshTime() < 10000
+        ) {
           // Token is valid within the last 10 seconds
           return response.request().newBuilder()
               .header(MifosInterceptor.HEADER_AUTH, prefManager.getToken())
