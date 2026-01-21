@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import androidx.annotation.Nullable;
 
 import com.mifos.api.services.OAuthService;
-import com.mifos.objects.oauth.GrantType;
 import com.mifos.objects.oauth.OAuthTokenResponse;
 import com.mifos.utils.PrefManager;
 
@@ -14,7 +13,6 @@ import okhttp3.Authenticator;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.Route;
-import rx.Subscriber;
 
 /**
  * Created by Rajan Maurya on 16/06/16.
@@ -44,46 +42,25 @@ public class MifosTokenAuthenticator implements Authenticator {
               .build();
         }
 
+        try {
+          OAuthTokenResponse tokenResponse = oAuthService.refreshOAuthTokenV1(
+              new HashMap<String, String>() {{
+                put("refresh_token", prefManager.getOauthData().getRefreshToken());
+              }}
+          ).toBlocking().first();
 
-//        prefManager.setToken("");
-//        oAuthService.refreshOAuthToken(
-//            prefManager.getOauthData().getRefreshToken(),
-//            "community-app",
-//            "123",
-//            GrantType.refresh_token
-//        )
-        oAuthService.refreshOAuthTokenV1(
-                new HashMap<String, String>() {{
-                  put("refresh_token", prefManager.getOauthData().getRefreshToken());
-                }}
-            )
-            .subscribe(new Subscriber<OAuthTokenResponse>() {
-              @Override
-              public void onCompleted() {
+          prefManager.setToken(String.format(
+              "%s %s",
+              tokenResponse.getTokenType(),
+              tokenResponse.getAccessToken()
+          ));
+          prefManager.setOauthData(tokenResponse);
 
-              }
-
-              @Override
-              public void onError(Throwable e) {
-                prefManager.setToken("");
-              }
-
-              @Override
-              public void onNext(OAuthTokenResponse oAuthTokenResponse) {
-                prefManager.setToken(String.format(
-                    "%s %s",
-                    oAuthTokenResponse.getTokenType(),
-                    oAuthTokenResponse.getAccessToken()
-                ));
-
-                prefManager.setOauthData(oAuthTokenResponse);
-              }
-            });
-
-        if (!TextUtils.isEmpty(prefManager.getToken())) {
           request = response.request().newBuilder()
               .header(MifosInterceptor.HEADER_AUTH, prefManager.getToken())
               .build();
+        } catch (Exception e) {
+          prefManager.setToken("");
         }
       }
     }
