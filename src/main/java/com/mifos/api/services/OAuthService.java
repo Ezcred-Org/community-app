@@ -38,8 +38,13 @@ public interface OAuthService {
   );
 
   @POST(APIEndPoint.TOKEN)
-  @Headers("authorization_not_required:true")
   Observable<OAuthTokenResponse> refreshOAuthTokenV1(
+      @Body Map<String, String> requestPayload
+  );
+
+  @POST("refresh")
+  @Headers("authorization_not_required:true")
+  Observable<OAuthTokenResponse> refreshOAuthTokenV2(
       @Body Map<String, String> requestPayload
   );
 }
