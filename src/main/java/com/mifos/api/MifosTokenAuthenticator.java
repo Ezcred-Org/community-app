@@ -64,7 +64,7 @@ public class MifosTokenAuthenticator implements Authenticator {
               .header(MifosInterceptor.HEADER_AUTH, prefManager.getToken())
               .build();
         } catch (Exception e) {
-          prefManager.setToken("");
+          return null;
         }
       }
     }
