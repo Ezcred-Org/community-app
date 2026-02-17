@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.mifos.api.BaseUrl;
 import com.mifos.objects.appuser.AppUser.EzCredAuthData;
+import com.mifos.objects.mfa.ValidateMfaOtpResponse;
 import com.mifos.objects.oauth.OAuthTokenResponse;
 import com.mifos.objects.organisation.Staff;
 import com.mifos.objects.user.User;
@@ -28,10 +29,12 @@ public class PrefManager {
 
     private static final String USER_ID = "preferences_user_id";
     private static final String TOKEN = "preferences_token";
+    private static final String TFA_TOKEN = "preferences_tfa_token";
     private static final String TENANT = "preferences_tenant";
     private static final String INSTANCE_URL = "instance_url";
     private static final String OAUTH_URL = "oauth_url";
     private static final String OAUTH_DATA = "oauth_data";
+    private static final String TFA_DATA = "oauth_data";
     private static final String INSTANCE_DOMAIN = "preferences_domain";
     private static final String USER_STATUS = "user_status";
     private static final String USER_DETAILS = "user_details";
@@ -48,6 +51,7 @@ public class PrefManager {
     private static final String PARTNER_AUTH_DATA = "partner_auth_data";
     private static final String LOGIN_BY_PARTNER = "login_by_partner";
     private static final String LAST_LOGIN_TIME = "last_login_time";
+    private static final String LAST_ACCESS_TOKEN_REFRESH_TIME = "last_access_token_refresh_time";
     private static final String LAST_INTERACTION_PAUSE_TIME= "last_interaction_pause_time";
 
     private final Gson gson;
@@ -135,15 +139,17 @@ public class PrefManager {
      * Authentication
      */
 
-    public void login(User user, String token) {
+    public void login(User user, String token, String tfaToken) {
         setUserId(user.getUserId());
         setToken(token);
         setUser(user);
+        setTfaToken(tfaToken);
     }
 
     public void logout() {
         setUserId(-1);
         clearToken();
+        clearTfaToken();
         clearUser();
         clearStaffDetails();
         clearStaffConfig();
@@ -151,6 +157,7 @@ public class PrefManager {
         setLoginByPartner(false);
         clearRetailerConfig();
         clearOauthData();
+        setTfaData(null);
     }
 
     private void clearOauthData() {
@@ -163,6 +170,23 @@ public class PrefManager {
 
     public void setOauthData(OAuthTokenResponse oauthData) {
         putClassObject(OAUTH_DATA, oauthData);
+        putLastAccessTokenRefreshTime();
+    }
+
+    public void putLastAccessTokenRefreshTime() {
+        putLong(LAST_ACCESS_TOKEN_REFRESH_TIME, System.currentTimeMillis());
+    }
+
+    public long getLastAccessTokenRefreshTime() {
+        return getLong(LAST_ACCESS_TOKEN_REFRESH_TIME, 0l);
+    }
+
+    public ValidateMfaOtpResponse getTfaData() {
+        return getClassObject(TFA_DATA, ValidateMfaOtpResponse.class);
+    }
+
+    public void setTfaData(ValidateMfaOtpResponse mfaOtpResponse) {
+        putClassObject(TFA_DATA, mfaOtpResponse);
     }
 
     private void clearUser() {
@@ -223,6 +247,18 @@ public class PrefManager {
 
     public String getToken() {
         return getString(TOKEN, "");
+    }
+
+    public void setTfaToken(String tfaToken) {
+        putString(TFA_TOKEN, tfaToken);
+    }
+
+    public void clearTfaToken() {
+        putString(TFA_TOKEN, "");
+    }
+
+    public String getTfaToken() {
+        return getString(TFA_TOKEN, "");
     }
 
     public boolean isAuthenticated() {

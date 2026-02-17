@@ -2,13 +2,13 @@ package com.mifos.objects.client;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ForeignKey;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
+
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,36 +21,36 @@ import java.util.List;
  * This project is licensed under the open source MPL V2.
  * See https://github.com/openMF/android-client/blob/master/LICENSE.md
  */
-@Table(database = MifosDatabase.class)
+
 public class Charges extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+    
     @SerializedName("id")
     Integer id;
 
-    @Column
+    
     @SerializedName("clientId")
     Integer clientId;
 
-    @Column
+    
     @SerializedName("loanId")
     Integer loanId;
 
-    @Column
+    
     @SerializedName("chargeId")
     Integer chargeId;
 
-    @Column
+    
     @SerializedName("name")
     String name;
 
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     @SerializedName("chargeTimeType")
     ChargeTimeType chargeTimeType;
 
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     @SerializedName("chargeDueDate")
     ClientDate chargeDueDate;
 
@@ -80,49 +80,49 @@ public class Charges extends MifosBaseModel implements Parcelable {
         isPaid = paid;
     }
 
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     @SerializedName("chargeCalculationType")
     ChargeCalculationType chargeCalculationType;
 
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     @SerializedName("currency")
     Currency currency;
 
-    @Column
+    
     @SerializedName("amount")
     Double amount;
 
-    @Column
+    
     @SerializedName("amountPaid")
     Double amountPaid;
 
-    @Column
+    
     @SerializedName("amountWaived")
     Double amountWaived;
 
-    @Column
+    
     @SerializedName("amountWrittenOff")
     Double amountWrittenOff;
 
-    @Column
+    
     @SerializedName("amountOutstanding")
     Double amountOutstanding;
 
-    @Column
+    
     @SerializedName("penalty")
     Boolean penalty;
 
-    @Column
+    
     @SerializedName("isActive")
     Boolean isActive;
 
-    @Column
+    
     @SerializedName("isPaid")
     Boolean isPaid;
 
-    @Column
+    
     @SerializedName("isWaived")
     Boolean isWaived;
 

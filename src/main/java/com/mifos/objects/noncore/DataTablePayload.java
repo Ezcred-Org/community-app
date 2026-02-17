@@ -5,34 +5,33 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
 
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+
+
+
 
 import java.util.HashMap;
 
 /**
  * Created by Tarun on 1/28/2017.
  */
-@Table(database = MifosDatabase.class)
+
 
 public class DataTablePayload extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey(autoincrement = true)
+    
     transient Integer id;
 
-    @Column
+    
     transient Long clientCreationTime;
 
     // this field belongs to database table only for saving the
     // data table string;
-    @Column
+    
     transient String dataTableString;
 
     @SerializedName("registeredTableName")
-    @Column
+    
     String registeredTableName;
 
     @SerializedName("data")

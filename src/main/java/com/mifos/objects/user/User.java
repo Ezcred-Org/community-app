@@ -24,6 +24,7 @@ public class User {
     private boolean authenticated;
     private boolean shouldRenewPassword;
     private boolean passwordExpired;
+    private boolean isTwoFactorAuthenticationRequired;
     private int officeId;
     private String officeName;
     private boolean isSelfServiceUser;
@@ -31,6 +32,7 @@ public class User {
     @SerializedName(value = "roles", alternate = {"selectedRoles"})
     private List<Role> roles = new ArrayList<Role>();
     private List<String> permissions = new ArrayList<String>();
+    private List<Integer> lastLoggedInTime = new ArrayList<>();
 
 
     private int staffId;
@@ -72,6 +74,14 @@ public class User {
 
     public void setPasswordExpired(boolean passwordExpired) {
         this.passwordExpired = passwordExpired;
+    }
+
+    public boolean isTwoFactorAuthenticationRequired() {
+        return isTwoFactorAuthenticationRequired;
+    }
+
+    public void setIsTwoFactorAuthenticationRequired(boolean isTwoFactorAuthenticationRequired) {
+        this.isTwoFactorAuthenticationRequired = isTwoFactorAuthenticationRequired;
     }
 
     public boolean isAuthenticated() {
@@ -162,8 +172,16 @@ public class User {
         return permissions;
     }
 
+    public List<Integer> getLastLoggedInTime() {
+        return lastLoggedInTime;
+    }
+
     public void setPermissions(List<String> permissions) {
         this.permissions = permissions;
+    }
+
+    public void setLastLoggedInTime(List<Integer> lastLoggedInTime) {
+        this.lastLoggedInTime = lastLoggedInTime;
     }
 
     @Override
@@ -179,6 +197,7 @@ public class User {
                 ", officeName='" + officeName + '\'' +
                 ", roles=" + roles +
                 ", permissions=" + permissions +
+                ", lastLoggedInTime=" + lastLoggedInTime +
                 '}';
     }
 }

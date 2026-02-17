@@ -221,7 +221,7 @@ public class Constants {
         GLOBAL_ERROR_MAP.put(ERROR_MSG_PLATFORM_SERVICE_UNAVAILABLE, "System is undergoing maintenance. Please try after some time.");
         GLOBAL_ERROR_MAP.put(ERROR_OTP_NOT_VERIFIED, "OTP is not verified.");
         GLOBAL_ERROR_MAP.put(ERROR_MSG_PASSWORD_OUTDATED, "Your password has expired, please reset your password.");
-        GLOBAL_ERROR_MAP.put(INVALID_REFRESH_TOKEN, "Session expired. Please login again to continue.");
+        GLOBAL_ERROR_MAP.put(INVALID_REFRESH_TOKEN, "Current Session has expired. Please re-login to continue.");
         GLOBAL_ERROR_MAP = Collections.unmodifiableMap(GLOBAL_ERROR_MAP);
 
         NO_TICKET_MAP.put(ERROR_MSG_NOT_AUTHENTICATED, "User Authentication Failed - Invalid username/password");
@@ -229,11 +229,18 @@ public class Constants {
         NO_TICKET_MAP.put(ERROR_MSG_400_INVALID_GRANT, "User Authentication Failed - Invalid username/password");
         NO_TICKET_MAP.put(ERROR_MSG_401_UNAUTHORIZED, "Looks like you are logged out, please login again.");
         NO_TICKET_MAP.put(ERROR_MSG_PASSWORD_OUTDATED, "Your password has expired, please reset your password.");
-        NO_TICKET_MAP.put(INVALID_REFRESH_TOKEN, "Session expired. Please login again to continue.");
+        NO_TICKET_MAP.put(INVALID_REFRESH_TOKEN, "Current Session has expired. Please re-login to continue.");
+        NO_TICKET_MAP.put("401.Unauthorized", "Current Session has expired. Please re-login to continue.");
         NO_TICKET_MAP = Collections.unmodifiableMap(NO_TICKET_MAP);
 
-        LOGOUT_ERROR_MAP.put(ERROR_MSG_PASSWORD_OUTDATED, "Password expired. Please login again to continue.");
-        LOGOUT_ERROR_MAP.put(INVALID_REFRESH_TOKEN, "Session expired. Please login again to continue.");
+        LOGOUT_ERROR_MAP.put(ERROR_MSG_PASSWORD_OUTDATED, "Current Session has expired. Please re-login to continue.");
+        LOGOUT_ERROR_MAP.put(INVALID_REFRESH_TOKEN, "Current Session has expired. Please re-login to continue.");
+        LOGOUT_ERROR_MAP.put("401.Unauthorized", "Current Session has expired. Please re-login to continue.");
+        LOGOUT_ERROR_MAP.put("error.msg.user.account.locked", "");
+        LOGOUT_ERROR_MAP.put("error.msg.user.account.disabled", "");
+        LOGOUT_ERROR_MAP.put("error.msg.user.account.expired", "");
+        LOGOUT_ERROR_MAP.put("error.msg.user.credentials.expired", "");
+        LOGOUT_ERROR_MAP.put("error.user.session.expired", "");
         LOGOUT_ERROR_MAP = Collections.unmodifiableMap(LOGOUT_ERROR_MAP);
 
         CUSTOM_ERROR_MAP_KEYS.put(INVALID_REFRESH_TOKEN_MESSAGE, INVALID_REFRESH_TOKEN);

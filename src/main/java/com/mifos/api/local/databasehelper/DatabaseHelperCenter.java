@@ -1,11 +1,11 @@
 package com.mifos.api.local.databasehelper;
 
 import android.os.AsyncTask;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import com.mifos.objects.client.Page;
 import com.mifos.objects.group.Center;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -34,15 +34,6 @@ public class DatabaseHelperCenter {
      */
     @Nullable
     public Observable<Void> saveAllCenters(final Page<Center> centerPage) {
-        AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
-            @Override
-            public void run() {
-
-                for (Center center : centerPage.getPageItems()) {
-                    center.save();
-                }
-            }
-        });
         return null;
     }
 
@@ -54,18 +45,7 @@ public class DatabaseHelperCenter {
     //TODO Implement Observable Transaction to load Center List
     public Observable<Page<Center>> readAllCenters() {
 
-        return Observable.create(new Observable.OnSubscribe<Page<Center>>() {
-            @Override
-            public void call(Subscriber<? super Page<Center>> subscriber) {
-
-                Page<Center> centerPage = new Page<>();
-                centerPage.setPageItems(SQLite.select()
-                        .from(Center.class)
-                        .queryList());
-                subscriber.onNext(centerPage);
-                subscriber.onCompleted();
-            }
-        });
+        return null;
 
     }
 

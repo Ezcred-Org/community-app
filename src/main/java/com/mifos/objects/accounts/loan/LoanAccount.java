@@ -9,50 +9,47 @@ package com.mifos.objects.accounts.loan;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ForeignKey;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
+import androidx.annotation.NonNull;
 
-@Table(database = MifosDatabase.class)
+import com.mifos.api.local.MifosBaseModel;
+
+
 public class LoanAccount extends MifosBaseModel implements Parcelable {
 
 
-    @Column
+    
     long clientId;
 
-    @Column
+    
     long groupId;
 
-    @PrimaryKey
+    
     Integer id;
 
-    @Column
+    
     String accountNo;
 
-    @Column
+    
     String externalId;
 
-    @Column
+    
     Integer productId;
 
-    @Column
+    
     String productName;
 
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     Status status;
 
-    @Column
-    @ForeignKey(saveForeignKeyModel = true)
+    
+    
     LoanType loanType;
 
-    @Column
+    
     Integer loanCycle;
 
-    @Column
+    
     Boolean inArrears;
 
     public LoanAccount() {
@@ -194,6 +191,7 @@ public class LoanAccount extends MifosBaseModel implements Parcelable {
         this.inArrears = inArrears;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "LoanAccount{" +

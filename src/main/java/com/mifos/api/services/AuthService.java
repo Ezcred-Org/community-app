@@ -12,6 +12,7 @@ import com.mifos.objects.user.LoginData;
 import com.mifos.objects.user.User;
 
 import retrofit2.http.Body;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -30,5 +31,12 @@ public interface AuthService {
 
     @PUT("users/{userId}")
     Observable<UpdatePasswordResponse> updatePassword(@Path("userId") long userId, @Body UpdatePasswordPayload updatePasswordPayload);
+
+    @PUT("users/{userId}")
+    Observable<UpdatePasswordResponse> updatePassword(
+        @Header("Authorization") String auth,
+        @Path("userId") long userId,
+        @Body UpdatePasswordPayload updatePasswordPayload
+    );
 
 }

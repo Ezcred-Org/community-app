@@ -3,6 +3,7 @@ package com.mifos.api.datamanager;
 import com.mifos.api.BaseApiManager;
 import com.mifos.objects.user.User;
 
+import java.util.Collections;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -21,7 +22,8 @@ public class DataManagerUser {
     return mBaseApiManager.getUserApi().getUser(userId);
   }
 
-  public Observable<User> getUser(String accessToken) {
-    return mBaseApiManager.getUserApi().getUser(accessToken);
+  public Observable<User> getUser(String accessToken, String accessTokenWithType) {
+    return mBaseApiManager.getUserApi()
+            .getUser(Collections.singletonMap("access_token", accessToken), accessTokenWithType);
   }
 }

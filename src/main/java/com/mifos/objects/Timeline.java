@@ -8,7 +8,7 @@ package com.mifos.objects;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.raizlabs.android.dbflow.structure.BaseModel;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by ishankhanna on 09/02/14.
  */
-public class Timeline extends BaseModel implements Parcelable {
+public class Timeline implements Parcelable {
 
     public static final Parcelable.Creator<Timeline> CREATOR = new Parcelable.Creator<Timeline>() {
         @Override

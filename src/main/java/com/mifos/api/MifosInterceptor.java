@@ -7,13 +7,16 @@ package com.mifos.api;
 
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
 
 import com.mifos.utils.AESUtil;
 import com.mifos.utils.PrefManager;
+
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Request;
@@ -29,6 +32,7 @@ import okio.Buffer;
 public class MifosInterceptor implements Interceptor {
 
     public static final String HEADER_TENANT = "Fineract-Platform-TenantId";
+    public static final String HEADER_TFA_TOKEN = "Fineract-Platform-TFA-Token";
     public static final String HEADER_AUTH = "Authorization";
     public static final String DATA_SECURITY_HEADER = "X-Data-Security";
     public static final String CLIENT_LOAN_HEADER = "X-Client-Loan";
@@ -94,8 +98,19 @@ public class MifosInterceptor implements Interceptor {
         if (!TextUtils.isEmpty(prefManager.getTenant())) {
             builder.header(HEADER_TENANT, prefManager.getTenant());
         }
-        if (!TextUtils.isEmpty(prefManager.getToken())) {
-            builder.header(HEADER_AUTH, prefManager.getToken());
+
+        String authNotRequired = chianrequest.header("authorization_not_required");
+        if (authNotRequired == null || !authNotRequired.equalsIgnoreCase("true")) {
+            if (!TextUtils.isEmpty(prefManager.getToken())) {
+                builder.header(HEADER_AUTH, prefManager.getToken());
+            }
+        }
+
+        // Remove the "authorization_not_required" header to ensure it is not passed to the server
+        builder.removeHeader("authorization_not_required");
+
+        if (!TextUtils.isEmpty(prefManager.getTfaToken())) {
+            builder.header(HEADER_TFA_TOKEN, prefManager.getTfaToken());
         }
 
         encryptRequestBodyIfNeeded(chianrequest.body(), builder, chianrequest.method());
@@ -153,7 +168,6 @@ public class MifosInterceptor implements Interceptor {
                 if (contentType == null || TextUtils.isEmpty(contentType)) {
                     contentType = HEADER_APPLICATION_JSON;
                 }
-
                 String responseString = null;
                 if (response.body() != null) {
                     responseString = response.body().string();

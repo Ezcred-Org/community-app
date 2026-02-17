@@ -10,36 +10,30 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 import com.mifos.api.local.MifosBaseModel;
-import com.mifos.api.local.MifosDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
 
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
-
-@Table(database = MifosDatabase.class, name = "SavingsAccountSummary")
 
 public class Summary extends MifosBaseModel implements Parcelable {
 
-    @PrimaryKey
+
     transient Integer savingsId;
 
     @SerializedName("currency")
     Currency currency;
 
     @SerializedName("totalDeposits")
-    @Column
+
     Double totalDeposits;
 
     @SerializedName("accountBalance")
-    @Column
+
     Double accountBalance;
 
     @SerializedName("totalWithdrawals")
-    @Column
+
     Double totalWithdrawals;
 
     @SerializedName("totalInterestEarned")
-    @Column
+
     Double totalInterestEarned;
 
     public Integer getSavingsId() {
