@@ -20,8 +20,20 @@ public class ApiErrorResponse {
   private final List<Errors> errors;
 
   @SerializedName(value = "httpStatusCode", alternate = {"status"})
-  private final Integer httpStatusCode;
+  private final Object httpStatusCode;
 
   @SerializedName(value = "errorHash")
   private final String errorHash;
+
+  @SerializedName(value = "error")
+  private final ErrorDetail error;
+
+  @Data
+  public static class ErrorDetail {
+    @SerializedName(value = "message")
+    private final String message;
+
+    @SerializedName(value = "errorCode")
+    private final String errorCode;
+  }
 }
